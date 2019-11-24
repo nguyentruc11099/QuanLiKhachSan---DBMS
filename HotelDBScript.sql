@@ -10,8 +10,8 @@ GO
 CREATE TABLE RoomTypes 
 (
 	RoomTypeID TINYINT IDENTITY NOT null,
-	Name NVARCHAR(100) not null,
-	Price smallmoney NOT null,
+	Name NVARCHAR(100) null,
+	Price smallmoney null,
 	Hide BIT DEFAULT(0) NULL,
 )
 GO
@@ -19,8 +19,8 @@ GO
 CREATE TABLE Rooms
 (
 	RoomID VARCHAR(5) NOT null,
-	RoomTypeID TINYINT NOT NULL,
-	OnFloor INT NOT NULL,
+	RoomTypeID TINYINT NULL,
+	OnFloor INT NULL,
 	Hide BIT DEFAULT(0) NULL,
 )
 GO
@@ -28,9 +28,9 @@ GO
 CREATE TABLE Customers
 (
 	CustomerID INT NOT NULL,
-	CustomerName NVARCHAR(30) NOT null,
-	IdentityCard INT NOT null,
-	PhoneNumber NVARCHAR(10) NOT null,
+	CustomerName NVARCHAR(30) null,
+	IdentityCard INT null,
+	PhoneNumber NVARCHAR(10) null,
 	CustomerAddress NVARCHAR(40) null, 
 	Hide BIT DEFAULT(0) NULL,
 )
@@ -39,7 +39,7 @@ go
 CREATE TABLE ServiceTypes
 (
 	ServiceTypeID TINYINT NOT null, 
-	ServiceTypeName NVARCHAR(20) NOT null,
+	ServiceTypeName NVARCHAR(20) null,
 	Hide BIT DEFAULT(0) NULL,
 )
 go
@@ -47,9 +47,9 @@ go
 CREATE TABLE HotelServices
 (
 	ServiceID INT NOT null,
-	ServiceName NVARCHAR(20) NOT null,
-	ServiceTypeID TINYINT NOT null,
-	Price smallmoney NOT NULL,
+	ServiceName NVARCHAR(20) null,
+	ServiceTypeID TINYINT null,
+	Price smallmoney NULL,
 	Hide BIT DEFAULT(0) NULL,
 )
 go
@@ -57,9 +57,9 @@ go
 CREATE TABLE SalePhases
 (
 	SalePhaseID INT NOT null,
-	ServiceTypeID TINYINT NOT NULL,
-	StartDate date NOT NULL,
-	EndDate date NOT NULL,
+	ServiceTypeID TINYINT NULL,
+	StartDate date NULL,
+	EndDate date NULL,
 	Hide BIT DEFAULT(0) NULL,
 )
 go
@@ -67,7 +67,7 @@ go
 CREATE TABLE EmployeeTypes
 (
 	EmployeeTypeID TINYINT NOT NULL,
-	EmployeeTypeName NVARCHAR(30) NOT NULL,
+	EmployeeTypeName NVARCHAR(30) NULL,
 	Hide BIT DEFAULT(0) NULL,
 )
 GO
@@ -75,10 +75,10 @@ GO
 CREATE TABLE Employees 
 (
 	EmployeeID VARCHAR(5) NOT NULL,
-	EmployeeName NVARCHAR(30) NOT NULL,
-	EmployeeTypeID TINYINT NOT NULL,
+	EmployeeName NVARCHAR(30) NULL,
+	EmployeeTypeID TINYINT NULL,
 	PhoneNumber INT NULL,
-	IndetityCard INT NOT NULL,
+	IndetityCard INT NULL,
 	[PassWord] NVARCHAR(20) NULL,
 	Hide BIT DEFAULT(0) NULL,
 )
@@ -88,7 +88,7 @@ CREATE TABLE Booking
 ( 
   CustomerID INT NOT NULL,
   RoomID VARCHAR(5) NOT NULL,
-  AppoinmentDate smalldatetime NOT NULL,
+  AppoinmentDate smalldatetime NULL,
   Hide BIT DEFAULT(0) NULL,
 )
 go
@@ -96,10 +96,10 @@ go
 CREATE TABLE Invoices
 (
 	InvoiceID INT NOT NULL,
-	CustomerID INT NOT NULL,
-	RoomID VARCHAR(5) NOT NULL,
+	CustomerID INT NULL,
+	RoomID VARCHAR(5) NULL,
 	NumberOfDay TINYINT NULL,
-	EmployeeID VARCHAR(5) NOT NULL,
+	EmployeeID VARCHAR(5) NULL,
 	InvoiceTotal SMALLMONEY NULL,
 	CheckInDate smallmoney NULL,
 	CheckOutDate DATE NULL,
@@ -111,7 +111,7 @@ CREATE TABLE Invoices_Services
 (
 	InvoiceID INT NOT NULL,
 	ServiceID int NOT NULL,
-	[Times] INT NOT NULL DEFAULT(1),
+	[Times] INT NULL DEFAULT(1),
 	Hide BIT DEFAULT(0) NULL,
 )
 go
@@ -213,3 +213,584 @@ ADD CONSTRAINT FK_InvoicesService_Employee
 FOREIGN KEY(EmployeeID)
 REFERENCES dbo.Employees(EmployeeID)
 go
+
+--CRUD
+--Create Room
+use HotelDB;
+if object_id('CreateRoom') is not null
+	drop proc CreateRoom;
+go
+create proc CreateRoom
+	(@RoomID VARCHAR(5) =null,
+	@RoomTypeID TINYINT=null,	
+	@OnFloor INT=null,
+	@Hide BIT = 0)
+as
+insert into Rooms (RoomID,RoomTypeID,OnFloor,Hide)
+values (@RoomID,@RoomTypeID,@OnFloor,@Hide)
+go
+exec CreateRoom @RoomID = '00003', @RoomTypeID = null, @OnFloor = 3, @Hide = 0
+go
+
+--Update Room
+use HotelDB;
+if object_id('UpdateRoom') is not null
+	drop proc UpdateRoom;
+go
+create proc UpdateRoom
+	(@RoomID VARCHAR(5) =null,
+	@RoomTypeID TINYINT=null,	
+	@OnFloor INT=null,
+	@Hide BIT = 0)
+as
+update Rooms
+set 
+	RoomTypeID = @RoomTypeID, 
+	OnFloor = @OnFloor, 
+	Hide = @Hide
+	where RoomID = @RoomID
+go
+exec UpdateRoom 00001,1,5
+go
+--Delete Room
+use HotelDB;
+if object_id('DeleteRoom') is not null
+	drop proc DeleteRoom;
+go
+create proc DeleteRoom
+	(@RoomID VARCHAR(5) =null)
+as
+delete Rooms
+	where RoomID = @RoomID
+go
+exec DeleteRoom '00003'
+go
+
+--Create RoomType
+use HotelDB;
+if object_id('CreateRoomType') is not null
+	drop proc CreateRoomType;
+go
+create proc CreateRoomType
+	(
+	@Name NVARCHAR(100) =  null,
+	@Price smallmoney = null,
+	@Hide BIT =0)
+as
+insert into RoomTypes(Name,Price,Hide)
+values ( @Name, @Price, @Hide)
+go
+exec CreateRoomType @Name = 'a', @Price = 10000, @Hide = 1 
+
+--Update RoomType
+use HotelDB;
+if object_id('UpdateRoomType') is not null
+	drop proc UpdateRoomType;
+go
+create proc UpdateRoomType
+	(
+	@RoomTypeID int = null,
+	@Name NVARCHAR(100) =  null,
+	@Price smallmoney = null,
+	@Hide BIT =0)
+as
+UPdate RoomTypes
+Set 
+	Name = @Name, 
+	Price = @Price, 
+	Hide = @Hide
+	where @RoomTypeID = RoomTypeID
+go
+exec UpdateRoomType 2,'abcfg',5000
+
+--Delete RoomType
+use HotelDB;
+if object_id('DeleteRoomType') is not null
+	drop proc DeleteRoomType;
+go
+create proc DeleteRoomType
+	(
+	@RoomTypeID int = null)
+as
+Delete RoomTypes
+	where @RoomTypeID = RoomTypeID
+go
+exec DeleteRoomType 2
+
+
+--Create Customer
+use HotelDB;
+if object_id('CreateCustomer') is not null
+	drop proc CreateCustomer;
+go
+create proc CreateCustomer
+	(
+		@CustomerID INT = NULL,
+	@CustomerName NVARCHAR(30) = null,
+	@IdentityCard INT = null,
+	@PhoneNumber NVARCHAR(10) =  null,
+	@CustomerAddress NVARCHAR(40) = null, 
+	@Hide BIT = 0)
+as
+insert into Customers(CustomerID,CustomerName,IdentityCard,PhoneNumber,CustomerAddress,Hide)
+values (@CustomerID, @CustomerName, @IdentityCard, @PhoneNumber, @CustomerAddress, @Hide)
+go
+exec CreateCustomer 2,'Phuong', 30, 0901333666, 'ABC', 1
+exec CreateCustomer 5,'Phuong', 30, 0901333666, 'ABC', 1
+--Update Customer
+use HotelDB;
+if object_id('UpdateCustomer') is not null
+	drop proc UpdateCustomer;
+go
+create proc UpdateCustomer
+	(
+		@CustomerID INT = NULL,
+	@CustomerName NVARCHAR(30) = null,
+	@IdentityCard INT = null,
+	@PhoneNumber NVARCHAR(10) =  null,
+	@CustomerAddress NVARCHAR(40) = null, 
+	@Hide BIT = 0)
+as
+update Customers
+set
+	CustomerName = @CustomerName, 
+	IdentityCard = @IdentityCard, 
+	PhoneNumber = @PhoneNumber, 
+	CustomerAddress = @CustomerAddress, 
+	Hide = @Hide
+	where CustomerID = @CustomerID
+go
+exec UpdateCustomer 2,' My Phuong', 30, 0901333666, 'ABCD', 1
+--Delete Customer
+use HotelDB;
+if object_id('DeleteCustomer') is not null
+	drop proc DeleteCustomer;
+go
+create proc DeleteCustomer
+	(
+		@CustomerID INT = NULL)
+as
+delete Customers
+	where CustomerID = @CustomerID
+go
+exec DeleteCustomer 5
+
+--Create ServiceType
+use HotelDB;
+if object_id('CreateServiceType') is not null
+	drop proc CreateServiceType;
+go
+create proc CreateServiceType
+	(
+	@ServiceTypeID TINYINT = null, 
+	@ServiceTypeName NVARCHAR(20) = null,
+	@Hide BIT = 0)
+as
+insert into ServiceTypes(ServiceTypeID, ServiceTypeName, Hide)
+values (@ServiceTypeID, @ServiceTypeName, @Hide)
+go
+exec CreateServiceType 2,'abc',1
+--Update ServiceType
+use HotelDB;
+if object_id('UpdateServiceType') is not null
+	drop proc UpdateServiceType;
+go
+create proc UpdateServiceType
+	(
+	@ServiceTypeID TINYINT = null, 
+	@ServiceTypeName NVARCHAR(20) = null,
+	@Hide BIT = 0)
+as
+update ServiceTypes
+set
+	ServiceTypeName = @ServiceTypeName, 
+	Hide = @Hide
+	where ServiceTypeID = @ServiceTypeID 
+go
+exec UpdateServiceType 1, 'KARAOKE'
+--Delete ServiceType
+use HotelDB;
+if object_id('DeleteServiceType') is not null
+	drop proc DeleteServiceType;
+go
+create proc DeleteServiceType
+	(@ServiceTypeID TINYINT = null)
+as
+delete ServiceTypes
+	where ServiceTypeID = @ServiceTypeID 
+go
+exec DeleteServiceType 2
+
+--Create Hotel Service
+use HotelDB;
+if object_id('CreateHotelService') is not null
+	drop proc CreateHotelService;
+go
+create proc CreateHotelService
+	(
+	@ServiceID INT = null,
+	@ServiceName NVARCHAR(20) = null,
+	@ServiceTypeID TINYINT = null,
+	@Price smallmoney = NULL,
+	@Hide BIT = 0)
+as
+insert into HotelServices(ServiceID, ServiceName, ServiceTypeID, Price, Hide)
+values (@ServiceID, @ServiceName, @ServiceTypeID, @Price, @Hide)
+go
+exec CreateHotelService 1,'abcd',2, 3000,0
+--Update HotelService
+use HotelDB;
+if object_id('UpdateHotelService') is not null
+	drop proc UpdateHotelService;
+go
+create proc UpdateHotelService
+	(
+	@ServiceID INT = null,
+	@ServiceName NVARCHAR(20) = null,
+	@ServiceTypeID TINYINT = null,
+	@Price smallmoney = null,
+	@Hide BIT = 0)
+as
+update HotelServices
+set
+	ServiceName = @ServiceName, 
+	ServiceTypeID = @ServiceTypeID, 
+	Price = @Price, 
+	Hide = @Hide
+	where ServiceID = @ServiceID 
+go
+exec UpdateHotelService 1,'none',2
+--Delete HotelService
+use HotelDB;
+if object_id('DeleteHotelService') is not null
+	drop proc DeleteHotelService;
+go
+create proc DeleteHotelService
+	(
+	@ServiceID INT = null)
+as
+delete HotelServices
+	where ServiceID = @ServiceID 
+go
+exec DeleteHotelService 1
+--Create SalePhase
+use HotelDB;
+if object_id('CreateSalePhase') is not null
+	drop proc CreateSalePhase;
+go
+create proc CreateSalePhase
+	(
+	@SalePhaseID INT = null,
+	@ServiceTypeID TINYINT = NULL,
+	@StartDate date = NULL,
+	@EndDate date = null,
+	@Hide BIT = 0)
+as
+insert into SalePhases(SalePhaseID, ServiceTypeID, StartDate, EndDate, Hide)
+values (@SalePhaseID, @ServiceTypeID, @StartDate, @EndDate, @Hide)
+go
+exec CreateSalePhase 1,2,'2010-3-10','2010-4-1',0
+--Update SalePhase
+use HotelDB;
+if object_id('UpdateSalePhase') is not null
+	drop proc UpdateSalePhase;
+go
+create proc UpdateSalePhase
+	(
+	@SalePhaseID INT = null,
+	@ServiceTypeID TINYINT = NULL,
+	@StartDate date = NULL,
+	@EndDate date = null,
+	@Hide BIT = 0)
+as
+update SalePhases
+set 
+	ServiceTypeID = @ServiceTypeID, 
+	StartDate = @StartDate, 
+	EndDate = @EndDate, 
+	Hide = @Hide
+	where 	SalePhaseID = @SalePhaseID
+go
+exec UpdateSalePhase 1,null,'2010-9-10','2010-4-1',1
+--Delete SalePhase
+use HotelDB;
+if object_id('DeleteSalePhase') is not null
+	drop proc DeleteSalePhase;
+go
+create proc DeleteSalePhase
+	(
+	@SalePhaseID INT = null)
+as
+delete SalePhases
+	where 	SalePhaseID = @SalePhaseID
+go
+
+--Create Employee Type
+use HotelDB;
+if object_id('CreateEmployeeType') is not null
+	drop proc CreateEmployeeType;
+go
+create proc CreateEmployeeType
+	(
+	@EmployeeTypeID TINYINT = NULL,
+	@EmployeeTypeName NVARCHAR(30) = NULL,
+	@Hide BIT = 0)
+as
+insert into EmployeeTypes(EmployeeTypeID, EmployeeTypeName, Hide)
+values (@EmployeeTypeID, @EmployeeTypeName, @Hide)
+go
+exec CreateEmployeeType 1,'abcd',1
+--Update Employee Type
+use HotelDB;
+if object_id('UpdateEmployeeType') is not null
+	drop proc UpdateEmployeeType;
+go
+create proc UpdateEmployeeType
+	(
+	@EmployeeTypeID TINYINT = NULL,
+	@EmployeeTypeName NVARCHAR(30) = NULL,
+	@Hide BIT = 0)
+as
+update EmployeeTypes
+set 
+	@EmployeeTypeName = @EmployeeTypeName, 
+	Hide = @Hide
+	where 	EmployeeTypeID = @EmployeeTypeID
+go
+exec UpdateEmployeeType 1,'abcde',0
+--Delete Employee Type
+use HotelDB;
+if object_id('DeleteEmployeeType') is not null
+	drop proc DeleteEmployeeType;
+go
+create proc DeleteEmployeeType
+	(
+	@EmployeeTypeID TINYINT = NULL)
+as
+delete EmployeeTypes
+where EmployeeTypeID = @EmployeeTypeID
+go
+
+--Create Employee
+use HotelDB;
+if object_id('CreateEmployee') is not null
+	drop proc CreateEmployee;
+go
+create proc CreateEmployee
+	(
+	@EmployeeID VARCHAR(5) = NULL,
+	@EmployeeName NVARCHAR(30) = NULL,
+	@EmployeeTypeID TINYINT = NULL,
+	@PhoneNumber INT = NULL,
+	@IndetityCard INT =  NULL,
+	@PassWord NVARCHAR(20) = NULL,
+	@Hide BIT = 0)
+as
+insert into Employees(EmployeeID, EmployeeName, EmployeeTypeID, PhoneNumber, IndetityCard, PassWord, Hide)
+values (@EmployeeID, @EmployeeName, @EmployeeTypeID, @PhoneNumber, @IndetityCard, @PassWord, @Hide)
+go
+exec CreateEmployee '0001', 'Binh', 1, 0923123921, 3, 'abcdxyz', 0
+--Update Employee
+use HotelDB;
+if object_id('UpdateEmployee') is not null
+	drop proc UpdateEmployee;
+go
+create proc UpdateEmployee
+	(
+	@EmployeeID VARCHAR(5) = NULL,
+	@EmployeeName NVARCHAR(30) = NULL,
+	@EmployeeTypeID TINYINT = NULL,
+	@PhoneNumber INT = NULL,
+	@IndetityCard INT =  NULL,
+	@PassWord NVARCHAR(20) = NULL,
+	@Hide BIT = 0)
+as
+update Employees
+set 
+	EmployeeName = @EmployeeName, 
+	EmployeeTypeID = @EmployeeTypeID, 
+	PhoneNumber = @PhoneNumber, 
+	IndetityCard = @IndetityCard, 
+	PassWord = @PassWord, 
+	Hide = @Hide
+	where 	EmployeeID = @EmployeeID
+go
+exec UpdateEmployee '0001', 'Binh', 1, 0923123921, 3, 'abcdxyz00', 0
+--Delete Employee
+use HotelDB;
+if object_id('DeleteEmployee') is not null
+	drop proc DeleteEmployee;
+go
+create proc DeleteEmployee
+	(
+	@EmployeeID VARCHAR(5) = NULL)
+as
+delete Employees
+where 	EmployeeID = @EmployeeID
+go
+
+--Create Booking
+use HotelDB;
+if object_id('CreateBooking') is not null
+	drop proc CreateBooking;
+go
+create proc CreateBooking
+	(
+	@CustomerID INT = NULL,
+	@RoomID VARCHAR(5) = NULL,
+	@AppoinmentDate smalldatetime = NULL,
+	@Hide BIT = 0)
+as
+insert into Booking(CustomerID, RoomID, AppoinmentDate, Hide)
+values (@CustomerID, @RoomID, @AppoinmentDate, @Hide)
+go
+exec CreateBooking 2,'00003','2010-3-10', 0
+--Update Booking
+use HotelDB;
+if object_id('UpdateBooking') is not null
+	drop proc UpdateBooking;
+go
+create proc UpdateBooking
+	(
+	@CustomerID INT = NULL,
+	@RoomID VARCHAR(5) = NULL,
+	@AppoinmentDate smalldatetime = NULL,
+	@Hide BIT = 0)
+as
+update Booking
+set
+	AppoinmentDate = @AppoinmentDate, 
+	Hide = @Hide
+	where CustomerID = @CustomerID and RoomID = @RoomID 
+go
+exec UpdateBooking 2,'00003','2010-3-11', 1
+--Delete Booking
+use HotelDB;
+if object_id('DeleteBooking') is not null
+	drop proc DeleteBooking;
+go
+create proc DeleteBooking
+	(
+	@CustomerID INT = NULL,
+	@RoomID VARCHAR(5) = NULL)
+as
+delete Booking
+where CustomerID = @CustomerID and RoomID = @RoomID 
+go
+exec DeleteBooking 2,'00003'
+
+--Create Invoice
+use HotelDB;
+if object_id('CreateInvoice') is not null
+	drop proc CreateInvoice;
+go
+create proc CreateInvoice
+	(
+	@InvoiceID INT = NULL,
+	@CustomerID INT = NULL,
+	@RoomID VARCHAR(5) = NULL,
+	@NumberOfDay TINYINT = NULL,
+	@EmployeeID VARCHAR(5) = NULL,
+	@InvoiceTotal SMALLMONEY = NULL,
+	@CheckInDate smallmoney = NULL,
+	@CheckOutDate DATE = NULL,
+	@Hide BIT = 0)
+as
+insert into Invoices(InvoiceID, CustomerID, RoomID, NumberOfDay, EmployeeID, InvoiceTotal, CheckInDate, CheckOutDate, Hide)
+values (@InvoiceID, @CustomerID, @RoomID, @NumberOfDay, @EmployeeID, @InvoiceTotal, @CheckInDate, @CheckOutDate, @Hide)
+go
+exec CreateInvoice 1,2,'00003',3,'0001',3000,4000,'2010-3-10',0
+--Update Invoice
+use HotelDB;
+if object_id('UpdateInvoice') is not null
+	drop proc UpdateInvoice;
+go
+create proc UpdateInvoice
+	(
+	@InvoiceID INT = NULL,
+	@CustomerID INT = NULL,
+	@RoomID VARCHAR(5) = NULL,
+	@NumberOfDay TINYINT = NULL,
+	@EmployeeID VARCHAR(5) = NULL,
+	@InvoiceTotal SMALLMONEY = NULL,
+	@CheckInDate smallmoney = NULL,
+	@CheckOutDate DATE = NULL,
+	@Hide BIT = 0)
+as
+update Invoices
+set 
+	CustomerID = @CustomerID, 
+	RoomID = @RoomID, 
+	NumberOfDay = @NumberOfDay, 
+	EmployeeID = @EmployeeID, 
+	InvoiceTotal = @InvoiceTotal, 
+	CheckInDate = @CheckInDate, 
+	CheckOutDate = @CheckOutDate, 
+	Hide = @Hide
+	where InvoiceID = @InvoiceID
+go
+exec UpdateInvoice 1,2,'00003',3,'0001',3500,4500,'2010-10-10',0
+--Delete Invoice
+use HotelDB;
+if object_id('DeleteInvoice') is not null
+	drop proc DeleteInvoice;
+go
+create proc DeleteInvoice
+	(
+	@InvoiceID INT = NULL)
+as
+delete Invoices
+	where InvoiceID = @InvoiceID
+go
+exec DeleteInvoice 1
+
+--Create Invoice_Service
+use HotelDB;
+if object_id('CreateInvoice_Service') is not null
+	drop proc CreateInvoice_Service;
+go
+create proc CreateInvoice_Service
+	(
+	@InvoiceID INT = NULL,
+	@ServiceID int = NULL,
+	@Times INT = 1,
+	@Hide BIT = 0)
+as
+insert into Invoices_Services(InvoiceID, ServiceID, Times, Hide)
+values (@InvoiceID, @ServiceID, @Times, @Hide)
+go
+exec CreateInvoice_Service 1,1
+
+--Update Invoice_Service
+use HotelDB;
+if object_id('UpdateInvoice_Service') is not null
+	drop proc UpdateInvoice_Service;
+go
+create proc UpdateInvoice_Service
+	(
+	@InvoiceID INT = NULL,
+	@ServiceID int = NULL,
+	@Times INT = 1,
+	@Hide BIT = 0)
+as
+update Invoices_Services
+set 
+	Times = @Times, 
+	Hide = @Hide
+	where 	InvoiceID = @InvoiceID and ServiceID = @ServiceID
+go
+exec UpdateInvoice_Service 1,1,5,1
+--Delete Invoice_Service
+use HotelDB;
+if object_id('DeleteInvoice_Service') is not null
+	drop proc DeleteInvoice_Service;
+go
+create proc DeleteInvoice_Service
+	(
+	@InvoiceID INT = NULL,
+	@ServiceID int = NULL)
+as
+delete Invoices_Services
+where InvoiceID = @InvoiceID and ServiceID = @ServiceID
+go
+exec DeleteInvoice_Service 1,1
