@@ -1,4 +1,4 @@
-IF DB_ID('HotelDB') IS NOT NULL DROP DATABASE HotelDB;
+﻿IF DB_ID('HotelDB') IS NOT NULL DROP DATABASE HotelDB;
 go
 
 CREATE DATABASE HotelDB;
@@ -10,17 +10,17 @@ GO
 CREATE TABLE RoomTypes 
 (
 	RoomTypeID TINYINT IDENTITY NOT null,
-	Name NVARCHAR(100) null,
-	Price smallmoney null,
-	Hide BIT DEFAULT(0) NULL,
+	Name NVARCHAR(100) not null,
+	Price smallmoney not null,
+	Hide BIT DEFAULT(0) null,
 )
 GO
 
 CREATE TABLE Rooms
 (
 	RoomID VARCHAR(5) NOT null,
-	RoomTypeID TINYINT NULL,
-	OnFloor INT NULL,
+	RoomTypeID TINYINT not null,
+	OnFloor INT not null,
 	Hide BIT DEFAULT(0) NULL,
 )
 GO
@@ -28,10 +28,10 @@ GO
 CREATE TABLE Customers
 (
 	CustomerID INT NOT NULL,
-	CustomerName NVARCHAR(30) null,
-	IdentityCard INT null,
-	PhoneNumber NVARCHAR(10) null,
-	CustomerAddress NVARCHAR(40) null, 
+	CustomerName NVARCHAR(30) not null,
+	IdentityCard INT not null,
+	PhoneNumber NVARCHAR(10) not null,
+	CustomerAddress NVARCHAR(40) not null, 
 	Hide BIT DEFAULT(0) NULL,
 )
 go
@@ -39,7 +39,7 @@ go
 CREATE TABLE ServiceTypes
 (
 	ServiceTypeID TINYINT NOT null, 
-	ServiceTypeName NVARCHAR(20) null,
+	ServiceTypeName NVARCHAR(20) not null,
 	Hide BIT DEFAULT(0) NULL,
 )
 go
@@ -47,9 +47,9 @@ go
 CREATE TABLE HotelServices
 (
 	ServiceID INT NOT null,
-	ServiceName NVARCHAR(20) null,
-	ServiceTypeID TINYINT null,
-	Price smallmoney NULL,
+	ServiceName NVARCHAR(20) not null,
+	ServiceTypeID TINYINT not null,
+	Price smallmoney not null,
 	Hide BIT DEFAULT(0) NULL,
 )
 go
@@ -57,9 +57,9 @@ go
 CREATE TABLE SalePhases
 (
 	SalePhaseID INT NOT null,
-	ServiceTypeID TINYINT NULL,
-	StartDate date NULL,
-	EndDate date NULL,
+	ServiceTypeID TINYINT not null,
+	StartDate date not null,
+	EndDate date not null,
 	Hide BIT DEFAULT(0) NULL,
 )
 go
@@ -67,7 +67,7 @@ go
 CREATE TABLE EmployeeTypes
 (
 	EmployeeTypeID TINYINT NOT NULL,
-	EmployeeTypeName NVARCHAR(30) NULL,
+	EmployeeTypeName NVARCHAR(30) not null,
 	Hide BIT DEFAULT(0) NULL,
 )
 GO
@@ -75,11 +75,11 @@ GO
 CREATE TABLE Employees 
 (
 	EmployeeID VARCHAR(5) NOT NULL,
-	EmployeeName NVARCHAR(30) NULL,
-	EmployeeTypeID TINYINT NULL,
-	PhoneNumber INT NULL,
-	IndetityCard INT NULL,
-	[PassWord] NVARCHAR(20) NULL,
+	EmployeeName NVARCHAR(30) not null,
+	EmployeeTypeID TINYINT not null,
+	PhoneNumber INT not null,
+	IndetityCard INT not null,
+	[PassWord] NVARCHAR(20) not null,
 	Hide BIT DEFAULT(0) NULL,
 )
 GO
@@ -88,7 +88,7 @@ CREATE TABLE Booking
 ( 
   CustomerID INT NOT NULL,
   RoomID VARCHAR(5) NOT NULL,
-  AppoinmentDate smalldatetime NULL,
+  AppoinmentDate smalldatetime not null,
   Hide BIT DEFAULT(0) NULL,
 )
 go
@@ -96,13 +96,13 @@ go
 CREATE TABLE Invoices
 (
 	InvoiceID INT NOT NULL,
-	CustomerID INT NULL,
-	RoomID VARCHAR(5) NULL,
-	NumberOfDay TINYINT NULL,
-	EmployeeID VARCHAR(5) NULL,
-	InvoiceTotal SMALLMONEY NULL,
-	CheckInDate smallmoney NULL,
-	CheckOutDate DATE NULL,
+	CustomerID INT not null,
+	RoomID VARCHAR(5) not null,
+	NumberOfDay TINYINT not null,
+	EmployeeID VARCHAR(5) not null,
+	InvoiceTotal SMALLMONEY not null,
+	CheckInDate smallmoney not null,
+	CheckOutDate DATE not null,
 	Hide BIT DEFAULT(0) NULL,
 )
 go
@@ -221,15 +221,23 @@ if object_id('CreateRoom') is not null
 	drop proc CreateRoom;
 go
 create proc CreateRoom
-	(@RoomID VARCHAR(5) =null,
-	@RoomTypeID TINYINT=null,	
-	@OnFloor INT=null,
+	(@RoomID VARCHAR(5) = null,
+	@RoomTypeID TINYINT= null,	
+	@OnFloor INT= null,
 	@Hide BIT = 0)
 as
+if exists (select * from Rooms where RoomID = @RoomID)
+	throw 50001, 'Invalid RoomID.', 1;
+if not exists (select * from RoomTypes where RoomTypeID = @RoomTypeID)
+	throw 50001, 'Invalid RoomTypeID.', 1;
+if(@OnFloor is null)
+	throw 50001, 'Invalid Onfloor.', 1;
+if(@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 insert into Rooms (RoomID,RoomTypeID,OnFloor,Hide)
 values (@RoomID,@RoomTypeID,@OnFloor,@Hide)
 go
-exec CreateRoom @RoomID = '00003', @RoomTypeID = null, @OnFloor = 3, @Hide = 0
+exec CreateRoom @RoomID = '00005', @RoomTypeID = 0001, @OnFloor = 4, @Hide = 1
 go
 
 --Update Room
@@ -243,6 +251,14 @@ create proc UpdateRoom
 	@OnFloor INT=null,
 	@Hide BIT = 0)
 as
+if not exists (select * from Rooms where RoomID = @RoomID)
+	throw 50001, 'Invalid RoomID.', 1;
+if not exists (select * from RoomTypes where RoomTypeID = @RoomTypeID)
+	throw 50001, 'Invalid RoomTypeID.', 1;
+if(@OnFloor is null)
+	throw 50001, 'Invalid Onfloor.', 1;
+if(@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 update Rooms
 set 
 	RoomTypeID = @RoomTypeID, 
@@ -250,7 +266,7 @@ set
 	Hide = @Hide
 	where RoomID = @RoomID
 go
-exec UpdateRoom 00001,1,5
+exec UpdateRoom '00005',1,6
 go
 --Delete Room
 use HotelDB;
@@ -260,6 +276,8 @@ go
 create proc DeleteRoom
 	(@RoomID VARCHAR(5) =null)
 as
+if not exists (select * from Rooms where RoomID = @RoomID)
+	throw 50001, 'Invalid RoomID.', 1;
 delete Rooms
 	where RoomID = @RoomID
 go
@@ -277,6 +295,10 @@ create proc CreateRoomType
 	@Price smallmoney = null,
 	@Hide BIT =0)
 as
+if(@Name is null)
+	throw 50001, 'Invalid Name.', 1;
+if(@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 insert into RoomTypes(Name,Price,Hide)
 values ( @Name, @Price, @Hide)
 go
@@ -294,6 +316,12 @@ create proc UpdateRoomType
 	@Price smallmoney = null,
 	@Hide BIT =0)
 as
+if not exists (select * from RoomTypes where RoomTypeID = @RoomTypeID)
+	throw 50001, 'Invalid RoomTypeID.', 1;
+if(@Name is null)
+	throw 50001, 'Invalid Name.', 1;
+if(@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 UPdate RoomTypes
 Set 
 	Name = @Name, 
@@ -312,6 +340,8 @@ create proc DeleteRoomType
 	(
 	@RoomTypeID int = null)
 as
+if not exists (select * from RoomTypes where RoomTypeID = @RoomTypeID)
+	throw 50001, 'Invalid RoomTypeID.', 1;
 Delete RoomTypes
 	where @RoomTypeID = RoomTypeID
 go
@@ -332,10 +362,22 @@ create proc CreateCustomer
 	@CustomerAddress NVARCHAR(40) = null, 
 	@Hide BIT = 0)
 as
+if exists (select * from Customers where CustomerID = @CustomerID)
+	throw 50001, 'Invalid CustomerID.', 1;
+if(@CustomerName is null)
+	throw 50001, 'Invalid CustomerName.', 1;
+if(@IdentityCard is null)
+	throw 50001, 'Invalid IdentityCard.', 1;
+if(@PhoneNumber is null)
+	throw 50001, 'Invalid PhoneNumber.', 1;
+if(@CustomerAddress is null)
+	throw 50001, 'Invalid CustomerAddress.', 1;
+if(@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 insert into Customers(CustomerID,CustomerName,IdentityCard,PhoneNumber,CustomerAddress,Hide)
 values (@CustomerID, @CustomerName, @IdentityCard, @PhoneNumber, @CustomerAddress, @Hide)
 go
-exec CreateCustomer 2,'Phuong', 30, 0901333666, 'ABC', 1
+exec CreateCustomer 7,'Phuong', 30, 0901333666, 'ABC', 1
 exec CreateCustomer 5,'Phuong', 30, 0901333666, 'ABC', 1
 --Update Customer
 use HotelDB;
@@ -351,6 +393,18 @@ create proc UpdateCustomer
 	@CustomerAddress NVARCHAR(40) = null, 
 	@Hide BIT = 0)
 as
+if not exists (select * from Customers where CustomerID = @CustomerID)
+	throw 50001, 'Invalid CustomerID.', 1;
+if(@CustomerName is null)
+	throw 50001, 'Invalid CustomerName.', 1;
+if(@IdentityCard is null)
+	throw 50001, 'Invalid IdentityCard.', 1;
+if(@PhoneNumber is null)
+	throw 50001, 'Invalid PhoneNumber.', 1;
+if(@CustomerAddress is null)
+	throw 50001, 'Invalid CustomerAddress.', 1;
+if(@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 update Customers
 set
 	CustomerName = @CustomerName, 
@@ -360,7 +414,7 @@ set
 	Hide = @Hide
 	where CustomerID = @CustomerID
 go
-exec UpdateCustomer 2,' My Phuong', 30, 0901333666, 'ABCD', 1
+exec UpdateCustomer 9,' My Phuong', 30, 0901333666, 'ABCD', 1
 --Delete Customer
 use HotelDB;
 if object_id('DeleteCustomer') is not null
@@ -370,6 +424,8 @@ create proc DeleteCustomer
 	(
 		@CustomerID INT = NULL)
 as
+if not exists (select * from Customers where CustomerID = @CustomerID)
+	throw 50001, 'Invalid CustomerID.', 1;
 delete Customers
 	where CustomerID = @CustomerID
 go
@@ -386,6 +442,12 @@ create proc CreateServiceType
 	@ServiceTypeName NVARCHAR(20) = null,
 	@Hide BIT = 0)
 as
+if exists (select * from ServiceTypes where ServiceTypeID = @ServiceTypeID)
+	throw 50001, 'Invalid ServiceTypeID.', 1;
+if(@ServiceTypeName is null)
+	throw 50001, 'Invalid ServiceTypeName.', 1;
+if(@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 insert into ServiceTypes(ServiceTypeID, ServiceTypeName, Hide)
 values (@ServiceTypeID, @ServiceTypeName, @Hide)
 go
@@ -401,6 +463,12 @@ create proc UpdateServiceType
 	@ServiceTypeName NVARCHAR(20) = null,
 	@Hide BIT = 0)
 as
+if not exists (select * from ServiceTypes where ServiceTypeID = @ServiceTypeID)
+	throw 50001, 'Invalid ServiceTypeID.', 1;
+if(@ServiceTypeName is null)
+	throw 50001, 'Invalid ServiceTypeName.', 1;
+if(@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 update ServiceTypes
 set
 	ServiceTypeName = @ServiceTypeName, 
@@ -416,6 +484,8 @@ go
 create proc DeleteServiceType
 	(@ServiceTypeID TINYINT = null)
 as
+if not exists (select * from ServiceTypes where ServiceTypeID = @ServiceTypeID)
+	throw 50001, 'Invalid ServiceTypeID.', 1;
 delete ServiceTypes
 	where ServiceTypeID = @ServiceTypeID 
 go
@@ -434,10 +504,20 @@ create proc CreateHotelService
 	@Price smallmoney = NULL,
 	@Hide BIT = 0)
 as
+if exists (select * from HotelServices where ServiceID = @ServiceID)
+	throw 50001, 'Invalid ServiceID.', 1;
+if(@ServiceName is null)
+	throw 50001, 'Invalid ServiceName.', 1;
+if not exists (select * from ServiceTypes where ServiceTypeID = @ServiceTypeID)
+	throw 50001, 'Invalid ServiceTypeID.', 1;
+if(@Price is null)
+	throw 50001, 'Invalid Price.', 1;
+if(@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 insert into HotelServices(ServiceID, ServiceName, ServiceTypeID, Price, Hide)
 values (@ServiceID, @ServiceName, @ServiceTypeID, @Price, @Hide)
 go
-exec CreateHotelService 1,'abcd',2, 3000,0
+exec CreateHotelService 5,'abcd',2, 3000,0
 --Update HotelService
 use HotelDB;
 if object_id('UpdateHotelService') is not null
@@ -451,6 +531,16 @@ create proc UpdateHotelService
 	@Price smallmoney = null,
 	@Hide BIT = 0)
 as
+if not exists (select * from HotelServices where ServiceID = @ServiceID)
+	throw 50001, 'Invalid ServiceID.', 1;
+if(@ServiceName is null)
+	throw 50001, 'Invalid ServiceName.', 1;
+if not exists (select * from ServiceTypes where ServiceTypeID = @ServiceTypeID)
+	throw 50001, 'Invalid ServiceTypeID.', 1;
+if(@Price is null)
+	throw 50001, 'Invalid Price.', 1;
+if(@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 update HotelServices
 set
 	ServiceName = @ServiceName, 
@@ -469,10 +559,12 @@ create proc DeleteHotelService
 	(
 	@ServiceID INT = null)
 as
+if not exists (select * from HotelServices where ServiceID = @ServiceID)
+	throw 50001, 'Invalid ServiceID.', 1;
 delete HotelServices
 	where ServiceID = @ServiceID 
 go
-exec DeleteHotelService 1
+exec DeleteHotelService 5
 --Create SalePhase
 use HotelDB;
 if object_id('CreateSalePhase') is not null
@@ -486,6 +578,16 @@ create proc CreateSalePhase
 	@EndDate date = null,
 	@Hide BIT = 0)
 as
+if exists (select * from SalePhases where SalePhaseID = @SalePhaseID)
+	throw 50001, 'Invalid SalePhaseID.', 1;
+if not exists (select * from ServiceTypes where ServiceTypeID = @ServiceTypeID)
+	throw 50001, 'Invalid ServiceTypeID.', 1;
+if(@StartDate is null or @StartDate > getdate() or datediff(dd, @StartDate, getdate()) > 30)
+	throw 50001, 'Invalid StartDate.', 1;
+if(@EndDate is null or datediff(dd, @EndDate, getdate()) > 30 or @EndDate < @StartDate) 
+	throw 50001, 'Invalid EndDate.', 1;
+if(@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 insert into SalePhases(SalePhaseID, ServiceTypeID, StartDate, EndDate, Hide)
 values (@SalePhaseID, @ServiceTypeID, @StartDate, @EndDate, @Hide)
 go
@@ -503,6 +605,16 @@ create proc UpdateSalePhase
 	@EndDate date = null,
 	@Hide BIT = 0)
 as
+if not exists (select * from SalePhases where SalePhaseID = @SalePhaseID)
+	throw 50001, 'Invalid SalePhaseID.', 1;
+if not exists (select * from ServiceTypes where ServiceTypeID = @ServiceTypeID)
+	throw 50001, 'Invalid ServiceTypeID.', 1;
+if(@StartDate is null or @StartDate > getdate() or datediff(dd, @StartDate, getdate()) > 30)
+	throw 50001, 'Invalid StartDate.', 1;
+if(@EndDate is null or datediff(dd, @EndDate, getdate()) > 30 or @EndDate < @StartDate) 
+	throw 50001, 'Invalid EndDate.', 1;
+if(@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 update SalePhases
 set 
 	ServiceTypeID = @ServiceTypeID, 
@@ -521,6 +633,8 @@ create proc DeleteSalePhase
 	(
 	@SalePhaseID INT = null)
 as
+if not exists (select * from SalePhases where SalePhaseID = @SalePhaseID)
+	throw 50001, 'Invalid SalePhaseID.', 1;
 delete SalePhases
 	where 	SalePhaseID = @SalePhaseID
 go
@@ -536,6 +650,12 @@ create proc CreateEmployeeType
 	@EmployeeTypeName NVARCHAR(30) = NULL,
 	@Hide BIT = 0)
 as
+if exists (select * from EmployeeTypes where EmployeeTypeID = @EmployeeTypeID)
+	throw 50001, 'Invalid EmployeeTypeID.', 1;
+if (@EmployeeTypeName is null)
+	throw 50001, 'Invalid EmployeeTypeName.', 1;
+if(@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 insert into EmployeeTypes(EmployeeTypeID, EmployeeTypeName, Hide)
 values (@EmployeeTypeID, @EmployeeTypeName, @Hide)
 go
@@ -551,6 +671,12 @@ create proc UpdateEmployeeType
 	@EmployeeTypeName NVARCHAR(30) = NULL,
 	@Hide BIT = 0)
 as
+if not exists (select * from EmployeeTypes where EmployeeTypeID = @EmployeeTypeID)
+	throw 50001, 'Invalid EmployeeTypeID.', 1;
+if (@EmployeeTypeName is null)
+	throw 50001, 'Invalid EmployeeTypeName.', 1;
+if(@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 update EmployeeTypes
 set 
 	@EmployeeTypeName = @EmployeeTypeName, 
@@ -567,6 +693,8 @@ create proc DeleteEmployeeType
 	(
 	@EmployeeTypeID TINYINT = NULL)
 as
+if not exists (select * from EmployeeTypes where EmployeeTypeID = @EmployeeTypeID)
+	throw 50001, 'Invalid EmployeeTypeID.', 1;
 delete EmployeeTypes
 where EmployeeTypeID = @EmployeeTypeID
 go
@@ -586,6 +714,20 @@ create proc CreateEmployee
 	@PassWord NVARCHAR(20) = NULL,
 	@Hide BIT = 0)
 as
+if exists (select * from Employees where EmployeeID = @EmployeeID)
+	throw 50001, 'Invalid EmployeeID.', 1;
+if (@EmployeeName is null)
+	throw 50001, 'Invalid EmployeeName.',1;
+if not exists (select * from EmployeeTypes where EmployeeTypeID = @EmployeeTypeID)
+	throw 50001, 'Invalid EmplyeeTypeID.', 1;
+if (@PhoneNumber is null)
+	throw 50001, 'Invalid PhoneNumber.',1;
+if (@IndetityCard is null)
+	throw 50001, 'Invalid IndetityCard.',1;
+if (@PassWord is null)
+	throw 50001, 'Invalid PassWord.',1;
+if (@Hide is null)
+	throw 50001, 'Invalid Hide.',1;
 insert into Employees(EmployeeID, EmployeeName, EmployeeTypeID, PhoneNumber, IndetityCard, PassWord, Hide)
 values (@EmployeeID, @EmployeeName, @EmployeeTypeID, @PhoneNumber, @IndetityCard, @PassWord, @Hide)
 go
@@ -605,6 +747,20 @@ create proc UpdateEmployee
 	@PassWord NVARCHAR(20) = NULL,
 	@Hide BIT = 0)
 as
+if not exists (select * from Employees where EmployeeID = @EmployeeID)
+	throw 50001, 'Invalid EmployeeID.', 1;
+if (@EmployeeName is null)
+	throw 50001, 'Invalid EmployeeName.',1;
+if not exists (select * from EmployeeTypes where EmployeeTypeID = @EmployeeTypeID)
+	throw 50001, 'Invalid EmplyeeTypeID.', 1;
+if (@PhoneNumber is null)
+	throw 50001, 'Invalid PhoneNumber.',1;
+if (@IndetityCard is null)
+	throw 50001, 'Invalid IndetityCard.',1;
+if (@PassWord is null)
+	throw 50001, 'Invalid PassWord.',1;
+if (@Hide is null)
+	throw 50001, 'Invalid Hide.',1;
 update Employees
 set 
 	EmployeeName = @EmployeeName, 
@@ -625,6 +781,8 @@ create proc DeleteEmployee
 	(
 	@EmployeeID VARCHAR(5) = NULL)
 as
+if not exists (select * from Employees where EmployeeID = @EmployeeID)
+	throw 50001, 'Invalid EmployeeID.', 1;
 delete Employees
 where 	EmployeeID = @EmployeeID
 go
@@ -641,6 +799,16 @@ create proc CreateBooking
 	@AppoinmentDate smalldatetime = NULL,
 	@Hide BIT = 0)
 as
+if exists (select * from Booking where CustomerID = @CustomerID and RoomID = @RoomID)
+	throw 50001, 'Invalid CustomerID and RoomID.', 1;
+if not exists (select * from Customers where CustomerID = @CustomerID)
+	throw 50001, 'Invalid CustomerID.',1;
+if not exists (select * from Rooms where RoomID = @RoomID)
+	throw 50001, 'Invalid RoomID.',1;
+if(@AppoinmentDate is null or @AppoinmentDate > getdate() or datediff(dd, @AppoinmentDate, getdate()) > 30)
+	throw 50001, 'Invalid AppoinmentDate.', 1;
+if (@Hide is null)
+	throw 50001, 'Invalid Hide.',1;
 insert into Booking(CustomerID, RoomID, AppoinmentDate, Hide)
 values (@CustomerID, @RoomID, @AppoinmentDate, @Hide)
 go
@@ -657,6 +825,12 @@ create proc UpdateBooking
 	@AppoinmentDate smalldatetime = NULL,
 	@Hide BIT = 0)
 as
+if not exists (select * from Booking where CustomerID = @CustomerID and RoomID = @RoomID)
+	throw 50001, 'Invalid CustomerID and RoomID.',1;
+if(@AppoinmentDate is null or @AppoinmentDate > getdate() or datediff(dd, @AppoinmentDate, getdate()) > 30)
+	throw 50001, 'Invalid AppoinmentDate.', 1;
+if (@Hide is null)
+	throw 50001, 'Invalid Hide.',1;
 update Booking
 set
 	AppoinmentDate = @AppoinmentDate, 
@@ -674,6 +848,8 @@ create proc DeleteBooking
 	@CustomerID INT = NULL,
 	@RoomID VARCHAR(5) = NULL)
 as
+if not exists (select * from Booking where CustomerID = @CustomerID and RoomID = @RoomID)
+	throw 50001, 'Invalid CustomerID and RoomID.',1;
 delete Booking
 where CustomerID = @CustomerID and RoomID = @RoomID 
 go
@@ -696,6 +872,26 @@ create proc CreateInvoice
 	@CheckOutDate DATE = NULL,
 	@Hide BIT = 0)
 as
+if exists (select * from Invoices where InvoiceID = @InvoiceID)
+	throw 50001, 'Invalid InvoiceID.',1;
+if not exists (select * from Customers where CustomerID = @CustomerID)
+	throw 50001, 'Invalid CustomerID.',1;
+if not exists (select * from Rooms where RoomID = @RoomID)
+	throw 50001, 'Invalid RoomID.',1;
+if not exists (select * from Booking where CustomerID = @CustomerID and RoomID = @RoomID)
+	throw 50001, 'Invalid CustomerID and RoomID because they does not exist on Booking table.',1;
+if (@NumberOfDay is null)
+	throw 50001, 'Invalid NumberOfDay.', 1;
+if not exists (select * from Employees where EmployeeID = @EmployeeID)
+	throw 50001, 'Invalid EmployeeID.', 1;
+if(@InvoiceTotal is null or @InvoiceTotal < 0)
+	throw 50001, 'Invalid InvoiceTotal', 1;
+if(@CheckInDate is null or @CheckInDate < 0)
+	throw 50001, 'Invalid CheckInDate.', 1;
+if(@CheckOutDate is null or @CheckOutDate > getdate() or datediff(dd, @CheckOutDate, getdate()) > 30)
+	throw 50001, 'Invalid CheckOutDate.', 1;
+if (@Hide is null)
+	throw 50001, 'Invalid Hide.',1;	
 insert into Invoices(InvoiceID, CustomerID, RoomID, NumberOfDay, EmployeeID, InvoiceTotal, CheckInDate, CheckOutDate, Hide)
 values (@InvoiceID, @CustomerID, @RoomID, @NumberOfDay, @EmployeeID, @InvoiceTotal, @CheckInDate, @CheckOutDate, @Hide)
 go
@@ -717,6 +913,26 @@ create proc UpdateInvoice
 	@CheckOutDate DATE = NULL,
 	@Hide BIT = 0)
 as
+if not exists (select * from Invoices where InvoiceID = @InvoiceID)
+	throw 50001, 'Invalid InvoiceID.',1;
+if not exists (select * from Customers where CustomerID = @CustomerID)
+	throw 50001, 'Invalid CustomerID.',1;
+if not exists (select * from Rooms where RoomID = @RoomID)
+	throw 50001, 'Invalid RoomID.',1;
+if not exists (select * from Booking where CustomerID = @CustomerID and RoomID = @RoomID)
+	throw 50001, 'Invalid CustomerID and RoomID because they does not exist on Booking table.',1;
+if (@NumberOfDay is null)
+	throw 50001, 'Invalid NumberOfDay.', 1;
+if not exists (select * from Employees where EmployeeID = @EmployeeID)
+	throw 50001, 'Invalid EmployeeID.', 1;
+if(@InvoiceTotal is null or @InvoiceTotal < 0)
+	throw 50001, 'Invalid InvoiceTotal', 1;
+if(@CheckInDate is null or @CheckInDate < 0)
+	throw 50001, 'Invalid CheckInDate.', 1;
+if(@CheckOutDate is null or @CheckOutDate > getdate() or datediff(dd, @CheckOutDate, getdate()) > 30)
+	throw 50001, 'Invalid CheckOutDate.', 1;
+if (@Hide is null)
+	throw 50001, 'Invalid Hide.',1;	
 update Invoices
 set 
 	CustomerID = @CustomerID, 
@@ -739,6 +955,8 @@ create proc DeleteInvoice
 	(
 	@InvoiceID INT = NULL)
 as
+if not exists (select * from Invoices where InvoiceID = @InvoiceID)
+	throw 50001, 'Invalid InvoiceID.',1;
 delete Invoices
 	where InvoiceID = @InvoiceID
 go
@@ -756,6 +974,16 @@ create proc CreateInvoice_Service
 	@Times INT = 1,
 	@Hide BIT = 0)
 as
+if exists (select * from Invoices_Services where InvoiceID = @InvoiceID and ServiceID = @ServiceID)
+	throw 50001, 'Invalid InvoiceID and ServiceID.', 1;
+if not exists (select * from Invoices where InvoiceID = @InvoiceID)
+	throw 50001, 'Invalid InvoiceID.',1;
+if not exists (select * from HotelServices where ServiceID = @ServiceID)
+	throw 50001, 'Invalid ServiceID.',1;
+if (@Times is null)
+	throw 50001, 'Invalid Times.', 1;
+if (@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 insert into Invoices_Services(InvoiceID, ServiceID, Times, Hide)
 values (@InvoiceID, @ServiceID, @Times, @Hide)
 go
@@ -773,6 +1001,16 @@ create proc UpdateInvoice_Service
 	@Times INT = 1,
 	@Hide BIT = 0)
 as
+if not exists (select * from Invoices_Services where InvoiceID = @InvoiceID and ServiceID = @ServiceID)
+	throw 50001, 'Invalid InvoiceID and ServiceID.', 1;
+if not exists (select * from Invoices where InvoiceID = @InvoiceID)
+	throw 50001, 'Invalid InvoiceID.',1;
+if not exists (select * from HotelServices where ServiceID = @ServiceID)
+	throw 50001, 'Invalid ServiceID.',1;
+if (@Times is null)
+	throw 50001, 'Invalid Times.', 1;
+if (@Hide is null)
+	throw 50001, 'Invalid Hide.', 1;
 update Invoices_Services
 set 
 	Times = @Times, 
@@ -790,6 +1028,8 @@ create proc DeleteInvoice_Service
 	@InvoiceID INT = NULL,
 	@ServiceID int = NULL)
 as
+if not exists (select * from Invoices_Services where InvoiceID = @InvoiceID and ServiceID = @ServiceID)
+	throw 50001, 'Invalid InvoiceID and ServiceID.', 1;
 delete Invoices_Services
 where InvoiceID = @InvoiceID and ServiceID = @ServiceID
 go
