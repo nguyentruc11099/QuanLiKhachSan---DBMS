@@ -86,6 +86,12 @@
       <DependentUpon>DataSetReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="DB_Layer\DBMain.cs" />
+    <Compile Include="Presentation_Layer\HotelManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation_Layer\HotelManagement.Designer.cs">
+      <DependentUpon>HotelManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentation_Layer\NhanPhongDatTruoc_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +197,9 @@
     <Compile Include="Presentation_Layer\ThongKeDichVu.Designer.cs">
       <DependentUpon>ThongKeDichVu.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Presentation_Layer\HotelManagement.resx">
+      <DependentUpon>HotelManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentation_Layer\NhanPhongDatTruoc_Form.resx">
       <DependentUpon>NhanPhongDatTruoc_Form.cs</DependentUpon>
     </EmbeddedResource>

@@ -101,8 +101,8 @@ CREATE TABLE Invoices
 	NumberOfDay TINYINT not null,
 	EmployeeID VARCHAR(5) not null,
 	InvoiceTotal SMALLMONEY not null,
-	CheckInDate smallmoney not null,
-	CheckOutDate DATE not null,
+	CheckInDate smalldatetime not null,
+	CheckOutDate smalldatetime not null,
 	Hide BIT DEFAULT(0) NULL,
 )
 go
@@ -226,6 +226,7 @@ create proc CreateRoom
 	@OnFloor INT= null,
 	@Hide BIT = 0)
 as
+
 if exists (select * from Rooms where RoomID = @RoomID)
 	throw 50001, 'Invalid RoomID.', 1;
 if not exists (select * from RoomTypes where RoomTypeID = @RoomTypeID)
@@ -236,6 +237,7 @@ if(@Hide is null)
 	throw 50001, 'Invalid Hide.', 1;
 insert into Rooms (RoomID,RoomTypeID,OnFloor,Hide)
 values (@RoomID,@RoomTypeID,@OnFloor,@Hide)
+delete RedoTable
 go
 exec CreateRoom @RoomID = '00005', @RoomTypeID = 0001, @OnFloor = 4, @Hide = 1
 go
@@ -265,6 +267,7 @@ set
 	OnFloor = @OnFloor, 
 	Hide = @Hide
 	where RoomID = @RoomID
+delete RedoTable
 go
 exec UpdateRoom '00005',1,6
 go
@@ -280,6 +283,7 @@ if not exists (select * from Rooms where RoomID = @RoomID)
 	throw 50001, 'Invalid RoomID.', 1;
 delete Rooms
 	where RoomID = @RoomID
+delete RedoTable
 go
 exec DeleteRoom '00003'
 go
@@ -868,8 +872,8 @@ create proc CreateInvoice
 	@NumberOfDay TINYINT = NULL,
 	@EmployeeID VARCHAR(5) = NULL,
 	@InvoiceTotal SMALLMONEY = NULL,
-	@CheckInDate smallmoney = NULL,
-	@CheckOutDate DATE = NULL,
+	@CheckInDate smalldatetime = NULL,
+	@CheckOutDate smalldatetime =null,
 	@Hide BIT = 0)
 as
 if exists (select * from Invoices where InvoiceID = @InvoiceID)
@@ -886,9 +890,9 @@ if not exists (select * from Employees where EmployeeID = @EmployeeID)
 	throw 50001, 'Invalid EmployeeID.', 1;
 if(@InvoiceTotal is null or @InvoiceTotal < 0)
 	throw 50001, 'Invalid InvoiceTotal', 1;
-if(@CheckInDate is null or @CheckInDate < 0)
+if(@CheckInDate is null or @CheckInDate >= getdate() or datediff(dd, @CheckInDate, getdate()) > 30)
 	throw 50001, 'Invalid CheckInDate.', 1;
-if(@CheckOutDate is null or @CheckOutDate > getdate() or datediff(dd, @CheckOutDate, getdate()) > 30)
+if(@CheckOutDate is null or @CheckOutDate < @CheckInDate or @CheckOutDate > getdate() or datediff(dd, @CheckOutDate, getdate()) > 30)
 	throw 50001, 'Invalid CheckOutDate.', 1;
 if (@Hide is null)
 	throw 50001, 'Invalid Hide.',1;	
@@ -909,8 +913,8 @@ create proc UpdateInvoice
 	@NumberOfDay TINYINT = NULL,
 	@EmployeeID VARCHAR(5) = NULL,
 	@InvoiceTotal SMALLMONEY = NULL,
-	@CheckInDate smallmoney = NULL,
-	@CheckOutDate DATE = NULL,
+	@CheckInDate smalldatetime = NULL,
+	@CheckOutDate smalldatetime = NULL,
 	@Hide BIT = 0)
 as
 if not exists (select * from Invoices where InvoiceID = @InvoiceID)
@@ -1034,3 +1038,186 @@ delete Invoices_Services
 where InvoiceID = @InvoiceID and ServiceID = @ServiceID
 go
 exec DeleteInvoice_Service 1,1
+
+---------------UNDO - REDO-----------------
+drop table UndoTable
+drop table RedoTable
+create table UndoTable
+(
+	iID int identity,
+	RoomID VARCHAR(5) null,
+	RoomTypeID TINYINT null,
+	OnFloor INT null,
+	Hide BIT DEFAULT(0) NULL,
+	iStatus varchar(10)
+)
+go
+create table RedoTable
+(
+	iID int identity,
+	RoomID VARCHAR(5) null,
+	RoomTypeID TINYINT null,
+	OnFloor INT null,
+	Hide BIT DEFAULT(0) NULL,
+	iStatus varchar(10)
+)
+go
+drop trigger Undo_Rooms_Insert
+drop trigger Undo_Rooms_Delete
+drop trigger Undo_Rooms_Update
+go
+create trigger Undo_Rooms_Insert on Rooms
+after insert
+as
+declare
+	@RoomID varchar(5),
+	@RoomTypeID TINYINT,
+	@OnFloor INT,
+	@Hide BIT;
+select @RoomID = RoomID, @RoomTypeID = RoomTypeID, @OnFloor = Onfloor, @Hide = Hide
+from inserted
+insert UndoTable
+values (@RoomID, @RoomTypeID, @OnFloor, @Hide,'inserted');
+go
+
+create trigger Undo_Rooms_Update on Rooms
+instead of update
+as
+declare
+	@RoomID varchar(5),
+	@RoomTypeID TINYINT,
+	@OnFloor INT,
+	@Hide BIT;
+select @RoomID = RoomID, @RoomTypeID = RoomTypeID, @OnFloor = Onfloor, @Hide = Hide
+from inserted
+insert UndoTable
+select RoomID, RoomTypeID, OnFloor, Hide, 'updated' from Rooms where RoomID = @RoomID
+update Rooms set RoomTypeID = @RoomTypeID, OnFloor = @OnFloor, Hide = @Hide where RoomID = @RoomID
+go
+create trigger Undo_Rooms_Delete on Rooms
+after delete
+as
+declare
+	@RoomID varchar(5),
+	@RoomTypeID TINYINT,
+	@OnFloor INT,
+	@Hide BIT;
+select @RoomID = RoomID, @RoomTypeID = RoomTypeID, @OnFloor = Onfloor, @Hide = Hide
+from deleted
+insert UndoTable
+values (@RoomID, @RoomTypeID, @OnFloor, @Hide,'deleted');
+go
+exec CreateRoom 0009,1,9,1;
+exec CreateRoom 0109,1,7,1;
+exec CreateRoom 0105,1,7,1;
+exec DeleteRoom 19;
+go
+drop proc UndoRooms
+go
+create proc UndoRooms
+as
+exec ('DISABLE TRIGGER Undo_Rooms_Insert ON Rooms')
+exec ('DISABLE TRIGGER Undo_Rooms_Delete ON Rooms')
+declare
+	@RoomID varchar(5),
+	@RoomTypeID TINYINT,
+	@OnFloor INT,
+	@Hide BIT,
+	@iStatus varchar (10);
+select top 1 @RoomID = RoomID, @RoomTypeID = RoomTypeID, @OnFloor = OnFloor, @Hide = Hide, @iStatus = iStatus from UndoTable order by iID desc
+if((select top 1 iStatus from UndoTable order by iID desc) = 'inserted')
+begin
+	delete Rooms
+	where RoomID = @RoomID;
+	insert RedoTable
+	values (@RoomID, @RoomTypeID, @OnFloor, @Hide, @iStatus);
+	with t as (select top 1 * from UndoTable order by iID desc )
+	delete from t;
+
+end
+else if((select top 1 iStatus from UndoTable order by iID desc) = 'deleted')
+begin
+	insert Rooms
+	values (@RoomID, @RoomTypeID, @OnFloor, @Hide)
+	insert RedoTable
+	values (@RoomID, @RoomTypeID, @OnFloor, @Hide, @iStatus);
+	with t as (select top 1 * from UndoTable order by iID desc )
+	delete from t;
+
+end
+else if((select top 1 iStatus from UndoTable order by iID desc) = 'updated')
+begin
+	insert RedoTable
+	select RoomID, RoomTypeID, OnFloor, Hide, 'updated' from Rooms where RoomID = @RoomID;
+	delete Rooms
+	where RoomID = @RoomID;
+	insert Rooms
+	values(@RoomID, @RoomTypeID, @OnFloor, @Hide);
+
+	with t as (select top 1 * from UndoTable order by iID desc )
+	delete from t;
+end
+exec ('ENABLE TRIGGER Undo_Rooms_Insert ON Rooms')
+exec ('ENABLE TRIGGER Undo_Rooms_Delete ON Rooms')
+go
+
+drop proc RedoRooms
+go
+create proc RedoRooms
+as
+exec ('DISABLE TRIGGER Undo_Rooms_Insert ON Rooms')
+exec ('DISABLE TRIGGER Undo_Rooms_Delete ON Rooms')
+declare
+	@RoomID varchar(5),
+	@RoomTypeID TINYINT,
+	@OnFloor INT,
+	@Hide BIT,
+	@iStatus varchar (10);
+select top 1 @RoomID = RoomID, @RoomTypeID = RoomTypeID, @OnFloor = OnFloor, @Hide = Hide, @iStatus = iStatus from RedoTable order by iID desc
+if((select top 1 iStatus from RedoTable order by iID desc) = 'inserted')
+begin
+	insert Rooms
+	values (@RoomID, @RoomTypeID, @OnFloor, @Hide);
+	insert UndoTable
+	values (@RoomID, @RoomTypeID, @OnFloor, @Hide, @iStatus);
+	with t as (select top 1 * from RedoTable order by iID desc )
+	delete from t;
+end
+else if((select top 1 iStatus from RedoTable order by iID desc) = 'deleted')
+begin
+	delete Rooms
+	where RoomID = @RoomID
+	insert UndoTable
+	values (@RoomID, @RoomTypeID, @OnFloor, @Hide, @iStatus);
+	with t as (select top 1 * from RedoTable order by iID desc )
+	delete from t;
+end
+else if((select top 1 iStatus from RedoTable order by iID desc) = 'updated')
+begin
+	insert UndoTable
+	select RoomID, RoomTypeID, OnFloor, Hide, 'updated' from Rooms where RoomID = @RoomID;
+	delete Rooms
+	where RoomID = @RoomID
+	insert Rooms
+	values (@RoomID, @RoomTypeID, @OnFloor, @Hide);
+	
+	with t as (select top 1 * from RedoTable order by iID desc )
+	delete from t;
+end
+exec ('ENABLE TRIGGER Undo_Rooms_Insert ON Rooms')
+exec ('ENABLE TRIGGER Undo_Rooms_Delete ON Rooms')
+go
+
+exec RedoRooms
+select * from rooms
+select * from UndoTable
+select * from RedoTable
+
+exec UndoRooms
+select * from rooms
+select * from UndoTable
+select * from RedoTable
+go
+exec UpdateRoom 4,1,10,0
+exec CreateRoom 13,1,6,1
+exec DeleteRoom 13
