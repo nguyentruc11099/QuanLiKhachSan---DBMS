@@ -35,7 +35,7 @@ CREATE TABLE Customers
 	CustomerID INT IDENTITY(1,1) NOT NULL,
 	CustomerName NVARCHAR(30) not null,
 	IdentityCard VARCHAR(9) not null,
-	PhoneNumber NVARCHAR(10) null,
+	PhoneNumber NVARCHAR(10) not null,
 	CustomerAddress NVARCHAR(40) null, 
 )
 go
@@ -125,6 +125,7 @@ WITH CHECK
 ADD CONSTRAINT FK_Rooms_RoomTypes
 FOREIGN KEY(RoomTypeID)
 REFERENCES dbo.RoomTypes(RoomTypeID)
+ON DELETE CASCADE;
 GO
 
 ALTER TABLE dbo.Employees  
@@ -132,6 +133,7 @@ WITH CHECK
 ADD CONSTRAINT FK_Employees_EmployeeTypes
 FOREIGN KEY(EmployeeTypeID)
 REFERENCES dbo.EmployeeTypes(EmployeeTypeID)
+ON DELETE CASCADE;
 GO
 
 ALTER TABLE dbo.Booking  
@@ -139,6 +141,7 @@ WITH CHECK
 ADD CONSTRAINT FK_Booking_Customers 
 FOREIGN KEY(CustomerID)
 REFERENCES dbo.Customers(CustomerID)
+ON DELETE CASCADE;
 GO
 
 ALTER TABLE dbo.Booking  
@@ -146,6 +149,7 @@ WITH CHECK
 ADD CONSTRAINT FK_Booking_Rooms 
 FOREIGN KEY(RoomID)
 REFERENCES dbo.Rooms(RoomID)
+ON DELETE CASCADE;
 GO
 
 ALTER TABLE dbo.Invoices  
@@ -153,6 +157,7 @@ WITH CHECK
 ADD CONSTRAINT FK_Invoices_Customers 
 FOREIGN KEY(CustomerID)
 REFERENCES dbo.Customers(CustomerID)
+ON DELETE CASCADE;
 GO
 
 ALTER TABLE dbo.Invoices  
@@ -160,6 +165,7 @@ WITH CHECK
 ADD CONSTRAINT FK_Invoices_Room 
 FOREIGN KEY(RoomID)
 REFERENCES dbo.Rooms(RoomID)
+ON DELETE CASCADE;
 GO
 
 ALTER TABLE dbo.Invoices_Services  
@@ -167,6 +173,7 @@ WITH CHECK
 ADD CONSTRAINT FK_InvoicesService_Service
 FOREIGN KEY(ServiceID)
 REFERENCES dbo.HotelServices(ServiceID)
+ON DELETE CASCADE;
 go
 
 ALTER TABLE dbo.Invoices_Services  
@@ -174,6 +181,7 @@ WITH CHECK
 ADD CONSTRAINT FK_InvoicesService_Invoice
 FOREIGN KEY(InvoiceID)
 REFERENCES dbo.Invoices(InvoiceID)
+ON DELETE CASCADE;
 GO
 
 ALTER TABLE dbo.Invoices
@@ -181,6 +189,7 @@ WITH CHECK
 ADD CONSTRAINT FK_InvoicesService_Employee
 FOREIGN KEY(EmployeeID)
 REFERENCES dbo.Employees(EmployeeID)
+ON DELETE CASCADE;
 go
 
 

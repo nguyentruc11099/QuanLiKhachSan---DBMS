@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel_Navigation = new System.Windows.Forms.Panel();
+            this.btn_Redo = new System.Windows.Forms.Button();
+            this.btn_Undo = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lbl_Permision = new System.Windows.Forms.Label();
             this.lbl_UserName = new System.Windows.Forms.Label();
@@ -53,6 +55,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.TabControl_Main = new System.Windows.Forms.TabControl();
             this.TabPage_Room = new System.Windows.Forms.TabPage();
+            this.checkBox_VIP = new System.Windows.Forms.CheckBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.cmb_Room = new System.Windows.Forms.ComboBox();
             this.textBox_Room = new System.Windows.Forms.TextBox();
             this.txt_Room_RoomTypeID = new System.Windows.Forms.TextBox();
@@ -143,13 +147,11 @@
             this.label20 = new System.Windows.Forms.Label();
             this.dgv_Service = new System.Windows.Forms.DataGridView();
             this.TabPage_Invoice = new System.Windows.Forms.TabPage();
-            this.btn_Create_Invoice = new System.Windows.Forms.Button();
-            this.checkBox_CheckInvoice = new System.Windows.Forms.CheckBox();
+            this.checkBox_HasPaid = new System.Windows.Forms.CheckBox();
             this.txt_Invoice_CheckOutDate = new System.Windows.Forms.TextBox();
             this.txt_Invoice_CheckInDate = new System.Windows.Forms.TextBox();
             this.txt_Invoice_InvoiceTotal = new System.Windows.Forms.TextBox();
             this.txt_Invoice_EmployeeID = new System.Windows.Forms.TextBox();
-            this.txt_Invoice_NumberOfDay = new System.Windows.Forms.TextBox();
             this.txt_Invoice_RoomID = new System.Windows.Forms.TextBox();
             this.txt_Invoice_CustomerID = new System.Windows.Forms.TextBox();
             this.txt_Invoice_InvoiceID = new System.Windows.Forms.TextBox();
@@ -163,13 +165,11 @@
             this.btn_Update_Invoice = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.dgv_Invoice = new System.Windows.Forms.DataGridView();
             this.TabPage_Booking = new System.Windows.Forms.TabPage();
-            this.btn_Create_Booking = new System.Windows.Forms.Button();
             this.btn_Delete_Booking = new System.Windows.Forms.Button();
             this.button44 = new System.Windows.Forms.Button();
             this.btn_Cancel_Booking = new System.Windows.Forms.Button();
@@ -212,6 +212,11 @@
             this.label44 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.dgv_InvoiceService = new System.Windows.Forms.DataGridView();
+            this.TabPage_Revenue = new System.Windows.Forms.TabPage();
+            this.btn_Calculate = new System.Windows.Forms.Button();
+            this.cmb_Year = new System.Windows.Forms.ComboBox();
+            this.cmb_Month = new System.Windows.Forms.ComboBox();
+            this.rtxt_Total = new System.Windows.Forms.RichTextBox();
             this.timer_Redraw = new System.Windows.Forms.Timer(this.components);
             this.panel_Navigation.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -239,11 +244,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeType)).BeginInit();
             this.TabPage_Invoice_Service.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_InvoiceService)).BeginInit();
+            this.TabPage_Revenue.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_Navigation
             // 
             this.panel_Navigation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.panel_Navigation.Controls.Add(this.btn_Redo);
+            this.panel_Navigation.Controls.Add(this.btn_Undo);
             this.panel_Navigation.Controls.Add(this.panel3);
             this.panel_Navigation.Controls.Add(this.btn_Logout);
             this.panel_Navigation.Controls.Add(this.btnAnalysis);
@@ -255,6 +263,26 @@
             this.panel_Navigation.Name = "panel_Navigation";
             this.panel_Navigation.Size = new System.Drawing.Size(233, 893);
             this.panel_Navigation.TabIndex = 1;
+            // 
+            // btn_Redo
+            // 
+            this.btn_Redo.Location = new System.Drawing.Point(132, 697);
+            this.btn_Redo.Name = "btn_Redo";
+            this.btn_Redo.Size = new System.Drawing.Size(64, 37);
+            this.btn_Redo.TabIndex = 12;
+            this.btn_Redo.Text = "Redo";
+            this.btn_Redo.UseVisualStyleBackColor = true;
+            this.btn_Redo.Click += new System.EventHandler(this.btn_Redo_Click);
+            // 
+            // btn_Undo
+            // 
+            this.btn_Undo.Location = new System.Drawing.Point(24, 697);
+            this.btn_Undo.Name = "btn_Undo";
+            this.btn_Undo.Size = new System.Drawing.Size(64, 37);
+            this.btn_Undo.TabIndex = 11;
+            this.btn_Undo.Text = "Undo";
+            this.btn_Undo.UseVisualStyleBackColor = true;
+            this.btn_Undo.Click += new System.EventHandler(this.btn_Undo_Click);
             // 
             // panel3
             // 
@@ -325,6 +353,7 @@
             this.btnAnalysis.TabIndex = 4;
             this.btnAnalysis.Text = "Analysis ";
             this.btnAnalysis.UseVisualStyleBackColor = false;
+            this.btnAnalysis.Click += new System.EventHandler(this.btnAnalysis_Click);
             // 
             // pictureBox1
             // 
@@ -552,15 +581,19 @@
             this.TabControl_Main.Controls.Add(this.TabPage_Booking);
             this.TabControl_Main.Controls.Add(this.TabPage_EmployeeType);
             this.TabControl_Main.Controls.Add(this.TabPage_Invoice_Service);
+            this.TabControl_Main.Controls.Add(this.TabPage_Revenue);
             this.TabControl_Main.Dock = System.Windows.Forms.DockStyle.Left;
             this.TabControl_Main.Location = new System.Drawing.Point(0, 0);
             this.TabControl_Main.Name = "TabControl_Main";
             this.TabControl_Main.SelectedIndex = 0;
             this.TabControl_Main.Size = new System.Drawing.Size(1374, 893);
             this.TabControl_Main.TabIndex = 5;
+            this.TabControl_Main.SelectedIndexChanged += new System.EventHandler(this.TabControl_Main_SelectedIndexChanged);
             // 
             // TabPage_Room
             // 
+            this.TabPage_Room.Controls.Add(this.checkBox_VIP);
+            this.TabPage_Room.Controls.Add(this.label21);
             this.TabPage_Room.Controls.Add(this.cmb_Room);
             this.TabPage_Room.Controls.Add(this.textBox_Room);
             this.TabPage_Room.Controls.Add(this.txt_Room_RoomTypeID);
@@ -587,6 +620,25 @@
             this.TabPage_Room.TabIndex = 0;
             this.TabPage_Room.Text = "Room";
             this.TabPage_Room.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_VIP
+            // 
+            this.checkBox_VIP.AutoSize = true;
+            this.checkBox_VIP.Location = new System.Drawing.Point(645, 23);
+            this.checkBox_VIP.Name = "checkBox_VIP";
+            this.checkBox_VIP.Size = new System.Drawing.Size(43, 17);
+            this.checkBox_VIP.TabIndex = 26;
+            this.checkBox_VIP.Text = "VIP";
+            this.checkBox_VIP.UseVisualStyleBackColor = true;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(593, 23);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(35, 13);
+            this.label21.TabIndex = 25;
+            this.label21.Text = "Name";
             // 
             // cmb_Room
             // 
@@ -658,6 +710,7 @@
             this.btn_Delete_Room.TabIndex = 17;
             this.btn_Delete_Room.Text = "Delete";
             this.btn_Delete_Room.UseVisualStyleBackColor = true;
+            this.btn_Delete_Room.Click += new System.EventHandler(this.btn_Delete_Room_Click);
             // 
             // rbtn_Empty
             // 
@@ -696,6 +749,7 @@
             this.btn_Cancel_Room.TabIndex = 15;
             this.btn_Cancel_Room.Text = "Cancel";
             this.btn_Cancel_Room.UseVisualStyleBackColor = true;
+            this.btn_Cancel_Room.Click += new System.EventHandler(this.btn_Cancel_Room_Click);
             // 
             // label3
             // 
@@ -714,6 +768,7 @@
             this.btn_Save_Room.TabIndex = 14;
             this.btn_Save_Room.Text = "Save";
             this.btn_Save_Room.UseVisualStyleBackColor = true;
+            this.btn_Save_Room.Click += new System.EventHandler(this.btn_Save_Room_Click);
             // 
             // label2
             // 
@@ -732,6 +787,7 @@
             this.btn_Update_Room.TabIndex = 13;
             this.btn_Update_Room.Text = "Update";
             this.btn_Update_Room.UseVisualStyleBackColor = true;
+            this.btn_Update_Room.Click += new System.EventHandler(this.btn_Update_Room_Click);
             // 
             // label1
             // 
@@ -750,6 +806,7 @@
             this.btn_Create_Room.TabIndex = 12;
             this.btn_Create_Room.Text = "Create";
             this.btn_Create_Room.UseVisualStyleBackColor = true;
+            this.btn_Create_Room.Click += new System.EventHandler(this.btn_Create_Room_Click);
             // 
             // dgv_Room
             // 
@@ -759,6 +816,7 @@
             this.dgv_Room.Name = "dgv_Room";
             this.dgv_Room.Size = new System.Drawing.Size(960, 400);
             this.dgv_Room.TabIndex = 0;
+            this.dgv_Room.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Room_CellClick);
             // 
             // TabPage_Customer
             // 
@@ -795,6 +853,7 @@
             this.btn_Delete_Customer.TabIndex = 25;
             this.btn_Delete_Customer.Text = "Delete";
             this.btn_Delete_Customer.UseVisualStyleBackColor = true;
+            this.btn_Delete_Customer.Click += new System.EventHandler(this.btn_Delete_Customer_Click);
             // 
             // btn_Back
             // 
@@ -813,6 +872,7 @@
             this.btn_Cancel_Customer.TabIndex = 23;
             this.btn_Cancel_Customer.Text = "Cancel";
             this.btn_Cancel_Customer.UseVisualStyleBackColor = true;
+            this.btn_Cancel_Customer.Click += new System.EventHandler(this.btn_Cancel_Customer_Click);
             // 
             // btn_Save_Customer
             // 
@@ -822,6 +882,7 @@
             this.btn_Save_Customer.TabIndex = 22;
             this.btn_Save_Customer.Text = "Save";
             this.btn_Save_Customer.UseVisualStyleBackColor = true;
+            this.btn_Save_Customer.Click += new System.EventHandler(this.btn_Save_Customer_Click);
             // 
             // btn_Update_Customer
             // 
@@ -831,6 +892,7 @@
             this.btn_Update_Customer.TabIndex = 21;
             this.btn_Update_Customer.Text = "Update";
             this.btn_Update_Customer.UseVisualStyleBackColor = true;
+            this.btn_Update_Customer.Click += new System.EventHandler(this.btn_Update_Customer_Click);
             // 
             // btn_Create_Customer
             // 
@@ -840,6 +902,7 @@
             this.btn_Create_Customer.TabIndex = 20;
             this.btn_Create_Customer.Text = "Create";
             this.btn_Create_Customer.UseVisualStyleBackColor = true;
+            this.btn_Create_Customer.Click += new System.EventHandler(this.btn_Create_Customer_Click);
             // 
             // txt_Customer_CustomerAddress
             // 
@@ -929,6 +992,7 @@
             this.dgv_Customer.Name = "dgv_Customer";
             this.dgv_Customer.Size = new System.Drawing.Size(960, 400);
             this.dgv_Customer.TabIndex = 9;
+            this.dgv_Customer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Customer_CellClick);
             // 
             // TabPage_RoomType
             // 
@@ -961,6 +1025,7 @@
             this.btn_Delete_RoomType.TabIndex = 17;
             this.btn_Delete_RoomType.Text = "Delete";
             this.btn_Delete_RoomType.UseVisualStyleBackColor = true;
+            this.btn_Delete_RoomType.Click += new System.EventHandler(this.btn_Delete_RoomType_Click);
             // 
             // button8
             // 
@@ -979,6 +1044,7 @@
             this.btn_Cancel_RoomType.TabIndex = 15;
             this.btn_Cancel_RoomType.Text = "Cancel";
             this.btn_Cancel_RoomType.UseVisualStyleBackColor = true;
+            this.btn_Cancel_RoomType.Click += new System.EventHandler(this.btn_Cancel_RoomType_Click);
             // 
             // btn_Save_RoomType
             // 
@@ -988,6 +1054,7 @@
             this.btn_Save_RoomType.TabIndex = 14;
             this.btn_Save_RoomType.Text = "Save";
             this.btn_Save_RoomType.UseVisualStyleBackColor = true;
+            this.btn_Save_RoomType.Click += new System.EventHandler(this.btn_Save_RoomType_Click);
             // 
             // btn_Update_RoomType
             // 
@@ -997,6 +1064,7 @@
             this.btn_Update_RoomType.TabIndex = 13;
             this.btn_Update_RoomType.Text = "Update";
             this.btn_Update_RoomType.UseVisualStyleBackColor = true;
+            this.btn_Update_RoomType.Click += new System.EventHandler(this.btn_Update_RoomType_Click);
             // 
             // btn_Create_RoomType
             // 
@@ -1006,6 +1074,7 @@
             this.btn_Create_RoomType.TabIndex = 12;
             this.btn_Create_RoomType.Text = "Create";
             this.btn_Create_RoomType.UseVisualStyleBackColor = true;
+            this.btn_Create_RoomType.Click += new System.EventHandler(this.btn_Create_RoomType_Click);
             // 
             // txt_RoomType_Price
             // 
@@ -1063,6 +1132,7 @@
             this.dgv_RoomType.Name = "dgv_RoomType";
             this.dgv_RoomType.Size = new System.Drawing.Size(960, 400);
             this.dgv_RoomType.TabIndex = 0;
+            this.dgv_RoomType.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_RoomType_CellClick);
             // 
             // TabPage_Employee
             // 
@@ -1101,6 +1171,7 @@
             this.btn_Delete_Employee.TabIndex = 18;
             this.btn_Delete_Employee.Text = "Delete";
             this.btn_Delete_Employee.UseVisualStyleBackColor = true;
+            this.btn_Delete_Employee.Click += new System.EventHandler(this.btn_Delete_Employee_Click);
             // 
             // button14
             // 
@@ -1119,6 +1190,7 @@
             this.btn_Cancel_Employee.TabIndex = 16;
             this.btn_Cancel_Employee.Text = "Cancel";
             this.btn_Cancel_Employee.UseVisualStyleBackColor = true;
+            this.btn_Cancel_Employee.Click += new System.EventHandler(this.btn_Cancel_Employee_Click);
             // 
             // btn_Save_Employee
             // 
@@ -1128,6 +1200,7 @@
             this.btn_Save_Employee.TabIndex = 15;
             this.btn_Save_Employee.Text = "Save";
             this.btn_Save_Employee.UseVisualStyleBackColor = true;
+            this.btn_Save_Employee.Click += new System.EventHandler(this.btn_Save_Employee_Click);
             // 
             // btn_Update_Employee
             // 
@@ -1137,6 +1210,7 @@
             this.btn_Update_Employee.TabIndex = 14;
             this.btn_Update_Employee.Text = "Update";
             this.btn_Update_Employee.UseVisualStyleBackColor = true;
+            this.btn_Update_Employee.Click += new System.EventHandler(this.btn_Update_Employee_Click);
             // 
             // btn_Create_Employee
             // 
@@ -1146,6 +1220,7 @@
             this.btn_Create_Employee.TabIndex = 13;
             this.btn_Create_Employee.Text = "Create";
             this.btn_Create_Employee.UseVisualStyleBackColor = true;
+            this.btn_Create_Employee.Click += new System.EventHandler(this.btn_Create_Employee_Click);
             // 
             // txt_Employee_PassWord
             // 
@@ -1251,6 +1326,7 @@
             this.dgv_Employee.Name = "dgv_Employee";
             this.dgv_Employee.Size = new System.Drawing.Size(960, 400);
             this.dgv_Employee.TabIndex = 0;
+            this.dgv_Employee.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Employee_CellClick);
             // 
             // tabPage_DefaultScreen
             // 
@@ -1338,6 +1414,7 @@
             this.btn_Delete_Service.TabIndex = 30;
             this.btn_Delete_Service.Text = "Delete";
             this.btn_Delete_Service.UseVisualStyleBackColor = true;
+            this.btn_Delete_Service.Click += new System.EventHandler(this.btn_Delete_Service_Click);
             // 
             // button20
             // 
@@ -1356,6 +1433,7 @@
             this.btn_Cancel_Service.TabIndex = 28;
             this.btn_Cancel_Service.Text = "Cancel";
             this.btn_Cancel_Service.UseVisualStyleBackColor = true;
+            this.btn_Cancel_Service.Click += new System.EventHandler(this.btn_Cancel_Service_Click);
             // 
             // btn_Save_Service
             // 
@@ -1365,6 +1443,7 @@
             this.btn_Save_Service.TabIndex = 27;
             this.btn_Save_Service.Text = "Save";
             this.btn_Save_Service.UseVisualStyleBackColor = true;
+            this.btn_Save_Service.Click += new System.EventHandler(this.btn_Save_Service_Click);
             // 
             // btn_Update_Service
             // 
@@ -1374,6 +1453,7 @@
             this.btn_Update_Service.TabIndex = 26;
             this.btn_Update_Service.Text = "Update";
             this.btn_Update_Service.UseVisualStyleBackColor = true;
+            this.btn_Update_Service.Click += new System.EventHandler(this.btn_Update_Service_Click);
             // 
             // btn_Create_Service
             // 
@@ -1383,6 +1463,7 @@
             this.btn_Create_Service.TabIndex = 25;
             this.btn_Create_Service.Text = "Create";
             this.btn_Create_Service.UseVisualStyleBackColor = true;
+            this.btn_Create_Service.Click += new System.EventHandler(this.btn_Create_Service_Click);
             // 
             // label18
             // 
@@ -1419,16 +1500,15 @@
             this.dgv_Service.Name = "dgv_Service";
             this.dgv_Service.Size = new System.Drawing.Size(960, 400);
             this.dgv_Service.TabIndex = 18;
+            this.dgv_Service.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Service_CellClick);
             // 
             // TabPage_Invoice
             // 
-            this.TabPage_Invoice.Controls.Add(this.btn_Create_Invoice);
-            this.TabPage_Invoice.Controls.Add(this.checkBox_CheckInvoice);
+            this.TabPage_Invoice.Controls.Add(this.checkBox_HasPaid);
             this.TabPage_Invoice.Controls.Add(this.txt_Invoice_CheckOutDate);
             this.TabPage_Invoice.Controls.Add(this.txt_Invoice_CheckInDate);
             this.TabPage_Invoice.Controls.Add(this.txt_Invoice_InvoiceTotal);
             this.TabPage_Invoice.Controls.Add(this.txt_Invoice_EmployeeID);
-            this.TabPage_Invoice.Controls.Add(this.txt_Invoice_NumberOfDay);
             this.TabPage_Invoice.Controls.Add(this.txt_Invoice_RoomID);
             this.TabPage_Invoice.Controls.Add(this.txt_Invoice_CustomerID);
             this.TabPage_Invoice.Controls.Add(this.txt_Invoice_InvoiceID);
@@ -1442,7 +1522,6 @@
             this.TabPage_Invoice.Controls.Add(this.btn_Update_Invoice);
             this.TabPage_Invoice.Controls.Add(this.label23);
             this.TabPage_Invoice.Controls.Add(this.label24);
-            this.TabPage_Invoice.Controls.Add(this.label25);
             this.TabPage_Invoice.Controls.Add(this.label26);
             this.TabPage_Invoice.Controls.Add(this.label27);
             this.TabPage_Invoice.Controls.Add(this.label28);
@@ -1454,24 +1533,15 @@
             this.TabPage_Invoice.Text = "Invoice";
             this.TabPage_Invoice.UseVisualStyleBackColor = true;
             // 
-            // btn_Create_Invoice
+            // checkBox_HasPaid
             // 
-            this.btn_Create_Invoice.Location = new System.Drawing.Point(239, 596);
-            this.btn_Create_Invoice.Name = "btn_Create_Invoice";
-            this.btn_Create_Invoice.Size = new System.Drawing.Size(75, 23);
-            this.btn_Create_Invoice.TabIndex = 45;
-            this.btn_Create_Invoice.Text = "Create";
-            this.btn_Create_Invoice.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_CheckInvoice
-            // 
-            this.checkBox_CheckInvoice.AutoSize = true;
-            this.checkBox_CheckInvoice.Location = new System.Drawing.Point(592, 101);
-            this.checkBox_CheckInvoice.Name = "checkBox_CheckInvoice";
-            this.checkBox_CheckInvoice.Size = new System.Drawing.Size(80, 17);
-            this.checkBox_CheckInvoice.TabIndex = 44;
-            this.checkBox_CheckInvoice.Text = "checkBox1";
-            this.checkBox_CheckInvoice.UseVisualStyleBackColor = true;
+            this.checkBox_HasPaid.AutoSize = true;
+            this.checkBox_HasPaid.Location = new System.Drawing.Point(592, 101);
+            this.checkBox_HasPaid.Name = "checkBox_HasPaid";
+            this.checkBox_HasPaid.Size = new System.Drawing.Size(47, 17);
+            this.checkBox_HasPaid.TabIndex = 44;
+            this.checkBox_HasPaid.Text = "YES";
+            this.checkBox_HasPaid.UseVisualStyleBackColor = true;
             // 
             // txt_Invoice_CheckOutDate
             // 
@@ -1489,24 +1559,17 @@
             // 
             // txt_Invoice_InvoiceTotal
             // 
-            this.txt_Invoice_InvoiceTotal.Location = new System.Drawing.Point(370, 98);
+            this.txt_Invoice_InvoiceTotal.Location = new System.Drawing.Point(368, 64);
             this.txt_Invoice_InvoiceTotal.Name = "txt_Invoice_InvoiceTotal";
             this.txt_Invoice_InvoiceTotal.Size = new System.Drawing.Size(100, 20);
             this.txt_Invoice_InvoiceTotal.TabIndex = 31;
             // 
             // txt_Invoice_EmployeeID
             // 
-            this.txt_Invoice_EmployeeID.Location = new System.Drawing.Point(370, 66);
+            this.txt_Invoice_EmployeeID.Location = new System.Drawing.Point(368, 32);
             this.txt_Invoice_EmployeeID.Name = "txt_Invoice_EmployeeID";
             this.txt_Invoice_EmployeeID.Size = new System.Drawing.Size(100, 20);
             this.txt_Invoice_EmployeeID.TabIndex = 30;
-            // 
-            // txt_Invoice_NumberOfDay
-            // 
-            this.txt_Invoice_NumberOfDay.Location = new System.Drawing.Point(370, 32);
-            this.txt_Invoice_NumberOfDay.Name = "txt_Invoice_NumberOfDay";
-            this.txt_Invoice_NumberOfDay.Size = new System.Drawing.Size(100, 20);
-            this.txt_Invoice_NumberOfDay.TabIndex = 29;
             // 
             // txt_Invoice_RoomID
             // 
@@ -1564,6 +1627,7 @@
             this.btn_Delete_Invoice.TabIndex = 37;
             this.btn_Delete_Invoice.Text = "Delete";
             this.btn_Delete_Invoice.UseVisualStyleBackColor = true;
+            this.btn_Delete_Invoice.Click += new System.EventHandler(this.btn_Delete_Invoice_Click);
             // 
             // button32
             // 
@@ -1582,6 +1646,7 @@
             this.btn_Cancel_Invoice.TabIndex = 35;
             this.btn_Cancel_Invoice.Text = "Cancel";
             this.btn_Cancel_Invoice.UseVisualStyleBackColor = true;
+            this.btn_Cancel_Invoice.Click += new System.EventHandler(this.btn_Cancel_Invoice_Click);
             // 
             // btn_Save_Invoice
             // 
@@ -1591,6 +1656,7 @@
             this.btn_Save_Invoice.TabIndex = 34;
             this.btn_Save_Invoice.Text = "Save";
             this.btn_Save_Invoice.UseVisualStyleBackColor = true;
+            this.btn_Save_Invoice.Click += new System.EventHandler(this.btn_Save_Invoice_Click);
             // 
             // btn_Update_Invoice
             // 
@@ -1600,11 +1666,12 @@
             this.btn_Update_Invoice.TabIndex = 33;
             this.btn_Update_Invoice.Text = "Update";
             this.btn_Update_Invoice.UseVisualStyleBackColor = true;
+            this.btn_Update_Invoice.Click += new System.EventHandler(this.btn_Update_Invoice_Click);
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(289, 101);
+            this.label23.Location = new System.Drawing.Point(287, 67);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(66, 13);
             this.label23.TabIndex = 25;
@@ -1613,20 +1680,11 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(289, 69);
+            this.label24.Location = new System.Drawing.Point(287, 35);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(64, 13);
             this.label24.TabIndex = 24;
             this.label24.Text = "EmployeeID";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(289, 35);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(74, 13);
-            this.label25.TabIndex = 23;
-            this.label25.Text = "NumberOfDay";
             // 
             // label26
             // 
@@ -1663,10 +1721,10 @@
             this.dgv_Invoice.Name = "dgv_Invoice";
             this.dgv_Invoice.Size = new System.Drawing.Size(960, 400);
             this.dgv_Invoice.TabIndex = 19;
+            this.dgv_Invoice.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Invoice_CellClick);
             // 
             // TabPage_Booking
             // 
-            this.TabPage_Booking.Controls.Add(this.btn_Create_Booking);
             this.TabPage_Booking.Controls.Add(this.btn_Delete_Booking);
             this.TabPage_Booking.Controls.Add(this.button44);
             this.TabPage_Booking.Controls.Add(this.btn_Cancel_Booking);
@@ -1687,15 +1745,7 @@
             this.TabPage_Booking.TabIndex = 9;
             this.TabPage_Booking.Text = "Booking";
             this.TabPage_Booking.UseVisualStyleBackColor = true;
-            // 
-            // btn_Create_Booking
-            // 
-            this.btn_Create_Booking.Location = new System.Drawing.Point(227, 631);
-            this.btn_Create_Booking.Name = "btn_Create_Booking";
-            this.btn_Create_Booking.Size = new System.Drawing.Size(75, 23);
-            this.btn_Create_Booking.TabIndex = 53;
-            this.btn_Create_Booking.Text = "Create";
-            this.btn_Create_Booking.UseVisualStyleBackColor = true;
+            this.TabPage_Booking.Click += new System.EventHandler(this.btn_Cancel_Booking_Click);
             // 
             // btn_Delete_Booking
             // 
@@ -1705,6 +1755,7 @@
             this.btn_Delete_Booking.TabIndex = 52;
             this.btn_Delete_Booking.Text = "Delete";
             this.btn_Delete_Booking.UseVisualStyleBackColor = true;
+            this.btn_Delete_Booking.Click += new System.EventHandler(this.btn_Delete_Booking_Click);
             // 
             // button44
             // 
@@ -1732,6 +1783,7 @@
             this.btn_Save_Booking.TabIndex = 49;
             this.btn_Save_Booking.Text = "Save";
             this.btn_Save_Booking.UseVisualStyleBackColor = true;
+            this.btn_Save_Booking.Click += new System.EventHandler(this.btn_Save_Booking_Click);
             // 
             // btn_Update_Booking
             // 
@@ -1741,6 +1793,7 @@
             this.btn_Update_Booking.TabIndex = 48;
             this.btn_Update_Booking.Text = "Update";
             this.btn_Update_Booking.UseVisualStyleBackColor = true;
+            this.btn_Update_Booking.Click += new System.EventHandler(this.btn_Update_Booking_Click);
             // 
             // txt_Booking_RoomID
             // 
@@ -1814,6 +1867,7 @@
             this.dgv_Booking.Name = "dgv_Booking";
             this.dgv_Booking.Size = new System.Drawing.Size(960, 400);
             this.dgv_Booking.TabIndex = 38;
+            this.dgv_Booking.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Booking_CellClick);
             // 
             // TabPage_EmployeeType
             // 
@@ -1843,6 +1897,7 @@
             this.btn_Delete_EmployeeType.TabIndex = 54;
             this.btn_Delete_EmployeeType.Text = "Delete";
             this.btn_Delete_EmployeeType.UseVisualStyleBackColor = true;
+            this.btn_Delete_EmployeeType.Click += new System.EventHandler(this.btn_Delete_EmployeeType_Click);
             // 
             // button50
             // 
@@ -1861,6 +1916,7 @@
             this.btn_Cancel_EmployeeType.TabIndex = 52;
             this.btn_Cancel_EmployeeType.Text = "Cancel";
             this.btn_Cancel_EmployeeType.UseVisualStyleBackColor = true;
+            this.btn_Cancel_EmployeeType.Click += new System.EventHandler(this.btn_Cancel_EmployeeType_Click);
             // 
             // btn_Save_EmployeeType
             // 
@@ -1870,6 +1926,7 @@
             this.btn_Save_EmployeeType.TabIndex = 51;
             this.btn_Save_EmployeeType.Text = "Save";
             this.btn_Save_EmployeeType.UseVisualStyleBackColor = true;
+            this.btn_Save_EmployeeType.Click += new System.EventHandler(this.btn_Save_EmployeeType_Click);
             // 
             // btn_Update_EmployeeType
             // 
@@ -1879,6 +1936,7 @@
             this.btn_Update_EmployeeType.TabIndex = 50;
             this.btn_Update_EmployeeType.Text = "Update";
             this.btn_Update_EmployeeType.UseVisualStyleBackColor = true;
+            this.btn_Update_EmployeeType.Click += new System.EventHandler(this.btn_Update_EmployeeType_Click);
             // 
             // btn_Create_EmployeeType
             // 
@@ -1888,6 +1946,7 @@
             this.btn_Create_EmployeeType.TabIndex = 49;
             this.btn_Create_EmployeeType.Text = "Create";
             this.btn_Create_EmployeeType.UseVisualStyleBackColor = true;
+            this.btn_Create_EmployeeType.Click += new System.EventHandler(this.btn_Create_EmployeeType_Click);
             // 
             // label40
             // 
@@ -1929,6 +1988,7 @@
             this.dgv_EmployeeType.Name = "dgv_EmployeeType";
             this.dgv_EmployeeType.Size = new System.Drawing.Size(960, 400);
             this.dgv_EmployeeType.TabIndex = 44;
+            this.dgv_EmployeeType.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_EmployeeType_CellClick);
             // 
             // TabPage_Invoice_Service
             // 
@@ -1962,6 +2022,7 @@
             this.btn_Delete_InvoiceService.TabIndex = 67;
             this.btn_Delete_InvoiceService.Text = "Delete";
             this.btn_Delete_InvoiceService.UseVisualStyleBackColor = true;
+            this.btn_Delete_InvoiceService.Click += new System.EventHandler(this.btn_Delete_InvoiceService_Click);
             // 
             // button57
             // 
@@ -1980,6 +2041,7 @@
             this.btn_Cancel_InvoiceService.TabIndex = 65;
             this.btn_Cancel_InvoiceService.Text = "Cancel";
             this.btn_Cancel_InvoiceService.UseVisualStyleBackColor = true;
+            this.btn_Cancel_InvoiceService.Click += new System.EventHandler(this.btn_Cancel_InvoiceService_Click);
             // 
             // btn_Save_InvoiceService
             // 
@@ -1989,6 +2051,7 @@
             this.btn_Save_InvoiceService.TabIndex = 64;
             this.btn_Save_InvoiceService.Text = "Save";
             this.btn_Save_InvoiceService.UseVisualStyleBackColor = true;
+            this.btn_Save_InvoiceService.Click += new System.EventHandler(this.btn_Save_InvoiceService_Click);
             // 
             // btn_Update_InvoiceService
             // 
@@ -1998,6 +2061,7 @@
             this.btn_Update_InvoiceService.TabIndex = 63;
             this.btn_Update_InvoiceService.Text = "Update";
             this.btn_Update_InvoiceService.UseVisualStyleBackColor = true;
+            this.btn_Update_InvoiceService.Click += new System.EventHandler(this.btn_Update_InvoiceService_Click);
             // 
             // btn_Create_InvoiceService
             // 
@@ -2007,6 +2071,7 @@
             this.btn_Create_InvoiceService.TabIndex = 62;
             this.btn_Create_InvoiceService.Text = "Create";
             this.btn_Create_InvoiceService.UseVisualStyleBackColor = true;
+            this.btn_Create_InvoiceService.Click += new System.EventHandler(this.btn_Create_InvoiceService_Click);
             // 
             // txt_InvoiceService_ServiceID
             // 
@@ -2080,6 +2145,86 @@
             this.dgv_InvoiceService.Name = "dgv_InvoiceService";
             this.dgv_InvoiceService.Size = new System.Drawing.Size(960, 400);
             this.dgv_InvoiceService.TabIndex = 53;
+            this.dgv_InvoiceService.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_InvoiceService_CellClick);
+            // 
+            // TabPage_Revenue
+            // 
+            this.TabPage_Revenue.Controls.Add(this.btn_Calculate);
+            this.TabPage_Revenue.Controls.Add(this.cmb_Year);
+            this.TabPage_Revenue.Controls.Add(this.cmb_Month);
+            this.TabPage_Revenue.Controls.Add(this.rtxt_Total);
+            this.TabPage_Revenue.Location = new System.Drawing.Point(4, 4);
+            this.TabPage_Revenue.Name = "TabPage_Revenue";
+            this.TabPage_Revenue.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage_Revenue.Size = new System.Drawing.Size(1366, 867);
+            this.TabPage_Revenue.TabIndex = 12;
+            this.TabPage_Revenue.Text = "Revenue";
+            this.TabPage_Revenue.UseVisualStyleBackColor = true;
+            // 
+            // btn_Calculate
+            // 
+            this.btn_Calculate.Location = new System.Drawing.Point(521, 84);
+            this.btn_Calculate.Name = "btn_Calculate";
+            this.btn_Calculate.Size = new System.Drawing.Size(75, 23);
+            this.btn_Calculate.TabIndex = 7;
+            this.btn_Calculate.Text = "Calculate";
+            this.btn_Calculate.UseVisualStyleBackColor = true;
+            this.btn_Calculate.Click += new System.EventHandler(this.btn_Calculate_Click);
+            // 
+            // cmb_Year
+            // 
+            this.cmb_Year.FormattingEnabled = true;
+            this.cmb_Year.Items.AddRange(new object[] {
+            "2010",
+            "2011",
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021"});
+            this.cmb_Year.Location = new System.Drawing.Point(611, 36);
+            this.cmb_Year.Name = "cmb_Year";
+            this.cmb_Year.Size = new System.Drawing.Size(95, 21);
+            this.cmb_Year.TabIndex = 6;
+            this.cmb_Year.Text = "2019";
+            this.cmb_Year.TextChanged += new System.EventHandler(this.cmb_Year_TextChanged);
+            // 
+            // cmb_Month
+            // 
+            this.cmb_Month.FormattingEnabled = true;
+            this.cmb_Month.Items.AddRange(new object[] {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"});
+            this.cmb_Month.Location = new System.Drawing.Point(520, 36);
+            this.cmb_Month.Name = "cmb_Month";
+            this.cmb_Month.Size = new System.Drawing.Size(76, 21);
+            this.cmb_Month.TabIndex = 5;
+            this.cmb_Month.Text = "None";
+            this.cmb_Month.TextChanged += new System.EventHandler(this.cmb_Month_TextChanged);
+            // 
+            // rtxt_Total
+            // 
+            this.rtxt_Total.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtxt_Total.Location = new System.Drawing.Point(39, 36);
+            this.rtxt_Total.Name = "rtxt_Total";
+            this.rtxt_Total.Size = new System.Drawing.Size(411, 118);
+            this.rtxt_Total.TabIndex = 4;
+            this.rtxt_Total.Text = "";
             // 
             // timer_Redraw
             // 
@@ -2135,6 +2280,7 @@
             this.TabPage_Invoice_Service.ResumeLayout(false);
             this.TabPage_Invoice_Service.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_InvoiceService)).EndInit();
+            this.TabPage_Revenue.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2182,7 +2328,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_Update_Room;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btn_Create_Room;
         private System.Windows.Forms.DataGridView dgv_Room;
         private System.Windows.Forms.TabPage TabPage_Customer;
         private System.Windows.Forms.Button btn_Delete_Customer;
@@ -2255,12 +2400,11 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.DataGridView dgv_Service;
         private System.Windows.Forms.TabPage TabPage_Invoice;
-        private System.Windows.Forms.CheckBox checkBox_CheckInvoice;
+        private System.Windows.Forms.CheckBox checkBox_HasPaid;
         private System.Windows.Forms.TextBox txt_Invoice_CheckOutDate;
         private System.Windows.Forms.TextBox txt_Invoice_CheckInDate;
         private System.Windows.Forms.TextBox txt_Invoice_InvoiceTotal;
         private System.Windows.Forms.TextBox txt_Invoice_EmployeeID;
-        private System.Windows.Forms.TextBox txt_Invoice_NumberOfDay;
         private System.Windows.Forms.TextBox txt_Invoice_RoomID;
         private System.Windows.Forms.TextBox txt_Invoice_CustomerID;
         private System.Windows.Forms.TextBox txt_Invoice_InvoiceID;
@@ -2274,7 +2418,6 @@
         private System.Windows.Forms.Button btn_Update_Invoice;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label28;
@@ -2322,9 +2465,17 @@
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.DataGridView dgv_InvoiceService;
-        private System.Windows.Forms.Button btn_Create_Invoice;
-        private System.Windows.Forms.Button btn_Create_Booking;
         private System.Windows.Forms.Timer timer_Redraw;
+        private System.Windows.Forms.Button btn_Create_Room;
+        private System.Windows.Forms.TabPage TabPage_Revenue;
+        private System.Windows.Forms.Button btn_Calculate;
+        private System.Windows.Forms.ComboBox cmb_Year;
+        private System.Windows.Forms.ComboBox cmb_Month;
+        private System.Windows.Forms.RichTextBox rtxt_Total;
+        private System.Windows.Forms.Button btn_Redo;
+        private System.Windows.Forms.Button btn_Undo;
+        private System.Windows.Forms.CheckBox checkBox_VIP;
+        private System.Windows.Forms.Label label21;
     }
 }
 

@@ -117,6 +117,12 @@ namespace HotelManagement.Presentation_Layer
                 {
                     rbtn_Reserved.Checked = true;
                 }
+                else { }
+                if(dgv_Room.Rows[r].Cells[4].Value.ToString() == "VIP")
+                {
+                    checkBox_VIP.Checked = true; 
+                }
+                else { checkBox_VIP.Checked = false; }
             }
         }
         private void dgv_Customer_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -164,8 +170,7 @@ namespace HotelManagement.Presentation_Layer
                 int r = dgv_Service.CurrentCell.RowIndex;
                 txt_Service_ServiceID.Text = dgv_Service.Rows[r].Cells[0].Value.ToString();
                 txt_Service_ServiceName.Text = dgv_Service.Rows[r].Cells[1].Value.ToString();
-                txt_Service_ServiceTypeID.Text = dgv_Service.Rows[r].Cells[2].Value.ToString();
-                txt_Service_Price.Text = dgv_Service.Rows[r].Cells[3].Value.ToString();
+                txt_Service_Price.Text = dgv_Service.Rows[r].Cells[2].Value.ToString();
             }
         }
 
@@ -179,16 +184,15 @@ namespace HotelManagement.Presentation_Layer
                 txt_Invoice_InvoiceID.Text = dgv_Invoice.Rows[r].Cells[0].Value.ToString();
                 txt_Invoice_CustomerID.Text = dgv_Invoice.Rows[r].Cells[1].Value.ToString();
                 txt_Invoice_RoomID.Text = dgv_Invoice.Rows[r].Cells[2].Value.ToString();
-                txt_Invoice_NumberOfDay.Text = dgv_Invoice.Rows[r].Cells[3].Value.ToString();
-                txt_Invoice_EmployeeID.Text = dgv_Invoice.Rows[r].Cells[4].Value.ToString();
-                txt_Invoice_InvoiceTotal.Text = dgv_Invoice.Rows[r].Cells[5].Value.ToString();
-                txt_Invoice_CheckInDate.Text = dgv_Invoice.Rows[r].Cells[6].Value.ToString();
-                txt_Invoice_CheckOutDate.Text = dgv_Invoice.Rows[r].Cells[7].Value.ToString();
-                if (Convert.ToBoolean(dgv_Invoice.Rows[r].Cells[8].Value) == true)
+                txt_Invoice_EmployeeID.Text = dgv_Invoice.Rows[r].Cells[3].Value.ToString();
+                txt_Invoice_InvoiceTotal.Text = dgv_Invoice.Rows[r].Cells[4].Value.ToString();
+                txt_Invoice_CheckInDate.Text = dgv_Invoice.Rows[r].Cells[5].Value.ToString();
+                txt_Invoice_CheckOutDate.Text = dgv_Invoice.Rows[r].Cells[6].Value.ToString();
+                if (Convert.ToBoolean(dgv_Invoice.Rows[r].Cells[7].Value) == true)
                 {
-                    checkBox_CheckInvoice.Checked = true;
+                    checkBox_HasPaid.Checked = true;
                 }
-                else checkBox_CheckInvoice.Checked = false;
+                else checkBox_HasPaid.Checked = false;
             }
         }
 
@@ -675,17 +679,16 @@ namespace HotelManagement.Presentation_Layer
             txt_Invoice_InvoiceID.Clear();
             txt_Invoice_CustomerID.Clear();
             txt_Invoice_RoomID.Clear();
-            txt_Invoice_NumberOfDay.Clear();
             txt_Invoice_EmployeeID.Clear();
             txt_Invoice_InvoiceTotal.Clear();
             txt_Invoice_CheckInDate.Clear();
             txt_Invoice_CheckOutDate.Clear();
-            checkBox_CheckInvoice.Checked = false;
+            checkBox_HasPaid.Checked = false;
         }
 
         private void btn_Save_Invoice_Click(object sender, EventArgs e)
         {
-            //BLInvoice blI = new BLInvoice();
+            BLInvoice blI = new BLInvoice();
             //if (SaveStatus == 1)
             //{
             //    blI.Checkin(txt_Invoice_CustomerID.Text, txt_Invoice_RoomID.Text, txt_Invoice_NumberOfDay.Text, txt_Invoice_EmployeeID.Text, txt_Invoice_InvoiceTotal.Text, txt_Invoice_CheckInDate.Text, txt_Invoice_CheckOutDate.Text, checkBox_CheckInvoice.Checked);
@@ -695,18 +698,18 @@ namespace HotelManagement.Presentation_Layer
             //    blI.UpdateInvoice(txt_Invoice_InvoiceID.Text, txt_Invoice_CustomerID.Text, txt_Invoice_RoomID.Text, txt_Invoice_NumberOfDay.Text, txt_Invoice_EmployeeID.Text, txt_Invoice_InvoiceTotal.Text, txt_Invoice_CheckInDate.Text, txt_Invoice_CheckOutDate.Text, checkBox_CheckInvoice.Checked);
             //}
             //SaveStatus = 0;
-            //dgv_Invoice.DataSource = blI.LoadInvoice();
-            //dgv_Invoice_CellClick(null, null);
-            //btn_Update_Invoice.Enabled = true;
-            //btn_Create_Invoice.Enabled = true;
-            //btn_Save_Invoice.Enabled = false;
+
+            blI.UpdateInvoice(txt_Invoice_InvoiceID.Text, txt_Invoice_CustomerID.Text, txt_Invoice_RoomID.Text, txt_Invoice_EmployeeID.Text, txt_Invoice_InvoiceTotal.Text, txt_Invoice_CheckInDate.Text, txt_Invoice_CheckOutDate.Text, checkBox_HasPaid.Checked);
+            dgv_Invoice.DataSource = blI.LoadInvoice();
+            dgv_Invoice_CellClick(null, null);
+            btn_Update_Invoice.Enabled = true;
+            btn_Save_Invoice.Enabled = false;
         }
 
         private void btn_Update_Invoice_Click(object sender, EventArgs e)
         {
             SaveStatus = 2;
             btn_Save_Invoice.Enabled = true;
-            btn_Create_Invoice.Enabled = false;
         }
 
         private void btn_Delete_Invoice_Click(object sender, EventArgs e)
@@ -720,7 +723,6 @@ namespace HotelManagement.Presentation_Layer
         private void btn_Cancel_Invoice_Click(object sender, EventArgs e)
         {
             btn_Save_Invoice.Enabled = false;
-            btn_Create_Invoice.Enabled = true;
             btn_Update_Invoice.Enabled = true;
             SaveStatus = 0;
             dgv_Invoice_CellClick(null, null);
@@ -862,7 +864,7 @@ namespace HotelManagement.Presentation_Layer
             dgv_Booking.DataSource = blSP.LoadBooking();
             dgv_Booking_CellClick(null, null);
             btn_Update_Booking.Enabled = true;
-            btn_Create_Booking.Enabled = true;
+
             btn_Save_Booking.Enabled = false;
         }
 
@@ -878,13 +880,13 @@ namespace HotelManagement.Presentation_Layer
         {
             SaveStatus = 2;
             btn_Save_Booking.Enabled = true;
-            btn_Create_Booking.Enabled = false;
+            
         }
 
         private void btn_Cancel_Booking_Click(object sender, EventArgs e)
         {
             btn_Save_Booking.Enabled = false;
-            btn_Create_Booking.Enabled = true;
+           
             btn_Update_Booking.Enabled = true;
             SaveStatus = 0;
             dgv_Booking_CellClick(null, null);
@@ -1001,5 +1003,136 @@ namespace HotelManagement.Presentation_Layer
         {
             DrawRooms();
         }
+
+        private void btnAnalysis_Click(object sender, EventArgs e)
+        {
+            TabControl_Main.TabPages.Clear();
+            TabControl_Main.TabPages.Add(TabPage_Revenue);
+        }
+
+        private void btn_Calculate_Click(object sender, EventArgs e)
+        {
+            BLInvoice blI = new BLInvoice();
+            if (cmb_Month.Text == "None")
+            {
+                rtxt_Total.Text = "Total revenues in " + cmb_Year.Text + " is: " + blI.CalculateRevenue(cmb_Month.Text, cmb_Year.Text) + "$";
+            }
+            else rtxt_Total.Text = "Total revenues in " + cmb_Month.Text + ", " + cmb_Year.Text + " is: " + blI.CalculateRevenue(cmb_Month.Text, cmb_Year.Text) + "$";
+        }
+
+        private void cmb_Year_TextChanged(object sender, EventArgs e)
+        {
+            if(cmb_Year.Text == "")
+            {
+                cmb_Year.Text = "2019";
+            }
+        }
+
+        private void cmb_Month_TextChanged(object sender, EventArgs e)
+        {
+            if (cmb_Month.Text == "")
+            {
+                cmb_Month.Text = "None";
+            }
+        }
+        #region Undo_Redo
+        private void btn_Undo_Click(object sender, EventArgs e)
+        {
+            HotelManagementDataContext db = new HotelManagementDataContext();
+            if(TabControl_Main.SelectedTab == TabPage_Room)
+            {
+                db.sp_Undo_Rooms();
+                db.Rooms.Context.SubmitChanges();
+                btn_Room_Click(null,null);
+            }
+            if (TabControl_Main.SelectedTab == TabPage_RoomType)
+            {
+                db.sp_Undo_RoomTypes();
+                db.RoomTypes.Context.SubmitChanges();
+                btn_RoomType_Click(null, null);
+            }
+            if (TabControl_Main.SelectedTab == TabPage_Customer)
+            {
+                db.sp_Undo_Customers();
+                db.Customers.Context.SubmitChanges();
+                btn_Customer_Click(null, null);
+            }
+            if (TabControl_Main.SelectedTab == TabPage_Employee)
+            {
+                db.sp_Undo_Employees();
+                db.Employees.Context.SubmitChanges();
+                btn_Employee_Click(null, null);
+            }
+            if (TabControl_Main.SelectedTab == TabPage_EmployeeType)
+            {
+                db.sp_Undo_EmployeeTypes();
+                db.EmployeeTypes.Context.SubmitChanges();
+                btn_EmployeeType_Click(null, null);
+            }
+            if (TabControl_Main.SelectedTab == TabPage_Service)
+            {
+                db.sp_Undo_HotelServices();
+                db.HotelServices.Context.SubmitChanges();
+                btn_Service_Click(null, null);
+            }
+            if (TabControl_Main.SelectedTab == TabPage_Invoice_Service)
+            {
+                db.sp_Undo_Invoices_Services();
+                db.Invoices_Services.Context.SubmitChanges();
+                btn_InvoiceService_Click(null, null);
+            }
+        }
+
+        private void btn_Redo_Click(object sender, EventArgs e)
+        {
+            HotelManagementDataContext db = new HotelManagementDataContext();
+            if (TabControl_Main.SelectedTab == TabPage_Room)
+            {
+                db.sp_Redo_Rooms();
+                db.Rooms.Context.SubmitChanges();
+                btn_Room_Click(null, null);
+            }
+            if (TabControl_Main.SelectedTab == TabPage_RoomType)
+            {
+                db.sp_Redo_RoomTypes();
+                db.RoomTypes.Context.SubmitChanges();
+                btn_RoomType_Click(null, null);
+            }
+            if (TabControl_Main.SelectedTab == TabPage_Customer)
+            {
+                db.sp_Redo_Customers();
+                db.Customers.Context.SubmitChanges();
+                btn_Customer_Click(null, null);
+            }
+            if (TabControl_Main.SelectedTab == TabPage_Employee)
+            {
+                db.sp_Redo_Employees();
+                db.Employees.Context.SubmitChanges();
+                btn_Employee_Click(null, null);
+            }
+            if (TabControl_Main.SelectedTab == TabPage_EmployeeType)
+            {
+                db.sp_Redo_EmployeeTypes();
+                db.EmployeeTypes.Context.SubmitChanges();
+                btn_EmployeeType_Click(null, null);
+            }
+            if (TabControl_Main.SelectedTab == TabPage_Service)
+            {
+                db.sp_Redo_HotelServices();
+                db.HotelServices.Context.SubmitChanges();
+                btn_Service_Click(null, null);
+            }
+            if (TabControl_Main.SelectedTab == TabPage_Invoice_Service)
+            {
+                db.sp_Redo_Invoices_Services();
+                db.Invoices_Services.Context.SubmitChanges();
+                btn_InvoiceService_Click(null, null);
+            }
+        }
+        #endregion
+        private void TabControl_Main_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
     }
 }

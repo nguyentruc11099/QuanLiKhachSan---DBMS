@@ -60,7 +60,7 @@ namespace HotelManagement
     #endregion
 		
 		public HotelManagementDataContext() : 
-				base(global::HotelManagement.Properties.Settings.Default.HotelDBConnectionString, mappingSource)
+				base(global::HotelManagement.Properties.Settings.Default.HotelDBConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -94,6 +94,14 @@ namespace HotelManagement
 			get
 			{
 				return this.GetTable<Booking>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Undo_RoomType> Undo_RoomTypes
+		{
+			get
+			{
+				return this.GetTable<Undo_RoomType>();
 			}
 		}
 		
@@ -145,6 +153,78 @@ namespace HotelManagement
 			}
 		}
 		
+		public System.Data.Linq.Table<Redo_Booking> Redo_Bookings
+		{
+			get
+			{
+				return this.GetTable<Redo_Booking>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Redo_Customer> Redo_Customers
+		{
+			get
+			{
+				return this.GetTable<Redo_Customer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Redo_Employee> Redo_Employees
+		{
+			get
+			{
+				return this.GetTable<Redo_Employee>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Redo_EmployeeType> Redo_EmployeeTypes
+		{
+			get
+			{
+				return this.GetTable<Redo_EmployeeType>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Redo_HotelService> Redo_HotelServices
+		{
+			get
+			{
+				return this.GetTable<Redo_HotelService>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Redo_Invoice> Redo_Invoices
+		{
+			get
+			{
+				return this.GetTable<Redo_Invoice>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Redo_Invoices_Service> Redo_Invoices_Services
+		{
+			get
+			{
+				return this.GetTable<Redo_Invoices_Service>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Redo_Room> Redo_Rooms
+		{
+			get
+			{
+				return this.GetTable<Redo_Room>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Redo_RoomType> Redo_RoomTypes
+		{
+			get
+			{
+				return this.GetTable<Redo_RoomType>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Room> Rooms
 		{
 			get
@@ -158,6 +238,70 @@ namespace HotelManagement
 			get
 			{
 				return this.GetTable<RoomType>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Undo_Booking> Undo_Bookings
+		{
+			get
+			{
+				return this.GetTable<Undo_Booking>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Undo_Customer> Undo_Customers
+		{
+			get
+			{
+				return this.GetTable<Undo_Customer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Undo_Employee> Undo_Employees
+		{
+			get
+			{
+				return this.GetTable<Undo_Employee>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Undo_EmployeeType> Undo_EmployeeTypes
+		{
+			get
+			{
+				return this.GetTable<Undo_EmployeeType>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Undo_HotelService> Undo_HotelServices
+		{
+			get
+			{
+				return this.GetTable<Undo_HotelService>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Undo_Invoice> Undo_Invoices
+		{
+			get
+			{
+				return this.GetTable<Undo_Invoice>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Undo_Invoices_Service> Undo_Invoices_Services
+		{
+			get
+			{
+				return this.GetTable<Undo_Invoices_Service>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Undo_Room> Undo_Rooms
+		{
+			get
+			{
+				return this.GetTable<Undo_Room>();
 			}
 		}
 		
@@ -211,21 +355,24 @@ namespace HotelManagement
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Create")]
-		public void sp_Create_Trigger_Create([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
+		public int sp_Create_Trigger_Create([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
+			return ((int)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Delete")]
-		public void sp_Create_Trigger_Delete([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
+		public int sp_Create_Trigger_Delete([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
+			return ((int)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Update")]
-		public void sp_Create_Trigger_Update([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
+		public int sp_Create_Trigger_Update([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
+			return ((int)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Undo")]
@@ -387,6 +534,13 @@ namespace HotelManagement
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), employeeID);
 			return ((ISingleResult<sp_FindEmployeeResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_FindInvoiceRoomPrice")]
+		public ISingleResult<sp_FindInvoiceRoomPriceResult> sp_FindInvoiceRoomPrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID);
+			return ((ISingleResult<sp_FindInvoiceRoomPriceResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_FindInvoiceServicePrice")]
@@ -605,16 +759,16 @@ namespace HotelManagement
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_ServicePrice", IsComposable=true)]
-		public System.Nullable<decimal> fn_ServicePrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_FindBooking", IsComposable=true)]
+		public IQueryable<fn_FindBookingResult> fn_FindBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
 		{
-			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
+			return this.CreateMethodCallQuery<fn_FindBookingResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID);
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_RoomPrice", IsComposable=true)]
-		public System.Nullable<decimal> fn_RoomPrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Revenue", IsComposable=true)]
+		public System.Nullable<decimal> Revenue([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string month, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string year)
 		{
-			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
+			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), month, year).ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_LoginEmployee", IsComposable=true)]
@@ -623,17 +777,16 @@ namespace HotelManagement
 			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), account, password, employeeType).ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_FindBooking", IsComposable=true)]
-		public IQueryable<fn_FindBookingResult> fn_FindBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_RoomPrice", IsComposable=true)]
+		public System.Nullable<decimal> fn_RoomPrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
 		{
-			return this.CreateMethodCallQuery<fn_FindBookingResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID);
+			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_FindInvoiceRoomPrice")]
-		public ISingleResult<sp_FindInvoiceRoomPriceResult> sp_FindInvoiceRoomPrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_ServicePrice", IsComposable=true)]
+		public System.Nullable<decimal> fn_ServicePrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID);
-			return ((ISingleResult<sp_FindInvoiceRoomPriceResult>)(result.ReturnValue));
+			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
 		}
 	}
 	
@@ -764,7 +917,7 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Booking", Storage="_Customer", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Booking", Storage="_Customer", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Customer Customer
 		{
 			get
@@ -798,7 +951,7 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Booking", Storage="_Room", ThisKey="RoomID", OtherKey="RoomID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Booking", Storage="_Room", ThisKey="RoomID", OtherKey="RoomID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Room Room
 		{
 			get
@@ -849,6 +1002,105 @@ namespace HotelManagement
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Undo_RoomTypes")]
+	public partial class Undo_RoomType
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<byte> _RoomTypeID;
+		
+		private string _Name;
+		
+		private System.Nullable<decimal> _Price;
+		
+		private string _iStatus;
+		
+		public Undo_RoomType()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomTypeID", DbType="TinyInt")]
+		public System.Nullable<byte> RoomTypeID
+		{
+			get
+			{
+				return this._RoomTypeID;
+			}
+			set
+			{
+				if ((this._RoomTypeID != value))
+				{
+					this._RoomTypeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(100)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="SmallMoney")]
+		public System.Nullable<decimal> Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this._Price = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
 			}
 		}
 	}
@@ -936,7 +1188,7 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdentityCard", DbType="VarChar(9) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdentityCard", DbType="VarChar(9)")]
 		public string IdentityCard
 		{
 			get
@@ -1178,7 +1430,7 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(10)")]
 		public string PhoneNumber
 		{
 			get
@@ -1198,7 +1450,7 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdentityCard", DbType="VarChar(9) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdentityCard", DbType="VarChar(9)")]
 		public string IdentityCard
 		{
 			get
@@ -1251,7 +1503,7 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EmployeeType_Employee", Storage="_EmployeeType", ThisKey="EmployeeTypeID", OtherKey="EmployeeTypeID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EmployeeType_Employee", Storage="_EmployeeType", ThisKey="EmployeeTypeID", OtherKey="EmployeeTypeID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public EmployeeType EmployeeType
 		{
 			get
@@ -1816,7 +2068,7 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Invoice", Storage="_Customer", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Invoice", Storage="_Customer", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Customer Customer
 		{
 			get
@@ -1850,7 +2102,7 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Invoice", Storage="_Employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Invoice", Storage="_Employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Employee Employee
 		{
 			get
@@ -1884,7 +2136,7 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Invoice", Storage="_Room", ThisKey="RoomID", OtherKey="RoomID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Room_Invoice", Storage="_Room", ThisKey="RoomID", OtherKey="RoomID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Room Room
 		{
 			get
@@ -2078,7 +2330,7 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Invoice_Invoices_Service", Storage="_Invoice", ThisKey="InvoiceID", OtherKey="InvoiceID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Invoice_Invoices_Service", Storage="_Invoice", ThisKey="InvoiceID", OtherKey="InvoiceID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Invoice Invoice
 		{
 			get
@@ -2112,7 +2364,7 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="HotelService_Invoices_Service", Storage="_HotelService", ThisKey="ServiceID", OtherKey="ServiceID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="HotelService_Invoices_Service", Storage="_HotelService", ThisKey="ServiceID", OtherKey="ServiceID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public HotelService HotelService
 		{
 			get
@@ -2163,6 +2415,1113 @@ namespace HotelManagement
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Redo_Booking")]
+	public partial class Redo_Booking
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<int> _BookingID;
+		
+		private System.Nullable<int> _CustomerID;
+		
+		private System.Nullable<int> _RoomID;
+		
+		private System.Nullable<System.DateTime> _AppoinmentDate;
+		
+		private string _iStatus;
+		
+		public Redo_Booking()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingID", DbType="Int")]
+		public System.Nullable<int> BookingID
+		{
+			get
+			{
+				return this._BookingID;
+			}
+			set
+			{
+				if ((this._BookingID != value))
+				{
+					this._BookingID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
+		public System.Nullable<int> CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomID", DbType="Int")]
+		public System.Nullable<int> RoomID
+		{
+			get
+			{
+				return this._RoomID;
+			}
+			set
+			{
+				if ((this._RoomID != value))
+				{
+					this._RoomID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppoinmentDate", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> AppoinmentDate
+		{
+			get
+			{
+				return this._AppoinmentDate;
+			}
+			set
+			{
+				if ((this._AppoinmentDate != value))
+				{
+					this._AppoinmentDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Redo_Customers")]
+	public partial class Redo_Customer
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<int> _CustomerID;
+		
+		private string _CustomerName;
+		
+		private string _IdentityCard;
+		
+		private string _PhoneNumber;
+		
+		private string _CustomerAddress;
+		
+		private string _iStatus;
+		
+		public Redo_Customer()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
+		public System.Nullable<int> CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="NVarChar(30)")]
+		public string CustomerName
+		{
+			get
+			{
+				return this._CustomerName;
+			}
+			set
+			{
+				if ((this._CustomerName != value))
+				{
+					this._CustomerName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdentityCard", DbType="VarChar(9)")]
+		public string IdentityCard
+		{
+			get
+			{
+				return this._IdentityCard;
+			}
+			set
+			{
+				if ((this._IdentityCard != value))
+				{
+					this._IdentityCard = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NVarChar(10)")]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this._PhoneNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerAddress", DbType="NVarChar(40)")]
+		public string CustomerAddress
+		{
+			get
+			{
+				return this._CustomerAddress;
+			}
+			set
+			{
+				if ((this._CustomerAddress != value))
+				{
+					this._CustomerAddress = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Redo_Employees")]
+	public partial class Redo_Employee
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<int> _EmployeeID;
+		
+		private string _EmployeeName;
+		
+		private System.Nullable<byte> _EmployeeTypeID;
+		
+		private string _PhoneNumber;
+		
+		private string _IdentityCard;
+		
+		private string _Password;
+		
+		private string _iStatus;
+		
+		public Redo_Employee()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="Int")]
+		public System.Nullable<int> EmployeeID
+		{
+			get
+			{
+				return this._EmployeeID;
+			}
+			set
+			{
+				if ((this._EmployeeID != value))
+				{
+					this._EmployeeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeName", DbType="NVarChar(30)")]
+		public string EmployeeName
+		{
+			get
+			{
+				return this._EmployeeName;
+			}
+			set
+			{
+				if ((this._EmployeeName != value))
+				{
+					this._EmployeeName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeID", DbType="TinyInt")]
+		public System.Nullable<byte> EmployeeTypeID
+		{
+			get
+			{
+				return this._EmployeeTypeID;
+			}
+			set
+			{
+				if ((this._EmployeeTypeID != value))
+				{
+					this._EmployeeTypeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(10)")]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this._PhoneNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdentityCard", DbType="VarChar(9)")]
+		public string IdentityCard
+		{
+			get
+			{
+				return this._IdentityCard;
+			}
+			set
+			{
+				if ((this._IdentityCard != value))
+				{
+					this._IdentityCard = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(20)")]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this._Password = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Redo_EmployeeTypes")]
+	public partial class Redo_EmployeeType
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<byte> _EmployeeTypeID;
+		
+		private string _EmployeeTypeName;
+		
+		private string _iStatus;
+		
+		public Redo_EmployeeType()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeID", DbType="TinyInt")]
+		public System.Nullable<byte> EmployeeTypeID
+		{
+			get
+			{
+				return this._EmployeeTypeID;
+			}
+			set
+			{
+				if ((this._EmployeeTypeID != value))
+				{
+					this._EmployeeTypeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeName", DbType="NVarChar(30)")]
+		public string EmployeeTypeName
+		{
+			get
+			{
+				return this._EmployeeTypeName;
+			}
+			set
+			{
+				if ((this._EmployeeTypeName != value))
+				{
+					this._EmployeeTypeName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Redo_HotelServices")]
+	public partial class Redo_HotelService
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<int> _ServiceID;
+		
+		private string _ServiceName;
+		
+		private System.Nullable<decimal> _Price;
+		
+		private string _iStatus;
+		
+		public Redo_HotelService()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceID", DbType="Int")]
+		public System.Nullable<int> ServiceID
+		{
+			get
+			{
+				return this._ServiceID;
+			}
+			set
+			{
+				if ((this._ServiceID != value))
+				{
+					this._ServiceID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceName", DbType="NVarChar(20)")]
+		public string ServiceName
+		{
+			get
+			{
+				return this._ServiceName;
+			}
+			set
+			{
+				if ((this._ServiceName != value))
+				{
+					this._ServiceName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="SmallMoney")]
+		public System.Nullable<decimal> Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this._Price = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Redo_Invoices")]
+	public partial class Redo_Invoice
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<int> _InvoiceID;
+		
+		private System.Nullable<int> _CustomerID;
+		
+		private System.Nullable<int> _RoomID;
+		
+		private System.Nullable<int> _EmployeeID;
+		
+		private System.Nullable<decimal> _InvoiceTotal;
+		
+		private System.Nullable<System.DateTime> _CheckInDate;
+		
+		private System.Nullable<System.DateTime> _CheckOutDate;
+		
+		private System.Nullable<bool> _HasPaid;
+		
+		private string _iStatus;
+		
+		public Redo_Invoice()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceID", DbType="Int")]
+		public System.Nullable<int> InvoiceID
+		{
+			get
+			{
+				return this._InvoiceID;
+			}
+			set
+			{
+				if ((this._InvoiceID != value))
+				{
+					this._InvoiceID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
+		public System.Nullable<int> CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomID", DbType="Int")]
+		public System.Nullable<int> RoomID
+		{
+			get
+			{
+				return this._RoomID;
+			}
+			set
+			{
+				if ((this._RoomID != value))
+				{
+					this._RoomID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="Int")]
+		public System.Nullable<int> EmployeeID
+		{
+			get
+			{
+				return this._EmployeeID;
+			}
+			set
+			{
+				if ((this._EmployeeID != value))
+				{
+					this._EmployeeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceTotal", DbType="SmallMoney")]
+		public System.Nullable<decimal> InvoiceTotal
+		{
+			get
+			{
+				return this._InvoiceTotal;
+			}
+			set
+			{
+				if ((this._InvoiceTotal != value))
+				{
+					this._InvoiceTotal = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckInDate", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> CheckInDate
+		{
+			get
+			{
+				return this._CheckInDate;
+			}
+			set
+			{
+				if ((this._CheckInDate != value))
+				{
+					this._CheckInDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckOutDate", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> CheckOutDate
+		{
+			get
+			{
+				return this._CheckOutDate;
+			}
+			set
+			{
+				if ((this._CheckOutDate != value))
+				{
+					this._CheckOutDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HasPaid", DbType="Bit")]
+		public System.Nullable<bool> HasPaid
+		{
+			get
+			{
+				return this._HasPaid;
+			}
+			set
+			{
+				if ((this._HasPaid != value))
+				{
+					this._HasPaid = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Redo_Invoices_Services")]
+	public partial class Redo_Invoices_Service
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<int> _Invoices_Services_ID;
+		
+		private System.Nullable<int> _InvoiceID;
+		
+		private System.Nullable<int> _ServiceID;
+		
+		private System.Nullable<int> _Times;
+		
+		private string _iStatus;
+		
+		public Redo_Invoices_Service()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invoices_Services_ID", DbType="Int")]
+		public System.Nullable<int> Invoices_Services_ID
+		{
+			get
+			{
+				return this._Invoices_Services_ID;
+			}
+			set
+			{
+				if ((this._Invoices_Services_ID != value))
+				{
+					this._Invoices_Services_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceID", DbType="Int")]
+		public System.Nullable<int> InvoiceID
+		{
+			get
+			{
+				return this._InvoiceID;
+			}
+			set
+			{
+				if ((this._InvoiceID != value))
+				{
+					this._InvoiceID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceID", DbType="Int")]
+		public System.Nullable<int> ServiceID
+		{
+			get
+			{
+				return this._ServiceID;
+			}
+			set
+			{
+				if ((this._ServiceID != value))
+				{
+					this._ServiceID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Times", DbType="Int")]
+		public System.Nullable<int> Times
+		{
+			get
+			{
+				return this._Times;
+			}
+			set
+			{
+				if ((this._Times != value))
+				{
+					this._Times = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Redo_Rooms")]
+	public partial class Redo_Room
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<int> _RoomID;
+		
+		private System.Nullable<byte> _RoomTypeID;
+		
+		private System.Nullable<int> _OnFloor;
+		
+		private System.Nullable<int> _Status;
+		
+		private string _iStatus;
+		
+		public Redo_Room()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomID", DbType="Int")]
+		public System.Nullable<int> RoomID
+		{
+			get
+			{
+				return this._RoomID;
+			}
+			set
+			{
+				if ((this._RoomID != value))
+				{
+					this._RoomID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomTypeID", DbType="TinyInt")]
+		public System.Nullable<byte> RoomTypeID
+		{
+			get
+			{
+				return this._RoomTypeID;
+			}
+			set
+			{
+				if ((this._RoomTypeID != value))
+				{
+					this._RoomTypeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OnFloor", DbType="Int")]
+		public System.Nullable<int> OnFloor
+		{
+			get
+			{
+				return this._OnFloor;
+			}
+			set
+			{
+				if ((this._OnFloor != value))
+				{
+					this._OnFloor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
+		public System.Nullable<int> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this._Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Redo_RoomTypes")]
+	public partial class Redo_RoomType
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<byte> _RoomTypeID;
+		
+		private string _Name;
+		
+		private System.Nullable<decimal> _Price;
+		
+		private string _iStatus;
+		
+		public Redo_RoomType()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomTypeID", DbType="TinyInt")]
+		public System.Nullable<byte> RoomTypeID
+		{
+			get
+			{
+				return this._RoomTypeID;
+			}
+			set
+			{
+				if ((this._RoomTypeID != value))
+				{
+					this._RoomTypeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(100)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="SmallMoney")]
+		public System.Nullable<decimal> Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this._Price = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
 			}
 		}
 	}
@@ -2319,7 +3678,7 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RoomType_Room", Storage="_RoomType", ThisKey="RoomTypeID", OtherKey="RoomTypeID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RoomType_Room", Storage="_RoomType", ThisKey="RoomTypeID", OtherKey="RoomTypeID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public RoomType RoomType
 		{
 			get
@@ -2536,6 +3895,1014 @@ namespace HotelManagement
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Undo_Booking")]
+	public partial class Undo_Booking
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<int> _BookingID;
+		
+		private System.Nullable<int> _CustomerID;
+		
+		private System.Nullable<int> _RoomID;
+		
+		private System.Nullable<System.DateTime> _AppoinmentDate;
+		
+		private string _iStatus;
+		
+		public Undo_Booking()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingID", DbType="Int")]
+		public System.Nullable<int> BookingID
+		{
+			get
+			{
+				return this._BookingID;
+			}
+			set
+			{
+				if ((this._BookingID != value))
+				{
+					this._BookingID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
+		public System.Nullable<int> CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomID", DbType="Int")]
+		public System.Nullable<int> RoomID
+		{
+			get
+			{
+				return this._RoomID;
+			}
+			set
+			{
+				if ((this._RoomID != value))
+				{
+					this._RoomID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppoinmentDate", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> AppoinmentDate
+		{
+			get
+			{
+				return this._AppoinmentDate;
+			}
+			set
+			{
+				if ((this._AppoinmentDate != value))
+				{
+					this._AppoinmentDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Undo_Customers")]
+	public partial class Undo_Customer
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<int> _CustomerID;
+		
+		private string _CustomerName;
+		
+		private string _IdentityCard;
+		
+		private string _PhoneNumber;
+		
+		private string _CustomerAddress;
+		
+		private string _iStatus;
+		
+		public Undo_Customer()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
+		public System.Nullable<int> CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="NVarChar(30)")]
+		public string CustomerName
+		{
+			get
+			{
+				return this._CustomerName;
+			}
+			set
+			{
+				if ((this._CustomerName != value))
+				{
+					this._CustomerName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdentityCard", DbType="VarChar(9)")]
+		public string IdentityCard
+		{
+			get
+			{
+				return this._IdentityCard;
+			}
+			set
+			{
+				if ((this._IdentityCard != value))
+				{
+					this._IdentityCard = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NVarChar(10)")]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this._PhoneNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerAddress", DbType="NVarChar(40)")]
+		public string CustomerAddress
+		{
+			get
+			{
+				return this._CustomerAddress;
+			}
+			set
+			{
+				if ((this._CustomerAddress != value))
+				{
+					this._CustomerAddress = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Undo_Employees")]
+	public partial class Undo_Employee
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<int> _EmployeeID;
+		
+		private string _EmployeeName;
+		
+		private System.Nullable<byte> _EmployeeTypeID;
+		
+		private string _PhoneNumber;
+		
+		private string _IdentityCard;
+		
+		private string _Password;
+		
+		private string _iStatus;
+		
+		public Undo_Employee()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="Int")]
+		public System.Nullable<int> EmployeeID
+		{
+			get
+			{
+				return this._EmployeeID;
+			}
+			set
+			{
+				if ((this._EmployeeID != value))
+				{
+					this._EmployeeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeName", DbType="NVarChar(30)")]
+		public string EmployeeName
+		{
+			get
+			{
+				return this._EmployeeName;
+			}
+			set
+			{
+				if ((this._EmployeeName != value))
+				{
+					this._EmployeeName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeID", DbType="TinyInt")]
+		public System.Nullable<byte> EmployeeTypeID
+		{
+			get
+			{
+				return this._EmployeeTypeID;
+			}
+			set
+			{
+				if ((this._EmployeeTypeID != value))
+				{
+					this._EmployeeTypeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(10)")]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this._PhoneNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdentityCard", DbType="VarChar(9)")]
+		public string IdentityCard
+		{
+			get
+			{
+				return this._IdentityCard;
+			}
+			set
+			{
+				if ((this._IdentityCard != value))
+				{
+					this._IdentityCard = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(20)")]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this._Password = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Undo_EmployeeTypes")]
+	public partial class Undo_EmployeeType
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<byte> _EmployeeTypeID;
+		
+		private string _EmployeeTypeName;
+		
+		private string _iStatus;
+		
+		public Undo_EmployeeType()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeID", DbType="TinyInt")]
+		public System.Nullable<byte> EmployeeTypeID
+		{
+			get
+			{
+				return this._EmployeeTypeID;
+			}
+			set
+			{
+				if ((this._EmployeeTypeID != value))
+				{
+					this._EmployeeTypeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeName", DbType="NVarChar(30)")]
+		public string EmployeeTypeName
+		{
+			get
+			{
+				return this._EmployeeTypeName;
+			}
+			set
+			{
+				if ((this._EmployeeTypeName != value))
+				{
+					this._EmployeeTypeName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Undo_HotelServices")]
+	public partial class Undo_HotelService
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<int> _ServiceID;
+		
+		private string _ServiceName;
+		
+		private System.Nullable<decimal> _Price;
+		
+		private string _iStatus;
+		
+		public Undo_HotelService()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceID", DbType="Int")]
+		public System.Nullable<int> ServiceID
+		{
+			get
+			{
+				return this._ServiceID;
+			}
+			set
+			{
+				if ((this._ServiceID != value))
+				{
+					this._ServiceID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceName", DbType="NVarChar(20)")]
+		public string ServiceName
+		{
+			get
+			{
+				return this._ServiceName;
+			}
+			set
+			{
+				if ((this._ServiceName != value))
+				{
+					this._ServiceName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="SmallMoney")]
+		public System.Nullable<decimal> Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this._Price = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Undo_Invoices")]
+	public partial class Undo_Invoice
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<int> _InvoiceID;
+		
+		private System.Nullable<int> _CustomerID;
+		
+		private System.Nullable<int> _RoomID;
+		
+		private System.Nullable<int> _EmployeeID;
+		
+		private System.Nullable<decimal> _InvoiceTotal;
+		
+		private System.Nullable<System.DateTime> _CheckInDate;
+		
+		private System.Nullable<System.DateTime> _CheckOutDate;
+		
+		private System.Nullable<bool> _HasPaid;
+		
+		private string _iStatus;
+		
+		public Undo_Invoice()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceID", DbType="Int")]
+		public System.Nullable<int> InvoiceID
+		{
+			get
+			{
+				return this._InvoiceID;
+			}
+			set
+			{
+				if ((this._InvoiceID != value))
+				{
+					this._InvoiceID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
+		public System.Nullable<int> CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomID", DbType="Int")]
+		public System.Nullable<int> RoomID
+		{
+			get
+			{
+				return this._RoomID;
+			}
+			set
+			{
+				if ((this._RoomID != value))
+				{
+					this._RoomID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="Int")]
+		public System.Nullable<int> EmployeeID
+		{
+			get
+			{
+				return this._EmployeeID;
+			}
+			set
+			{
+				if ((this._EmployeeID != value))
+				{
+					this._EmployeeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceTotal", DbType="SmallMoney")]
+		public System.Nullable<decimal> InvoiceTotal
+		{
+			get
+			{
+				return this._InvoiceTotal;
+			}
+			set
+			{
+				if ((this._InvoiceTotal != value))
+				{
+					this._InvoiceTotal = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckInDate", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> CheckInDate
+		{
+			get
+			{
+				return this._CheckInDate;
+			}
+			set
+			{
+				if ((this._CheckInDate != value))
+				{
+					this._CheckInDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckOutDate", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> CheckOutDate
+		{
+			get
+			{
+				return this._CheckOutDate;
+			}
+			set
+			{
+				if ((this._CheckOutDate != value))
+				{
+					this._CheckOutDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HasPaid", DbType="Bit")]
+		public System.Nullable<bool> HasPaid
+		{
+			get
+			{
+				return this._HasPaid;
+			}
+			set
+			{
+				if ((this._HasPaid != value))
+				{
+					this._HasPaid = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Undo_Invoices_Services")]
+	public partial class Undo_Invoices_Service
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<int> _Invoices_Services_ID;
+		
+		private System.Nullable<int> _InvoiceID;
+		
+		private System.Nullable<int> _ServiceID;
+		
+		private System.Nullable<int> _Times;
+		
+		private string _iStatus;
+		
+		public Undo_Invoices_Service()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invoices_Services_ID", DbType="Int")]
+		public System.Nullable<int> Invoices_Services_ID
+		{
+			get
+			{
+				return this._Invoices_Services_ID;
+			}
+			set
+			{
+				if ((this._Invoices_Services_ID != value))
+				{
+					this._Invoices_Services_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceID", DbType="Int")]
+		public System.Nullable<int> InvoiceID
+		{
+			get
+			{
+				return this._InvoiceID;
+			}
+			set
+			{
+				if ((this._InvoiceID != value))
+				{
+					this._InvoiceID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceID", DbType="Int")]
+		public System.Nullable<int> ServiceID
+		{
+			get
+			{
+				return this._ServiceID;
+			}
+			set
+			{
+				if ((this._ServiceID != value))
+				{
+					this._ServiceID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Times", DbType="Int")]
+		public System.Nullable<int> Times
+		{
+			get
+			{
+				return this._Times;
+			}
+			set
+			{
+				if ((this._Times != value))
+				{
+					this._Times = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Undo_Rooms")]
+	public partial class Undo_Room
+	{
+		
+		private int _iID;
+		
+		private System.Nullable<int> _RoomID;
+		
+		private System.Nullable<byte> _RoomTypeID;
+		
+		private System.Nullable<int> _OnFloor;
+		
+		private System.Nullable<int> _Status;
+		
+		private string _iStatus;
+		
+		public Undo_Room()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int iID
+		{
+			get
+			{
+				return this._iID;
+			}
+			set
+			{
+				if ((this._iID != value))
+				{
+					this._iID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomID", DbType="Int")]
+		public System.Nullable<int> RoomID
+		{
+			get
+			{
+				return this._RoomID;
+			}
+			set
+			{
+				if ((this._RoomID != value))
+				{
+					this._RoomID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomTypeID", DbType="TinyInt")]
+		public System.Nullable<byte> RoomTypeID
+		{
+			get
+			{
+				return this._RoomTypeID;
+			}
+			set
+			{
+				if ((this._RoomTypeID != value))
+				{
+					this._RoomTypeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OnFloor", DbType="Int")]
+		public System.Nullable<int> OnFloor
+		{
+			get
+			{
+				return this._OnFloor;
+			}
+			set
+			{
+				if ((this._OnFloor != value))
+				{
+					this._OnFloor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
+		public System.Nullable<int> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this._Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iStatus", DbType="NVarChar(20)")]
+		public string iStatus
+		{
+			get
+			{
+				return this._iStatus;
+			}
+			set
+			{
+				if ((this._iStatus != value))
+				{
+					this._iStatus = value;
+				}
+			}
+		}
+	}
+	
 	public partial class sp_FindBookingResult
 	{
 		
@@ -2683,7 +5050,7 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(10)")]
 		public string PhoneNumber
 		{
 			get
@@ -2699,7 +5066,7 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdentityCard", DbType="VarChar(9) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdentityCard", DbType="VarChar(9)")]
 		public string IdentityCard
 		{
 			get
@@ -2727,6 +5094,140 @@ namespace HotelManagement
 				if ((this._Password != value))
 				{
 					this._Password = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_FindInvoiceRoomPriceResult
+	{
+		
+		private int _InvoiceID;
+		
+		private int _CustomerID;
+		
+		private string _CustomerName;
+		
+		private System.DateTime _CheckInDate;
+		
+		private System.Nullable<System.DateTime> _CheckOutDate;
+		
+		private string _Name;
+		
+		private decimal _Price;
+		
+		public sp_FindInvoiceRoomPriceResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceID", DbType="Int NOT NULL")]
+		public int InvoiceID
+		{
+			get
+			{
+				return this._InvoiceID;
+			}
+			set
+			{
+				if ((this._InvoiceID != value))
+				{
+					this._InvoiceID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string CustomerName
+		{
+			get
+			{
+				return this._CustomerName;
+			}
+			set
+			{
+				if ((this._CustomerName != value))
+				{
+					this._CustomerName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckInDate", DbType="SmallDateTime NOT NULL")]
+		public System.DateTime CheckInDate
+		{
+			get
+			{
+				return this._CheckInDate;
+			}
+			set
+			{
+				if ((this._CheckInDate != value))
+				{
+					this._CheckInDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckOutDate", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> CheckOutDate
+		{
+			get
+			{
+				return this._CheckOutDate;
+			}
+			set
+			{
+				if ((this._CheckOutDate != value))
+				{
+					this._CheckOutDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="SmallMoney NOT NULL")]
+		public decimal Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this._Price = value;
 				}
 			}
 		}
@@ -3101,140 +5602,6 @@ namespace HotelManagement
 				if ((this._RoomID != value))
 				{
 					this._RoomID = value;
-				}
-			}
-		}
-	}
-	
-	public partial class sp_FindInvoiceRoomPriceResult
-	{
-		
-		private int _InvoiceID;
-		
-		private int _CustomerID;
-		
-		private string _CustomerName;
-		
-		private System.DateTime _CheckInDate;
-		
-		private System.Nullable<System.DateTime> _CheckOutDate;
-		
-		private string _Name;
-		
-		private decimal _Price;
-		
-		public sp_FindInvoiceRoomPriceResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceID", DbType="Int NOT NULL")]
-		public int InvoiceID
-		{
-			get
-			{
-				return this._InvoiceID;
-			}
-			set
-			{
-				if ((this._InvoiceID != value))
-				{
-					this._InvoiceID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
-		public int CustomerID
-		{
-			get
-			{
-				return this._CustomerID;
-			}
-			set
-			{
-				if ((this._CustomerID != value))
-				{
-					this._CustomerID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
-		public string CustomerName
-		{
-			get
-			{
-				return this._CustomerName;
-			}
-			set
-			{
-				if ((this._CustomerName != value))
-				{
-					this._CustomerName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckInDate", DbType="SmallDateTime NOT NULL")]
-		public System.DateTime CheckInDate
-		{
-			get
-			{
-				return this._CheckInDate;
-			}
-			set
-			{
-				if ((this._CheckInDate != value))
-				{
-					this._CheckInDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckOutDate", DbType="SmallDateTime")]
-		public System.Nullable<System.DateTime> CheckOutDate
-		{
-			get
-			{
-				return this._CheckOutDate;
-			}
-			set
-			{
-				if ((this._CheckOutDate != value))
-				{
-					this._CheckOutDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this._Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="SmallMoney NOT NULL")]
-		public decimal Price
-		{
-			get
-			{
-				return this._Price;
-			}
-			set
-			{
-				if ((this._Price != value))
-				{
-					this._Price = value;
 				}
 			}
 		}

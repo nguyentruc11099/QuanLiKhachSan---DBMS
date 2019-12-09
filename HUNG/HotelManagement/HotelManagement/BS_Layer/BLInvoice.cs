@@ -56,12 +56,12 @@ namespace HotelManagement.BS_Layer
                 return false;
             }
         }
-        public bool UpdateInvoice(string InvoiceID, string CustomerID, string RoomID, string NumberOfDay, string EmployeeID, string InvoiceTotal, string CheckInDate, string CheckOutDate, bool CheckInvoice)
+        public bool UpdateInvoice(string InvoiceID, string CustomerID, string RoomID, string EmployeeID, string InvoiceTotal, string CheckInDate, string CheckOutDate, bool HasPaid)
         {
             try
             {
                 HotelManagementDataContext db = new HotelManagementDataContext();
-                db.sp_UpdateInvoices(Convert.ToInt32(InvoiceID), Convert.ToInt32(CustomerID), Convert.ToInt32(RoomID), Convert.ToInt32(EmployeeID), Convert.ToDecimal(InvoiceTotal), Convert.ToDateTime(CheckInDate), Convert.ToDateTime(CheckOutDate), CheckInvoice);
+                db.sp_UpdateInvoices(Convert.ToInt32(InvoiceID), Convert.ToInt32(CustomerID), Convert.ToInt32(RoomID), Convert.ToInt32(EmployeeID), Convert.ToDecimal(InvoiceTotal), Convert.ToDateTime(CheckInDate), Convert.ToDateTime(CheckOutDate), HasPaid);
                 db.Invoices.Context.SubmitChanges();
                 return true;
             }
@@ -83,6 +83,12 @@ namespace HotelManagement.BS_Layer
             {
                 return false;
             }
+        }
+        public decimal CalculateRevenue(string month, string year)
+        {
+            HotelManagementDataContext db = new HotelManagementDataContext();
+
+            return Convert.ToDecimal(db.Revenue(month, year));
         }
     }
 }

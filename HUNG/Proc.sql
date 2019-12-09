@@ -227,7 +227,11 @@ BEGIN
 
 	 DECLARE @count INT = (SELECT COUNT(ID)
 	 FROM @InfoColTempTable)
-
+	 DECLARE @delsql AS NVARCHAR(max) = ' if object_id(''Undo_'+@TableName+''') is not null
+	 drop table Undo_'+@TableName+';';
+	 PRINT @delsql;
+	 EXEC sp_executesql
+	 @stmt = @delsql;
 	 DECLARE @sql AS NVARCHAR(max) =	'create table Undo_' + @TableName + char(13)+ 
 										'(' + char(13) +
 										'iID INT IDENTITY, ';
@@ -270,7 +274,11 @@ BEGIN
 
 	 DECLARE @count INT = (SELECT COUNT(ID)
 	 FROM @InfoColTempTable)
-
+	 DECLARE @delsql AS NVARCHAR(max) = ' if object_id(''Redo_'+@TableName+''') is not null
+	 drop table Redo_'+@TableName+';';
+	 PRINT @delsql;
+	 EXEC sp_executesql
+	 @stmt = @delsql;
 	 DECLARE @sql AS NVARCHAR(max) =	'create table Redo_' + @TableName + char(13)+ 
 										'(' + char(13) +
 										'iID INT IDENTITY, ';
@@ -296,6 +304,7 @@ BEGIN
 	exec sys.sp_executesql @sql
 END
 GO
+
 exec sp_Create_Undo_Table @TableName = N'Rooms'
 exec sp_Create_Undo_Table @TableName = N'Employees'
 exec sp_Create_Undo_Table @TableName = N'Customers'
@@ -394,7 +403,7 @@ BEGIN
 	print @sql
 	exec sys.sp_executesql @sql
 END
-
+go
 exec sp_Create_Trigger_Delete @TableName = N'Rooms'
 exec sp_Create_Trigger_Delete @TableName = N'Employees'
 exec sp_Create_Trigger_Delete @TableName = N'Customers'
@@ -484,6 +493,7 @@ BEGIN
 	print @sql
 	exec sys.sp_executesql @sql
 END
+go
 exec sp_Create_Trigger_Create @TableName = N'Rooms'
 exec sp_Create_Trigger_Create @TableName = N'Employees'
 exec sp_Create_Trigger_Create @TableName = N'Customers'
@@ -585,6 +595,7 @@ BEGIN
 	print @sql
 	exec sys.sp_executesql @sql
 END
+go
 exec sp_Create_Trigger_Update @TableName = N'Rooms'
 exec sp_Create_Trigger_Update @TableName = N'Employees'
 exec sp_Create_Trigger_Update @TableName = N'Customers'
@@ -615,13 +626,13 @@ BEGIN
 	 DECLARE @count INT = (SELECT COUNT(ID)
 	 FROM @InfoColTempTable)
 
-	 DECLARE @delsql AS NVARCHAR(max) = ' if object_id(''Undo_'+@TableName+''') is not null
-	 drop table Undo_'+@TableName+';';
+	 DECLARE @delsql AS NVARCHAR(max) = ' if object_id(''sp_Undo_'+@TableName+''') is not null
+	 drop proc sp_Undo_'+@TableName+';';
 	 PRINT @delsql;
 	 EXEC sp_executesql
 	 @stmt = @delsql;
 
-	 DECLARE @sql AS NVARCHAR(max) = N'create procedure Undo_'+@TableName+char(13)+
+	 DECLARE @sql AS NVARCHAR(max) = N'create procedure sp_Undo_'+@TableName+char(13)+
 	 'as'+char(13)+
 	 'BEGIN'+char(13)+
 	 'SET IDENTITY_INSERT '+@TableName+ ' ON'+char(13)+
@@ -790,13 +801,13 @@ BEGIN
 	 DECLARE @count INT = (SELECT COUNT(ID)
 	 FROM @InfoColTempTable)
 
-	 DECLARE @delsql AS NVARCHAR(max) = ' if object_id(''Redo_'+@TableName+''') is not null
-	 drop table Redo_'+@TableName+';';
+	  DECLARE @delsql AS NVARCHAR(max) = ' if object_id(''sp_Redo_'+@TableName+''') is not null
+	 drop proc sp_Redo_'+@TableName+';';
 	 PRINT @delsql;
 	 EXEC sp_executesql
 	 @stmt = @delsql;
 
-	 DECLARE @sql AS NVARCHAR(max) = N'create procedure Redo_'+@TableName+char(13)+
+	 DECLARE @sql AS NVARCHAR(max) = N'create procedure sp_Redo_'+@TableName+char(13)+
 	 'as'+char(13)+
 	 'BEGIN'+char(13)+
 	 'SET IDENTITY_INSERT '+@TableName+ ' ON'+char(13)+
@@ -968,6 +979,8 @@ exec dbo.sp_Create_Redo @TableName = N'Invoices'
 exec dbo.sp_Create_Redo @TableName = N'HotelServices'
 exec dbo.sp_Create_Redo @TableName = N'Invoices_Services'
 GO
+
+
 
 
 
@@ -1261,3 +1274,23 @@ BEGIN
 	END CATCH
 END
 GO
+
+if object_id('Revenue') is not null
+drop function Revenue
+go
+create function Revenue(@month nvarchar(50), @year nvarchar(50))
+returns smallmoney
+begin
+	if(@month != 'None')
+	begin
+	return(select sum(InvoiceTotal) 
+			from Invoices
+			where	FORMAT(CheckOutDate - 1,'MMM', 'en-US') = @month and 
+					year(cast(CheckOutDate as nvarchar(50))) = @year)
+	end
+	return(select sum(InvoiceTotal) 
+		from Invoices
+		where year(cast(CheckOutDate as nvarchar(50))) = @year)
+end
+go
+select dbo.Revenue ('November','2019')

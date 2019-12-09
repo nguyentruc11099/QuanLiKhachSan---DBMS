@@ -32,5 +32,15 @@ namespace HotelManagement.Properties {
                 return ((string)(this["HotelDBConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-HLUM7A4;Initial Catalog=HotelDB;Integrated Security=True")]
+        public string HotelDBConnectionString1 {
+            get {
+                return ((string)(this["HotelDBConnectionString1"]));
+            }
+        }
     }
 }
