@@ -56,8 +56,6 @@
     <Compile Include="BS_Layer\BLInvoice_Service.cs" />
     <Compile Include="BS_Layer\BLRoom.cs" />
     <Compile Include="BS_Layer\BLRoomType.cs" />
-    <Compile Include="BS_Layer\BLServiceType.cs" />
-    <Compile Include="BS_Layer\BLSalePhase.cs" />
     <Compile Include="HotelManagement.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

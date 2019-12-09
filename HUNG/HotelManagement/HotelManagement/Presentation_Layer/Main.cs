@@ -34,7 +34,11 @@ namespace HotelManagement.Presentation_Layer
         {
             TabControl_Main.TabPages.Clear();
             TabControl_Main.TabPages.Add(tabPage_DefaultScreen);
-
+            DrawRooms();
+        }
+        private void DrawRooms()
+        {
+            Panel_ListRoom.Controls.Clear();
             BS_Layer.BLRoom blp = new BS_Layer.BLRoom();
 
             var tbRooms = blp.LoadRoom();
@@ -91,6 +95,7 @@ namespace HotelManagement.Presentation_Layer
             Detail Temp = new Detail(RoomID, EmployeeID);
             Temp.ShowDialog();
         }
+
         #region CellClick DatagridView
         private void dgv_Room_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -164,15 +169,7 @@ namespace HotelManagement.Presentation_Layer
             }
         }
 
-        private void dgv_ServiceType_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgv_ServiceType.Rows[0].Cells[0].Value != null)
-            {
-                int r = dgv_ServiceType.CurrentCell.RowIndex;
-                txt_ServiceType_ServiceTypeID.Text = dgv_ServiceType.Rows[r].Cells[0].Value.ToString();
-                txt_ServiceType_ServiceTypeName.Text = dgv_ServiceType.Rows[r].Cells[1].Value.ToString();
-            }
-        }
+   
 
         private void dgv_Invoice_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -195,17 +192,6 @@ namespace HotelManagement.Presentation_Layer
             }
         }
 
-        private void dgv_SalePhase_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgv_SalePhase.Rows[0].Cells[0].Value != null)
-            {
-                int r = dgv_SalePhase.CurrentCell.RowIndex;
-                txt_SalePhase_SalePhaseID.Text = dgv_SalePhase.Rows[r].Cells[0].Value.ToString();
-                txt_SalePhase_ServiceTypeID.Text = dgv_SalePhase.Rows[r].Cells[1].Value.ToString();
-                txt_SalePhase_StartDate.Text = dgv_SalePhase.Rows[r].Cells[2].Value.ToString();
-                txt_SalePhase_EndDate.Text = dgv_SalePhase.Rows[r].Cells[3].Value.ToString();
-            }
-        }
         private void dgv_Booking_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgv_Booking.Rows[0].Cells[0].Value != null)
@@ -238,6 +224,7 @@ namespace HotelManagement.Presentation_Layer
             }
         }
         #endregion
+
         #region Manage Button
         private void btn_Room_Click(object sender, EventArgs e)
         {
@@ -339,25 +326,7 @@ namespace HotelManagement.Presentation_Layer
             txt_Service_ServiceID.Enabled = false;
         }
 
-        private void btn_ServiceType_Click(object sender, EventArgs e)
-        {
-
-            TabControl_Main.TabPages.Clear();
-            TabControl_Main.TabPages.Add(TabPage_ServiceType);
-            dgv_ServiceType.AutoResizeColumns();
-            BLServiceType dbST = new BLServiceType();
-            var data = dbST.LoadServiceType();
-            if (data != null)
-            {
-                dgv_ServiceType.DataSource = data;
-            }
-            else
-            {
-                dgv_ServiceType.DataSource = null;
-            }
-            dgv_ServiceType_CellClick(null, null);
-            txt_ServiceType_ServiceTypeID.Enabled = false;
-        }
+    
 
         private void btn_Invoice_Click(object sender, EventArgs e)
         {
@@ -379,25 +348,7 @@ namespace HotelManagement.Presentation_Layer
             txt_Invoice_InvoiceID.Enabled = false;
         }
 
-        private void btn_SalePhase_Click(object sender, EventArgs e)
-        {
-
-            TabControl_Main.TabPages.Clear();
-            TabControl_Main.TabPages.Add(TabPage_SalePhase);
-            dgv_SalePhase.AutoResizeColumns();
-            BLSalePhase dbSP = new BLSalePhase();
-            var data = dbSP.LoadSalePhase();
-            if (data != null)
-            {
-                dgv_SalePhase.DataSource = data;
-            }
-            else
-            {
-                dgv_SalePhase.DataSource = null;
-            }
-            dgv_SalePhase_CellClick(null, null);
-            txt_SalePhase_SalePhaseID.Enabled = false;
-        }
+      
 
         private void btn_Booking_Click(object sender, EventArgs e)
         {
@@ -459,7 +410,6 @@ namespace HotelManagement.Presentation_Layer
         }
         #endregion
 
-        
         #region CRUD Room
         private void btn_Save_Room_Click(object sender, EventArgs e)
         {
@@ -527,6 +477,7 @@ namespace HotelManagement.Presentation_Layer
             dgv_Room_CellClick(null, null);
         }
         #endregion
+
         #region CRUD Customer
         private void btn_Create_Customer_Click(object sender, EventArgs e)
         {
@@ -590,6 +541,7 @@ namespace HotelManagement.Presentation_Layer
             btn_Create_Customer.Enabled = false;
         }
         #endregion
+
         #region CRUD Employee
         private void btn_Create_Employee_Click(object sender, EventArgs e)
         {
@@ -656,7 +608,8 @@ namespace HotelManagement.Presentation_Layer
             dgv_Employee_CellClick(null, null);
         }
 
-        #endregion
+        #endregion  
+
         #region CRUD RoomType
         private void btn_Create_RoomType_Click(object sender, EventArgs e)
         {
@@ -712,61 +665,7 @@ namespace HotelManagement.Presentation_Layer
         }
 
         #endregion
-        #region CRUD SalePhase
-        private void btn_Create_SalePhase_Click(object sender, EventArgs e)
-        {
-            SaveStatus = 1;
-            btn_Save_SalePhase.Enabled = true;
-            btn_Update_SalePhase.Enabled = false;
-            txt_SalePhase_SalePhaseID.Clear();
-            txt_SalePhase_ServiceTypeID.Clear();
-            txt_SalePhase_StartDate.Clear();
-            txt_SalePhase_EndDate.Clear();
-        }
-
-        private void btn_Save_SalePhase_Click(object sender, EventArgs e)
-        {
-            BLSalePhase blSP = new BLSalePhase();
-            if (SaveStatus == 1)
-            {
-                blSP.CreateSalePhase(txt_SalePhase_ServiceTypeID.Text, txt_SalePhase_StartDate.Text, txt_SalePhase_EndDate.Text);
-            }
-            else if (SaveStatus == 2)
-            {
-                blSP.UpdateSalePhase(Convert.ToInt32(txt_SalePhase_SalePhaseID.Text), txt_SalePhase_ServiceTypeID.Text, txt_SalePhase_StartDate.Text, txt_SalePhase_EndDate.Text);
-            }
-            SaveStatus = 0;
-            dgv_SalePhase.DataSource = blSP.LoadSalePhase();
-            dgv_SalePhase_CellClick(null, null);
-            btn_Update_SalePhase.Enabled = true;
-            btn_Create_SalePhase.Enabled = true;
-            btn_Save_SalePhase.Enabled = false;
-        }
-
-        private void btn_Update_SalePhase_Click(object sender, EventArgs e)
-        {
-            SaveStatus = 2;
-            btn_Save_SalePhase.Enabled = true;
-            btn_Create_SalePhase.Enabled = false;
-        }
-
-        private void btn_Delete_SalePhase_Click(object sender, EventArgs e)
-        {
-            BLSalePhase blRT = new BLSalePhase();
-            blRT.DeleteSalePhase(Convert.ToInt32(txt_SalePhase_SalePhaseID.Text));
-            dgv_SalePhase.DataSource = blRT.LoadSalePhase();
-            dgv_SalePhase_CellClick(null, null);
-        }
-
-        private void btn_Cancel_SalePhase_Click(object sender, EventArgs e)
-        {
-            btn_Save_SalePhase.Enabled = false;
-            btn_Create_SalePhase.Enabled = true;
-            btn_Update_SalePhase.Enabled = true;
-            SaveStatus = 0;
-            dgv_SalePhase_CellClick(null, null);
-        }
-        #endregion
+ 
         #region CRUD Invoice
         private void btn_Create_Invoice_Click(object sender, EventArgs e)
         {
@@ -827,6 +726,7 @@ namespace HotelManagement.Presentation_Layer
             dgv_Invoice_CellClick(null, null);
         }
         #endregion
+
         #region CRUD Service
         private void btn_Create_Service_Click(object sender, EventArgs e)
         {
@@ -835,7 +735,6 @@ namespace HotelManagement.Presentation_Layer
             btn_Update_Service.Enabled = false;
             txt_Service_ServiceID.Clear();
             txt_Service_ServiceName.Clear();
-            txt_ServiceType_ServiceTypeID.Clear();
             txt_Service_Price.Clear();
         }
 
@@ -844,11 +743,11 @@ namespace HotelManagement.Presentation_Layer
             BLHotelService blS = new BLHotelService();
             if (SaveStatus == 1)
             {
-                blS.CreateHotelService(txt_Service_ServiceName.Text, txt_ServiceType_ServiceTypeID.Text, txt_Service_Price.Text);
+                blS.CreateHotelService(txt_Service_ServiceName.Text, txt_Service_Price.Text);
             }
             else if (SaveStatus == 2)
             {
-                blS.UpdateHotelService(txt_Service_ServiceID.Text, txt_Service_ServiceName.Text, txt_ServiceType_ServiceTypeID.Text, txt_Service_Price.Text);
+                blS.UpdateHotelService(txt_Service_ServiceID.Text, txt_Service_ServiceName.Text, txt_Service_Price.Text);
             }
             SaveStatus = 0;
             dgv_Service.DataSource = blS.LoadHotelService();
@@ -882,61 +781,7 @@ namespace HotelManagement.Presentation_Layer
             dgv_Service_CellClick(null, null);
         }
         #endregion
-        #region CRUD ServiceType
-        private void btn_Save_ServiceType_Click(object sender, EventArgs e)
-        {
-            BLServiceType blRT = new BLServiceType();
-            if (SaveStatus == 1)
-            {
-                blRT.CreateServiceType(txt_ServiceType_ServiceTypeName.Text);
-            }
-            else if (SaveStatus == 2)
-            {
-                blRT.UpdateServiceType(Convert.ToInt32(txt_ServiceType_ServiceTypeID.Text), txt_ServiceType_ServiceTypeName.Text);
-            }
-            SaveStatus = 0;
-            dgv_ServiceType.DataSource = blRT.LoadServiceType();
-            dgv_ServiceType_CellClick(null, null);
-            btn_Update_ServiceType.Enabled = true;
-            btn_Create_ServiceType.Enabled = true;
-            btn_Save_ServiceType.Enabled = false;
-        }
 
-        private void btn_Create_ServiceType_Click(object sender, EventArgs e)
-        {
-            SaveStatus = 1;
-            btn_Save_ServiceType.Enabled = true;
-            btn_Update_ServiceType.Enabled = false;
-            txt_ServiceType_ServiceTypeID.Clear();
-            txt_ServiceType_ServiceTypeName.Clear();
-        }
-
-        private void btn_Update_ServiceType_Click(object sender, EventArgs e)
-        {
-            SaveStatus = 2;
-            btn_Save_ServiceType.Enabled = true;
-            btn_Create_ServiceType.Enabled = false;
-        }
-
-        private void btn_Delete_ServiceType_Click(object sender, EventArgs e)
-        {
-            BLServiceType blRT = new BLServiceType();
-            blRT.DeleteServiceType(txt_ServiceType_ServiceTypeID.Text);
-            dgv_ServiceType.DataSource = blRT.LoadServiceType();
-            dgv_ServiceType_CellClick(null, null);
-        }
-
-        private void btn_Cancel_ServiceType_Click(object sender, EventArgs e)
-        {
-            btn_Save_ServiceType.Enabled = false;
-            btn_Create_ServiceType.Enabled = true;
-            btn_Update_ServiceType.Enabled = true;
-            SaveStatus = 0;
-            dgv_ServiceType_CellClick(null, null);
-        }
-
-
-        #endregion
         #region CRUD EmployeeType
         private void btn_Create_EmployeeType_Click(object sender, EventArgs e)
         {
@@ -990,6 +835,7 @@ namespace HotelManagement.Presentation_Layer
             dgv_EmployeeType_CellClick(null, null);
         }
         #endregion
+
         #region CRUD Booking
         private void btn_Create_Booking_Click(object sender, EventArgs e)
         {
@@ -1044,6 +890,7 @@ namespace HotelManagement.Presentation_Layer
             dgv_Booking_CellClick(null, null);
         }
         #endregion
+
         #region CRUD Invoice_Service
         private void btn_Create_InvoiceService_Click(object sender, EventArgs e)
         {
@@ -1141,6 +988,11 @@ namespace HotelManagement.Presentation_Layer
         private void Button_Hide_Click(object sender, EventArgs e)
         {
             panel_Manage.Width = 0;
+        }
+
+        private void Button_Redraw_Click(object sender, EventArgs e)
+        {
+            DrawRooms();
         }
     }
 }

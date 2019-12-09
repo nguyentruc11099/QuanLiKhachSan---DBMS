@@ -16,12 +16,12 @@ namespace HotelManagement.BS_Layer
             HotelManagementDataContext hm = new HotelManagementDataContext();
             return hm.HotelServices;
         }
-        public bool CreateHotelService(string ServiceName, string ServiceTypeID, string Price)
+        public bool CreateHotelService(string ServiceName, string Price)
         {
             try
             {
                 HotelManagementDataContext db = new HotelManagementDataContext();
-                db.sp_CreateHotelServices(ServiceName, Convert.ToByte(ServiceTypeID), Convert.ToDecimal(Price));
+                db.sp_CreateHotelServices(ServiceName, Convert.ToDecimal(Price));
                 db.HotelServices.Context.SubmitChanges();
                 return true;
             }
@@ -30,12 +30,12 @@ namespace HotelManagement.BS_Layer
                 return false;
             }
         }
-        public bool UpdateHotelService(string ServiceID, string ServiceName, string ServiceTypeID, string Price)
+        public bool UpdateHotelService(string ServiceID, string ServiceName, string Price)
         {
             try
             {
                 HotelManagementDataContext db = new HotelManagementDataContext();
-                db.sp_UpdateHotelServices(Convert.ToInt32(ServiceID), ServiceName, Convert.ToByte(ServiceTypeID), Convert.ToDecimal(Price));
+                db.sp_UpdateHotelServices(Convert.ToInt32(ServiceID), ServiceName, Convert.ToDecimal(Price));
                 db.HotelServices.Context.SubmitChanges();
                 return true;
             }

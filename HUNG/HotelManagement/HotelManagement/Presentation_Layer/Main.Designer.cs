@@ -44,9 +44,7 @@
             this.btn_InvoiceService = new System.Windows.Forms.Button();
             this.btn_EmployeeType = new System.Windows.Forms.Button();
             this.btn_Booking = new System.Windows.Forms.Button();
-            this.btn_SalePhase = new System.Windows.Forms.Button();
             this.btn_Invoice = new System.Windows.Forms.Button();
-            this.btn_ServiceType = new System.Windows.Forms.Button();
             this.btn_Service = new System.Windows.Forms.Button();
             this.btn_Employee = new System.Windows.Forms.Button();
             this.btn_RoomType = new System.Windows.Forms.Button();
@@ -144,19 +142,8 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.dgv_Service = new System.Windows.Forms.DataGridView();
-            this.TabPage_ServiceType = new System.Windows.Forms.TabPage();
-            this.btn_Delete_ServiceType = new System.Windows.Forms.Button();
-            this.button26 = new System.Windows.Forms.Button();
-            this.btn_Cancel_ServiceType = new System.Windows.Forms.Button();
-            this.btn_Save_ServiceType = new System.Windows.Forms.Button();
-            this.btn_Update_ServiceType = new System.Windows.Forms.Button();
-            this.btn_Create_ServiceType = new System.Windows.Forms.Button();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.txt_ServiceType_ServiceTypeName = new System.Windows.Forms.TextBox();
-            this.txt_ServiceType_ServiceTypeID = new System.Windows.Forms.TextBox();
-            this.dgv_ServiceType = new System.Windows.Forms.DataGridView();
             this.TabPage_Invoice = new System.Windows.Forms.TabPage();
+            this.btn_Create_Invoice = new System.Windows.Forms.Button();
             this.checkBox_CheckInvoice = new System.Windows.Forms.CheckBox();
             this.txt_Invoice_CheckOutDate = new System.Windows.Forms.TextBox();
             this.txt_Invoice_CheckInDate = new System.Windows.Forms.TextBox();
@@ -181,23 +168,8 @@
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.dgv_Invoice = new System.Windows.Forms.DataGridView();
-            this.TabPage_SalePhase = new System.Windows.Forms.TabPage();
-            this.btn_Delete_SalePhase = new System.Windows.Forms.Button();
-            this.button38 = new System.Windows.Forms.Button();
-            this.btn_Cancel_SalePhase = new System.Windows.Forms.Button();
-            this.btn_Save_SalePhase = new System.Windows.Forms.Button();
-            this.btn_Update_SalePhase = new System.Windows.Forms.Button();
-            this.btn_Create_SalePhase = new System.Windows.Forms.Button();
-            this.txt_SalePhase_StartDate = new System.Windows.Forms.TextBox();
-            this.txt_SalePhase_EndDate = new System.Windows.Forms.TextBox();
-            this.txt_SalePhase_ServiceTypeID = new System.Windows.Forms.TextBox();
-            this.txt_SalePhase_SalePhaseID = new System.Windows.Forms.TextBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.dgv_SalePhase = new System.Windows.Forms.DataGridView();
             this.TabPage_Booking = new System.Windows.Forms.TabPage();
+            this.btn_Create_Booking = new System.Windows.Forms.Button();
             this.btn_Delete_Booking = new System.Windows.Forms.Button();
             this.button44 = new System.Windows.Forms.Button();
             this.btn_Cancel_Booking = new System.Windows.Forms.Button();
@@ -240,8 +212,7 @@
             this.label44 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.dgv_InvoiceService = new System.Windows.Forms.DataGridView();
-            this.btn_Create_Invoice = new System.Windows.Forms.Button();
-            this.btn_Create_Booking = new System.Windows.Forms.Button();
+            this.Button_Redraw = new System.Windows.Forms.Button();
             this.panel_Navigation.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -260,12 +231,8 @@
             this.tabPage_DefaultScreen.SuspendLayout();
             this.TabPage_Service.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Service)).BeginInit();
-            this.TabPage_ServiceType.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_ServiceType)).BeginInit();
             this.TabPage_Invoice.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Invoice)).BeginInit();
-            this.TabPage_SalePhase.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_SalePhase)).BeginInit();
             this.TabPage_Booking.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Booking)).BeginInit();
             this.TabPage_EmployeeType.SuspendLayout();
@@ -417,9 +384,7 @@
             this.panel_Manage.Controls.Add(this.btn_InvoiceService);
             this.panel_Manage.Controls.Add(this.btn_EmployeeType);
             this.panel_Manage.Controls.Add(this.btn_Booking);
-            this.panel_Manage.Controls.Add(this.btn_SalePhase);
             this.panel_Manage.Controls.Add(this.btn_Invoice);
-            this.panel_Manage.Controls.Add(this.btn_ServiceType);
             this.panel_Manage.Controls.Add(this.btn_Service);
             this.panel_Manage.Controls.Add(this.btn_Employee);
             this.panel_Manage.Controls.Add(this.btn_RoomType);
@@ -433,7 +398,7 @@
             // 
             // Button_Hide
             // 
-            this.Button_Hide.Location = new System.Drawing.Point(170, 15);
+            this.Button_Hide.Location = new System.Drawing.Point(170, 31);
             this.Button_Hide.Name = "Button_Hide";
             this.Button_Hide.Size = new System.Drawing.Size(75, 23);
             this.Button_Hide.TabIndex = 15;
@@ -448,7 +413,7 @@
             this.btn_InvoiceService.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_InvoiceService.ForeColor = System.Drawing.Color.White;
             this.btn_InvoiceService.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_InvoiceService.Location = new System.Drawing.Point(18, 820);
+            this.btn_InvoiceService.Location = new System.Drawing.Point(29, 716);
             this.btn_InvoiceService.Name = "btn_InvoiceService";
             this.btn_InvoiceService.Size = new System.Drawing.Size(227, 70);
             this.btn_InvoiceService.TabIndex = 14;
@@ -463,7 +428,7 @@
             this.btn_EmployeeType.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_EmployeeType.ForeColor = System.Drawing.Color.White;
             this.btn_EmployeeType.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_EmployeeType.Location = new System.Drawing.Point(18, 744);
+            this.btn_EmployeeType.Location = new System.Drawing.Point(25, 640);
             this.btn_EmployeeType.Name = "btn_EmployeeType";
             this.btn_EmployeeType.Size = new System.Drawing.Size(227, 70);
             this.btn_EmployeeType.TabIndex = 13;
@@ -478,28 +443,13 @@
             this.btn_Booking.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Booking.ForeColor = System.Drawing.Color.White;
             this.btn_Booking.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Booking.Location = new System.Drawing.Point(18, 668);
+            this.btn_Booking.Location = new System.Drawing.Point(18, 564);
             this.btn_Booking.Name = "btn_Booking";
             this.btn_Booking.Size = new System.Drawing.Size(227, 70);
             this.btn_Booking.TabIndex = 12;
             this.btn_Booking.Text = "Booking";
             this.btn_Booking.UseVisualStyleBackColor = false;
             this.btn_Booking.Click += new System.EventHandler(this.btn_Booking_Click);
-            // 
-            // btn_SalePhase
-            // 
-            this.btn_SalePhase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(166)))), ((int)(((byte)(90)))));
-            this.btn_SalePhase.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_SalePhase.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_SalePhase.ForeColor = System.Drawing.Color.White;
-            this.btn_SalePhase.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_SalePhase.Location = new System.Drawing.Point(18, 592);
-            this.btn_SalePhase.Name = "btn_SalePhase";
-            this.btn_SalePhase.Size = new System.Drawing.Size(227, 70);
-            this.btn_SalePhase.TabIndex = 11;
-            this.btn_SalePhase.Text = "SalePhase";
-            this.btn_SalePhase.UseVisualStyleBackColor = false;
-            this.btn_SalePhase.Click += new System.EventHandler(this.btn_SalePhase_Click);
             // 
             // btn_Invoice
             // 
@@ -508,28 +458,13 @@
             this.btn_Invoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Invoice.ForeColor = System.Drawing.Color.White;
             this.btn_Invoice.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Invoice.Location = new System.Drawing.Point(18, 516);
+            this.btn_Invoice.Location = new System.Drawing.Point(18, 488);
             this.btn_Invoice.Name = "btn_Invoice";
             this.btn_Invoice.Size = new System.Drawing.Size(227, 70);
             this.btn_Invoice.TabIndex = 10;
             this.btn_Invoice.Text = "Invoice";
             this.btn_Invoice.UseVisualStyleBackColor = false;
             this.btn_Invoice.Click += new System.EventHandler(this.btn_Invoice_Click);
-            // 
-            // btn_ServiceType
-            // 
-            this.btn_ServiceType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(166)))), ((int)(((byte)(90)))));
-            this.btn_ServiceType.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_ServiceType.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_ServiceType.ForeColor = System.Drawing.Color.White;
-            this.btn_ServiceType.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_ServiceType.Location = new System.Drawing.Point(18, 440);
-            this.btn_ServiceType.Name = "btn_ServiceType";
-            this.btn_ServiceType.Size = new System.Drawing.Size(227, 70);
-            this.btn_ServiceType.TabIndex = 9;
-            this.btn_ServiceType.Text = "ServiceType";
-            this.btn_ServiceType.UseVisualStyleBackColor = false;
-            this.btn_ServiceType.Click += new System.EventHandler(this.btn_ServiceType_Click);
             // 
             // btn_Service
             // 
@@ -538,7 +473,7 @@
             this.btn_Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Service.ForeColor = System.Drawing.Color.White;
             this.btn_Service.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Service.Location = new System.Drawing.Point(18, 364);
+            this.btn_Service.Location = new System.Drawing.Point(18, 412);
             this.btn_Service.Name = "btn_Service";
             this.btn_Service.Size = new System.Drawing.Size(227, 70);
             this.btn_Service.TabIndex = 8;
@@ -553,7 +488,7 @@
             this.btn_Employee.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Employee.ForeColor = System.Drawing.Color.White;
             this.btn_Employee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Employee.Location = new System.Drawing.Point(18, 288);
+            this.btn_Employee.Location = new System.Drawing.Point(25, 336);
             this.btn_Employee.Name = "btn_Employee";
             this.btn_Employee.Size = new System.Drawing.Size(227, 70);
             this.btn_Employee.TabIndex = 7;
@@ -568,7 +503,7 @@
             this.btn_RoomType.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_RoomType.ForeColor = System.Drawing.Color.White;
             this.btn_RoomType.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_RoomType.Location = new System.Drawing.Point(18, 212);
+            this.btn_RoomType.Location = new System.Drawing.Point(18, 260);
             this.btn_RoomType.Name = "btn_RoomType";
             this.btn_RoomType.Size = new System.Drawing.Size(227, 70);
             this.btn_RoomType.TabIndex = 6;
@@ -583,7 +518,7 @@
             this.btn_Customer.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Customer.ForeColor = System.Drawing.Color.White;
             this.btn_Customer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Customer.Location = new System.Drawing.Point(18, 136);
+            this.btn_Customer.Location = new System.Drawing.Point(18, 184);
             this.btn_Customer.Name = "btn_Customer";
             this.btn_Customer.Size = new System.Drawing.Size(227, 70);
             this.btn_Customer.TabIndex = 5;
@@ -598,7 +533,7 @@
             this.btn_Room.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Room.ForeColor = System.Drawing.Color.White;
             this.btn_Room.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Room.Location = new System.Drawing.Point(18, 57);
+            this.btn_Room.Location = new System.Drawing.Point(18, 104);
             this.btn_Room.Name = "btn_Room";
             this.btn_Room.Size = new System.Drawing.Size(227, 70);
             this.btn_Room.TabIndex = 4;
@@ -624,9 +559,7 @@
             this.TabControl_Main.Controls.Add(this.TabPage_Employee);
             this.TabControl_Main.Controls.Add(this.tabPage_DefaultScreen);
             this.TabControl_Main.Controls.Add(this.TabPage_Service);
-            this.TabControl_Main.Controls.Add(this.TabPage_ServiceType);
             this.TabControl_Main.Controls.Add(this.TabPage_Invoice);
-            this.TabControl_Main.Controls.Add(this.TabPage_SalePhase);
             this.TabControl_Main.Controls.Add(this.TabPage_Booking);
             this.TabControl_Main.Controls.Add(this.TabPage_EmployeeType);
             this.TabControl_Main.Controls.Add(this.TabPage_Invoice_Service);
@@ -1332,6 +1265,7 @@
             // 
             // tabPage_DefaultScreen
             // 
+            this.tabPage_DefaultScreen.Controls.Add(this.Button_Redraw);
             this.tabPage_DefaultScreen.Controls.Add(this.Panel_ListRoom);
             this.tabPage_DefaultScreen.Location = new System.Drawing.Point(4, 4);
             this.tabPage_DefaultScreen.Name = "tabPage_DefaultScreen";
@@ -1498,121 +1432,6 @@
             this.dgv_Service.Size = new System.Drawing.Size(960, 400);
             this.dgv_Service.TabIndex = 18;
             // 
-            // TabPage_ServiceType
-            // 
-            this.TabPage_ServiceType.Controls.Add(this.btn_Delete_ServiceType);
-            this.TabPage_ServiceType.Controls.Add(this.button26);
-            this.TabPage_ServiceType.Controls.Add(this.btn_Cancel_ServiceType);
-            this.TabPage_ServiceType.Controls.Add(this.btn_Save_ServiceType);
-            this.TabPage_ServiceType.Controls.Add(this.btn_Update_ServiceType);
-            this.TabPage_ServiceType.Controls.Add(this.btn_Create_ServiceType);
-            this.TabPage_ServiceType.Controls.Add(this.label21);
-            this.TabPage_ServiceType.Controls.Add(this.label22);
-            this.TabPage_ServiceType.Controls.Add(this.txt_ServiceType_ServiceTypeName);
-            this.TabPage_ServiceType.Controls.Add(this.txt_ServiceType_ServiceTypeID);
-            this.TabPage_ServiceType.Controls.Add(this.dgv_ServiceType);
-            this.TabPage_ServiceType.Location = new System.Drawing.Point(4, 4);
-            this.TabPage_ServiceType.Name = "TabPage_ServiceType";
-            this.TabPage_ServiceType.Size = new System.Drawing.Size(1366, 867);
-            this.TabPage_ServiceType.TabIndex = 6;
-            this.TabPage_ServiceType.Text = "ServiceType";
-            this.TabPage_ServiceType.UseVisualStyleBackColor = true;
-            // 
-            // btn_Delete_ServiceType
-            // 
-            this.btn_Delete_ServiceType.Location = new System.Drawing.Point(161, 597);
-            this.btn_Delete_ServiceType.Name = "btn_Delete_ServiceType";
-            this.btn_Delete_ServiceType.Size = new System.Drawing.Size(75, 23);
-            this.btn_Delete_ServiceType.TabIndex = 43;
-            this.btn_Delete_ServiceType.Text = "Delete";
-            this.btn_Delete_ServiceType.UseVisualStyleBackColor = true;
-            // 
-            // button26
-            // 
-            this.button26.Location = new System.Drawing.Point(293, 553);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(75, 23);
-            this.button26.TabIndex = 42;
-            this.button26.Text = "Back";
-            this.button26.UseVisualStyleBackColor = true;
-            // 
-            // btn_Cancel_ServiceType
-            // 
-            this.btn_Cancel_ServiceType.Location = new System.Drawing.Point(293, 597);
-            this.btn_Cancel_ServiceType.Name = "btn_Cancel_ServiceType";
-            this.btn_Cancel_ServiceType.Size = new System.Drawing.Size(75, 23);
-            this.btn_Cancel_ServiceType.TabIndex = 41;
-            this.btn_Cancel_ServiceType.Text = "Cancel";
-            this.btn_Cancel_ServiceType.UseVisualStyleBackColor = true;
-            // 
-            // btn_Save_ServiceType
-            // 
-            this.btn_Save_ServiceType.Location = new System.Drawing.Point(32, 597);
-            this.btn_Save_ServiceType.Name = "btn_Save_ServiceType";
-            this.btn_Save_ServiceType.Size = new System.Drawing.Size(75, 23);
-            this.btn_Save_ServiceType.TabIndex = 40;
-            this.btn_Save_ServiceType.Text = "Save";
-            this.btn_Save_ServiceType.UseVisualStyleBackColor = true;
-            // 
-            // btn_Update_ServiceType
-            // 
-            this.btn_Update_ServiceType.Location = new System.Drawing.Point(161, 553);
-            this.btn_Update_ServiceType.Name = "btn_Update_ServiceType";
-            this.btn_Update_ServiceType.Size = new System.Drawing.Size(75, 23);
-            this.btn_Update_ServiceType.TabIndex = 39;
-            this.btn_Update_ServiceType.Text = "Update";
-            this.btn_Update_ServiceType.UseVisualStyleBackColor = true;
-            // 
-            // btn_Create_ServiceType
-            // 
-            this.btn_Create_ServiceType.Location = new System.Drawing.Point(32, 553);
-            this.btn_Create_ServiceType.Name = "btn_Create_ServiceType";
-            this.btn_Create_ServiceType.Size = new System.Drawing.Size(75, 23);
-            this.btn_Create_ServiceType.TabIndex = 38;
-            this.btn_Create_ServiceType.Text = "Create";
-            this.btn_Create_ServiceType.UseVisualStyleBackColor = true;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(29, 64);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(95, 13);
-            this.label21.TabIndex = 37;
-            this.label21.Text = "ServiceTypeName";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(29, 32);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(78, 13);
-            this.label22.TabIndex = 36;
-            this.label22.Text = "ServiceTypeID";
-            // 
-            // txt_ServiceType_ServiceTypeName
-            // 
-            this.txt_ServiceType_ServiceTypeName.Location = new System.Drawing.Point(139, 61);
-            this.txt_ServiceType_ServiceTypeName.Name = "txt_ServiceType_ServiceTypeName";
-            this.txt_ServiceType_ServiceTypeName.Size = new System.Drawing.Size(132, 20);
-            this.txt_ServiceType_ServiceTypeName.TabIndex = 34;
-            // 
-            // txt_ServiceType_ServiceTypeID
-            // 
-            this.txt_ServiceType_ServiceTypeID.Location = new System.Drawing.Point(139, 35);
-            this.txt_ServiceType_ServiceTypeID.Name = "txt_ServiceType_ServiceTypeID";
-            this.txt_ServiceType_ServiceTypeID.Size = new System.Drawing.Size(54, 20);
-            this.txt_ServiceType_ServiceTypeID.TabIndex = 33;
-            // 
-            // dgv_ServiceType
-            // 
-            this.dgv_ServiceType.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dgv_ServiceType.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_ServiceType.Location = new System.Drawing.Point(32, 100);
-            this.dgv_ServiceType.Name = "dgv_ServiceType";
-            this.dgv_ServiceType.Size = new System.Drawing.Size(960, 400);
-            this.dgv_ServiceType.TabIndex = 31;
-            // 
             // TabPage_Invoice
             // 
             this.TabPage_Invoice.Controls.Add(this.btn_Create_Invoice);
@@ -1646,6 +1465,15 @@
             this.TabPage_Invoice.TabIndex = 7;
             this.TabPage_Invoice.Text = "Invoice";
             this.TabPage_Invoice.UseVisualStyleBackColor = true;
+            // 
+            // btn_Create_Invoice
+            // 
+            this.btn_Create_Invoice.Location = new System.Drawing.Point(239, 596);
+            this.btn_Create_Invoice.Name = "btn_Create_Invoice";
+            this.btn_Create_Invoice.Size = new System.Drawing.Size(75, 23);
+            this.btn_Create_Invoice.TabIndex = 45;
+            this.btn_Create_Invoice.Text = "Create";
+            this.btn_Create_Invoice.UseVisualStyleBackColor = true;
             // 
             // checkBox_CheckInvoice
             // 
@@ -1848,157 +1676,6 @@
             this.dgv_Invoice.Size = new System.Drawing.Size(960, 400);
             this.dgv_Invoice.TabIndex = 19;
             // 
-            // TabPage_SalePhase
-            // 
-            this.TabPage_SalePhase.Controls.Add(this.btn_Delete_SalePhase);
-            this.TabPage_SalePhase.Controls.Add(this.button38);
-            this.TabPage_SalePhase.Controls.Add(this.btn_Cancel_SalePhase);
-            this.TabPage_SalePhase.Controls.Add(this.btn_Save_SalePhase);
-            this.TabPage_SalePhase.Controls.Add(this.btn_Update_SalePhase);
-            this.TabPage_SalePhase.Controls.Add(this.btn_Create_SalePhase);
-            this.TabPage_SalePhase.Controls.Add(this.txt_SalePhase_StartDate);
-            this.TabPage_SalePhase.Controls.Add(this.txt_SalePhase_EndDate);
-            this.TabPage_SalePhase.Controls.Add(this.txt_SalePhase_ServiceTypeID);
-            this.TabPage_SalePhase.Controls.Add(this.txt_SalePhase_SalePhaseID);
-            this.TabPage_SalePhase.Controls.Add(this.label34);
-            this.TabPage_SalePhase.Controls.Add(this.label35);
-            this.TabPage_SalePhase.Controls.Add(this.label36);
-            this.TabPage_SalePhase.Controls.Add(this.label37);
-            this.TabPage_SalePhase.Controls.Add(this.dgv_SalePhase);
-            this.TabPage_SalePhase.Location = new System.Drawing.Point(4, 4);
-            this.TabPage_SalePhase.Name = "TabPage_SalePhase";
-            this.TabPage_SalePhase.Size = new System.Drawing.Size(1366, 867);
-            this.TabPage_SalePhase.TabIndex = 8;
-            this.TabPage_SalePhase.Text = "SalePhase";
-            this.TabPage_SalePhase.UseVisualStyleBackColor = true;
-            // 
-            // btn_Delete_SalePhase
-            // 
-            this.btn_Delete_SalePhase.Location = new System.Drawing.Point(356, 675);
-            this.btn_Delete_SalePhase.Name = "btn_Delete_SalePhase";
-            this.btn_Delete_SalePhase.Size = new System.Drawing.Size(75, 23);
-            this.btn_Delete_SalePhase.TabIndex = 37;
-            this.btn_Delete_SalePhase.Text = "Delete";
-            this.btn_Delete_SalePhase.UseVisualStyleBackColor = true;
-            // 
-            // button38
-            // 
-            this.button38.Location = new System.Drawing.Point(488, 631);
-            this.button38.Name = "button38";
-            this.button38.Size = new System.Drawing.Size(75, 23);
-            this.button38.TabIndex = 36;
-            this.button38.Text = "Back";
-            this.button38.UseVisualStyleBackColor = true;
-            // 
-            // btn_Cancel_SalePhase
-            // 
-            this.btn_Cancel_SalePhase.Location = new System.Drawing.Point(488, 675);
-            this.btn_Cancel_SalePhase.Name = "btn_Cancel_SalePhase";
-            this.btn_Cancel_SalePhase.Size = new System.Drawing.Size(75, 23);
-            this.btn_Cancel_SalePhase.TabIndex = 35;
-            this.btn_Cancel_SalePhase.Text = "Cancel";
-            this.btn_Cancel_SalePhase.UseVisualStyleBackColor = true;
-            // 
-            // btn_Save_SalePhase
-            // 
-            this.btn_Save_SalePhase.Location = new System.Drawing.Point(227, 675);
-            this.btn_Save_SalePhase.Name = "btn_Save_SalePhase";
-            this.btn_Save_SalePhase.Size = new System.Drawing.Size(75, 23);
-            this.btn_Save_SalePhase.TabIndex = 34;
-            this.btn_Save_SalePhase.Text = "Save";
-            this.btn_Save_SalePhase.UseVisualStyleBackColor = true;
-            // 
-            // btn_Update_SalePhase
-            // 
-            this.btn_Update_SalePhase.Location = new System.Drawing.Point(356, 631);
-            this.btn_Update_SalePhase.Name = "btn_Update_SalePhase";
-            this.btn_Update_SalePhase.Size = new System.Drawing.Size(75, 23);
-            this.btn_Update_SalePhase.TabIndex = 33;
-            this.btn_Update_SalePhase.Text = "Update";
-            this.btn_Update_SalePhase.UseVisualStyleBackColor = true;
-            // 
-            // btn_Create_SalePhase
-            // 
-            this.btn_Create_SalePhase.Location = new System.Drawing.Point(227, 631);
-            this.btn_Create_SalePhase.Name = "btn_Create_SalePhase";
-            this.btn_Create_SalePhase.Size = new System.Drawing.Size(75, 23);
-            this.btn_Create_SalePhase.TabIndex = 32;
-            this.btn_Create_SalePhase.Text = "Create";
-            this.btn_Create_SalePhase.UseVisualStyleBackColor = true;
-            // 
-            // txt_SalePhase_StartDate
-            // 
-            this.txt_SalePhase_StartDate.Location = new System.Drawing.Point(379, 44);
-            this.txt_SalePhase_StartDate.Name = "txt_SalePhase_StartDate";
-            this.txt_SalePhase_StartDate.Size = new System.Drawing.Size(100, 20);
-            this.txt_SalePhase_StartDate.TabIndex = 29;
-            // 
-            // txt_SalePhase_EndDate
-            // 
-            this.txt_SalePhase_EndDate.Location = new System.Drawing.Point(379, 81);
-            this.txt_SalePhase_EndDate.Name = "txt_SalePhase_EndDate";
-            this.txt_SalePhase_EndDate.Size = new System.Drawing.Size(100, 20);
-            this.txt_SalePhase_EndDate.TabIndex = 28;
-            // 
-            // txt_SalePhase_ServiceTypeID
-            // 
-            this.txt_SalePhase_ServiceTypeID.Location = new System.Drawing.Point(120, 78);
-            this.txt_SalePhase_ServiceTypeID.Name = "txt_SalePhase_ServiceTypeID";
-            this.txt_SalePhase_ServiceTypeID.Size = new System.Drawing.Size(100, 20);
-            this.txt_SalePhase_ServiceTypeID.TabIndex = 27;
-            // 
-            // txt_SalePhase_SalePhaseID
-            // 
-            this.txt_SalePhase_SalePhaseID.Location = new System.Drawing.Point(120, 44);
-            this.txt_SalePhase_SalePhaseID.Name = "txt_SalePhase_SalePhaseID";
-            this.txt_SalePhase_SalePhaseID.Size = new System.Drawing.Size(100, 20);
-            this.txt_SalePhase_SalePhaseID.TabIndex = 26;
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(285, 47);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(52, 13);
-            this.label34.TabIndex = 23;
-            this.label34.Text = "StartDate";
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(285, 81);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(49, 13);
-            this.label35.TabIndex = 22;
-            this.label35.Text = "EndDate";
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(33, 81);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(78, 13);
-            this.label36.TabIndex = 21;
-            this.label36.Text = "ServiceTypeID";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(33, 47);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(69, 13);
-            this.label37.TabIndex = 20;
-            this.label37.Text = "SalePhaseID";
-            // 
-            // dgv_SalePhase
-            // 
-            this.dgv_SalePhase.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dgv_SalePhase.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_SalePhase.Location = new System.Drawing.Point(27, 154);
-            this.dgv_SalePhase.Name = "dgv_SalePhase";
-            this.dgv_SalePhase.Size = new System.Drawing.Size(960, 400);
-            this.dgv_SalePhase.TabIndex = 19;
-            // 
             // TabPage_Booking
             // 
             this.TabPage_Booking.Controls.Add(this.btn_Create_Booking);
@@ -2022,6 +1699,15 @@
             this.TabPage_Booking.TabIndex = 9;
             this.TabPage_Booking.Text = "Booking";
             this.TabPage_Booking.UseVisualStyleBackColor = true;
+            // 
+            // btn_Create_Booking
+            // 
+            this.btn_Create_Booking.Location = new System.Drawing.Point(227, 631);
+            this.btn_Create_Booking.Name = "btn_Create_Booking";
+            this.btn_Create_Booking.Size = new System.Drawing.Size(75, 23);
+            this.btn_Create_Booking.TabIndex = 53;
+            this.btn_Create_Booking.Text = "Create";
+            this.btn_Create_Booking.UseVisualStyleBackColor = true;
             // 
             // btn_Delete_Booking
             // 
@@ -2407,23 +2093,15 @@
             this.dgv_InvoiceService.Size = new System.Drawing.Size(960, 400);
             this.dgv_InvoiceService.TabIndex = 53;
             // 
-            // btn_Create_Invoice
+            // Button_Redraw
             // 
-            this.btn_Create_Invoice.Location = new System.Drawing.Point(239, 596);
-            this.btn_Create_Invoice.Name = "btn_Create_Invoice";
-            this.btn_Create_Invoice.Size = new System.Drawing.Size(75, 23);
-            this.btn_Create_Invoice.TabIndex = 45;
-            this.btn_Create_Invoice.Text = "Create";
-            this.btn_Create_Invoice.UseVisualStyleBackColor = true;
-            // 
-            // btn_Create_Booking
-            // 
-            this.btn_Create_Booking.Location = new System.Drawing.Point(227, 631);
-            this.btn_Create_Booking.Name = "btn_Create_Booking";
-            this.btn_Create_Booking.Size = new System.Drawing.Size(75, 23);
-            this.btn_Create_Booking.TabIndex = 53;
-            this.btn_Create_Booking.Text = "Create";
-            this.btn_Create_Booking.UseVisualStyleBackColor = true;
+            this.Button_Redraw.Location = new System.Drawing.Point(680, 70);
+            this.Button_Redraw.Name = "Button_Redraw";
+            this.Button_Redraw.Size = new System.Drawing.Size(75, 23);
+            this.Button_Redraw.TabIndex = 16;
+            this.Button_Redraw.Text = "Reset";
+            this.Button_Redraw.UseVisualStyleBackColor = true;
+            this.Button_Redraw.Click += new System.EventHandler(this.Button_Redraw_Click);
             // 
             // Main
             // 
@@ -2461,15 +2139,9 @@
             this.TabPage_Service.ResumeLayout(false);
             this.TabPage_Service.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Service)).EndInit();
-            this.TabPage_ServiceType.ResumeLayout(false);
-            this.TabPage_ServiceType.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_ServiceType)).EndInit();
             this.TabPage_Invoice.ResumeLayout(false);
             this.TabPage_Invoice.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Invoice)).EndInit();
-            this.TabPage_SalePhase.ResumeLayout(false);
-            this.TabPage_SalePhase.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_SalePhase)).EndInit();
             this.TabPage_Booking.ResumeLayout(false);
             this.TabPage_Booking.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Booking)).EndInit();
@@ -2502,9 +2174,7 @@
         private System.Windows.Forms.Button btn_Customer;
         private System.Windows.Forms.Button btn_Room;
         private System.Windows.Forms.Button btn_Service;
-        private System.Windows.Forms.Button btn_ServiceType;
         private System.Windows.Forms.Button btn_Invoice;
-        private System.Windows.Forms.Button btn_SalePhase;
         private System.Windows.Forms.Button btn_Booking;
         private System.Windows.Forms.Button btn_EmployeeType;
         private System.Windows.Forms.Button btn_InvoiceService;
@@ -2601,18 +2271,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.DataGridView dgv_Service;
-        private System.Windows.Forms.TabPage TabPage_ServiceType;
-        private System.Windows.Forms.Button btn_Delete_ServiceType;
-        private System.Windows.Forms.Button button26;
-        private System.Windows.Forms.Button btn_Cancel_ServiceType;
-        private System.Windows.Forms.Button btn_Save_ServiceType;
-        private System.Windows.Forms.Button btn_Update_ServiceType;
-        private System.Windows.Forms.Button btn_Create_ServiceType;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.TextBox txt_ServiceType_ServiceTypeName;
-        private System.Windows.Forms.TextBox txt_ServiceType_ServiceTypeID;
-        private System.Windows.Forms.DataGridView dgv_ServiceType;
         private System.Windows.Forms.TabPage TabPage_Invoice;
         private System.Windows.Forms.CheckBox checkBox_CheckInvoice;
         private System.Windows.Forms.TextBox txt_Invoice_CheckOutDate;
@@ -2638,22 +2296,6 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.DataGridView dgv_Invoice;
-        private System.Windows.Forms.TabPage TabPage_SalePhase;
-        private System.Windows.Forms.Button btn_Delete_SalePhase;
-        private System.Windows.Forms.Button button38;
-        private System.Windows.Forms.Button btn_Cancel_SalePhase;
-        private System.Windows.Forms.Button btn_Save_SalePhase;
-        private System.Windows.Forms.Button btn_Update_SalePhase;
-        private System.Windows.Forms.Button btn_Create_SalePhase;
-        private System.Windows.Forms.TextBox txt_SalePhase_StartDate;
-        private System.Windows.Forms.TextBox txt_SalePhase_EndDate;
-        private System.Windows.Forms.TextBox txt_SalePhase_ServiceTypeID;
-        private System.Windows.Forms.TextBox txt_SalePhase_SalePhaseID;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.DataGridView dgv_SalePhase;
         private System.Windows.Forms.TabPage TabPage_Booking;
         private System.Windows.Forms.Button btn_Delete_Booking;
         private System.Windows.Forms.Button button44;
@@ -2699,6 +2341,7 @@
         private System.Windows.Forms.DataGridView dgv_InvoiceService;
         private System.Windows.Forms.Button btn_Create_Invoice;
         private System.Windows.Forms.Button btn_Create_Booking;
+        private System.Windows.Forms.Button Button_Redraw;
     }
 }
 

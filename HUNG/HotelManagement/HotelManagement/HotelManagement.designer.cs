@@ -36,12 +36,12 @@ namespace HotelManagement
     partial void InsertCustomer(Customer instance);
     partial void UpdateCustomer(Customer instance);
     partial void DeleteCustomer(Customer instance);
-    partial void InsertEmployeeType(EmployeeType instance);
-    partial void UpdateEmployeeType(EmployeeType instance);
-    partial void DeleteEmployeeType(EmployeeType instance);
     partial void InsertEmployee(Employee instance);
     partial void UpdateEmployee(Employee instance);
     partial void DeleteEmployee(Employee instance);
+    partial void InsertEmployeeType(EmployeeType instance);
+    partial void UpdateEmployeeType(EmployeeType instance);
+    partial void DeleteEmployeeType(EmployeeType instance);
     partial void InsertHotelService(HotelService instance);
     partial void UpdateHotelService(HotelService instance);
     partial void DeleteHotelService(HotelService instance);
@@ -57,12 +57,6 @@ namespace HotelManagement
     partial void InsertRoomType(RoomType instance);
     partial void UpdateRoomType(RoomType instance);
     partial void DeleteRoomType(RoomType instance);
-    partial void InsertSalePhase(SalePhase instance);
-    partial void UpdateSalePhase(SalePhase instance);
-    partial void DeleteSalePhase(SalePhase instance);
-    partial void InsertServiceType(ServiceType instance);
-    partial void UpdateServiceType(ServiceType instance);
-    partial void DeleteServiceType(ServiceType instance);
     #endregion
 		
 		public HotelManagementDataContext() : 
@@ -111,19 +105,19 @@ namespace HotelManagement
 			}
 		}
 		
-		public System.Data.Linq.Table<EmployeeType> EmployeeTypes
-		{
-			get
-			{
-				return this.GetTable<EmployeeType>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Employee> Employees
 		{
 			get
 			{
 				return this.GetTable<Employee>();
+			}
+		}
+		
+		public System.Data.Linq.Table<EmployeeType> EmployeeTypes
+		{
+			get
+			{
+				return this.GetTable<EmployeeType>();
 			}
 		}
 		
@@ -167,26 +161,10 @@ namespace HotelManagement
 			}
 		}
 		
-		public System.Data.Linq.Table<SalePhase> SalePhases
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CheckIn")]
+		public int sp_CheckIn([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeID", DbType="Int")] System.Nullable<int> employeeID)
 		{
-			get
-			{
-				return this.GetTable<SalePhase>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ServiceType> ServiceTypes
-		{
-			get
-			{
-				return this.GetTable<ServiceType>();
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Booking")]
-		public int sp_Booking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppoinmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appoinmentDate)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, appoinmentDate);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, employeeID);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -197,17 +175,10 @@ namespace HotelManagement
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CheckIn")]
-		public int sp_CheckIn([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeID", DbType="Int")] System.Nullable<int> employeeID)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CheckOut")]
+		public int sp_CheckOut([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeID", DbType="Int")] System.Nullable<int> employeeID)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, employeeID);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create")]
-		public int sp_Create([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(30)")] string tableName)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -257,6 +228,13 @@ namespace HotelManagement
 			return ((int)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CreateBooking")]
+		public int sp_CreateBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppoinmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appoinmentDate)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, appoinmentDate);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CreateCustomers")]
 		public int sp_CreateCustomers([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerName", DbType="NVarChar(30)")] string customerName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdentityCard", DbType="VarChar(9)")] string identityCard, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PhoneNumber", DbType="NVarChar(10)")] string phoneNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerAddress", DbType="NVarChar(40)")] string customerAddress)
 		{
@@ -279,9 +257,16 @@ namespace HotelManagement
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CreateHotelServices")]
-		public int sp_CreateHotelServices([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ServiceName", DbType="NVarChar(20)")] string serviceName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ServiceTypeID", DbType="TinyInt")] System.Nullable<byte> serviceTypeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Price", DbType="SmallMoney")] System.Nullable<decimal> price)
+		public int sp_CreateHotelServices([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ServiceName", DbType="NVarChar(20)")] string serviceName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Price", DbType="SmallMoney")] System.Nullable<decimal> price)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), serviceName, serviceTypeID, price);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), serviceName, price);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CreateInvoices")]
+		public int sp_CreateInvoices([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumberOfDay", DbType="TinyInt")] System.Nullable<byte> numberOfDay, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeID", DbType="Int")] System.Nullable<int> employeeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="InvoiceTotal", DbType="SmallMoney")] System.Nullable<decimal> invoiceTotal, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CheckInDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> checkInDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CheckOutDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> checkOutDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="HasPaid", DbType="Bit")] System.Nullable<bool> hasPaid)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, numberOfDay, employeeID, invoiceTotal, checkInDate, checkOutDate, hasPaid);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -303,27 +288,6 @@ namespace HotelManagement
 		public int sp_CreateRoomTypes([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Name", DbType="NVarChar(100)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Price", DbType="SmallMoney")] System.Nullable<decimal> price)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), name, price);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CreateSalePhases")]
-		public int sp_CreateSalePhases([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ServiceTypeID", DbType="TinyInt")] System.Nullable<byte> serviceTypeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="StartDate", DbType="Date")] System.Nullable<System.DateTime> startDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EndDate", DbType="Date")] System.Nullable<System.DateTime> endDate)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), serviceTypeID, startDate, endDate);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CreateServiceTypes")]
-		public int sp_CreateServiceTypes([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ServiceTypeName", DbType="NVarChar(20)")] string serviceTypeName)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), serviceTypeName);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Delete")]
-		public int sp_Delete([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(30)")] string tableName)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -387,20 +351,6 @@ namespace HotelManagement
 		public int sp_DeleteRoomTypes([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomTypeID", DbType="TinyInt")] System.Nullable<byte> roomTypeID)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomTypeID);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_DeleteSalePhases")]
-		public int sp_DeleteSalePhases([global::System.Data.Linq.Mapping.ParameterAttribute(Name="SalePhaseID", DbType="Int")] System.Nullable<int> salePhaseID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), salePhaseID);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_DeleteServiceTypes")]
-		public int sp_DeleteServiceTypes([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ServiceTypeID", DbType="TinyInt")] System.Nullable<byte> serviceTypeID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), serviceTypeID);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -488,24 +438,10 @@ namespace HotelManagement
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateServiceTypes")]
-		public int sp_UpdateServiceTypes([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ServiceTypeID", DbType="TinyInt")] System.Nullable<byte> serviceTypeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ServiceTypeName", DbType="NVarChar(20)")] string serviceTypeName)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateRoomTypes")]
+		public int sp_UpdateRoomTypes([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomTypeID", DbType="TinyInt")] System.Nullable<byte> roomTypeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Name", DbType="NVarChar(100)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Price", DbType="SmallMoney")] System.Nullable<decimal> price)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), serviceTypeID, serviceTypeName);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Redo_SalePhases")]
-		public int sp_Redo_SalePhases()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Redo_ServiceTypes")]
-		public int sp_Redo_ServiceTypes()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomTypeID, name, price);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -578,27 +514,6 @@ namespace HotelManagement
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Undo_SalePhases")]
-		public int sp_Undo_SalePhases()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Undo_ServiceTypes")]
-		public int sp_Undo_ServiceTypes()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Update")]
-		public int sp_Update([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(30)")] string tableName)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
-			return ((int)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateBooking")]
 		public int sp_UpdateBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="BookingID", DbType="Int")] System.Nullable<int> bookingID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppoinmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appoinmentDate)
 		{
@@ -628,9 +543,9 @@ namespace HotelManagement
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateHotelServices")]
-		public int sp_UpdateHotelServices([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ServiceID", DbType="Int")] System.Nullable<int> serviceID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ServiceName", DbType="NVarChar(20)")] string serviceName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ServiceTypeID", DbType="TinyInt")] System.Nullable<byte> serviceTypeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Price", DbType="SmallMoney")] System.Nullable<decimal> price)
+		public int sp_UpdateHotelServices([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ServiceID", DbType="Int")] System.Nullable<int> serviceID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ServiceName", DbType="NVarChar(20)")] string serviceName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Price", DbType="SmallMoney")] System.Nullable<decimal> price)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), serviceID, serviceName, serviceTypeID, price);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), serviceID, serviceName, price);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -655,20 +570,6 @@ namespace HotelManagement
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateRoomTypes")]
-		public int sp_UpdateRoomTypes([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomTypeID", DbType="TinyInt")] System.Nullable<byte> roomTypeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Name", DbType="NVarChar(100)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Price", DbType="SmallMoney")] System.Nullable<decimal> price)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomTypeID, name, price);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateSalePhases")]
-		public int sp_UpdateSalePhases([global::System.Data.Linq.Mapping.ParameterAttribute(Name="SalePhaseID", DbType="Int")] System.Nullable<int> salePhaseID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ServiceTypeID", DbType="TinyInt")] System.Nullable<byte> serviceTypeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="StartDate", DbType="Date")] System.Nullable<System.DateTime> startDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EndDate", DbType="Date")] System.Nullable<System.DateTime> endDate)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), salePhaseID, serviceTypeID, startDate, endDate);
-			return ((int)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_FindBooking", IsComposable=true)]
 		public IQueryable<fn_FindBookingResult> fn_FindBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
 		{
@@ -679,6 +580,34 @@ namespace HotelManagement
 		public System.Nullable<int> fn_LoginEmployee([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Account", DbType="Int")] System.Nullable<int> account, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Password", DbType="NVarChar(20)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeType", DbType="TinyInt")] System.Nullable<byte> employeeType)
 		{
 			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), account, password, employeeType).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Booking")]
+		public int sp_Booking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppoinmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appoinmentDate)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, appoinmentDate);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Delete")]
+		public int sp_Delete([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(30)")] string tableName)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create")]
+		public int sp_Create([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(30)")] string tableName)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Update")]
+		public int sp_Update([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(30)")] string tableName)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
+			return ((int)(result.ReturnValue));
 		}
 	}
 	
@@ -1112,120 +1041,6 @@ namespace HotelManagement
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.EmployeeTypes")]
-	public partial class EmployeeType : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private byte _EmployeeTypeID;
-		
-		private string _EmployeeTypeName;
-		
-		private EntitySet<Employee> _Employees;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnEmployeeTypeIDChanging(byte value);
-    partial void OnEmployeeTypeIDChanged();
-    partial void OnEmployeeTypeNameChanging(string value);
-    partial void OnEmployeeTypeNameChanged();
-    #endregion
-		
-		public EmployeeType()
-		{
-			this._Employees = new EntitySet<Employee>(new Action<Employee>(this.attach_Employees), new Action<Employee>(this.detach_Employees));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeID", AutoSync=AutoSync.OnInsert, DbType="TinyInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public byte EmployeeTypeID
-		{
-			get
-			{
-				return this._EmployeeTypeID;
-			}
-			set
-			{
-				if ((this._EmployeeTypeID != value))
-				{
-					this.OnEmployeeTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._EmployeeTypeID = value;
-					this.SendPropertyChanged("EmployeeTypeID");
-					this.OnEmployeeTypeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeName", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
-		public string EmployeeTypeName
-		{
-			get
-			{
-				return this._EmployeeTypeName;
-			}
-			set
-			{
-				if ((this._EmployeeTypeName != value))
-				{
-					this.OnEmployeeTypeNameChanging(value);
-					this.SendPropertyChanging();
-					this._EmployeeTypeName = value;
-					this.SendPropertyChanged("EmployeeTypeName");
-					this.OnEmployeeTypeNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EmployeeType_Employee", Storage="_Employees", ThisKey="EmployeeTypeID", OtherKey="EmployeeTypeID")]
-		public EntitySet<Employee> Employees
-		{
-			get
-			{
-				return this._Employees;
-			}
-			set
-			{
-				this._Employees.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Employees(Employee entity)
-		{
-			this.SendPropertyChanging();
-			entity.EmployeeType = this;
-		}
-		
-		private void detach_Employees(Employee entity)
-		{
-			this.SendPropertyChanging();
-			entity.EmployeeType = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Employees")]
 	public partial class Employee : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1477,6 +1292,120 @@ namespace HotelManagement
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.EmployeeTypes")]
+	public partial class EmployeeType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private byte _EmployeeTypeID;
+		
+		private string _EmployeeTypeName;
+		
+		private EntitySet<Employee> _Employees;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnEmployeeTypeIDChanging(byte value);
+    partial void OnEmployeeTypeIDChanged();
+    partial void OnEmployeeTypeNameChanging(string value);
+    partial void OnEmployeeTypeNameChanged();
+    #endregion
+		
+		public EmployeeType()
+		{
+			this._Employees = new EntitySet<Employee>(new Action<Employee>(this.attach_Employees), new Action<Employee>(this.detach_Employees));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeID", AutoSync=AutoSync.OnInsert, DbType="TinyInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public byte EmployeeTypeID
+		{
+			get
+			{
+				return this._EmployeeTypeID;
+			}
+			set
+			{
+				if ((this._EmployeeTypeID != value))
+				{
+					this.OnEmployeeTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._EmployeeTypeID = value;
+					this.SendPropertyChanged("EmployeeTypeID");
+					this.OnEmployeeTypeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeName", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string EmployeeTypeName
+		{
+			get
+			{
+				return this._EmployeeTypeName;
+			}
+			set
+			{
+				if ((this._EmployeeTypeName != value))
+				{
+					this.OnEmployeeTypeNameChanging(value);
+					this.SendPropertyChanging();
+					this._EmployeeTypeName = value;
+					this.SendPropertyChanged("EmployeeTypeName");
+					this.OnEmployeeTypeNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EmployeeType_Employee", Storage="_Employees", ThisKey="EmployeeTypeID", OtherKey="EmployeeTypeID")]
+		public EntitySet<Employee> Employees
+		{
+			get
+			{
+				return this._Employees;
+			}
+			set
+			{
+				this._Employees.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Employees(Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.EmployeeType = this;
+		}
+		
+		private void detach_Employees(Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.EmployeeType = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.HotelServices")]
 	public partial class HotelService : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1487,13 +1416,9 @@ namespace HotelManagement
 		
 		private string _ServiceName;
 		
-		private byte _ServiceTypeID;
-		
 		private decimal _Price;
 		
 		private EntitySet<Invoices_Service> _Invoices_Services;
-		
-		private EntityRef<ServiceType> _ServiceType;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1503,8 +1428,6 @@ namespace HotelManagement
     partial void OnServiceIDChanged();
     partial void OnServiceNameChanging(string value);
     partial void OnServiceNameChanged();
-    partial void OnServiceTypeIDChanging(byte value);
-    partial void OnServiceTypeIDChanged();
     partial void OnPriceChanging(decimal value);
     partial void OnPriceChanged();
     #endregion
@@ -1512,7 +1435,6 @@ namespace HotelManagement
 		public HotelService()
 		{
 			this._Invoices_Services = new EntitySet<Invoices_Service>(new Action<Invoices_Service>(this.attach_Invoices_Services), new Action<Invoices_Service>(this.detach_Invoices_Services));
-			this._ServiceType = default(EntityRef<ServiceType>);
 			OnCreated();
 		}
 		
@@ -1556,30 +1478,6 @@ namespace HotelManagement
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceTypeID", DbType="TinyInt NOT NULL")]
-		public byte ServiceTypeID
-		{
-			get
-			{
-				return this._ServiceTypeID;
-			}
-			set
-			{
-				if ((this._ServiceTypeID != value))
-				{
-					if (this._ServiceType.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnServiceTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._ServiceTypeID = value;
-					this.SendPropertyChanged("ServiceTypeID");
-					this.OnServiceTypeIDChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="SmallMoney NOT NULL")]
 		public decimal Price
 		{
@@ -1610,40 +1508,6 @@ namespace HotelManagement
 			set
 			{
 				this._Invoices_Services.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceType_HotelService", Storage="_ServiceType", ThisKey="ServiceTypeID", OtherKey="ServiceTypeID", IsForeignKey=true)]
-		public ServiceType ServiceType
-		{
-			get
-			{
-				return this._ServiceType.Entity;
-			}
-			set
-			{
-				ServiceType previousValue = this._ServiceType.Entity;
-				if (((previousValue != value) 
-							|| (this._ServiceType.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ServiceType.Entity = null;
-						previousValue.HotelServices.Remove(this);
-					}
-					this._ServiceType.Entity = value;
-					if ((value != null))
-					{
-						value.HotelServices.Add(this);
-						this._ServiceTypeID = value.ServiceTypeID;
-					}
-					else
-					{
-						this._ServiceTypeID = default(byte);
-					}
-					this.SendPropertyChanged("ServiceType");
-				}
 			}
 		}
 		
@@ -2667,323 +2531,6 @@ namespace HotelManagement
 		{
 			this.SendPropertyChanging();
 			entity.RoomType = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SalePhases")]
-	public partial class SalePhase : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _SalePhaseID;
-		
-		private byte _ServiceTypeID;
-		
-		private System.DateTime _StartDate;
-		
-		private System.DateTime _EndDate;
-		
-		private EntityRef<ServiceType> _ServiceType;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnSalePhaseIDChanging(int value);
-    partial void OnSalePhaseIDChanged();
-    partial void OnServiceTypeIDChanging(byte value);
-    partial void OnServiceTypeIDChanged();
-    partial void OnStartDateChanging(System.DateTime value);
-    partial void OnStartDateChanged();
-    partial void OnEndDateChanging(System.DateTime value);
-    partial void OnEndDateChanged();
-    #endregion
-		
-		public SalePhase()
-		{
-			this._ServiceType = default(EntityRef<ServiceType>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SalePhaseID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int SalePhaseID
-		{
-			get
-			{
-				return this._SalePhaseID;
-			}
-			set
-			{
-				if ((this._SalePhaseID != value))
-				{
-					this.OnSalePhaseIDChanging(value);
-					this.SendPropertyChanging();
-					this._SalePhaseID = value;
-					this.SendPropertyChanged("SalePhaseID");
-					this.OnSalePhaseIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceTypeID", DbType="TinyInt NOT NULL")]
-		public byte ServiceTypeID
-		{
-			get
-			{
-				return this._ServiceTypeID;
-			}
-			set
-			{
-				if ((this._ServiceTypeID != value))
-				{
-					if (this._ServiceType.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnServiceTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._ServiceTypeID = value;
-					this.SendPropertyChanged("ServiceTypeID");
-					this.OnServiceTypeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="Date NOT NULL")]
-		public System.DateTime StartDate
-		{
-			get
-			{
-				return this._StartDate;
-			}
-			set
-			{
-				if ((this._StartDate != value))
-				{
-					this.OnStartDateChanging(value);
-					this.SendPropertyChanging();
-					this._StartDate = value;
-					this.SendPropertyChanged("StartDate");
-					this.OnStartDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="Date NOT NULL")]
-		public System.DateTime EndDate
-		{
-			get
-			{
-				return this._EndDate;
-			}
-			set
-			{
-				if ((this._EndDate != value))
-				{
-					this.OnEndDateChanging(value);
-					this.SendPropertyChanging();
-					this._EndDate = value;
-					this.SendPropertyChanged("EndDate");
-					this.OnEndDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceType_SalePhase", Storage="_ServiceType", ThisKey="ServiceTypeID", OtherKey="ServiceTypeID", IsForeignKey=true)]
-		public ServiceType ServiceType
-		{
-			get
-			{
-				return this._ServiceType.Entity;
-			}
-			set
-			{
-				ServiceType previousValue = this._ServiceType.Entity;
-				if (((previousValue != value) 
-							|| (this._ServiceType.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ServiceType.Entity = null;
-						previousValue.SalePhases.Remove(this);
-					}
-					this._ServiceType.Entity = value;
-					if ((value != null))
-					{
-						value.SalePhases.Add(this);
-						this._ServiceTypeID = value.ServiceTypeID;
-					}
-					else
-					{
-						this._ServiceTypeID = default(byte);
-					}
-					this.SendPropertyChanged("ServiceType");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ServiceTypes")]
-	public partial class ServiceType : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private byte _ServiceTypeID;
-		
-		private string _ServiceTypeName;
-		
-		private EntitySet<HotelService> _HotelServices;
-		
-		private EntitySet<SalePhase> _SalePhases;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnServiceTypeIDChanging(byte value);
-    partial void OnServiceTypeIDChanged();
-    partial void OnServiceTypeNameChanging(string value);
-    partial void OnServiceTypeNameChanged();
-    #endregion
-		
-		public ServiceType()
-		{
-			this._HotelServices = new EntitySet<HotelService>(new Action<HotelService>(this.attach_HotelServices), new Action<HotelService>(this.detach_HotelServices));
-			this._SalePhases = new EntitySet<SalePhase>(new Action<SalePhase>(this.attach_SalePhases), new Action<SalePhase>(this.detach_SalePhases));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceTypeID", AutoSync=AutoSync.OnInsert, DbType="TinyInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public byte ServiceTypeID
-		{
-			get
-			{
-				return this._ServiceTypeID;
-			}
-			set
-			{
-				if ((this._ServiceTypeID != value))
-				{
-					this.OnServiceTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._ServiceTypeID = value;
-					this.SendPropertyChanged("ServiceTypeID");
-					this.OnServiceTypeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceTypeName", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
-		public string ServiceTypeName
-		{
-			get
-			{
-				return this._ServiceTypeName;
-			}
-			set
-			{
-				if ((this._ServiceTypeName != value))
-				{
-					this.OnServiceTypeNameChanging(value);
-					this.SendPropertyChanging();
-					this._ServiceTypeName = value;
-					this.SendPropertyChanged("ServiceTypeName");
-					this.OnServiceTypeNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceType_HotelService", Storage="_HotelServices", ThisKey="ServiceTypeID", OtherKey="ServiceTypeID")]
-		public EntitySet<HotelService> HotelServices
-		{
-			get
-			{
-				return this._HotelServices;
-			}
-			set
-			{
-				this._HotelServices.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ServiceType_SalePhase", Storage="_SalePhases", ThisKey="ServiceTypeID", OtherKey="ServiceTypeID")]
-		public EntitySet<SalePhase> SalePhases
-		{
-			get
-			{
-				return this._SalePhases;
-			}
-			set
-			{
-				this._SalePhases.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_HotelServices(HotelService entity)
-		{
-			this.SendPropertyChanging();
-			entity.ServiceType = this;
-		}
-		
-		private void detach_HotelServices(HotelService entity)
-		{
-			this.SendPropertyChanging();
-			entity.ServiceType = null;
-		}
-		
-		private void attach_SalePhases(SalePhase entity)
-		{
-			this.SendPropertyChanging();
-			entity.ServiceType = this;
-		}
-		
-		private void detach_SalePhases(SalePhase entity)
-		{
-			this.SendPropertyChanging();
-			entity.ServiceType = null;
 		}
 	}
 	

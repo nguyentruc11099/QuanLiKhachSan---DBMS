@@ -32,7 +32,6 @@ namespace HotelManagement.Presentation_Layer
                         Button_Checkout.Enabled = false;
                         tabControl_Main.TabPages.Clear();
                         tabControl_Main.TabPages.Add(tabPage_Booking);
-                       // InitializerCheckin();
                         InitializerBooking();
                         break;
                     }
@@ -80,7 +79,6 @@ namespace HotelManagement.Presentation_Layer
                 MessageBox.Show(" Adding failed ");
             }
         }
-
         private void Booking_Button_ChooseCustomer_Click(object sender, EventArgs e)
         {
             int r = Booking_DGV_ListOfCustomer.CurrentCell.RowIndex;
@@ -94,12 +92,10 @@ namespace HotelManagement.Presentation_Layer
                 Booking_DataGridView_DetailOfBooking.Rows[0].Cells[1].Value = Booking_DGV_ListOfCustomer.Rows[r].Cells[1].Value;
             }
         }
-
         private void Booking_Button_Back_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void Booking_Button_AddBooking_Click(object sender, EventArgs e)
         {
             if (Booking_DataGridView_DetailOfBooking.Rows[0].Cells[0].Value.ToString() != "" && Booking_DataGridView_DetailOfBooking.Rows[0].Cells[2].Value.ToString() != "")
@@ -121,7 +117,6 @@ namespace HotelManagement.Presentation_Layer
                 MessageBox.Show("Have some emty information ");
             }
         }
-
         private void SearchKH_TextBox_TextChanged(object sender, EventArgs e)
         {
             string column;
@@ -336,7 +331,6 @@ namespace HotelManagement.Presentation_Layer
         {
             tabControl_Main.TabPages.Clear();
             tabControl_Main.TabPages.Add(tabPage_CheckOut);
-
             InitializerCheckout();
         }
         private void Back_Button_Click(object sender, EventArgs e)
@@ -350,6 +344,9 @@ namespace HotelManagement.Presentation_Layer
         }
         private void InitializerCheckout()
         {
+            this.DateTimePicker_AppointmentDate.MinDate = DateTime.Today;
+
+            LoadCustomerDataBookingTable();
             
         }
         #endregion

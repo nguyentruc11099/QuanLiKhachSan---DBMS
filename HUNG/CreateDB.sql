@@ -40,28 +40,12 @@ CREATE TABLE Customers
 )
 go
 
-CREATE TABLE ServiceTypes
-(
-	ServiceTypeID TINYINT IDENTITY(1,1) NOT NULL, 
-	ServiceTypeName NVARCHAR(20) not null,
-)
-go
 
 CREATE TABLE HotelServices
 (
 	ServiceID INT IDENTITY(1,1) NOT NULL,
 	ServiceName NVARCHAR(20) not null,
-	ServiceTypeID TINYINT not null,
 	Price smallmoney not null,
-)
-go
-
-CREATE TABLE SalePhases
-(
-	SalePhaseID INT IDENTITY(1,1) NOT NULL,
-	ServiceTypeID TINYINT not null,
-	StartDate date not null,
-	EndDate date not null,
 )
 go
 
@@ -119,14 +103,12 @@ go
 ALTER TABLE dbo.Customers ADD CONSTRAINT PK_Customers PRIMARY KEY(CustomerID);
 ALTER TABLE dbo.RoomTypes ADD CONSTRAINT PK_RoomTypes PRIMARY KEY(RoomTypeID);
 ALTER TABLE dbo.Rooms ADD CONSTRAINT PK_Rooms PRIMARY KEY(RoomID);
-ALTER TABLE dbo.ServiceTypes ADD CONSTRAINT PK_ServiceTypes PRIMARY KEY(ServiceTypeID);
 ALTER TABLE dbo.HotelServices ADD CONSTRAINT PK_Services PRIMARY KEY(ServiceID);
 ALTER TABLE dbo.Employees ADD CONSTRAINT PK_Employees PRIMARY KEY(EmployeeID);
 ALTER TABLE dbo.EmployeeTypes ADD CONSTRAINT PK_EmployeeTypes PRIMARY KEY(EmployeeTypeID);
 ALTER TABLE dbo.Booking ADD CONSTRAINT PK_Booking PRIMARY KEY(BookingID);
 ALTER TABLE dbo.Invoices_Services ADD CONSTRAINT PK_InvoicesServices PRIMARY KEY(Invoices_Services_ID);
 ALTER TABLE dbo.Invoices ADD CONSTRAINT PK_Invoices PRIMARY KEY(InvoiceID);
-ALTER TABLE dbo.SalePhases ADD CONSTRAINT PK_SalePhases PRIMARY KEY(SalePhaseID);
 GO
 
 ALTER TABLE dbo.Customers
@@ -151,20 +133,6 @@ WITH CHECK
 ADD CONSTRAINT FK_Employees_EmployeeTypes
 FOREIGN KEY(EmployeeTypeID)
 REFERENCES dbo.EmployeeTypes(EmployeeTypeID)
-GO
-
-ALTER TABLE dbo.HotelServices
-WITH CHECK 
-ADD CONSTRAINT FK_Services_ServiceTypes 
-FOREIGN KEY(ServiceTypeID)
-REFERENCES dbo.ServiceTypes(ServiceTypeID)
-GO
-
-ALTER TABLE dbo.SalePhases  
-WITH CHECK 
-ADD CONSTRAINT FK_SalePhases_ServiceTypes 
-FOREIGN KEY(ServiceTypeID)
-REFERENCES dbo.ServiceTypes(ServiceTypeID)
 GO
 
 ALTER TABLE dbo.Booking  
@@ -216,9 +184,6 @@ FOREIGN KEY(EmployeeID)
 REFERENCES dbo.Employees(EmployeeID)
 go
 
-ALTER TABLE dbo.SalePhases 
-ADD CONSTRAINT Check_SalePhasesEndDate CHECK (EndDate >= StartDate);
-GO
 
 ALTER TABLE dbo.Booking  
 add CONSTRAINT Check_BookingAppointmentDate CHECK ( AppoinmentDate >= CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME));

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Checkin_ChooseCustomer = new System.Windows.Forms.Button();
             this.Checkin_Panel_SelectCustomer = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -67,6 +67,11 @@
             this.Checkin_Button_Confirm = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.Checkin_DataGridView_Detail = new System.Windows.Forms.DataGridView();
+            this.Checkin_CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkin_CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkin_RoomID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkin_RoomType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkin_StartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Checkin_Panel_DetailOFCheckin = new System.Windows.Forms.Panel();
             this.Button_ChooseBooking = new System.Windows.Forms.Button();
             this.Button_Booking = new System.Windows.Forms.Button();
@@ -75,6 +80,10 @@
             this.panel10 = new System.Windows.Forms.Panel();
             this.SearchKhachDat_ComboBox = new System.Windows.Forms.ComboBox();
             this.Checkin_Datagridview_Booking = new System.Windows.Forms.DataGridView();
+            this.Checkin_Booking_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkin_Booking_CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkin_Booking_CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkin_Booking_RoomID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Checkin_Panel_HaveBooking = new System.Windows.Forms.Panel();
             this.TenKH_Label = new System.Windows.Forms.Label();
             this.Button_Checkout = new System.Windows.Forms.Button();
@@ -109,11 +118,13 @@
             this.RichTextBox_Detail = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Checkout_Datagridview_Invoice = new System.Windows.Forms.DataGridView();
-            this.TienDichVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SoNgaySD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenDV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaDV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaHopDong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkout_InvoiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkout_StartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkout_EndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkout_RoomType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CheckOut_NumberOfDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkout_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.Checkout_Datagridview_Services = new System.Windows.Forms.DataGridView();
             this.Back_Button = new System.Windows.Forms.Button();
@@ -122,22 +133,11 @@
             this.tabControl_Main = new System.Windows.Forms.TabControl();
             this.tabPage_Checkin = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Checkin_CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkin_CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkin_RoomID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkin_RoomType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkin_StartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkin_Booking_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkin_Booking_CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkin_Booking_CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkin_Booking_RoomID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkout_InvoiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkout_StartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkout_EndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkout_RoomType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CheckOut_NumberOfDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkout_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkout_Service_InvoiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkout_Service_ServiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkout_Service_ServiceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SoNgaySD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TienDichVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Checkin_Panel_SelectCustomer.SuspendLayout();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Checkin_Datagridview_ListOfCustomer)).BeginInit();
@@ -539,6 +539,31 @@
             this.Checkin_DataGridView_Detail.Size = new System.Drawing.Size(550, 63);
             this.Checkin_DataGridView_Detail.TabIndex = 41;
             // 
+            // Checkin_CustomerID
+            // 
+            this.Checkin_CustomerID.HeaderText = "Customer ID";
+            this.Checkin_CustomerID.Name = "Checkin_CustomerID";
+            // 
+            // Checkin_CustomerName
+            // 
+            this.Checkin_CustomerName.HeaderText = "Customer Name";
+            this.Checkin_CustomerName.Name = "Checkin_CustomerName";
+            // 
+            // Checkin_RoomID
+            // 
+            this.Checkin_RoomID.HeaderText = "Room ID";
+            this.Checkin_RoomID.Name = "Checkin_RoomID";
+            // 
+            // Checkin_RoomType
+            // 
+            this.Checkin_RoomType.HeaderText = "Room Type";
+            this.Checkin_RoomType.Name = "Checkin_RoomType";
+            // 
+            // Checkin_StartDate
+            // 
+            this.Checkin_StartDate.HeaderText = "Start Date";
+            this.Checkin_StartDate.Name = "Checkin_StartDate";
+            // 
             // Checkin_Panel_DetailOFCheckin
             // 
             this.Checkin_Panel_DetailOFCheckin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -635,6 +660,26 @@
             this.Checkin_Datagridview_Booking.Size = new System.Drawing.Size(654, 129);
             this.Checkin_Datagridview_Booking.TabIndex = 24;
             // 
+            // Checkin_Booking_ID
+            // 
+            this.Checkin_Booking_ID.HeaderText = "BookingID ";
+            this.Checkin_Booking_ID.Name = "Checkin_Booking_ID";
+            // 
+            // Checkin_Booking_CustomerID
+            // 
+            this.Checkin_Booking_CustomerID.HeaderText = "Customer ID";
+            this.Checkin_Booking_CustomerID.Name = "Checkin_Booking_CustomerID";
+            // 
+            // Checkin_Booking_CustomerName
+            // 
+            this.Checkin_Booking_CustomerName.HeaderText = "Customer Name";
+            this.Checkin_Booking_CustomerName.Name = "Checkin_Booking_CustomerName";
+            // 
+            // Checkin_Booking_RoomID
+            // 
+            this.Checkin_Booking_RoomID.HeaderText = "Room ID";
+            this.Checkin_Booking_RoomID.Name = "Checkin_Booking_RoomID";
+            // 
             // Checkin_Panel_HaveBooking
             // 
             this.Checkin_Panel_HaveBooking.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -694,7 +739,7 @@
             this.tabPage_Booking.Location = new System.Drawing.Point(4, 4);
             this.tabPage_Booking.Name = "tabPage_Booking";
             this.tabPage_Booking.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Booking.Size = new System.Drawing.Size(737, 827);
+            this.tabPage_Booking.Size = new System.Drawing.Size(848, 827);
             this.tabPage_Booking.TabIndex = 1;
             this.tabPage_Booking.Text = "Booking";
             this.tabPage_Booking.UseVisualStyleBackColor = true;
@@ -987,38 +1032,48 @@
             this.Checkout_Datagridview_Invoice.Size = new System.Drawing.Size(760, 124);
             this.Checkout_Datagridview_Invoice.TabIndex = 49;
             // 
-            // TienDichVu
+            // Checkout_InvoiceID
             // 
-            this.TienDichVu.DataPropertyName = "GiaDV";
-            this.TienDichVu.HeaderText = "Tiền Dịch Vụ Mỗi Ngày";
-            this.TienDichVu.Name = "TienDichVu";
+            this.Checkout_InvoiceID.DataPropertyName = "InvoiceID";
+            this.Checkout_InvoiceID.HeaderText = "Invoice ID";
+            this.Checkout_InvoiceID.Name = "Checkout_InvoiceID";
             // 
-            // SoNgaySD
+            // TenKH
             // 
-            this.SoNgaySD.DataPropertyName = "SoNgaySD";
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.NullValue = null;
-            this.SoNgaySD.DefaultCellStyle = dataGridViewCellStyle2;
-            this.SoNgaySD.HeaderText = "Số Lần Sử Dụng";
-            this.SoNgaySD.Name = "SoNgaySD";
+            this.TenKH.DataPropertyName = "Checkout_CustomerName";
+            this.TenKH.HeaderText = "Customer Name";
+            this.TenKH.Name = "TenKH";
             // 
-            // TenDV
+            // Checkout_StartDate
             // 
-            this.TenDV.DataPropertyName = "TenDV";
-            this.TenDV.HeaderText = "Tên Dịch Vụ";
-            this.TenDV.Name = "TenDV";
+            this.Checkout_StartDate.DataPropertyName = "NgayThue";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.Format = "dd/MM/yyyy";
+            dataGridViewCellStyle1.NullValue = null;
+            this.Checkout_StartDate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Checkout_StartDate.HeaderText = "StartDate";
+            this.Checkout_StartDate.Name = "Checkout_StartDate";
             // 
-            // MaDV
+            // Checkout_EndDate
             // 
-            this.MaDV.DataPropertyName = "MaDV";
-            this.MaDV.HeaderText = "Mã Dịch Vụ";
-            this.MaDV.Name = "MaDV";
+            this.Checkout_EndDate.DataPropertyName = "NgayDuKienTraPhong";
+            this.Checkout_EndDate.HeaderText = "EndDate";
+            this.Checkout_EndDate.Name = "Checkout_EndDate";
             // 
-            // MaHopDong
+            // Checkout_RoomType
             // 
-            this.MaHopDong.DataPropertyName = "MaHD";
-            this.MaHopDong.HeaderText = "Mã Hợp Đồng";
-            this.MaHopDong.Name = "MaHopDong";
+            this.Checkout_RoomType.HeaderText = "Room Type";
+            this.Checkout_RoomType.Name = "Checkout_RoomType";
+            // 
+            // CheckOut_NumberOfDay
+            // 
+            this.CheckOut_NumberOfDay.HeaderText = "Days";
+            this.CheckOut_NumberOfDay.Name = "CheckOut_NumberOfDay";
+            // 
+            // Checkout_Total
+            // 
+            this.Checkout_Total.HeaderText = "Total";
+            this.Checkout_Total.Name = "Checkout_Total";
             // 
             // label3
             // 
@@ -1033,9 +1088,9 @@
             // 
             this.Checkout_Datagridview_Services.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Checkout_Datagridview_Services.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.MaHopDong,
-            this.MaDV,
-            this.TenDV,
+            this.Checkout_Service_InvoiceID,
+            this.Checkout_Service_ServiceID,
+            this.Checkout_Service_ServiceName,
             this.SoNgaySD,
             this.TienDichVu});
             this.Checkout_Datagridview_Services.Location = new System.Drawing.Point(10, 27);
@@ -1108,7 +1163,7 @@
             this.tabPage_Checkin.Controls.Add(this.Checkin_DateTimePicker_Today);
             this.tabPage_Checkin.Location = new System.Drawing.Point(4, 4);
             this.tabPage_Checkin.Name = "tabPage_Checkin";
-            this.tabPage_Checkin.Size = new System.Drawing.Size(737, 827);
+            this.tabPage_Checkin.Size = new System.Drawing.Size(848, 827);
             this.tabPage_Checkin.TabIndex = 2;
             this.tabPage_Checkin.Text = "Checkin";
             this.tabPage_Checkin.UseVisualStyleBackColor = true;
@@ -1124,93 +1179,38 @@
             this.panel1.Size = new System.Drawing.Size(256, 853);
             this.panel1.TabIndex = 3;
             // 
-            // Checkin_CustomerID
+            // Checkout_Service_InvoiceID
             // 
-            this.Checkin_CustomerID.HeaderText = "Customer ID";
-            this.Checkin_CustomerID.Name = "Checkin_CustomerID";
+            this.Checkout_Service_InvoiceID.DataPropertyName = "MaHD";
+            this.Checkout_Service_InvoiceID.HeaderText = "Invoice ID";
+            this.Checkout_Service_InvoiceID.Name = "Checkout_Service_InvoiceID";
             // 
-            // Checkin_CustomerName
+            // Checkout_Service_ServiceID
             // 
-            this.Checkin_CustomerName.HeaderText = "Customer Name";
-            this.Checkin_CustomerName.Name = "Checkin_CustomerName";
+            this.Checkout_Service_ServiceID.DataPropertyName = "MaDV";
+            this.Checkout_Service_ServiceID.HeaderText = "Service ID";
+            this.Checkout_Service_ServiceID.Name = "Checkout_Service_ServiceID";
             // 
-            // Checkin_RoomID
+            // Checkout_Service_ServiceName
             // 
-            this.Checkin_RoomID.HeaderText = "Room ID";
-            this.Checkin_RoomID.Name = "Checkin_RoomID";
+            this.Checkout_Service_ServiceName.DataPropertyName = "TenDV";
+            this.Checkout_Service_ServiceName.HeaderText = "Service Name";
+            this.Checkout_Service_ServiceName.Name = "Checkout_Service_ServiceName";
             // 
-            // Checkin_RoomType
+            // SoNgaySD
             // 
-            this.Checkin_RoomType.HeaderText = "Room Type";
-            this.Checkin_RoomType.Name = "Checkin_RoomType";
+            this.SoNgaySD.DataPropertyName = "Checkout_Service_Time";
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.NullValue = null;
+            this.SoNgaySD.DefaultCellStyle = dataGridViewCellStyle2;
+            this.SoNgaySD.HeaderText = "Time";
+            this.SoNgaySD.Name = "SoNgaySD";
             // 
-            // Checkin_StartDate
+            // TienDichVu
             // 
-            this.Checkin_StartDate.HeaderText = "Start Date";
-            this.Checkin_StartDate.Name = "Checkin_StartDate";
-            // 
-            // Checkin_Booking_ID
-            // 
-            this.Checkin_Booking_ID.HeaderText = "BookingID ";
-            this.Checkin_Booking_ID.Name = "Checkin_Booking_ID";
-            // 
-            // Checkin_Booking_CustomerID
-            // 
-            this.Checkin_Booking_CustomerID.HeaderText = "Customer ID";
-            this.Checkin_Booking_CustomerID.Name = "Checkin_Booking_CustomerID";
-            // 
-            // Checkin_Booking_CustomerName
-            // 
-            this.Checkin_Booking_CustomerName.HeaderText = "Customer Name";
-            this.Checkin_Booking_CustomerName.Name = "Checkin_Booking_CustomerName";
-            // 
-            // Checkin_Booking_RoomID
-            // 
-            this.Checkin_Booking_RoomID.HeaderText = "Room ID";
-            this.Checkin_Booking_RoomID.Name = "Checkin_Booking_RoomID";
-            // 
-            // Checkout_InvoiceID
-            // 
-            this.Checkout_InvoiceID.DataPropertyName = "InvoiceID";
-            this.Checkout_InvoiceID.HeaderText = "Invoice ID";
-            this.Checkout_InvoiceID.Name = "Checkout_InvoiceID";
-            // 
-            // TenKH
-            // 
-            this.TenKH.DataPropertyName = "Checkout_CustomerName";
-            this.TenKH.HeaderText = "Customer Name";
-            this.TenKH.Name = "TenKH";
-            // 
-            // Checkout_StartDate
-            // 
-            this.Checkout_StartDate.DataPropertyName = "NgayThue";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.Format = "dd/MM/yyyy";
-            dataGridViewCellStyle1.NullValue = null;
-            this.Checkout_StartDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Checkout_StartDate.HeaderText = "StartDate";
-            this.Checkout_StartDate.Name = "Checkout_StartDate";
-            // 
-            // Checkout_EndDate
-            // 
-            this.Checkout_EndDate.DataPropertyName = "NgayDuKienTraPhong";
-            this.Checkout_EndDate.HeaderText = "EndDate";
-            this.Checkout_EndDate.Name = "Checkout_EndDate";
-            // 
-            // Checkout_RoomType
-            // 
-            this.Checkout_RoomType.HeaderText = "Room Type";
-            this.Checkout_RoomType.Name = "Checkout_RoomType";
-            // 
-            // CheckOut_NumberOfDay
-            // 
-            this.CheckOut_NumberOfDay.HeaderText = "Days";
-            this.CheckOut_NumberOfDay.Name = "CheckOut_NumberOfDay";
-            // 
-            // Checkout_Total
-            // 
-            this.Checkout_Total.HeaderText = "Total";
-            this.Checkout_Total.Name = "Checkout_Total";
+            this.TienDichVu.DataPropertyName = "GiaDV";
+            this.TienDichVu.HeaderText = "Tiền Dịch Vụ Mỗi Ngày";
+            this.TienDichVu.Name = "TienDichVu";
             // 
             // Detail
             // 
@@ -1338,11 +1338,6 @@
         private System.Windows.Forms.RichTextBox RichTextBox_Detail;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView Checkout_Datagridview_Invoice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TienDichVu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SoNgaySD;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenDV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaDV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaHopDong;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView Checkout_Datagridview_Services;
         private System.Windows.Forms.Button Back_Button;
@@ -1372,5 +1367,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Checkout_RoomType;
         private System.Windows.Forms.DataGridViewTextBoxColumn CheckOut_NumberOfDay;
         private System.Windows.Forms.DataGridViewTextBoxColumn Checkout_Total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Checkout_Service_InvoiceID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Checkout_Service_ServiceID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Checkout_Service_ServiceName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SoNgaySD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TienDichVu;
     }
 }

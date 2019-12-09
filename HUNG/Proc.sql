@@ -176,7 +176,6 @@ BEGIN
 END
 GO
 
-
 exec sp_Create @TableName = N'Rooms'
 exec sp_Create @TableName = N'Employees'
 exec sp_Create @TableName = N'Customers'
@@ -184,36 +183,31 @@ exec sp_Create @TableName = N'RoomTypes'
 exec sp_Create @TableName = N'Booking'
 exec sp_Create @TableName = N'Invoices'
 exec sp_Create @TableName = N'EmployeeTypes'
-exec sp_Create @TableName = N'ServiceTypes'
-exec sp_Create @TableName = N'SalePhases'
 exec sp_Create @TableName = N'HotelServices'
 exec sp_Create @TableName = N'Invoices_Services'
-
+go
 
 exec sp_Update @TableName = N'Rooms'
 exec sp_Update @TableName = N'Employees'
 exec sp_Update @TableName = N'Customers'
 exec sp_Update @TableName = N'RoomTypes'
 exec sp_Update @TableName = N'EmployeeTypes'
-exec sp_Update @TableName = N'ServiceTypes'
-exec sp_Update @TableName = N'SalePhases'
 exec sp_Update @TableName = N'Booking'
 exec sp_Update @TableName = N'Invoices'
 exec sp_Update @TableName = N'HotelServices'
 exec sp_Update @TableName = N'Invoices_Services'
-
+go
 
 exec sp_Delete @TableName = N'Rooms'
 exec sp_Delete @TableName = N'Employees'
 exec sp_Delete @TableName = N'Customers'
 exec sp_Delete @TableName = N'RoomTypes'
 exec sp_Delete @TableName = N'EmployeeTypes'
-exec sp_Delete @TableName = N'ServiceTypes'
-exec sp_Delete @TableName = N'SalePhases'
 exec sp_Delete @TableName = N'Booking'
 exec sp_Delete @TableName = N'Invoices'
 exec sp_Delete @TableName = N'HotelServices'
 exec sp_Delete @TableName = N'Invoices_Services'
+GO
 
 -----------------------------------Undo_Redo_Table-----------------------
 if object_id ('sp_Create_Undo_Table') is not null
@@ -307,8 +301,6 @@ exec sp_Create_Undo_Table @TableName = N'Employees'
 exec sp_Create_Undo_Table @TableName = N'Customers'
 exec sp_Create_Undo_Table @TableName = N'RoomTypes'
 exec sp_Create_Undo_Table @TableName = N'EmployeeTypes'
-exec sp_Create_Undo_Table @TableName = N'ServiceTypes'
-exec sp_Create_Undo_Table @TableName = N'SalePhases'
 exec sp_Create_Undo_Table @TableName = N'Booking'
 exec sp_Create_Undo_Table @TableName = N'Invoices'
 exec sp_Create_Undo_Table @TableName = N'HotelServices'
@@ -319,8 +311,6 @@ exec sp_Create_Redo_Table @TableName = N'Employees'
 exec sp_Create_Redo_Table @TableName = N'Customers'
 exec sp_Create_Redo_Table @TableName = N'RoomTypes'
 exec sp_Create_Redo_Table @TableName = N'EmployeeTypes'
-exec sp_Create_Redo_Table @TableName = N'ServiceTypes'
-exec sp_Create_Redo_Table @TableName = N'SalePhases'
 exec sp_Create_Redo_Table @TableName = N'Booking'
 exec sp_Create_Redo_Table @TableName = N'Invoices'
 exec sp_Create_Redo_Table @TableName = N'HotelServices'
@@ -410,8 +400,6 @@ exec sp_Create_Trigger_Delete @TableName = N'Employees'
 exec sp_Create_Trigger_Delete @TableName = N'Customers'
 exec sp_Create_Trigger_Delete @TableName = N'RoomTypes'
 exec sp_Create_Trigger_Delete @TableName = N'EmployeeTypes'
-exec sp_Create_Trigger_Delete @TableName = N'ServiceTypes'
-exec sp_Create_Trigger_Delete @TableName = N'SalePhases'
 exec sp_Create_Trigger_Delete @TableName = N'Booking'
 exec sp_Create_Trigger_Delete @TableName = N'Invoices'
 exec sp_Create_Trigger_Delete @TableName = N'HotelServices'
@@ -501,8 +489,6 @@ exec sp_Create_Trigger_Create @TableName = N'Employees'
 exec sp_Create_Trigger_Create @TableName = N'Customers'
 exec sp_Create_Trigger_Create @TableName = N'RoomTypes'
 exec sp_Create_Trigger_Create @TableName = N'EmployeeTypes'
-exec sp_Create_Trigger_Create @TableName = N'ServiceTypes'
-exec sp_Create_Trigger_Create @TableName = N'SalePhases'
 exec sp_Create_Trigger_Create @TableName = N'Booking'
 exec sp_Create_Trigger_Create @TableName = N'Invoices'
 exec sp_Create_Trigger_Create @TableName = N'HotelServices'
@@ -604,8 +590,6 @@ exec sp_Create_Trigger_Update @TableName = N'Employees'
 exec sp_Create_Trigger_Update @TableName = N'Customers'
 exec sp_Create_Trigger_Update @TableName = N'RoomTypes'
 exec sp_Create_Trigger_Update @TableName = N'EmployeeTypes'
-exec sp_Create_Trigger_Update @TableName = N'ServiceTypes'
-exec sp_Create_Trigger_Update @TableName = N'SalePhases'
 exec sp_Create_Trigger_Update @TableName = N'Booking'
 exec sp_Create_Trigger_Update @TableName = N'Invoices'
 exec sp_Create_Trigger_Update @TableName = N'HotelServices'
@@ -968,8 +952,6 @@ exec dbo.sp_Create_Undo @TableName = N'Employees'
 exec dbo.sp_Create_Undo @TableName = N'Customers'
 exec dbo.sp_Create_Undo @TableName = N'RoomTypes'
 exec dbo.sp_Create_Undo @TableName = N'EmployeeTypes'
-exec dbo.sp_Create_Undo @TableName = N'ServiceTypes'
-exec dbo.sp_Create_Undo @TableName = N'SalePhases'
 exec dbo.sp_Create_Undo @TableName = N'Booking'
 exec dbo.sp_Create_Undo @TableName = N'Invoices'
 exec dbo.sp_Create_Undo @TableName = N'HotelServices'
@@ -981,8 +963,6 @@ exec dbo.sp_Create_Redo @TableName = N'Employees'
 exec dbo.sp_Create_Redo @TableName = N'Customers'
 exec dbo.sp_Create_Redo @TableName = N'RoomTypes'
 exec dbo.sp_Create_Redo @TableName = N'EmployeeTypes'
-exec dbo.sp_Create_Redo @TableName = N'ServiceTypes'
-exec dbo.sp_Create_Redo @TableName = N'SalePhases'
 exec dbo.sp_Create_Redo @TableName = N'Booking'
 exec dbo.sp_Create_Redo @TableName = N'Invoices'
 exec dbo.sp_Create_Redo @TableName = N'HotelServices'
@@ -1222,17 +1202,3 @@ BEGIN
 END
 GO
 
-
-use HotelDB;
-if object_id('revenue') is not null
-	drop FUNCTION revenue;
-GO
-CREATE function revenue(@month int, @year int)
-returns float
-begin
-	return(select sum(InvoiceTotal) 
-			from Invoices
-			where (select month(cast(CheckOutDate as nvarchar(50))) from Invoices) = @month
-					and (select year(cast(CheckOutDate as nvarchar(50))) from Invoices) = @year);
-end
-go
