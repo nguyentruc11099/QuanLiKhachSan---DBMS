@@ -1,0 +1,42 @@
+C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe.config
+C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe
+C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\bin\Debug\HotelManagement.pdb
+C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csprojAssemblyReference.cache
+C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Form1.resources
+C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Properties.Resources.resources
+C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csproj.GenerateResource.cache
+C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\obj\Debug\HotelManagement.exe
+C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\obj\Debug\HotelManagement.pdb
+C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe.config
+C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe
+C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HotelManagement\HotelManagement\bin\Debug\HotelManagement.pdb
+C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csprojAssemblyReference.cache
+C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Properties.Resources.resources
+C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csproj.GenerateResource.cache
+C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HotelManagement\HotelManagement\obj\Debug\HotelManagement.exe
+C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HotelManagement\HotelManagement\obj\Debug\HotelManagement.pdb
+C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Presentation_Layer.DetailForm.resources
+C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Main.resources
+C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Presentation_Layer.Login.resources
+D:\Năm 3\HQTCS\Hung\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csprojAssemblyReference.cache
+D:\Năm 3\HQTCS\Hung\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Presentation_Layer.DetailForm.resources
+D:\Năm 3\HQTCS\Hung\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Main.resources
+D:\Năm 3\HQTCS\Hung\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Presentation_Layer.Login.resources
+D:\Năm 3\HQTCS\Hung\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Properties.Resources.resources
+D:\Năm 3\HQTCS\Hung\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csproj.GenerateResource.cache
+D:\Năm 3\HQTCS\Hung\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.exe
+D:\Năm 3\HQTCS\Hung\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.pdb
+D:\Năm 3\HQTCS\Hung\HUNG\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe.config
+D:\Năm 3\HQTCS\Hung\HUNG\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe
+D:\Năm 3\HQTCS\Hung\HUNG\HotelManagement\HotelManagement\bin\Debug\HotelManagement.pdb
+C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csprojAssemblyReference.cache
+C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Presentation_Layer.Detail.resources
+C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Presentation_Layer.Login.resources
+C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Properties.Resources.resources
+C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csproj.GenerateResource.cache
+C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagement\obj\Debug\HotelManagement.exe
+C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagement\obj\Debug\HotelManagement.pdb
+C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Presentation_Layer.Main.resources
+C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe.config
+C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe
+C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagement\bin\Debug\HotelManagement.pdb

@@ -1,9 +1,0 @@
-C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe.config
-C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe
-C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\bin\Debug\HotelManagement.pdb
-C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csprojAssemblyReference.cache
-C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Form1.resources
-C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Properties.Resources.resources
-C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csproj.GenerateResource.cache
-C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\obj\Debug\HotelManagement.exe
-C:\Users\ADMIN\Desktop\HotelManagement\HotelManagement\obj\Debug\HotelManagement.pdb

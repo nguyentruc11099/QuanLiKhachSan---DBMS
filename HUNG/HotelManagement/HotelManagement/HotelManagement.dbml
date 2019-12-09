@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HotelDB" Class="HotelManagementDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local);Initial Catalog=HotelDB;Integrated Security=True" SettingsObjectName="HotelManagement.Properties.Settings" SettingsPropertyName="HotelDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Booking" Member="Bookings">
+    <Type Name="Booking">
+      <Column Name="BookingID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RoomID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AppoinmentDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_Booking" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
+      <Association Name="Room_Booking" Member="Room" ThisKey="RoomID" OtherKey="RoomID" Type="Room" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customers" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="IdentityCard" Type="System.String" DbType="VarChar(9) NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="CustomerAddress" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Association Name="Customer_Booking" Member="Bookings" ThisKey="CustomerID" OtherKey="CustomerID" Type="Booking" />
+      <Association Name="Customer_Invoice" Member="Invoices" ThisKey="CustomerID" OtherKey="CustomerID" Type="Invoice" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmployeeTypes" Member="EmployeeTypes">
+    <Type Name="EmployeeType">
+      <Column Name="EmployeeTypeID" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeTypeName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="EmployeeType_Employee" Member="Employees" ThisKey="EmployeeTypeID" OtherKey="EmployeeTypeID" Type="Employee" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Employees" Member="Employees">
+    <Type Name="Employee">
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeTypeID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="IdentityCard" Type="System.String" DbType="VarChar(9) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Employee_Invoice" Member="Invoices" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Invoice" />
+      <Association Name="EmployeeType_Employee" Member="EmployeeType" ThisKey="EmployeeTypeID" OtherKey="EmployeeTypeID" Type="EmployeeType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HotelServices" Member="HotelServices">
+    <Type Name="HotelService">
+      <Column Name="ServiceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ServiceName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ServiceTypeID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Association Name="HotelService_Invoices_Service" Member="Invoices_Services" ThisKey="ServiceID" OtherKey="ServiceID" Type="Invoices_Service" />
+      <Association Name="ServiceType_HotelService" Member="ServiceType" ThisKey="ServiceTypeID" OtherKey="ServiceTypeID" Type="ServiceType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Invoices" Member="Invoices">
+    <Type Name="Invoice">
+      <Column Name="InvoiceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RoomID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NumberOfDay" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceTotal" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Column Name="CheckInDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CheckOutDate" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="HasPaid" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Invoice_Invoices_Service" Member="Invoices_Services" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="Invoices_Service" />
+      <Association Name="Customer_Invoice" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
+      <Association Name="Employee_Invoice" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+      <Association Name="Room_Invoice" Member="Room" ThisKey="RoomID" OtherKey="RoomID" Type="Room" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Invoices_Services" Member="Invoices_Services">
+    <Type Name="Invoices_Service">
+      <Column Name="Invoices_Services_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InvoiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ServiceID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Times" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Invoice_Invoices_Service" Member="Invoice" ThisKey="InvoiceID" OtherKey="InvoiceID" Type="Invoice" IsForeignKey="true" />
+      <Association Name="HotelService_Invoices_Service" Member="HotelService" ThisKey="ServiceID" OtherKey="ServiceID" Type="HotelService" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rooms" Member="Rooms">
+    <Type Name="Room">
+      <Column Name="RoomID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RoomTypeID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="OnFloor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Room_Booking" Member="Bookings" ThisKey="RoomID" OtherKey="RoomID" Type="Booking" />
+      <Association Name="Room_Invoice" Member="Invoices" ThisKey="RoomID" OtherKey="RoomID" Type="Invoice" />
+      <Association Name="RoomType_Room" Member="RoomType" ThisKey="RoomTypeID" OtherKey="RoomTypeID" Type="RoomType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RoomTypes" Member="RoomTypes">
+    <Type Name="RoomType">
+      <Column Name="RoomTypeID" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Association Name="RoomType_Room" Member="Rooms" ThisKey="RoomTypeID" OtherKey="RoomTypeID" Type="Room" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SalePhases" Member="SalePhases">
+    <Type Name="SalePhase">
+      <Column Name="SalePhaseID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ServiceTypeID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="ServiceType_SalePhase" Member="ServiceType" ThisKey="ServiceTypeID" OtherKey="ServiceTypeID" Type="ServiceType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ServiceTypes" Member="ServiceTypes">
+    <Type Name="ServiceType">
+      <Column Name="ServiceTypeID" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ServiceTypeName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="ServiceType_HotelService" Member="HotelServices" ThisKey="ServiceTypeID" OtherKey="ServiceTypeID" Type="HotelService" />
+      <Association Name="ServiceType_SalePhase" Member="SalePhases" ThisKey="ServiceTypeID" OtherKey="ServiceTypeID" Type="SalePhase" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_Booking" Method="sp_Booking">
+    <Parameter Name="CustomerID" Parameter="customerID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AppoinmentDate" Parameter="appoinmentDate" Type="System.DateTime" DbType="SmallDateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Redo_RoomTypes" Method="sp_Redo_RoomTypes">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_CheckIn" Method="sp_CheckIn">
+    <Parameter Name="CustomerID" Parameter="customerID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EmployeeID" Parameter="employeeID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Create" Method="sp_Create">
+    <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Create_Redo" Method="sp_Create_Redo">
+    <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Create_Redo_Table" Method="sp_Create_Redo_Table">
+    <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Create_Trigger_Create" Method="sp_Create_Trigger_Create">
+    <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(100)" />
+  </Function>
+  <Function Name="dbo.sp_Create_Trigger_Delete" Method="sp_Create_Trigger_Delete">
+    <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(100)" />
+  </Function>
+  <Function Name="dbo.sp_Create_Trigger_Update" Method="sp_Create_Trigger_Update">
+    <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(100)" />
+  </Function>
+  <Function Name="dbo.sp_Create_Undo" Method="sp_Create_Undo">
+    <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Create_Undo_Table" Method="sp_Create_Undo_Table">
+    <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_CreateCustomers" Method="sp_CreateCustomers">
+    <Parameter Name="CustomerName" Parameter="customerName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="IdentityCard" Parameter="identityCard" Type="System.String" DbType="VarChar(9)" />
+    <Parameter Name="PhoneNumber" Parameter="phoneNumber" Type="System.String" DbType="NVarChar(10)" />
+    <Parameter Name="CustomerAddress" Parameter="customerAddress" Type="System.String" DbType="NVarChar(40)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_CreateEmployees" Method="sp_CreateEmployees">
+    <Parameter Name="EmployeeName" Parameter="employeeName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="EmployeeTypeID" Parameter="employeeTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="PhoneNumber" Parameter="phoneNumber" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="IdentityCard" Parameter="identityCard" Type="System.String" DbType="VarChar(9)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_CreateEmployeeTypes" Method="sp_CreateEmployeeTypes">
+    <Parameter Name="EmployeeTypeName" Parameter="employeeTypeName" Type="System.String" DbType="NVarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_CreateHotelServices" Method="sp_CreateHotelServices">
+    <Parameter Name="ServiceName" Parameter="serviceName" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="ServiceTypeID" Parameter="serviceTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="Price" Parameter="price" Type="System.Decimal" DbType="SmallMoney" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_CreateInvoices_Services" Method="sp_CreateInvoices_Services">
+    <Parameter Name="InvoiceID" Parameter="invoiceID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ServiceID" Parameter="serviceID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Times" Parameter="times" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_CreateRooms" Method="sp_CreateRooms">
+    <Parameter Name="RoomTypeID" Parameter="roomTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="OnFloor" Parameter="onFloor" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Status" Parameter="status" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_CreateRoomTypes" Method="sp_CreateRoomTypes">
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Price" Parameter="price" Type="System.Decimal" DbType="SmallMoney" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_CreateSalePhases" Method="sp_CreateSalePhases">
+    <Parameter Name="ServiceTypeID" Parameter="serviceTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="StartDate" Parameter="startDate" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="EndDate" Parameter="endDate" Type="System.DateTime" DbType="Date" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_CreateServiceTypes" Method="sp_CreateServiceTypes">
+    <Parameter Name="ServiceTypeName" Parameter="serviceTypeName" Type="System.String" DbType="NVarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Delete" Method="sp_Delete">
+    <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DeleteBooking" Method="sp_DeleteBooking">
+    <Parameter Name="BookingID" Parameter="bookingID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DeleteCustomers" Method="sp_DeleteCustomers">
+    <Parameter Name="CustomerID" Parameter="customerID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DeleteEmployees" Method="sp_DeleteEmployees">
+    <Parameter Name="EmployeeID" Parameter="employeeID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DeleteEmployeeTypes" Method="sp_DeleteEmployeeTypes">
+    <Parameter Name="EmployeeTypeID" Parameter="employeeTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DeleteHotelServices" Method="sp_DeleteHotelServices">
+    <Parameter Name="ServiceID" Parameter="serviceID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DeleteInvoices" Method="sp_DeleteInvoices">
+    <Parameter Name="InvoiceID" Parameter="invoiceID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DeleteInvoices_Services" Method="sp_DeleteInvoices_Services">
+    <Parameter Name="Invoices_Services_ID" Parameter="invoices_Services_ID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DeleteRooms" Method="sp_DeleteRooms">
+    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DeleteRoomTypes" Method="sp_DeleteRoomTypes">
+    <Parameter Name="RoomTypeID" Parameter="roomTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DeleteSalePhases" Method="sp_DeleteSalePhases">
+    <Parameter Name="SalePhaseID" Parameter="salePhaseID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_DeleteServiceTypes" Method="sp_DeleteServiceTypes">
+    <Parameter Name="ServiceTypeID" Parameter="serviceTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_FindBooking" Method="sp_FindBooking">
+    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_FindBookingResult">
+      <Column Name="BookingID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RoomID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AppoinmentDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_FindEmployee" Method="sp_FindEmployee">
+    <Parameter Name="EmployeeID" Parameter="employeeID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_FindEmployeeResult">
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeTypeID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="IdentityCard" Type="System.String" DbType="VarChar(9) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_FindRoom" Method="sp_FindRoom">
+    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_FindRoomResult">
+      <Column Name="RoomID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RoomTypeID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="OnFloor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_LoadRoom" Method="sp_LoadRoom">
+    <ElementType Name="sp_LoadRoomResult">
+      <Column Name="RoomID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RoomTypeID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="OnFloor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_Redo_Booking" Method="sp_Redo_Booking">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Redo_Customers" Method="sp_Redo_Customers">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Redo_Employees" Method="sp_Redo_Employees">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Redo_EmployeeTypes" Method="sp_Redo_EmployeeTypes">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Redo_HotelServices" Method="sp_Redo_HotelServices">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Redo_Invoices" Method="sp_Redo_Invoices">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Redo_Invoices_Services" Method="sp_Redo_Invoices_Services">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Redo_Rooms" Method="sp_Redo_Rooms">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_UpdateServiceTypes" Method="sp_UpdateServiceTypes">
+    <Parameter Name="ServiceTypeID" Parameter="serviceTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="ServiceTypeName" Parameter="serviceTypeName" Type="System.String" DbType="NVarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Redo_SalePhases" Method="sp_Redo_SalePhases">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Redo_ServiceTypes" Method="sp_Redo_ServiceTypes">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_SearchCustomer" Method="sp_SearchCustomer">
+    <Parameter Name="CustomerName" Parameter="customerName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="IdentityCard" Parameter="identityCard" Type="System.String" DbType="VarChar(9)" />
+  </Function>
+  <Function Name="dbo.sp_Undo_Booking" Method="sp_Undo_Booking">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Undo_Customers" Method="sp_Undo_Customers">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Undo_Employees" Method="sp_Undo_Employees">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Undo_EmployeeTypes" Method="sp_Undo_EmployeeTypes">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Undo_HotelServices" Method="sp_Undo_HotelServices">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Undo_Invoices" Method="sp_Undo_Invoices">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Undo_Invoices_Services" Method="sp_Undo_Invoices_Services">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Undo_Rooms" Method="sp_Undo_Rooms">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Undo_RoomTypes" Method="sp_Undo_RoomTypes">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Undo_SalePhases" Method="sp_Undo_SalePhases">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Undo_ServiceTypes" Method="sp_Undo_ServiceTypes">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Update" Method="sp_Update">
+    <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_UpdateBooking" Method="sp_UpdateBooking">
+    <Parameter Name="BookingID" Parameter="bookingID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CustomerID" Parameter="customerID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AppoinmentDate" Parameter="appoinmentDate" Type="System.DateTime" DbType="SmallDateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_UpdateCustomers" Method="sp_UpdateCustomers">
+    <Parameter Name="CustomerID" Parameter="customerID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CustomerName" Parameter="customerName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="IdentityCard" Parameter="identityCard" Type="System.String" DbType="VarChar(9)" />
+    <Parameter Name="PhoneNumber" Parameter="phoneNumber" Type="System.String" DbType="NVarChar(10)" />
+    <Parameter Name="CustomerAddress" Parameter="customerAddress" Type="System.String" DbType="NVarChar(40)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_UpdateEmployees" Method="sp_UpdateEmployees">
+    <Parameter Name="EmployeeID" Parameter="employeeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EmployeeName" Parameter="employeeName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="EmployeeTypeID" Parameter="employeeTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="PhoneNumber" Parameter="phoneNumber" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="IdentityCard" Parameter="identityCard" Type="System.String" DbType="VarChar(9)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_UpdateEmployeeTypes" Method="sp_UpdateEmployeeTypes">
+    <Parameter Name="EmployeeTypeID" Parameter="employeeTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="EmployeeTypeName" Parameter="employeeTypeName" Type="System.String" DbType="NVarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_UpdateHotelServices" Method="sp_UpdateHotelServices">
+    <Parameter Name="ServiceID" Parameter="serviceID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ServiceName" Parameter="serviceName" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="ServiceTypeID" Parameter="serviceTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="Price" Parameter="price" Type="System.Decimal" DbType="SmallMoney" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_UpdateInvoices" Method="sp_UpdateInvoices">
+    <Parameter Name="InvoiceID" Parameter="invoiceID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CustomerID" Parameter="customerID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="NumberOfDay" Parameter="numberOfDay" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="EmployeeID" Parameter="employeeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="InvoiceTotal" Parameter="invoiceTotal" Type="System.Decimal" DbType="SmallMoney" />
+    <Parameter Name="CheckInDate" Parameter="checkInDate" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="CheckOutDate" Parameter="checkOutDate" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="HasPaid" Parameter="hasPaid" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_UpdateInvoices_Services" Method="sp_UpdateInvoices_Services">
+    <Parameter Name="Invoices_Services_ID" Parameter="invoices_Services_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="InvoiceID" Parameter="invoiceID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ServiceID" Parameter="serviceID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Times" Parameter="times" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_UpdateRooms" Method="sp_UpdateRooms">
+    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RoomTypeID" Parameter="roomTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="OnFloor" Parameter="onFloor" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Status" Parameter="status" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_UpdateRoomTypes" Method="sp_UpdateRoomTypes">
+    <Parameter Name="RoomTypeID" Parameter="roomTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Price" Parameter="price" Type="System.Decimal" DbType="SmallMoney" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_UpdateSalePhases" Method="sp_UpdateSalePhases">
+    <Parameter Name="SalePhaseID" Parameter="salePhaseID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ServiceTypeID" Parameter="serviceTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="StartDate" Parameter="startDate" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="EndDate" Parameter="endDate" Type="System.DateTime" DbType="Date" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_FindBooking" Method="fn_FindBooking" IsComposable="true">
+    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="fn_FindBookingResult">
+      <Column Name="BookingID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="RoomID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.fn_LoginEmployee" Method="fn_LoginEmployee" IsComposable="true">
+    <Parameter Name="Account" Parameter="account" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="EmployeeType" Parameter="employeeType" Type="System.Byte" DbType="TinyInt" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
