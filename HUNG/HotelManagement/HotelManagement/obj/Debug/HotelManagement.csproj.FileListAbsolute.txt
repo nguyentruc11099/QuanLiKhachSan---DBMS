@@ -51,3 +51,14 @@ C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HUNG\HotelManagement\Hotel
 C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe.config
 C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe
 C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\bin\Debug\HotelManagement.pdb
+D:\Năm 3\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe.config
+D:\Năm 3\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe
+D:\Năm 3\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\bin\Debug\HotelManagement.pdb
+D:\Năm 3\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csprojAssemblyReference.cache
+D:\Năm 3\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Presentation_Layer.Detail.resources
+D:\Năm 3\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Presentation_Layer.Main.resources
+D:\Năm 3\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Presentation_Layer.Login.resources
+D:\Năm 3\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Properties.Resources.resources
+D:\Năm 3\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csproj.GenerateResource.cache
+D:\Năm 3\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.exe
+D:\Năm 3\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.pdb

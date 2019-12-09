@@ -994,5 +994,17 @@ namespace HotelManagement.Presentation_Layer
         {
             DrawRooms();
         }
+
+        private void btn_Calculate_Click(object sender, EventArgs e)
+        {
+            BLInvoice blI = new BLInvoice();
+            rtxt_Total.Text = "Total revenues in " + cmb_Month.Text + ", " + cmb_Year.Text + " is: " + blI.CalculateRevenue(cmb_Month.Text, cmb_Year.Text);
+        }
+
+        private void btnAnalysis_Click(object sender, EventArgs e)
+        {
+            TabControl_Main.TabPages.Clear();
+            TabControl_Main.TabPages.Add(TabPage_Revenue);
+        }
     }
 }

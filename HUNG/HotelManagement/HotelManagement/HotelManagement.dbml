@@ -117,14 +117,17 @@
     <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(100)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.sp_Create_Trigger_Create" Method="sp_Create_Trigger_Create">
+  <Function Name="dbo.sp_Create_Trigger_Create" Method="sp_Create_Trigger_Create" IsComposable="true">
     <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="object" />
   </Function>
-  <Function Name="dbo.sp_Create_Trigger_Delete" Method="sp_Create_Trigger_Delete">
+  <Function Name="dbo.sp_Create_Trigger_Delete" Method="sp_Create_Trigger_Delete" IsComposable="true">
     <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="object" />
   </Function>
-  <Function Name="dbo.sp_Create_Trigger_Update" Method="sp_Create_Trigger_Update">
+  <Function Name="dbo.sp_Create_Trigger_Update" Method="sp_Create_Trigger_Update" IsComposable="true">
     <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="object" />
   </Function>
   <Function Name="dbo.sp_Create_Undo" Method="sp_Create_Undo">
     <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(30)" />
@@ -297,9 +300,10 @@
     <Parameter Name="Price" Parameter="price" Type="System.Decimal" DbType="SmallMoney" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.sp_SearchCustomer" Method="sp_SearchCustomer">
+  <Function Name="dbo.sp_SearchCustomer" Method="sp_SearchCustomer" IsComposable="true">
     <Parameter Name="CustomerName" Parameter="customerName" Type="System.String" DbType="NVarChar(30)" />
     <Parameter Name="IdentityCard" Parameter="identityCard" Type="System.String" DbType="VarChar(9)" />
+    <Return Type="object" />
   </Function>
   <Function Name="dbo.sp_Undo_Booking" Method="sp_Undo_Booking">
     <Return Type="System.Int32" />
@@ -421,5 +425,10 @@
   <Function Name="dbo.sp_Update" Method="sp_Update">
     <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(30)" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.revenue" Method="revenue" IsComposable="true">
+    <Parameter Name="month" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="year" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Decimal" />
   </Function>
 </Database>

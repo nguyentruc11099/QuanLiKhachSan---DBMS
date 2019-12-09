@@ -1202,3 +1202,16 @@ BEGIN
 END
 GO
 
+
+if object_id('revenue') is not null
+drop function revenue
+go
+create function revenue(@month nvarchar(50), @year nvarchar(50))
+returns smallmoney
+begin
+	return(select sum(InvoiceTotal) 
+			from Invoices
+			where	FORMAT(CheckOutDate,'MMM', 'en-US') = @month and 
+					year(cast(CheckOutDate as int)) = @year)
+end
+go

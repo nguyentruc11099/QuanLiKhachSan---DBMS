@@ -57,5 +57,11 @@ namespace HotelManagement.BS_Layer
                 return false;
             }
         }
+        public decimal CalculateRevenue(string month, string year)
+        {
+            HotelManagementDataContext db = new HotelManagementDataContext();
+            
+            return Convert.ToDecimal(db.revenue(month, year));
+        }
     }
 }

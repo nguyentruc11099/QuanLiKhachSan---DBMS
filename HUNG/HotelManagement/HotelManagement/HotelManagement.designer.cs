@@ -196,22 +196,22 @@ namespace HotelManagement
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Create")]
-		public void sp_Create_Trigger_Create([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Create", IsComposable=true)]
+		public object sp_Create_Trigger_Create([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName).ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Delete")]
-		public void sp_Create_Trigger_Delete([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Delete", IsComposable=true)]
+		public object sp_Create_Trigger_Delete([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName).ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Update")]
-		public void sp_Create_Trigger_Update([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Update", IsComposable=true)]
+		public object sp_Create_Trigger_Update([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName).ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Undo")]
@@ -445,10 +445,10 @@ namespace HotelManagement
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SearchCustomer")]
-		public void sp_SearchCustomer([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerName", DbType="NVarChar(30)")] string customerName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdentityCard", DbType="VarChar(9)")] string identityCard)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SearchCustomer", IsComposable=true)]
+		public object sp_SearchCustomer([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerName", DbType="NVarChar(30)")] string customerName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdentityCard", DbType="VarChar(9)")] string identityCard)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerName, identityCard);
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerName, identityCard).ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Undo_Booking")]
@@ -608,6 +608,12 @@ namespace HotelManagement
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
 			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.revenue", IsComposable=true)]
+		public System.Nullable<decimal> revenue([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string month, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string year)
+		{
+			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), month, year).ReturnValue));
 		}
 	}
 	

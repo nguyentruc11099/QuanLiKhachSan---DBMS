@@ -261,3 +261,14 @@ VALUES
 
 
 
+drop function revenue
+go
+create function revenue(@month int, @year int)
+returns smallmoney
+begin
+	return(select sum(InvoiceTotal) 
+			from Invoices
+			where	month(cast(CheckOutDate as int)) = @month and 
+					year(cast(CheckOutDate as int)) = @year)
+end
+go

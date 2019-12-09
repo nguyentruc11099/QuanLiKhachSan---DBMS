@@ -125,6 +125,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.dgv_Employee = new System.Windows.Forms.DataGridView();
             this.tabPage_DefaultScreen = new System.Windows.Forms.TabPage();
+            this.Button_Redraw = new System.Windows.Forms.Button();
             this.Panel_ListRoom = new System.Windows.Forms.Panel();
             this.TabPage_Service = new System.Windows.Forms.TabPage();
             this.txt_Service_ServiceID = new System.Windows.Forms.TextBox();
@@ -212,7 +213,11 @@
             this.label44 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.dgv_InvoiceService = new System.Windows.Forms.DataGridView();
-            this.Button_Redraw = new System.Windows.Forms.Button();
+            this.TabPage_Revenue = new System.Windows.Forms.TabPage();
+            this.rtxt_Total = new System.Windows.Forms.RichTextBox();
+            this.cmb_Month = new System.Windows.Forms.ComboBox();
+            this.cmb_Year = new System.Windows.Forms.ComboBox();
+            this.btn_Calculate = new System.Windows.Forms.Button();
             this.panel_Navigation.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -239,6 +244,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeType)).BeginInit();
             this.TabPage_Invoice_Service.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_InvoiceService)).BeginInit();
+            this.TabPage_Revenue.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_Navigation
@@ -338,6 +344,7 @@
             this.btnAnalysis.TabIndex = 4;
             this.btnAnalysis.Text = "Analysis ";
             this.btnAnalysis.UseVisualStyleBackColor = false;
+            this.btnAnalysis.Click += new System.EventHandler(this.btnAnalysis_Click);
             // 
             // pictureBox1
             // 
@@ -563,6 +570,7 @@
             this.TabControl_Main.Controls.Add(this.TabPage_Booking);
             this.TabControl_Main.Controls.Add(this.TabPage_EmployeeType);
             this.TabControl_Main.Controls.Add(this.TabPage_Invoice_Service);
+            this.TabControl_Main.Controls.Add(this.TabPage_Revenue);
             this.TabControl_Main.Dock = System.Windows.Forms.DockStyle.Left;
             this.TabControl_Main.Location = new System.Drawing.Point(0, 0);
             this.TabControl_Main.Name = "TabControl_Main";
@@ -1273,6 +1281,16 @@
             this.tabPage_DefaultScreen.TabIndex = 4;
             this.tabPage_DefaultScreen.Text = "Default Screen";
             this.tabPage_DefaultScreen.UseVisualStyleBackColor = true;
+            // 
+            // Button_Redraw
+            // 
+            this.Button_Redraw.Location = new System.Drawing.Point(680, 70);
+            this.Button_Redraw.Name = "Button_Redraw";
+            this.Button_Redraw.Size = new System.Drawing.Size(75, 23);
+            this.Button_Redraw.TabIndex = 16;
+            this.Button_Redraw.Text = "Reset";
+            this.Button_Redraw.UseVisualStyleBackColor = true;
+            this.Button_Redraw.Click += new System.EventHandler(this.Button_Redraw_Click);
             // 
             // Panel_ListRoom
             // 
@@ -2093,15 +2111,79 @@
             this.dgv_InvoiceService.Size = new System.Drawing.Size(960, 400);
             this.dgv_InvoiceService.TabIndex = 53;
             // 
-            // Button_Redraw
+            // TabPage_Revenue
             // 
-            this.Button_Redraw.Location = new System.Drawing.Point(680, 70);
-            this.Button_Redraw.Name = "Button_Redraw";
-            this.Button_Redraw.Size = new System.Drawing.Size(75, 23);
-            this.Button_Redraw.TabIndex = 16;
-            this.Button_Redraw.Text = "Reset";
-            this.Button_Redraw.UseVisualStyleBackColor = true;
-            this.Button_Redraw.Click += new System.EventHandler(this.Button_Redraw_Click);
+            this.TabPage_Revenue.Controls.Add(this.btn_Calculate);
+            this.TabPage_Revenue.Controls.Add(this.cmb_Year);
+            this.TabPage_Revenue.Controls.Add(this.cmb_Month);
+            this.TabPage_Revenue.Controls.Add(this.rtxt_Total);
+            this.TabPage_Revenue.Location = new System.Drawing.Point(4, 4);
+            this.TabPage_Revenue.Name = "TabPage_Revenue";
+            this.TabPage_Revenue.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage_Revenue.Size = new System.Drawing.Size(1366, 867);
+            this.TabPage_Revenue.TabIndex = 12;
+            this.TabPage_Revenue.Text = "Revenue";
+            this.TabPage_Revenue.UseVisualStyleBackColor = true;
+            // 
+            // rtxt_Total
+            // 
+            this.rtxt_Total.Location = new System.Drawing.Point(242, 52);
+            this.rtxt_Total.Name = "rtxt_Total";
+            this.rtxt_Total.Size = new System.Drawing.Size(411, 118);
+            this.rtxt_Total.TabIndex = 0;
+            this.rtxt_Total.Text = "";
+            // 
+            // cmb_Month
+            // 
+            this.cmb_Month.FormattingEnabled = true;
+            this.cmb_Month.Items.AddRange(new object[] {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"});
+            this.cmb_Month.Location = new System.Drawing.Point(723, 52);
+            this.cmb_Month.Name = "cmb_Month";
+            this.cmb_Month.Size = new System.Drawing.Size(76, 21);
+            this.cmb_Month.TabIndex = 1;
+            // 
+            // cmb_Year
+            // 
+            this.cmb_Year.FormattingEnabled = true;
+            this.cmb_Year.Items.AddRange(new object[] {
+            "2010",
+            "2011",
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021"});
+            this.cmb_Year.Location = new System.Drawing.Point(814, 52);
+            this.cmb_Year.Name = "cmb_Year";
+            this.cmb_Year.Size = new System.Drawing.Size(95, 21);
+            this.cmb_Year.TabIndex = 2;
+            // 
+            // btn_Calculate
+            // 
+            this.btn_Calculate.Location = new System.Drawing.Point(724, 100);
+            this.btn_Calculate.Name = "btn_Calculate";
+            this.btn_Calculate.Size = new System.Drawing.Size(75, 23);
+            this.btn_Calculate.TabIndex = 3;
+            this.btn_Calculate.Text = "Calculate";
+            this.btn_Calculate.UseVisualStyleBackColor = true;
+            this.btn_Calculate.Click += new System.EventHandler(this.btn_Calculate_Click);
             // 
             // Main
             // 
@@ -2151,6 +2233,7 @@
             this.TabPage_Invoice_Service.ResumeLayout(false);
             this.TabPage_Invoice_Service.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_InvoiceService)).EndInit();
+            this.TabPage_Revenue.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2342,6 +2425,11 @@
         private System.Windows.Forms.Button btn_Create_Invoice;
         private System.Windows.Forms.Button btn_Create_Booking;
         private System.Windows.Forms.Button Button_Redraw;
+        private System.Windows.Forms.TabPage TabPage_Revenue;
+        private System.Windows.Forms.Button btn_Calculate;
+        private System.Windows.Forms.ComboBox cmb_Year;
+        private System.Windows.Forms.ComboBox cmb_Month;
+        private System.Windows.Forms.RichTextBox rtxt_Total;
     }
 }
 
