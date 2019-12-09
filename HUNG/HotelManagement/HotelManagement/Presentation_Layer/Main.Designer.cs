@@ -214,10 +214,10 @@
             this.label45 = new System.Windows.Forms.Label();
             this.dgv_InvoiceService = new System.Windows.Forms.DataGridView();
             this.TabPage_Revenue = new System.Windows.Forms.TabPage();
-            this.rtxt_Total = new System.Windows.Forms.RichTextBox();
-            this.cmb_Month = new System.Windows.Forms.ComboBox();
-            this.cmb_Year = new System.Windows.Forms.ComboBox();
             this.btn_Calculate = new System.Windows.Forms.Button();
+            this.cmb_Year = new System.Windows.Forms.ComboBox();
+            this.cmb_Month = new System.Windows.Forms.ComboBox();
+            this.rtxt_Total = new System.Windows.Forms.RichTextBox();
             this.panel_Navigation.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -2125,34 +2125,15 @@
             this.TabPage_Revenue.Text = "Revenue";
             this.TabPage_Revenue.UseVisualStyleBackColor = true;
             // 
-            // rtxt_Total
+            // btn_Calculate
             // 
-            this.rtxt_Total.Location = new System.Drawing.Point(242, 52);
-            this.rtxt_Total.Name = "rtxt_Total";
-            this.rtxt_Total.Size = new System.Drawing.Size(411, 118);
-            this.rtxt_Total.TabIndex = 0;
-            this.rtxt_Total.Text = "";
-            // 
-            // cmb_Month
-            // 
-            this.cmb_Month.FormattingEnabled = true;
-            this.cmb_Month.Items.AddRange(new object[] {
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December"});
-            this.cmb_Month.Location = new System.Drawing.Point(723, 52);
-            this.cmb_Month.Name = "cmb_Month";
-            this.cmb_Month.Size = new System.Drawing.Size(76, 21);
-            this.cmb_Month.TabIndex = 1;
+            this.btn_Calculate.Location = new System.Drawing.Point(724, 100);
+            this.btn_Calculate.Name = "btn_Calculate";
+            this.btn_Calculate.Size = new System.Drawing.Size(75, 23);
+            this.btn_Calculate.TabIndex = 3;
+            this.btn_Calculate.Text = "Calculate";
+            this.btn_Calculate.UseVisualStyleBackColor = true;
+            this.btn_Calculate.Click += new System.EventHandler(this.btn_Calculate_Click);
             // 
             // cmb_Year
             // 
@@ -2174,16 +2155,39 @@
             this.cmb_Year.Name = "cmb_Year";
             this.cmb_Year.Size = new System.Drawing.Size(95, 21);
             this.cmb_Year.TabIndex = 2;
+            this.cmb_Year.Text = "2019";
+            this.cmb_Year.TextChanged += new System.EventHandler(this.cmb_Year_TextChanged);
             // 
-            // btn_Calculate
+            // cmb_Month
             // 
-            this.btn_Calculate.Location = new System.Drawing.Point(724, 100);
-            this.btn_Calculate.Name = "btn_Calculate";
-            this.btn_Calculate.Size = new System.Drawing.Size(75, 23);
-            this.btn_Calculate.TabIndex = 3;
-            this.btn_Calculate.Text = "Calculate";
-            this.btn_Calculate.UseVisualStyleBackColor = true;
-            this.btn_Calculate.Click += new System.EventHandler(this.btn_Calculate_Click);
+            this.cmb_Month.FormattingEnabled = true;
+            this.cmb_Month.Items.AddRange(new object[] {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"});
+            this.cmb_Month.Location = new System.Drawing.Point(723, 52);
+            this.cmb_Month.Name = "cmb_Month";
+            this.cmb_Month.Size = new System.Drawing.Size(76, 21);
+            this.cmb_Month.TabIndex = 1;
+            this.cmb_Month.Text = "None";
+            this.cmb_Month.TextChanged += new System.EventHandler(this.cmb_Month_TextChanged);
+            // 
+            // rtxt_Total
+            // 
+            this.rtxt_Total.Location = new System.Drawing.Point(242, 52);
+            this.rtxt_Total.Name = "rtxt_Total";
+            this.rtxt_Total.Size = new System.Drawing.Size(411, 118);
+            this.rtxt_Total.TabIndex = 0;
+            this.rtxt_Total.Text = "";
             // 
             // Main
             // 

@@ -1209,9 +1209,15 @@ go
 create function revenue(@month nvarchar(50), @year nvarchar(50))
 returns smallmoney
 begin
+	if(@month != 'None')
+	begin
 	return(select sum(InvoiceTotal) 
 			from Invoices
 			where	FORMAT(CheckOutDate,'MMM', 'en-US') = @month and 
 					year(cast(CheckOutDate as int)) = @year)
+	end
+	return(select sum(InvoiceTotal) 
+		from Invoices
+		where year(cast(CheckOutDate as int)) = @year)
 end
 go
