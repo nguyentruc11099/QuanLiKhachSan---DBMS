@@ -990,41 +990,16 @@ namespace HotelManagement.Presentation_Layer
             panel_Manage.Width = 0;
         }
 
-        private void Button_Redraw_Click(object sender, EventArgs e)
+
+        private void btn_Logout_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+            Environment.Exit(0);
+        }
+
+        private void timer_Redraw_Tick(object sender, EventArgs e)
         {
             DrawRooms();
-        }
-
-        private void btn_Calculate_Click(object sender, EventArgs e)
-        {
-            BLInvoice blI = new BLInvoice();
-            if(cmb_Month.Text == "None")
-            {
-                rtxt_Total.Text = "Total revenues in " + cmb_Year.Text + " is: " + blI.CalculateRevenue(cmb_Month.Text, cmb_Year.Text) + "$";
-            }
-            else rtxt_Total.Text = "Total revenues in " + cmb_Month.Text + ", " + cmb_Year.Text + " is: " + blI.CalculateRevenue(cmb_Month.Text, cmb_Year.Text) + "$";
-        }
-
-        private void btnAnalysis_Click(object sender, EventArgs e)
-        {
-            TabControl_Main.TabPages.Clear();
-            TabControl_Main.TabPages.Add(TabPage_Revenue);
-        }
-
-        private void cmb_Month_TextChanged(object sender, EventArgs e)
-        {
-            if(cmb_Month.Text == "")
-            {
-                cmb_Month.Text = "None";
-            }
-        }
-
-        private void cmb_Year_TextChanged(object sender, EventArgs e)
-        {
-            if (cmb_Year.Text == "")
-            {
-                cmb_Year.Text = "2019";
-            }
         }
     }
 }

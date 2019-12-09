@@ -615,13 +615,13 @@ BEGIN
 	 DECLARE @count INT = (SELECT COUNT(ID)
 	 FROM @InfoColTempTable)
 
-	 DECLARE @delsql AS NVARCHAR(max) = ' if object_id(''sp_Undo_'+@TableName+''') is not null
-	 drop proc sp_Undo_'+@TableName+';';
+	 DECLARE @delsql AS NVARCHAR(max) = ' if object_id(''Undo_'+@TableName+''') is not null
+	 drop table Undo_'+@TableName+';';
 	 PRINT @delsql;
 	 EXEC sp_executesql
 	 @stmt = @delsql;
 
-	 DECLARE @sql AS NVARCHAR(max) = N'create procedure sp_Undo_'+@TableName+char(13)+
+	 DECLARE @sql AS NVARCHAR(max) = N'create procedure Undo_'+@TableName+char(13)+
 	 'as'+char(13)+
 	 'BEGIN'+char(13)+
 	 'SET IDENTITY_INSERT '+@TableName+ ' ON'+char(13)+
@@ -790,13 +790,13 @@ BEGIN
 	 DECLARE @count INT = (SELECT COUNT(ID)
 	 FROM @InfoColTempTable)
 
-	  DECLARE @delsql AS NVARCHAR(max) = ' if object_id(''sp_Redo_'+@TableName+''') is not null
-	 drop proc sp_Redo_'+@TableName+';';
+	 DECLARE @delsql AS NVARCHAR(max) = ' if object_id(''Redo_'+@TableName+''') is not null
+	 drop table Redo_'+@TableName+';';
 	 PRINT @delsql;
 	 EXEC sp_executesql
 	 @stmt = @delsql;
 
-	 DECLARE @sql AS NVARCHAR(max) = N'create procedure sp_Redo_'+@TableName+char(13)+
+	 DECLARE @sql AS NVARCHAR(max) = N'create procedure Redo_'+@TableName+char(13)+
 	 'as'+char(13)+
 	 'BEGIN'+char(13)+
 	 'SET IDENTITY_INSERT '+@TableName+ ' ON'+char(13)+
@@ -1149,8 +1149,8 @@ AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN
-			insert into dbo.Invoices (CustomerID, RoomID, NumberOfDay, EmployeeID, InvoiceTotal, CheckInDate, CheckOutDate,HasPaid)
-				VALUES (@CustomerID, @RoomID, null, @EmployeeID, 0, CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME),NULL,0)
+			insert into dbo.Invoices (CustomerID, RoomID, EmployeeID, InvoiceTotal, CheckInDate, CheckOutDate,HasPaid)
+				VALUES (@CustomerID, @RoomID, null, @EmployeeID, CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME),NULL,0)
 			UPDATE dbo.Rooms SET Status = 1 WHERE RoomID = @RoomID; 
 			
 			IF( EXISTS(SELECT BookingID FROM dbo.Booking WHERE CustomerID=@CustomerID AND RoomID = RoomID))
@@ -1168,6 +1168,75 @@ END
 GO
 
 
+use HotelDB;
+if object_id('fn_RoomPrice') is not null
+	drop FUNCTION fn_RoomPrice;
+go
+create FUNCTION fn_RoomPrice
+	(
+		@RoomID INT = NULL
+	)
+RETURNS Money
+BEGIN
+	DECLARE @startdate AS SMALLDATETIME
+
+	SET @startdate = (SELECT CheckInDate FROM dbo.Invoices WHERE RoomID = @RoomID AND HasPaid = 0);
+
+	DECLARE @Price AS MONEY = ( SELECT c.Price FROM dbo.Invoices a INNER JOIN dbo.Rooms b ON a.RoomID = b.RoomID INNER JOIN dbo.RoomTypes c ON b.RoomTypeID = c.RoomTypeID WHERE a.RoomID = @RoomID AND a.HasPaid = 0); 
+
+	DECLARE @pay AS MONEY = DATEDIFF(day, @startdate,getdate()) * @Price
+
+	RETURN @pay;
+END
+go
+
+
+use HotelDB;
+if object_id('fn_ServicePrice') is not null
+	drop FUNCTION fn_ServicePrice;
+go
+create FUNCTION fn_ServicePrice
+	(
+		@RoomID INT = NULL
+	)
+RETURNS Money
+BEGIN
+	DECLARE @ID AS INT = (SELECT InvoiceID FROM dbo.Invoices WHERE RoomID= @RoomID AND HasPaid = 0);
+	DECLARE @pay AS MONEY =0;
+	SET @pay += (SELECT Sum(Times*Price) AS Price FROM dbo.Invoices_Services INNER JOIN dbo.HotelServices ON HotelServices.ServiceID = Invoices_Services.ServiceID WHERE InvoiceID = @ID);
+	RETURN @pay;
+END
+GO
+
+use HotelDB;
+if object_id('sp_FindInvoiceRoomPrice') is not null
+	drop Proc sp_FindInvoiceRoomPrice;
+go
+create proc sp_FindInvoiceRoomPrice
+(
+	@RoomID INT = NULL
+)
+as
+Begin
+	SELECT a.InvoiceID,a.CustomerID, d.CustomerName, a.CheckInDate,a.CheckOutDate,c.Name,c.Price FROM (SELECT * FROM dbo.Invoices WHERE RoomID = @RoomID AND HasPaid=0) a INNER JOIN dbo.Rooms b ON a.RoomID = b.RoomID INNER JOIN dbo.RoomTypes c ON c.RoomTypeID= b.RoomTypeID INNER JOIN dbo.Customers d ON a.CustomerID = d.CustomerID;
+END
+GO
+
+
+
+use HotelDB;
+if object_id('sp_FindInvoiceServicePrice') is not null
+	drop Proc sp_FindInvoiceServicePrice;
+go
+create proc sp_FindInvoiceServicePrice
+(
+	@RoomID INT = NULL
+)
+as
+Begin
+	SELECT A.InvoiceID,b.ServiceID,c.ServiceName,b.Times, c.Price FROM (SELECT * FROM dbo.Invoices WHERE RoomID= @RoomID AND HasPaid=0) a INNER JOIN dbo.Invoices_Services b ON a.InvoiceID = b.InvoiceID INNER JOIN dbo.HotelServices c ON b.ServiceID = c.ServiceID 
+END
+GO
 
 
 use HotelDB;
@@ -1176,23 +1245,14 @@ if object_id('sp_CheckOut') is not null
 go
 create proc sp_CheckOut
 	(
-		@CustomerID INT = NULL,
-		@RoomID INT = NULL,
-		@EmployeeID INT = NULL 
+		@RoomID INT = NULL
 	)
 AS
 BEGIN
 	BEGIN TRY
-		BEGIN TRAN
-			insert into dbo.Invoices (CustomerID, RoomID, NumberOfDay, EmployeeID, InvoiceTotal, CheckInDate, CheckOutDate,HasPaid)
-				VALUES (@CustomerID, @RoomID, null, @EmployeeID, 0, CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME),NULL,0)
-			UPDATE dbo.Rooms SET Status = 1 WHERE RoomID = @RoomID; 
-			
-			IF( EXISTS(SELECT BookingID FROM dbo.Booking WHERE CustomerID=@CustomerID AND RoomID = RoomID))
-			BEGIN
-				DECLARE @ID AS INT = (SELECT BookingID FROM dbo.Booking WHERE CustomerID=@CustomerID AND RoomID = RoomID); 
-				DELETE dbo.Booking WHERE BookingID = @ID;
-			END 
+		BEGIN TRAN	
+			UPDATE dbo.Invoices SET InvoiceTotal = dbo.fn_RoomPrice(@RoomID) + dbo.fn_ServicePrice(@RoomID), CheckOutDate = CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME), HasPaid = 1 WHERE RoomID = @RoomID AND HasPaid = 0;  
+			UPDATE dbo.Rooms SET Status = 0 WHERE RoomID = @RoomID; 
 		COMMIT TRAN
 	END TRY 
 	BEGIN CATCH
@@ -1201,23 +1261,3 @@ BEGIN
 	END CATCH
 END
 GO
-
-
-if object_id('revenue') is not null
-drop function revenue
-go
-create function revenue(@month nvarchar(50), @year nvarchar(50))
-returns smallmoney
-begin
-	if(@month != 'None')
-	begin
-	return(select sum(InvoiceTotal) 
-			from Invoices
-			where	FORMAT(CheckOutDate,'MMM', 'en-US') = @month and 
-					year(cast(CheckOutDate as int)) = @year)
-	end
-	return(select sum(InvoiceTotal) 
-		from Invoices
-		where year(cast(CheckOutDate as int)) = @year)
-end
-go

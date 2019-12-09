@@ -12,9 +12,13 @@ namespace HotelManagement.BS_Layer
     {
         public System.Data.Linq.Table<Invoice> LoadInvoice()
         {
-            DataSet ds = new DataSet();
             HotelManagementDataContext hm = new HotelManagementDataContext();
             return hm.Invoices;
+        }
+        public System.Collections.Generic.List<sp_FindInvoiceRoomPriceResult> LoadCheckoutInvoiceRoomPrice(int RoomID)
+        {
+            HotelManagementDataContext db = new HotelManagementDataContext();
+            return db.sp_FindInvoiceRoomPrice(RoomID).ToList();
         }
         public bool Checkin(string CustomerID, string RoomID,string EmployeeID)
         {
@@ -29,13 +33,36 @@ namespace HotelManagement.BS_Layer
                 return false;
             }
         }
+        public decimal? CalInvoiceRoomPrice(int RoomID)
+        {
+            HotelManagementDataContext db = new HotelManagementDataContext();
+            return db.fn_RoomPrice(RoomID);
+        }
+        public decimal? CalInvoiceServicePrice(int RoomID)
+        {
+            HotelManagementDataContext db = new HotelManagementDataContext();
+            return db.fn_ServicePrice(RoomID);
+        }
+        public bool Checkout(int RoomID)
+        {
+            try
+            {
+                HotelManagementDataContext db = new HotelManagementDataContext();
+                db.sp_CheckOut(RoomID);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public bool UpdateInvoice(string InvoiceID, string CustomerID, string RoomID, string NumberOfDay, string EmployeeID, string InvoiceTotal, string CheckInDate, string CheckOutDate, bool CheckInvoice)
         {
             try
             {
-                //HotelManagementDataContext db = new HotelManagementDataContext();
-                //db.sp_UpdateInvoice(Convert.ToInt32(InvoiceID), Convert.ToInt32(CustomerID), Convert.ToInt32(RoomID), Convert.ToByte(NumberOfDay), Convert.ToInt32(EmployeeID), Convert.ToDecimal(InvoiceTotal), Convert.ToDateTime(CheckInDate), Convert.ToDateTime(CheckOutDate), CheckInvoice);
-                //db.Invoices.Context.SubmitChanges();
+                HotelManagementDataContext db = new HotelManagementDataContext();
+                db.sp_UpdateInvoices(Convert.ToInt32(InvoiceID), Convert.ToInt32(CustomerID), Convert.ToInt32(RoomID), Convert.ToInt32(EmployeeID), Convert.ToDecimal(InvoiceTotal), Convert.ToDateTime(CheckInDate), Convert.ToDateTime(CheckOutDate), CheckInvoice);
+                db.Invoices.Context.SubmitChanges();
                 return true;
             }
             catch
@@ -56,12 +83,6 @@ namespace HotelManagement.BS_Layer
             {
                 return false;
             }
-        }
-        public decimal CalculateRevenue(string month, string year)
-        {
-            HotelManagementDataContext db = new HotelManagementDataContext();
-            
-            return Convert.ToDecimal(db.revenue(month, year));
         }
     }
 }

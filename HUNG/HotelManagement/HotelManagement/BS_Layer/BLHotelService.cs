@@ -12,9 +12,13 @@ namespace HotelManagement.BS_Layer
     {
         public System.Data.Linq.Table<HotelService> LoadHotelService()
         {
-            DataSet ds = new DataSet();
             HotelManagementDataContext hm = new HotelManagementDataContext();
             return hm.HotelServices;
+        }
+        public System.Collections.Generic.List<sp_FindInvoiceServicePriceResult> LoadCheckOutInvoiceService(int RoomID)
+        {            
+            HotelManagementDataContext db = new HotelManagementDataContext();
+            return db.sp_FindInvoiceServicePrice(RoomID).ToList();
         }
         public bool CreateHotelService(string ServiceName, string Price)
         {

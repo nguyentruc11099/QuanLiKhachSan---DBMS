@@ -81,7 +81,6 @@ CREATE TABLE Invoices
 	InvoiceID INT IDENTITY(1,1) NOT null,
 	CustomerID INT not null,
 	RoomID int not null,
-	NumberOfDay TINYINT NULL,
 	EmployeeID INT not null,
 	InvoiceTotal SMALLMONEY not null,
 	CheckInDate smalldatetime not null,
@@ -194,10 +193,6 @@ ADD CONSTRAINT Check_InvoicesEndDate CHECK (CheckOutDate >= CheckInDate);
 GO
 
 ALTER TABLE dbo.Invoices  
-ADD CONSTRAINT Check_InvoicesNumberOfDay CHECK (NumberOfDay >= 0);
-GO
-
-ALTER TABLE dbo.Invoices  
 ADD CONSTRAINT Check_InvoicesInvoiceTotal CHECK (InvoiceTotal >= 0);
 GO
 
@@ -218,12 +213,12 @@ INSERT INTO dbo.Rooms
     Status
 )
 VALUES
-(1,1,0),
+(1,1,1),
 (1,1,1),
 (1,1,0),
 (2,2,0),
-(2,1,1),
-(2,2,1),
+(2,1,0),
+(2,2,0),
 (2,2,0)
 
 INSERT INTO dbo.EmployeeTypes
@@ -259,16 +254,61 @@ VALUES
 (   N' Huynh Nguyen Xuan Huy','312383206',N'0328342484',N'HCM'  ),
 (   N' Huynh Nguyen Mai Khanh','312383346',N'0323342485',N'HCM'  )
 
+ INSERT INTO dbo.HotelServices
+ (
+     ServiceName,
+     Price
+ )
+ VALUES
+ (   N'Spa', -- ServiceName - nvarchar(20)
+      50000-- Price - smallmoney
+     ),
+ (   N'Food', -- ServiceName - nvarchar(20)
+      20000-- Price - smallmoney
+     )
 
+INSERT INTO dbo.Invoices
+(
+    CustomerID,
+    RoomID,
+    EmployeeID,
+    InvoiceTotal,
+    CheckInDate,
+    CheckOutDate,
+    HasPaid
+)
+VALUES
+(   1,                     -- CustomerID - int
+    2,                     -- RoomID - int
+    1000,                     -- EmployeeID - int
+    0,                  -- InvoiceTotal - smallmoney
+    '2019-12-08 12:00:30', -- CheckInDate - smalldatetime
+    '2019-12-12 12:00:30', -- CheckOutDate - smalldatetime
+    0                   -- HasPaid - bit
+    ),
+(   1,                     -- CustomerID - int
+    1,                     -- RoomID - int
+    1000,                     -- EmployeeID - int
+    0,                  -- InvoiceTotal - smallmoney
+    '2019-12-08 12:00:30', -- CheckInDate - smalldatetime
+    '2019-12-15 12:00:30', -- CheckOutDate - smalldatetime
+    0                   -- HasPaid - bit
+ )
 
-drop function revenue
-go
-create function revenue(@month int, @year int)
-returns smallmoney
-begin
-	return(select sum(InvoiceTotal) 
-			from Invoices
-			where	month(cast(CheckOutDate as int)) = @month and 
-					year(cast(CheckOutDate as int)) = @year)
-end
-go
+INSERT INTO dbo.Invoices_Services
+(
+    InvoiceID,
+    ServiceID,
+    Times
+)
+VALUES
+(   2, -- InvoiceID - int
+    1, -- ServiceID - int
+    2  -- Times - int
+    ),
+(   
+	2, -- InvoiceID - int
+	2, -- ServiceID - int
+	1  -- Times - int
+)
+

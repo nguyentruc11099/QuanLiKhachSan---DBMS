@@ -161,6 +161,20 @@ namespace HotelManagement
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Booking")]
+		public int sp_Booking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppoinmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appoinmentDate)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, appoinmentDate);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateRoomTypes")]
+		public int sp_UpdateRoomTypes([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomTypeID", DbType="TinyInt")] System.Nullable<byte> roomTypeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Name", DbType="NVarChar(100)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Price", DbType="SmallMoney")] System.Nullable<decimal> price)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomTypeID, name, price);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CheckIn")]
 		public int sp_CheckIn([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeID", DbType="Int")] System.Nullable<int> employeeID)
 		{
@@ -168,17 +182,17 @@ namespace HotelManagement
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Redo_RoomTypes")]
-		public int sp_Redo_RoomTypes()
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CheckOut")]
+		public int sp_CheckOut([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID);
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CheckOut")]
-		public int sp_CheckOut([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeID", DbType="Int")] System.Nullable<int> employeeID)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create")]
+		public int sp_Create([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(30)")] string tableName)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, employeeID);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -196,22 +210,22 @@ namespace HotelManagement
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Create", IsComposable=true)]
-		public object sp_Create_Trigger_Create([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Create")]
+		public void sp_Create_Trigger_Create([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
 		{
-			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName).ReturnValue));
+			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Delete", IsComposable=true)]
-		public object sp_Create_Trigger_Delete([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Delete")]
+		public void sp_Create_Trigger_Delete([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
 		{
-			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName).ReturnValue));
+			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Update", IsComposable=true)]
-		public object sp_Create_Trigger_Update([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Update")]
+		public void sp_Create_Trigger_Update([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
 		{
-			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName).ReturnValue));
+			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Undo")]
@@ -264,9 +278,9 @@ namespace HotelManagement
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CreateInvoices")]
-		public int sp_CreateInvoices([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumberOfDay", DbType="TinyInt")] System.Nullable<byte> numberOfDay, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeID", DbType="Int")] System.Nullable<int> employeeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="InvoiceTotal", DbType="SmallMoney")] System.Nullable<decimal> invoiceTotal, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CheckInDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> checkInDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CheckOutDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> checkOutDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="HasPaid", DbType="Bit")] System.Nullable<bool> hasPaid)
+		public int sp_CreateInvoices([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeID", DbType="Int")] System.Nullable<int> employeeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="InvoiceTotal", DbType="SmallMoney")] System.Nullable<decimal> invoiceTotal, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CheckInDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> checkInDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CheckOutDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> checkOutDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="HasPaid", DbType="Bit")] System.Nullable<bool> hasPaid)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, numberOfDay, employeeID, invoiceTotal, checkInDate, checkOutDate, hasPaid);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, employeeID, invoiceTotal, checkInDate, checkOutDate, hasPaid);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -288,6 +302,13 @@ namespace HotelManagement
 		public int sp_CreateRoomTypes([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Name", DbType="NVarChar(100)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Price", DbType="SmallMoney")] System.Nullable<decimal> price)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), name, price);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Delete")]
+		public int sp_Delete([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(30)")] string tableName)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -368,6 +389,13 @@ namespace HotelManagement
 			return ((ISingleResult<sp_FindEmployeeResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_FindInvoiceServicePrice")]
+		public ISingleResult<sp_FindInvoiceServicePriceResult> sp_FindInvoiceServicePrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID);
+			return ((ISingleResult<sp_FindInvoiceServicePriceResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_FindRoom")]
 		public ISingleResult<sp_FindRoomResult> sp_FindRoom([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
 		{
@@ -438,17 +466,17 @@ namespace HotelManagement
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateRoomTypes")]
-		public int sp_UpdateRoomTypes([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomTypeID", DbType="TinyInt")] System.Nullable<byte> roomTypeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Name", DbType="NVarChar(100)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Price", DbType="SmallMoney")] System.Nullable<decimal> price)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Redo_RoomTypes")]
+		public int sp_Redo_RoomTypes()
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomTypeID, name, price);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SearchCustomer", IsComposable=true)]
-		public object sp_SearchCustomer([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerName", DbType="NVarChar(30)")] string customerName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdentityCard", DbType="VarChar(9)")] string identityCard)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SearchCustomer")]
+		public void sp_SearchCustomer([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerName", DbType="NVarChar(30)")] string customerName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdentityCard", DbType="VarChar(9)")] string identityCard)
 		{
-			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerName, identityCard).ReturnValue));
+			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerName, identityCard);
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Undo_Booking")]
@@ -514,6 +542,13 @@ namespace HotelManagement
 			return ((int)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Update")]
+		public int sp_Update([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(30)")] string tableName)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateBooking")]
 		public int sp_UpdateBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="BookingID", DbType="Int")] System.Nullable<int> bookingID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppoinmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appoinmentDate)
 		{
@@ -550,9 +585,9 @@ namespace HotelManagement
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateInvoices")]
-		public int sp_UpdateInvoices([global::System.Data.Linq.Mapping.ParameterAttribute(Name="InvoiceID", DbType="Int")] System.Nullable<int> invoiceID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumberOfDay", DbType="TinyInt")] System.Nullable<byte> numberOfDay, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeID", DbType="Int")] System.Nullable<int> employeeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="InvoiceTotal", DbType="SmallMoney")] System.Nullable<decimal> invoiceTotal, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CheckInDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> checkInDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CheckOutDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> checkOutDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="HasPaid", DbType="Bit")] System.Nullable<bool> hasPaid)
+		public int sp_UpdateInvoices([global::System.Data.Linq.Mapping.ParameterAttribute(Name="InvoiceID", DbType="Int")] System.Nullable<int> invoiceID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeID", DbType="Int")] System.Nullable<int> employeeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="InvoiceTotal", DbType="SmallMoney")] System.Nullable<decimal> invoiceTotal, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CheckInDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> checkInDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CheckOutDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> checkOutDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="HasPaid", DbType="Bit")] System.Nullable<bool> hasPaid)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), invoiceID, customerID, roomID, numberOfDay, employeeID, invoiceTotal, checkInDate, checkOutDate, hasPaid);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), invoiceID, customerID, roomID, employeeID, invoiceTotal, checkInDate, checkOutDate, hasPaid);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -570,10 +605,16 @@ namespace HotelManagement
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_FindBooking", IsComposable=true)]
-		public IQueryable<fn_FindBookingResult> fn_FindBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_ServicePrice", IsComposable=true)]
+		public System.Nullable<decimal> fn_ServicePrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
 		{
-			return this.CreateMethodCallQuery<fn_FindBookingResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID);
+			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_RoomPrice", IsComposable=true)]
+		public System.Nullable<decimal> fn_RoomPrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
+		{
+			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_LoginEmployee", IsComposable=true)]
@@ -582,38 +623,17 @@ namespace HotelManagement
 			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), account, password, employeeType).ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Booking")]
-		public int sp_Booking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppoinmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appoinmentDate)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_FindBooking", IsComposable=true)]
+		public IQueryable<fn_FindBookingResult> fn_FindBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, appoinmentDate);
-			return ((int)(result.ReturnValue));
+			return this.CreateMethodCallQuery<fn_FindBookingResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID);
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Delete")]
-		public int sp_Delete([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(30)")] string tableName)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_FindInvoiceRoomPrice")]
+		public ISingleResult<sp_FindInvoiceRoomPriceResult> sp_FindInvoiceRoomPrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create")]
-		public int sp_Create([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(30)")] string tableName)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Update")]
-		public int sp_Update([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(30)")] string tableName)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.revenue", IsComposable=true)]
-		public System.Nullable<decimal> revenue([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string month, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string year)
-		{
-			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), month, year).ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID);
+			return ((ISingleResult<sp_FindInvoiceRoomPriceResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -1562,8 +1582,6 @@ namespace HotelManagement
 		
 		private int _RoomID;
 		
-		private System.Nullable<byte> _NumberOfDay;
-		
 		private int _EmployeeID;
 		
 		private decimal _InvoiceTotal;
@@ -1592,8 +1610,6 @@ namespace HotelManagement
     partial void OnCustomerIDChanged();
     partial void OnRoomIDChanging(int value);
     partial void OnRoomIDChanged();
-    partial void OnNumberOfDayChanging(System.Nullable<byte> value);
-    partial void OnNumberOfDayChanged();
     partial void OnEmployeeIDChanging(int value);
     partial void OnEmployeeIDChanged();
     partial void OnInvoiceTotalChanging(decimal value);
@@ -1679,26 +1695,6 @@ namespace HotelManagement
 					this._RoomID = value;
 					this.SendPropertyChanged("RoomID");
 					this.OnRoomIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberOfDay", DbType="TinyInt")]
-		public System.Nullable<byte> NumberOfDay
-		{
-			get
-			{
-				return this._NumberOfDay;
-			}
-			set
-			{
-				if ((this._NumberOfDay != value))
-				{
-					this.OnNumberOfDayChanging(value);
-					this.SendPropertyChanging();
-					this._NumberOfDay = value;
-					this.SendPropertyChanged("NumberOfDay");
-					this.OnNumberOfDayChanged();
 				}
 			}
 		}
@@ -2736,6 +2732,104 @@ namespace HotelManagement
 		}
 	}
 	
+	public partial class sp_FindInvoiceServicePriceResult
+	{
+		
+		private int _InvoiceID;
+		
+		private int _ServiceID;
+		
+		private string _ServiceName;
+		
+		private System.Nullable<int> _Times;
+		
+		private decimal _Price;
+		
+		public sp_FindInvoiceServicePriceResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceID", DbType="Int NOT NULL")]
+		public int InvoiceID
+		{
+			get
+			{
+				return this._InvoiceID;
+			}
+			set
+			{
+				if ((this._InvoiceID != value))
+				{
+					this._InvoiceID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceID", DbType="Int NOT NULL")]
+		public int ServiceID
+		{
+			get
+			{
+				return this._ServiceID;
+			}
+			set
+			{
+				if ((this._ServiceID != value))
+				{
+					this._ServiceID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceName", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string ServiceName
+		{
+			get
+			{
+				return this._ServiceName;
+			}
+			set
+			{
+				if ((this._ServiceName != value))
+				{
+					this._ServiceName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Times", DbType="Int")]
+		public System.Nullable<int> Times
+		{
+			get
+			{
+				return this._Times;
+			}
+			set
+			{
+				if ((this._Times != value))
+				{
+					this._Times = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="SmallMoney NOT NULL")]
+		public decimal Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this._Price = value;
+				}
+			}
+		}
+	}
+	
 	public partial class sp_FindRoomResult
 	{
 		
@@ -3007,6 +3101,140 @@ namespace HotelManagement
 				if ((this._RoomID != value))
 				{
 					this._RoomID = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_FindInvoiceRoomPriceResult
+	{
+		
+		private int _InvoiceID;
+		
+		private int _CustomerID;
+		
+		private string _CustomerName;
+		
+		private System.DateTime _CheckInDate;
+		
+		private System.Nullable<System.DateTime> _CheckOutDate;
+		
+		private string _Name;
+		
+		private decimal _Price;
+		
+		public sp_FindInvoiceRoomPriceResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceID", DbType="Int NOT NULL")]
+		public int InvoiceID
+		{
+			get
+			{
+				return this._InvoiceID;
+			}
+			set
+			{
+				if ((this._InvoiceID != value))
+				{
+					this._InvoiceID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string CustomerName
+		{
+			get
+			{
+				return this._CustomerName;
+			}
+			set
+			{
+				if ((this._CustomerName != value))
+				{
+					this._CustomerName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckInDate", DbType="SmallDateTime NOT NULL")]
+		public System.DateTime CheckInDate
+		{
+			get
+			{
+				return this._CheckInDate;
+			}
+			set
+			{
+				if ((this._CheckInDate != value))
+				{
+					this._CheckInDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckOutDate", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> CheckOutDate
+		{
+			get
+			{
+				return this._CheckOutDate;
+			}
+			set
+			{
+				if ((this._CheckOutDate != value))
+				{
+					this._CheckOutDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="SmallMoney NOT NULL")]
+		public decimal Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this._Price = value;
 				}
 			}
 		}

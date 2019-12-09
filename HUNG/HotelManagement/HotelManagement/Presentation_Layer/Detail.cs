@@ -41,15 +41,16 @@ namespace HotelManagement.Presentation_Layer
                         Button_Checkin.Enabled = false;
                         tabControl_Main.TabPages.Clear();
                         tabControl_Main.TabPages.Add(tabPage_CheckOut);
+                        InitializerCheckout();
                         break;
                     }
                 case 2:
                     {
                         Button_Booking.Enabled = false;
                         Button_Checkout.Enabled = false;
-                        InitializerCheckin();
                         tabControl_Main.TabPages.Clear();
                         tabControl_Main.TabPages.Add(tabPage_Checkin);
+                        InitializerCheckin();
                         break;
                     }
             }
@@ -340,17 +341,48 @@ namespace HotelManagement.Presentation_Layer
 
         private void Checkout_Button_Confirm_Click(object sender, EventArgs e)
         {
-
+            BS_Layer.BLInvoice bl = new BS_Layer.BLInvoice();
+            if(bl.Checkout(this.Room_ID)==true)
+            {
+                MessageBox.Show("Successfully");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Failed");
+            }
         }
         private void InitializerCheckout()
         {
             this.DateTimePicker_AppointmentDate.MinDate = DateTime.Today;
-
-            LoadCustomerDataBookingTable();
-            
+            LoadInvoiceRoom();
+            LoadInvoiceService();
+            BS_Layer.BLInvoice bl = new BS_Layer.BLInvoice();
+            this.TextBox_RoomPrice.Text = bl.CalInvoiceRoomPrice(this.Room_ID).ToString();
+            this.TextBox_ServicePrice.Text = bl.CalInvoiceServicePrice(this.Room_ID).ToString();
+        }
+        private void LoadInvoiceRoom()
+        {
+            BS_Layer.BLInvoice bl = new BS_Layer.BLInvoice();
+            var Temp = bl.LoadCheckoutInvoiceRoomPrice(this.Room_ID);
+            Checkout_Datagridview_Invoice.Rows[0].Cells[0].Value = Temp.ElementAt(0).InvoiceID;
+            Checkout_Datagridview_Invoice.Rows[0].Cells[1].Value = Temp.ElementAt(0).CustomerName;
+            Checkout_Datagridview_Invoice.Rows[0].Cells[2].Value = Temp.ElementAt(0).CheckInDate;
+            Checkout_Datagridview_Invoice.Rows[0].Cells[3].Value = Temp.ElementAt(0).CheckOutDate;
+            Checkout_Datagridview_Invoice.Rows[0].Cells[4].Value = Temp.ElementAt(0).Name;
+            Checkout_Datagridview_Invoice.Rows[0].Cells[5].Value = Temp.ElementAt(0).Price;
+        }
+        private void LoadInvoiceService()
+        {
+            BS_Layer.BLHotelService bl = new BS_Layer.BLHotelService();
+            var Temp = bl.LoadCheckOutInvoiceService(this.Room_ID);
+            Checkout_Datagridview_Services.Rows[0].Cells[0].Value = Temp.ElementAt(0).InvoiceID;
+            Checkout_Datagridview_Services.Rows[0].Cells[1].Value = Temp.ElementAt(0).ServiceID;
+            Checkout_Datagridview_Services.Rows[0].Cells[2].Value = Temp.ElementAt(0).ServiceName;
+            Checkout_Datagridview_Services.Rows[0].Cells[3].Value = Temp.ElementAt(0).Times;
+            Checkout_Datagridview_Services.Rows[0].Cells[4].Value = Temp.ElementAt(0).Price;
         }
         #endregion
-
     }
 }
 

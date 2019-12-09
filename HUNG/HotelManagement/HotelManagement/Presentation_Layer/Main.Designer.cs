@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel_Navigation = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lbl_Permision = new System.Windows.Forms.Label();
             this.lbl_UserName = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btn_Logout = new System.Windows.Forms.Button();
-            this.btnGrade = new System.Windows.Forms.Button();
             this.btnAnalysis = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_Manage = new System.Windows.Forms.Button();
@@ -125,7 +125,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.dgv_Employee = new System.Windows.Forms.DataGridView();
             this.tabPage_DefaultScreen = new System.Windows.Forms.TabPage();
-            this.Button_Redraw = new System.Windows.Forms.Button();
             this.Panel_ListRoom = new System.Windows.Forms.Panel();
             this.TabPage_Service = new System.Windows.Forms.TabPage();
             this.txt_Service_ServiceID = new System.Windows.Forms.TextBox();
@@ -213,11 +212,7 @@
             this.label44 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.dgv_InvoiceService = new System.Windows.Forms.DataGridView();
-            this.TabPage_Revenue = new System.Windows.Forms.TabPage();
-            this.btn_Calculate = new System.Windows.Forms.Button();
-            this.cmb_Year = new System.Windows.Forms.ComboBox();
-            this.cmb_Month = new System.Windows.Forms.ComboBox();
-            this.rtxt_Total = new System.Windows.Forms.RichTextBox();
+            this.timer_Redraw = new System.Windows.Forms.Timer(this.components);
             this.panel_Navigation.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -244,7 +239,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_EmployeeType)).BeginInit();
             this.TabPage_Invoice_Service.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_InvoiceService)).BeginInit();
-            this.TabPage_Revenue.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_Navigation
@@ -252,7 +246,6 @@
             this.panel_Navigation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
             this.panel_Navigation.Controls.Add(this.panel3);
             this.panel_Navigation.Controls.Add(this.btn_Logout);
-            this.panel_Navigation.Controls.Add(this.btnGrade);
             this.panel_Navigation.Controls.Add(this.btnAnalysis);
             this.panel_Navigation.Controls.Add(this.pictureBox1);
             this.panel_Navigation.Controls.Add(this.btn_Manage);
@@ -297,6 +290,7 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.Image = global::HotelManagement.Properties.Resources.icons8_customer_30px;
             this.pictureBox2.Location = new System.Drawing.Point(12, 3);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(39, 38);
@@ -310,26 +304,13 @@
             this.btn_Logout.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Logout.ForeColor = System.Drawing.Color.White;
             this.btn_Logout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Logout.Location = new System.Drawing.Point(2, 629);
+            this.btn_Logout.Location = new System.Drawing.Point(6, 553);
             this.btn_Logout.Name = "btn_Logout";
             this.btn_Logout.Size = new System.Drawing.Size(227, 70);
             this.btn_Logout.TabIndex = 9;
             this.btn_Logout.Text = "Logout";
             this.btn_Logout.UseVisualStyleBackColor = false;
-            // 
-            // btnGrade
-            // 
-            this.btnGrade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(166)))), ((int)(((byte)(90)))));
-            this.btnGrade.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGrade.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGrade.ForeColor = System.Drawing.Color.White;
-            this.btnGrade.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGrade.Location = new System.Drawing.Point(2, 477);
-            this.btnGrade.Name = "btnGrade";
-            this.btnGrade.Size = new System.Drawing.Size(227, 70);
-            this.btnGrade.TabIndex = 5;
-            this.btnGrade.Text = "Grade";
-            this.btnGrade.UseVisualStyleBackColor = false;
+            this.btn_Logout.Click += new System.EventHandler(this.btn_Logout_Click);
             // 
             // btnAnalysis
             // 
@@ -338,13 +319,12 @@
             this.btnAnalysis.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAnalysis.ForeColor = System.Drawing.Color.White;
             this.btnAnalysis.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAnalysis.Location = new System.Drawing.Point(2, 553);
+            this.btnAnalysis.Location = new System.Drawing.Point(2, 477);
             this.btnAnalysis.Name = "btnAnalysis";
             this.btnAnalysis.Size = new System.Drawing.Size(227, 70);
             this.btnAnalysis.TabIndex = 4;
             this.btnAnalysis.Text = "Analysis ";
             this.btnAnalysis.UseVisualStyleBackColor = false;
-            this.btnAnalysis.Click += new System.EventHandler(this.btnAnalysis_Click);
             // 
             // pictureBox1
             // 
@@ -405,12 +385,14 @@
             // 
             // Button_Hide
             // 
-            this.Button_Hide.Location = new System.Drawing.Point(170, 31);
+            this.Button_Hide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(166)))), ((int)(((byte)(90)))));
+            this.Button_Hide.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Button_Hide.Location = new System.Drawing.Point(170, 21);
             this.Button_Hide.Name = "Button_Hide";
             this.Button_Hide.Size = new System.Drawing.Size(75, 23);
             this.Button_Hide.TabIndex = 15;
             this.Button_Hide.Text = "HIDE";
-            this.Button_Hide.UseVisualStyleBackColor = true;
+            this.Button_Hide.UseVisualStyleBackColor = false;
             this.Button_Hide.Click += new System.EventHandler(this.Button_Hide_Click);
             // 
             // btn_InvoiceService
@@ -420,7 +402,7 @@
             this.btn_InvoiceService.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_InvoiceService.ForeColor = System.Drawing.Color.White;
             this.btn_InvoiceService.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_InvoiceService.Location = new System.Drawing.Point(29, 716);
+            this.btn_InvoiceService.Location = new System.Drawing.Point(18, 716);
             this.btn_InvoiceService.Name = "btn_InvoiceService";
             this.btn_InvoiceService.Size = new System.Drawing.Size(227, 70);
             this.btn_InvoiceService.TabIndex = 14;
@@ -435,7 +417,7 @@
             this.btn_EmployeeType.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_EmployeeType.ForeColor = System.Drawing.Color.White;
             this.btn_EmployeeType.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_EmployeeType.Location = new System.Drawing.Point(25, 640);
+            this.btn_EmployeeType.Location = new System.Drawing.Point(18, 640);
             this.btn_EmployeeType.Name = "btn_EmployeeType";
             this.btn_EmployeeType.Size = new System.Drawing.Size(227, 70);
             this.btn_EmployeeType.TabIndex = 13;
@@ -495,7 +477,7 @@
             this.btn_Employee.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Employee.ForeColor = System.Drawing.Color.White;
             this.btn_Employee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Employee.Location = new System.Drawing.Point(25, 336);
+            this.btn_Employee.Location = new System.Drawing.Point(18, 336);
             this.btn_Employee.Name = "btn_Employee";
             this.btn_Employee.Size = new System.Drawing.Size(227, 70);
             this.btn_Employee.TabIndex = 7;
@@ -540,7 +522,7 @@
             this.btn_Room.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Room.ForeColor = System.Drawing.Color.White;
             this.btn_Room.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Room.Location = new System.Drawing.Point(18, 104);
+            this.btn_Room.Location = new System.Drawing.Point(18, 108);
             this.btn_Room.Name = "btn_Room";
             this.btn_Room.Size = new System.Drawing.Size(227, 70);
             this.btn_Room.TabIndex = 4;
@@ -570,7 +552,6 @@
             this.TabControl_Main.Controls.Add(this.TabPage_Booking);
             this.TabControl_Main.Controls.Add(this.TabPage_EmployeeType);
             this.TabControl_Main.Controls.Add(this.TabPage_Invoice_Service);
-            this.TabControl_Main.Controls.Add(this.TabPage_Revenue);
             this.TabControl_Main.Dock = System.Windows.Forms.DockStyle.Left;
             this.TabControl_Main.Location = new System.Drawing.Point(0, 0);
             this.TabControl_Main.Name = "TabControl_Main";
@@ -1273,7 +1254,6 @@
             // 
             // tabPage_DefaultScreen
             // 
-            this.tabPage_DefaultScreen.Controls.Add(this.Button_Redraw);
             this.tabPage_DefaultScreen.Controls.Add(this.Panel_ListRoom);
             this.tabPage_DefaultScreen.Location = new System.Drawing.Point(4, 4);
             this.tabPage_DefaultScreen.Name = "tabPage_DefaultScreen";
@@ -1282,21 +1262,11 @@
             this.tabPage_DefaultScreen.Text = "Default Screen";
             this.tabPage_DefaultScreen.UseVisualStyleBackColor = true;
             // 
-            // Button_Redraw
-            // 
-            this.Button_Redraw.Location = new System.Drawing.Point(680, 70);
-            this.Button_Redraw.Name = "Button_Redraw";
-            this.Button_Redraw.Size = new System.Drawing.Size(75, 23);
-            this.Button_Redraw.TabIndex = 16;
-            this.Button_Redraw.Text = "Reset";
-            this.Button_Redraw.UseVisualStyleBackColor = true;
-            this.Button_Redraw.Click += new System.EventHandler(this.Button_Redraw_Click);
-            // 
             // Panel_ListRoom
             // 
-            this.Panel_ListRoom.Location = new System.Drawing.Point(66, 372);
+            this.Panel_ListRoom.Location = new System.Drawing.Point(66, 180);
             this.Panel_ListRoom.Name = "Panel_ListRoom";
-            this.Panel_ListRoom.Size = new System.Drawing.Size(1115, 466);
+            this.Panel_ListRoom.Size = new System.Drawing.Size(1174, 658);
             this.Panel_ListRoom.TabIndex = 0;
             // 
             // TabPage_Service
@@ -2111,83 +2081,11 @@
             this.dgv_InvoiceService.Size = new System.Drawing.Size(960, 400);
             this.dgv_InvoiceService.TabIndex = 53;
             // 
-            // TabPage_Revenue
+            // timer_Redraw
             // 
-            this.TabPage_Revenue.Controls.Add(this.btn_Calculate);
-            this.TabPage_Revenue.Controls.Add(this.cmb_Year);
-            this.TabPage_Revenue.Controls.Add(this.cmb_Month);
-            this.TabPage_Revenue.Controls.Add(this.rtxt_Total);
-            this.TabPage_Revenue.Location = new System.Drawing.Point(4, 4);
-            this.TabPage_Revenue.Name = "TabPage_Revenue";
-            this.TabPage_Revenue.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Revenue.Size = new System.Drawing.Size(1366, 867);
-            this.TabPage_Revenue.TabIndex = 12;
-            this.TabPage_Revenue.Text = "Revenue";
-            this.TabPage_Revenue.UseVisualStyleBackColor = true;
-            // 
-            // btn_Calculate
-            // 
-            this.btn_Calculate.Location = new System.Drawing.Point(724, 100);
-            this.btn_Calculate.Name = "btn_Calculate";
-            this.btn_Calculate.Size = new System.Drawing.Size(75, 23);
-            this.btn_Calculate.TabIndex = 3;
-            this.btn_Calculate.Text = "Calculate";
-            this.btn_Calculate.UseVisualStyleBackColor = true;
-            this.btn_Calculate.Click += new System.EventHandler(this.btn_Calculate_Click);
-            // 
-            // cmb_Year
-            // 
-            this.cmb_Year.FormattingEnabled = true;
-            this.cmb_Year.Items.AddRange(new object[] {
-            "2010",
-            "2011",
-            "2012",
-            "2013",
-            "2014",
-            "2015",
-            "2016",
-            "2017",
-            "2018",
-            "2019",
-            "2020",
-            "2021"});
-            this.cmb_Year.Location = new System.Drawing.Point(814, 52);
-            this.cmb_Year.Name = "cmb_Year";
-            this.cmb_Year.Size = new System.Drawing.Size(95, 21);
-            this.cmb_Year.TabIndex = 2;
-            this.cmb_Year.Text = "2019";
-            this.cmb_Year.TextChanged += new System.EventHandler(this.cmb_Year_TextChanged);
-            // 
-            // cmb_Month
-            // 
-            this.cmb_Month.FormattingEnabled = true;
-            this.cmb_Month.Items.AddRange(new object[] {
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December"});
-            this.cmb_Month.Location = new System.Drawing.Point(723, 52);
-            this.cmb_Month.Name = "cmb_Month";
-            this.cmb_Month.Size = new System.Drawing.Size(76, 21);
-            this.cmb_Month.TabIndex = 1;
-            this.cmb_Month.Text = "None";
-            this.cmb_Month.TextChanged += new System.EventHandler(this.cmb_Month_TextChanged);
-            // 
-            // rtxt_Total
-            // 
-            this.rtxt_Total.Location = new System.Drawing.Point(242, 52);
-            this.rtxt_Total.Name = "rtxt_Total";
-            this.rtxt_Total.Size = new System.Drawing.Size(411, 118);
-            this.rtxt_Total.TabIndex = 0;
-            this.rtxt_Total.Text = "";
+            this.timer_Redraw.Enabled = true;
+            this.timer_Redraw.Interval = 30000;
+            this.timer_Redraw.Tick += new System.EventHandler(this.timer_Redraw_Tick);
             // 
             // Main
             // 
@@ -2237,7 +2135,6 @@
             this.TabPage_Invoice_Service.ResumeLayout(false);
             this.TabPage_Invoice_Service.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_InvoiceService)).EndInit();
-            this.TabPage_Revenue.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2250,7 +2147,6 @@
         private System.Windows.Forms.Label lbl_UserName;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btn_Logout;
-        private System.Windows.Forms.Button btnGrade;
         private System.Windows.Forms.Button btnAnalysis;
         private System.Windows.Forms.Button btn_Manage;
         private System.Windows.Forms.Button btnDashboard;
@@ -2428,12 +2324,7 @@
         private System.Windows.Forms.DataGridView dgv_InvoiceService;
         private System.Windows.Forms.Button btn_Create_Invoice;
         private System.Windows.Forms.Button btn_Create_Booking;
-        private System.Windows.Forms.Button Button_Redraw;
-        private System.Windows.Forms.TabPage TabPage_Revenue;
-        private System.Windows.Forms.Button btn_Calculate;
-        private System.Windows.Forms.ComboBox cmb_Year;
-        private System.Windows.Forms.ComboBox cmb_Month;
-        private System.Windows.Forms.RichTextBox rtxt_Total;
+        private System.Windows.Forms.Timer timer_Redraw;
     }
 }
 
