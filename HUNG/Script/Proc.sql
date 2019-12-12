@@ -1,4 +1,7 @@
-﻿if object_id('sp_Create') is not null
+﻿use HotelDB
+go
+
+if object_id('sp_Create') is not null
 drop proc sp_Create
 go
 create proc sp_Create
@@ -999,7 +1002,6 @@ END
 go
  
 
-
 -- FindRoom
 use HotelDB;
 if object_id('sp_FindRoom') is not null
@@ -1040,7 +1042,6 @@ BEGIN
 	SELECT @id
 END
 go
-
 
 -- Find Employee
 use HotelDB;
@@ -1249,19 +1250,19 @@ begin
 end
 go
 
---
+
 use HotelDB;
-if object_id('sp_Revenue3Month') is not null
-drop Proc sp_Revenue3Month
+if object_id('sp_Revenue5Month') is not null
+drop Proc sp_Revenue5Month
 go
-create Proc sp_Revenue3Month
+create Proc sp_Revenue5Month
 AS
 begin
 	DECLARE @month as nvarchar(20) = month(cast(getdate() as nvarchar(50)));
 	DECLARE @year as int = year(cast(getdate() as nvarchar(50)));
 	DECLARE @TempTable TABLE (ID INT identity(1,1) PRIMARY KEY, [Month] int, Revenue decimal);
 	Declare @cnt INT = 0;
-		If(@month<=2)
+		If(@month<=4)
 		begin 
 			while @cnt < @month
 			begin
@@ -1274,7 +1275,7 @@ begin
 		end
 		else 
 		begin
-			while @cnt < 3
+			while @cnt < 5
 			begin
 				INSERT INTO @TempTable
 				SELECT (@month-@cnt) as Month, SUM(InvoiceTotal) as Total 			 
@@ -1287,4 +1288,36 @@ begin
 end
 go
 
-Exec sp_Revenue3Month
+
+USE HotelDB;
+IF OBJECT_ID(N'dbo.sp_SearchCustomer', N'P') IS NOT NULL DROP PROC dbo.sp_SearchCustomer;
+GO
+CREATE PROC dbo.sp_SearchCustomer
+(
+	@CustomerName AS nvarchar(30) = NULL,
+	@IdentityCard AS nvarchar(10) = NULL
+)
+AS
+BEGIN
+	if @CustomerName is not null
+	SET @CustomerName = @CustomerName + '%';
+
+	if @IdentityCard is not null
+	SET @IdentityCard = @IdentityCard + '%'
+
+	DECLARE @sql AS NVARCHAR(1000);
+	SET @sql =
+	N'SELECT *'
+	+ N' FROM dbo.Customers where 1=1 '
+	+ CASE WHEN @CustomerName IS NOT NULL THEN
+	N'AND CustomerName like @cna ' ELSE N'' END
+	+ CASE WHEN @IdentityCard IS NOT NULL THEN
+	N'AND IdentityCard like @cid ' ELSE N'' END
+	print @sql;
+	EXEC sp_executesql
+	@stmt = @sql,
+	@params = N'@cna AS nvarchar(30), @cid AS nvarchar(10)',
+	@cna = @CustomerName,
+	@cid = @IdentityCard
+END
+GO

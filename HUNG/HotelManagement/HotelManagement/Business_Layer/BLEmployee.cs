@@ -16,7 +16,7 @@ namespace HotelManagement.BS_Layer
             HotelManagementDataContext db = new HotelManagementDataContext();
             return db.sp_LoginEmployee(Account, Password, Convert.ToByte(Type)).ElementAt(0).Column1;
         }
-        public System.Collections.Generic.List<HotelManagement.sp_FindEmployeeResult> FindEmployee(int? ID)
+        public System.Collections.Generic.List<HotelManagement.Data_Layer.sp_FindEmployeeResult> FindEmployee(int? ID)
         {
             HotelManagementDataContext db = new HotelManagementDataContext();
             return db.sp_FindEmployee(ID).ToList();

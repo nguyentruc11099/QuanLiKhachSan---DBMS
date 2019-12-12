@@ -82,15 +82,15 @@ namespace HotelManagement.Presentation_Layer
         }
         private void Booking_Button_ChooseCustomer_Click(object sender, EventArgs e)
         {
-            int r = Booking_DGV_ListOfCustomer.CurrentCell.RowIndex;
-            if (r > Booking_DGV_ListOfCustomer.Rows.Count - 2)
+            int r = Booking_Datagridview_ListOfCustomer.CurrentCell.RowIndex;
+            if (r > Booking_Datagridview_ListOfCustomer.Rows.Count - 2)
             {
                 return;
             }
             else
             {
-                Booking_DataGridView_DetailOfBooking.Rows[0].Cells[0].Value = Booking_DGV_ListOfCustomer.Rows[r].Cells[0].Value;
-                Booking_DataGridView_DetailOfBooking.Rows[0].Cells[1].Value = Booking_DGV_ListOfCustomer.Rows[r].Cells[1].Value;
+                Booking_DataGridView_DetailOfBooking.Rows[0].Cells[0].Value = Booking_Datagridview_ListOfCustomer.Rows[r].Cells[0].Value;
+                Booking_DataGridView_DetailOfBooking.Rows[0].Cells[1].Value = Booking_Datagridview_ListOfCustomer.Rows[r].Cells[1].Value;
             }
         }
         private void Booking_Button_Back_Click(object sender, EventArgs e)
@@ -118,35 +118,12 @@ namespace HotelManagement.Presentation_Layer
                 MessageBox.Show("Have some emty information ");
             }
         }
-        private void SearchKH_TextBox_TextChanged(object sender, EventArgs e)
-        {
-            string column;
-            switch (Booking_Combobox_Search.Text)
-            {
-                case "Customer Name":
-                    {
-                        column = "CustomerName";
-                        break;
-                    }
-                case "Identity Card":
-                    {
-                        column = "IdentityCard";
-                        break;
-                    }
-                default:
-                    {
-                        return;
-                    }
-            }
-            //BS_Layer.BLCustomer bl = new BS_Layer.BLCustomer();
-            //Booking_DGV_ListOfCustomer.DataSource = bl.fin(column, SearchKH_TextBox.Text);            
-        }
         private void LoadCustomerDataBookingTable()
         {
             try
             {
                 BS_Layer.BLCustomer bl = new BS_Layer.BLCustomer();
-                Booking_DGV_ListOfCustomer.DataSource = bl.LoadCustomer();
+                Booking_Datagridview_ListOfCustomer.DataSource = bl.LoadCustomer();
             }
             catch(Exception ex)
             {
@@ -164,8 +141,8 @@ namespace HotelManagement.Presentation_Layer
             this.Booking_TextBox_PhoneNumber.ResetText();
             this.Booking_TextBox_IdentityCard.ResetText();
             LoadCustomerDataBookingTable();
-            Booking_DataGridView_DetailOfBooking.Rows[0].Cells[0].Value = Booking_DGV_ListOfCustomer.Rows[0].Cells[0].Value;
-            Booking_DataGridView_DetailOfBooking.Rows[0].Cells[1].Value = Booking_DGV_ListOfCustomer.Rows[0].Cells[1].Value;
+            Booking_DataGridView_DetailOfBooking.Rows[0].Cells[0].Value = Booking_Datagridview_ListOfCustomer.Rows[0].Cells[0].Value;
+            Booking_DataGridView_DetailOfBooking.Rows[0].Cells[1].Value = Booking_Datagridview_ListOfCustomer.Rows[0].Cells[1].Value;
             Booking_DataGridView_DetailOfBooking.Rows[0].Cells[2].Value = this.Room_ID;
             BS_Layer.BLRoom bl = new BS_Layer.BLRoom(); 
             Booking_DataGridView_DetailOfBooking.Rows[0].Cells[3].Value = bl.FindRoom(this.Room_ID).ElementAt(0).Type;
@@ -391,22 +368,39 @@ namespace HotelManagement.Presentation_Layer
 
         private void Booking_TextBox_SearchCutomer_TextChanged(object sender, EventArgs e)
         {
-            //var bSource = new BindingSource();
-            //var table = new DataTable();
-            //SqlCommand comm = new SqlCommand();
-            //SqlDataAdapter dataAdapter = new SqlDataAdapter();
+            BS_Layer.BLCustomer bl = new BLCustomer();
+            var dtHD = new DataTable();
+            dtHD.Clear();
+            DataSet ds = new DataSet();
+            if (Booking_Combobox_Search.Text == "Customer Name")
+            {
+               ds = bl.SearchCutomer(Booking_TextBox_SearchCutomer.Text,null);                
+            }
+            else
+            {
+                ds = bl.SearchCutomer(null,Booking_TextBox_SearchCutomer.Text);
+            }
+            dtHD = ds.Tables[0];
 
-            //dgv.DataSource = bSource;
-            //comm.CommandType = CommandType.Text;
-            //comm.CommandText = 'Exec sp_SearcgCustomers';
-            //dataAdapter = 
-            //dataAdapter.Fill(table);
-            //bSource.DataSource = table;
+            Booking_Datagridview_ListOfCustomer.DataSource = dtHD;
         }
 
         private void Checkin_TextBox_SearchCutomer_TextChanged(object sender, EventArgs e)
         {
-
+            BS_Layer.BLCustomer bl = new BLCustomer();
+            var dtHD = new DataTable();
+            dtHD.Clear();
+            DataSet ds = new DataSet();
+            if (Checkin_Combobox_Search.Text == "Customer Name")
+            {
+                ds = bl.SearchCutomer(Checkin_TextBox_SearchCutomer.Text, null);
+            }
+            else
+            {
+                ds = bl.SearchCutomer(null, Checkin_TextBox_SearchCutomer.Text);
+            }
+            dtHD = ds.Tables[0];
+            Checkin_Datagridview_ListOfCustomer.DataSource = dtHD;
         }
     }
 }

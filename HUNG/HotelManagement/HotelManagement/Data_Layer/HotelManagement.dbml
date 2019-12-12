@@ -99,6 +99,12 @@
     <Parameter Name="AppoinmentDate" Parameter="appoinmentDate" Type="System.DateTime" DbType="SmallDateTime" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.sp_UpdateRoomTypes" Method="sp_UpdateRoomTypes">
+    <Parameter Name="RoomTypeID" Parameter="roomTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Price" Parameter="price" Type="System.Decimal" DbType="SmallMoney" />
+    <Return Type="System.Int32" />
+  </Function>
   <Function Name="dbo.sp_CheckIn" Method="sp_CheckIn">
     <Parameter Name="CustomerID" Parameter="customerID" Type="System.Int32" DbType="Int" />
     <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
@@ -129,11 +135,15 @@
     <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(100)" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.sp_Create_Trigger_Update" Method="sp_Create_Trigger_Update">
+    <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
   <Function Name="dbo.sp_Create_Undo" Method="sp_Create_Undo">
     <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(30)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.sp_Create_Trigger_Update" Method="sp_Create_Trigger_Update">
+  <Function Name="dbo.sp_Create_Undo_Table" Method="sp_Create_Undo_Table">
     <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(100)" />
     <Return Type="System.Int32" />
   </Function>
@@ -141,13 +151,6 @@
     <Parameter Name="CustomerID" Parameter="customerID" Type="System.Int32" DbType="Int" />
     <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
     <Parameter Name="AppoinmentDate" Parameter="appoinmentDate" Type="System.DateTime" DbType="SmallDateTime" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.sp_Create_Undo_Table" Method="sp_Create_Undo_Table">
-    <Parameter Name="TableName" Parameter="tableName" Type="System.String" DbType="NVarChar(100)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.sp_Redo_Booking" Method="sp_Redo_Booking">
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.sp_CreateCustomers" Method="sp_CreateCustomers">
@@ -301,10 +304,7 @@
       <Column Name="" Member="Column1" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.sp_UpdateRoomTypes" Method="sp_UpdateRoomTypes">
-    <Parameter Name="RoomTypeID" Parameter="roomTypeID" Type="System.Byte" DbType="TinyInt" />
-    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="NVarChar(100)" />
-    <Parameter Name="Price" Parameter="price" Type="System.Decimal" DbType="SmallMoney" />
+  <Function Name="dbo.sp_Redo_Booking" Method="sp_Redo_Booking">
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.sp_Redo_Customers" Method="sp_Redo_Customers">
@@ -444,8 +444,8 @@
     <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
     <Return Type="System.Decimal" />
   </Function>
-  <Function Name="dbo.sp_Revenue3Month" Method="sp_Revenue3Month">
-    <ElementType Name="sp_Revenue3MonthResult">
+  <Function Name="dbo.sp_Revenue5Month" Method="sp_Revenue5Month">
+    <ElementType Name="sp_Revenue5MonthResult">
       <Column Name="Month" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Revenue" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
     </ElementType>

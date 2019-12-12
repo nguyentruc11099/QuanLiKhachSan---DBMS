@@ -48,16 +48,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BS_Layer\BLBooking.cs" />
-    <Compile Include="BS_Layer\BLCustomer.cs" />
-    <Compile Include="BS_Layer\BLEmployee.cs" />
-    <Compile Include="BS_Layer\BLEmployeeType.cs" />
-    <Compile Include="BS_Layer\BLHotelService.cs" />
-    <Compile Include="BS_Layer\BLInvoice.cs" />
-    <Compile Include="BS_Layer\BLInvoice_Service.cs" />
-    <Compile Include="BS_Layer\BLRoom.cs" />
-    <Compile Include="BS_Layer\BLRoomType.cs" />
-    <Compile Include="HotelManagement.designer.cs">
+    <Compile Include="Business_Layer\BLBooking.cs" />
+    <Compile Include="Business_Layer\BLCustomer.cs" />
+    <Compile Include="Business_Layer\BLEmployee.cs" />
+    <Compile Include="Business_Layer\BLEmployeeType.cs" />
+    <Compile Include="Business_Layer\BLHotelService.cs" />
+    <Compile Include="Business_Layer\BLInvoice.cs" />
+    <Compile Include="Business_Layer\BLInvoice_Service.cs" />
+    <Compile Include="Business_Layer\BLRoom.cs" />
+    <Compile Include="Business_Layer\BLRoomType.cs" />
+    <Compile Include="Data_Layer\DBMain.cs" />
+    <Compile Include="Data_Layer\HotelManagement.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HotelManagement.dbml</DependentUpon>
@@ -82,7 +83,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="HotelManagement.dbml.layout">
+    <None Include="Data_Layer\HotelManagement.dbml.layout">
       <DependentUpon>HotelManagement.dbml</DependentUpon>
     </None>
     <EmbeddedResource Include="Presentation_Layer\Detail.resx">
@@ -104,7 +105,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="HotelManagement.dbml">
+    <None Include="Data_Layer\HotelManagement.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>HotelManagement.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>

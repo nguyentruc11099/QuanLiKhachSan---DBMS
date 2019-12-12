@@ -16,6 +16,12 @@ namespace HotelManagement.BS_Layer
             HotelManagementDataContext hm = new HotelManagementDataContext();
             return hm.Invoices;
         }
+        public DataSet Chart()
+        {
+            DBMain db = new DBMain();
+            string sql = "Exec sp_Revenue5Month ";
+            return db.ExecuteQueryDataSet(sql, CommandType.Text);
+        }
         public System.Collections.Generic.List<sp_FindInvoiceRoomPriceResult> LoadCheckoutInvoiceRoomPrice(int RoomID)
         {
             HotelManagementDataContext db = new HotelManagementDataContext();

@@ -11,12 +11,12 @@ namespace HotelManagement.BS_Layer
 {
     class BLRoom
     {
-        public System.Collections.Generic.List<HotelManagement.sp_LoadRoomResult> LoadRoom()
+        public System.Collections.Generic.List<HotelManagement.Data_Layer.sp_LoadRoomResult> LoadRoom()
         {
             HotelManagementDataContext db = new HotelManagementDataContext();
             return db.sp_LoadRoom().ToList();
         }
-        public System.Collections.Generic.List<HotelManagement.sp_FindRoomResult> FindRoom(int RoomID)
+        public System.Collections.Generic.List<HotelManagement.Data_Layer.sp_FindRoomResult> FindRoom(int RoomID)
         {
             HotelManagementDataContext db = new HotelManagementDataContext();
             return db.sp_FindRoom(RoomID).ToList();

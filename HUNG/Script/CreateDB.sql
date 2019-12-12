@@ -302,10 +302,10 @@ INSERT INTO dbo.Customers
     CustomerAddress
 )
 VALUES
-(   N' Huynh Kim Lien','312383706',N'0328942384',N'HCM'  ),
-(   N' Doan Nguyen Xuan Huy','312383206',N'0328342484',N'HCM'  ),
-(   N' Nguyen Mai Khanh','312383346',N'0323342485',N'HCM'  ),
-(   N' Nguyen Minh Nhut','312383377',N'0325662485',N'HCM'  )
+(   N'Huynh Kim Lien','312383706',N'0328942384',N'HCM'  ),
+(   N'Doan Nguyen Xuan Huy','312383206',N'0328342484',N'HCM'  ),
+(   N'Nguyen Mai Khanh','312383346',N'0323342485',N'HCM'  ),
+(   N'Nguyen Minh Nhut','312383377',N'0325662485',N'HCM'  )
 
  INSERT INTO dbo.HotelServices
  (

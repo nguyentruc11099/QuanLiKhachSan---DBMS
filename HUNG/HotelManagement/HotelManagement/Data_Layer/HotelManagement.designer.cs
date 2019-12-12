@@ -168,6 +168,13 @@ namespace HotelManagement.Data_Layer
 			return ((int)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateRoomTypes")]
+		public int sp_UpdateRoomTypes([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomTypeID", DbType="TinyInt")] System.Nullable<byte> roomTypeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Name", DbType="NVarChar(100)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Price", DbType="SmallMoney")] System.Nullable<decimal> price)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomTypeID, name, price);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CheckIn")]
 		public int sp_CheckIn([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeID", DbType="Int")] System.Nullable<int> employeeID)
 		{
@@ -217,13 +224,6 @@ namespace HotelManagement.Data_Layer
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Undo")]
-		public int sp_Create_Undo([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(30)")] string tableName)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
-			return ((int)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Trigger_Update")]
 		public int sp_Create_Trigger_Update([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(100)")] string tableName)
 		{
@@ -231,10 +231,10 @@ namespace HotelManagement.Data_Layer
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CreateBooking")]
-		public int sp_CreateBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppoinmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appoinmentDate)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Create_Undo")]
+		public int sp_Create_Undo([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TableName", DbType="NVarChar(30)")] string tableName)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, appoinmentDate);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), tableName);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -245,10 +245,10 @@ namespace HotelManagement.Data_Layer
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Redo_Booking")]
-		public int sp_Redo_Booking()
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CreateBooking")]
+		public int sp_CreateBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppoinmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appoinmentDate)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, appoinmentDate);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -420,10 +420,10 @@ namespace HotelManagement.Data_Layer
 			return ((ISingleResult<sp_LoginEmployeeResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateRoomTypes")]
-		public int sp_UpdateRoomTypes([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomTypeID", DbType="TinyInt")] System.Nullable<byte> roomTypeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Name", DbType="NVarChar(100)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Price", DbType="SmallMoney")] System.Nullable<decimal> price)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Redo_Booking")]
+		public int sp_Redo_Booking()
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomTypeID, name, price);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -633,11 +633,11 @@ namespace HotelManagement.Data_Layer
 			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Revenue3Month")]
-		public ISingleResult<sp_Revenue3MonthResult> sp_Revenue3Month()
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Revenue5Month")]
+		public ISingleResult<sp_Revenue5MonthResult> sp_Revenue5Month()
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<sp_Revenue3MonthResult>)(result.ReturnValue));
+			return ((ISingleResult<sp_Revenue5MonthResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -3190,14 +3190,14 @@ namespace HotelManagement.Data_Layer
 		}
 	}
 	
-	public partial class sp_Revenue3MonthResult
+	public partial class sp_Revenue5MonthResult
 	{
 		
 		private System.Nullable<int> _Month;
 		
 		private System.Nullable<decimal> _Revenue;
 		
-		public sp_Revenue3MonthResult()
+		public sp_Revenue5MonthResult()
 		{
 		}
 		

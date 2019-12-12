@@ -32,9 +32,8 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.panel_Navigation = new System.Windows.Forms.Panel();
-            this.btn_Redo = new System.Windows.Forms.Button();
-            this.btn_Undo = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lbl_Permision = new System.Windows.Forms.Label();
             this.lbl_UserName = new System.Windows.Forms.Label();
@@ -44,6 +43,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_Manage = new System.Windows.Forms.Button();
             this.btnDashboard = new System.Windows.Forms.Button();
+            this.btn_Redo = new System.Windows.Forms.Button();
+            this.btn_Undo = new System.Windows.Forms.Button();
             this.panel_Manage = new System.Windows.Forms.Panel();
             this.Button_Hide = new System.Windows.Forms.Button();
             this.btn_InvoiceService = new System.Windows.Forms.Button();
@@ -219,13 +220,13 @@
             this.label45 = new System.Windows.Forms.Label();
             this.dgv_InvoiceService = new System.Windows.Forms.DataGridView();
             this.TabPage_Revenue = new System.Windows.Forms.TabPage();
+            this.Chart_TotalRevenue = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.Analysis_DataGridView = new System.Windows.Forms.DataGridView();
             this.btn_Calculate = new System.Windows.Forms.Button();
             this.cmb_Year = new System.Windows.Forms.ComboBox();
             this.cmb_Month = new System.Windows.Forms.ComboBox();
             this.rtxt_Total = new System.Windows.Forms.RichTextBox();
             this.timer_Redraw = new System.Windows.Forms.Timer(this.components);
-            this.Analysis_DataGridView = new System.Windows.Forms.DataGridView();
-            this.Chart_TotalRevenue = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel_Navigation.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -253,8 +254,8 @@
             this.TabPage_Invoice_Service.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_InvoiceService)).BeginInit();
             this.TabPage_Revenue.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Analysis_DataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Chart_TotalRevenue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Analysis_DataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_Navigation
@@ -271,26 +272,6 @@
             this.panel_Navigation.Name = "panel_Navigation";
             this.panel_Navigation.Size = new System.Drawing.Size(233, 893);
             this.panel_Navigation.TabIndex = 1;
-            // 
-            // btn_Redo
-            // 
-            this.btn_Redo.Location = new System.Drawing.Point(181, 40);
-            this.btn_Redo.Name = "btn_Redo";
-            this.btn_Redo.Size = new System.Drawing.Size(64, 37);
-            this.btn_Redo.TabIndex = 12;
-            this.btn_Redo.Text = "Redo";
-            this.btn_Redo.UseVisualStyleBackColor = true;
-            this.btn_Redo.Click += new System.EventHandler(this.btn_Redo_Click);
-            // 
-            // btn_Undo
-            // 
-            this.btn_Undo.Location = new System.Drawing.Point(18, 40);
-            this.btn_Undo.Name = "btn_Undo";
-            this.btn_Undo.Size = new System.Drawing.Size(64, 37);
-            this.btn_Undo.TabIndex = 11;
-            this.btn_Undo.Text = "Undo";
-            this.btn_Undo.UseVisualStyleBackColor = true;
-            this.btn_Undo.Click += new System.EventHandler(this.btn_Undo_Click);
             // 
             // panel3
             // 
@@ -401,6 +382,26 @@
             this.btnDashboard.Text = " Dashboard";
             this.btnDashboard.UseVisualStyleBackColor = false;
             this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
+            // 
+            // btn_Redo
+            // 
+            this.btn_Redo.Location = new System.Drawing.Point(181, 40);
+            this.btn_Redo.Name = "btn_Redo";
+            this.btn_Redo.Size = new System.Drawing.Size(64, 37);
+            this.btn_Redo.TabIndex = 12;
+            this.btn_Redo.Text = "Redo";
+            this.btn_Redo.UseVisualStyleBackColor = true;
+            this.btn_Redo.Click += new System.EventHandler(this.btn_Redo_Click);
+            // 
+            // btn_Undo
+            // 
+            this.btn_Undo.Location = new System.Drawing.Point(18, 40);
+            this.btn_Undo.Name = "btn_Undo";
+            this.btn_Undo.Size = new System.Drawing.Size(64, 37);
+            this.btn_Undo.TabIndex = 11;
+            this.btn_Undo.Text = "Undo";
+            this.btn_Undo.UseVisualStyleBackColor = true;
+            this.btn_Undo.Click += new System.EventHandler(this.btn_Undo_Click);
             // 
             // panel_Manage
             // 
@@ -2201,6 +2202,34 @@
             this.TabPage_Revenue.Text = "Revenue";
             this.TabPage_Revenue.UseVisualStyleBackColor = true;
             // 
+            // Chart_TotalRevenue
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.Chart_TotalRevenue.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.Chart_TotalRevenue.Legends.Add(legend1);
+            this.Chart_TotalRevenue.Location = new System.Drawing.Point(737, 155);
+            this.Chart_TotalRevenue.Name = "Chart_TotalRevenue";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Revenue";
+            this.Chart_TotalRevenue.Series.Add(series1);
+            this.Chart_TotalRevenue.Size = new System.Drawing.Size(560, 552);
+            this.Chart_TotalRevenue.TabIndex = 9;
+            title1.Name = "Hotel avenue in the last 5 month ";
+            this.Chart_TotalRevenue.Titles.Add(title1);
+            // 
+            // Analysis_DataGridView
+            // 
+            this.Analysis_DataGridView.AllowUserToAddRows = false;
+            this.Analysis_DataGridView.AllowUserToDeleteRows = false;
+            this.Analysis_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Analysis_DataGridView.Location = new System.Drawing.Point(48, 155);
+            this.Analysis_DataGridView.Name = "Analysis_DataGridView";
+            this.Analysis_DataGridView.ReadOnly = true;
+            this.Analysis_DataGridView.Size = new System.Drawing.Size(585, 552);
+            this.Analysis_DataGridView.TabIndex = 8;
+            // 
             // btn_Calculate
             // 
             this.btn_Calculate.Location = new System.Drawing.Point(558, 63);
@@ -2272,33 +2301,6 @@
             this.timer_Redraw.Interval = 10000;
             this.timer_Redraw.Tick += new System.EventHandler(this.timer_Redraw_Tick);
             // 
-            // Analysis_DataGridView
-            // 
-            this.Analysis_DataGridView.AllowUserToAddRows = false;
-            this.Analysis_DataGridView.AllowUserToDeleteRows = false;
-            this.Analysis_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Analysis_DataGridView.Location = new System.Drawing.Point(48, 155);
-            this.Analysis_DataGridView.Name = "Analysis_DataGridView";
-            this.Analysis_DataGridView.ReadOnly = true;
-            this.Analysis_DataGridView.Size = new System.Drawing.Size(585, 552);
-            this.Analysis_DataGridView.TabIndex = 8;
-            // 
-            // Chart_TotalRevenue
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.Chart_TotalRevenue.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.Chart_TotalRevenue.Legends.Add(legend1);
-            this.Chart_TotalRevenue.Location = new System.Drawing.Point(737, 155);
-            this.Chart_TotalRevenue.Name = "Chart_TotalRevenue";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.Chart_TotalRevenue.Series.Add(series1);
-            this.Chart_TotalRevenue.Size = new System.Drawing.Size(560, 552);
-            this.Chart_TotalRevenue.TabIndex = 9;
-            this.Chart_TotalRevenue.Text = "chart1";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2349,8 +2351,8 @@
             this.TabPage_Invoice_Service.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_InvoiceService)).EndInit();
             this.TabPage_Revenue.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Analysis_DataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Chart_TotalRevenue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Analysis_DataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }

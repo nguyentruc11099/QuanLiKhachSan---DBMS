@@ -16,11 +16,30 @@ namespace HotelManagement.BS_Layer
             HotelManagementDataContext hm = new HotelManagementDataContext();
             return hm.Customers;
         }
-        public void SearchCutomer(string CustomerName, string IdentityCard)
+        public DataSet SearchCutomer(string CustomerName, string IdentityCard)
         {
             DBMain db = new DBMain();
-            string sql = "Exec sp_SearchCustomers";
-            db.ExecuteQueryDataSet(sql, CommandType.Text);
+            string sql = "Exec sp_SearchCustomer ";
+            if (CustomerName != null)
+            {
+                sql += " "+CustomerName;
+                if (IdentityCard != null)
+                {
+                    sql += "," + IdentityCard;
+                }
+            }
+            else
+            {
+                if (IdentityCard != null && IdentityCard != "")
+                {
+                    sql += "null," + IdentityCard;
+                }
+                else
+                {
+                    sql = "select * from Customers";
+                }
+            }            
+            return db.ExecuteQueryDataSet(sql, CommandType.Text);
         }
         public bool CreateCustomer(string CustomerName, string IdentityCard, string PhoneNumber, string CustomerAddress)
         {

@@ -1,4 +1,5 @@
 ﻿using HotelManagement.BS_Layer;
+using HotelManagement.Data_Layer;
 using HotelManagement.Presentation_Layer;
 using System;
 using System.Collections.Generic;
@@ -968,9 +969,34 @@ namespace HotelManagement.Presentation_Layer
 
         private void AnalysisInitialize()
         {
-            
+            LoadChart();
         }
+        public void LoadChart()
+        {
+            
+            BS_Layer.BLInvoice bl = new BLInvoice();
+            var dt = new DataTable();
+            dt.Clear();
+            DataSet ds = bl.Chart();
+            dt = ds.Tables[0];
+            var Month = DateTime.Now.Month;
 
+            for (int i = 4; i >=0 ; i--)
+            {
+                var temp = dt.Rows[i].ItemArray[1];
+                if (temp.ToString()!="")
+                {
+                    Chart_TotalRevenue.Series["Revenue"].Points.Add(Convert.ToDouble(dt.Rows[i].ItemArray[1]));
+                }
+                else
+                {
+                    Chart_TotalRevenue.Series["Revenue"].Points.Add(0);
+                }
+                Chart_TotalRevenue.Series["Revenue"].Points[Math.Abs(i-4)].Label = "Month " + (Month - i).ToString();
+                Chart_TotalRevenue.Series["Revenue"].Points[Math.Abs(i - 4)].Color = Color.Blue;
+                Chart_TotalRevenue.Series["Revenue"].Points[Math.Abs(i - 4)].AxisLabel = "Month " + (Month - i).ToString();
+            }            
+        }
         private void btn_Calculate_Click(object sender, EventArgs e)
         {
             BLInvoice blI = new BLInvoice();

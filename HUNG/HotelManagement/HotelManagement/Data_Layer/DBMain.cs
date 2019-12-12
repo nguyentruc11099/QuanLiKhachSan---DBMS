@@ -10,11 +10,10 @@ namespace HotelManagement.Data_Layer
 {
     class DBMain
     {
-        string ConStr = "Data Source=(local); Initial Catalog=QuanLyKhachSan;Integrated Security=True";
+        string ConStr = "Data Source=(local); Initial Catalog=HotelDB;Integrated Security=True";
         SqlConnection conn = null;
         SqlCommand comm = null;
         SqlDataAdapter da = null;
-        SqlDataReader dd = null;
         public DBMain()
         {
             conn = new SqlConnection(ConStr);
@@ -49,7 +48,7 @@ namespace HotelManagement.Data_Layer
                 comm.ExecuteNonQuery();
                 f = true;
             }
-            catch (SqlException ex)
+            catch
             {
                 f = false;
             }
