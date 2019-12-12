@@ -17,24 +17,45 @@ namespace HotelManagement.BS_Layer
         }
         public bool CreateInvoice_Service(string InvoiceID, string ServiceID, string Times)
         {
-            HotelManagementDataContext db = new HotelManagementDataContext();
-            db.sp_CreateInvoices_Services(Convert.ToInt32(InvoiceID), Convert.ToInt32(ServiceID), Convert.ToInt32(Times));
-            db.Invoices_Services.Context.SubmitChanges();
-            return true;
+            try
+            {
+                HotelManagementDataContext db = new HotelManagementDataContext();
+                db.sp_CreateInvoices_Services(Convert.ToInt32(InvoiceID), Convert.ToInt32(ServiceID), Convert.ToInt32(Times));
+                db.Invoices_Services.Context.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         public bool UpdateInvoice_Service(int Invoices_Services_ID, string InvoiceID, string ServiceID, string Times)
         {
-            HotelManagementDataContext db = new HotelManagementDataContext();
-            db.sp_UpdateInvoices_Services(Invoices_Services_ID, Convert.ToInt32(InvoiceID), Convert.ToInt32(ServiceID), Convert.ToInt32(Times));
-            db.Invoices_Services.Context.SubmitChanges();
-            return true;
+            try
+            {
+                HotelManagementDataContext db = new HotelManagementDataContext();
+                db.sp_UpdateInvoices_Services(Invoices_Services_ID, Convert.ToInt32(InvoiceID), Convert.ToInt32(ServiceID), Convert.ToInt32(Times));
+                db.Invoices_Services.Context.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         public bool DeleteInvoice_Service(int Invoices_Services_ID)
         {
-            HotelManagementDataContext db = new HotelManagementDataContext();
-            db.sp_DeleteInvoices_Services(Invoices_Services_ID);
-            db.Invoices_Services.Context.SubmitChanges();
-            return true;
+            try
+            {
+                HotelManagementDataContext db = new HotelManagementDataContext();
+                db.sp_DeleteInvoices_Services(Invoices_Services_ID);
+                db.Invoices_Services.Context.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

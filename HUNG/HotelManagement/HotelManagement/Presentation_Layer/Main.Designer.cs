@@ -37,7 +37,7 @@
             this.lbl_UserName = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btn_Logout = new System.Windows.Forms.Button();
-            this.btnAnalysis = new System.Windows.Forms.Button();
+            this.btn_Analysis = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_Manage = new System.Windows.Forms.Button();
             this.btnDashboard = new System.Windows.Forms.Button();
@@ -218,6 +218,11 @@
             this.cmb_Month = new System.Windows.Forms.ComboBox();
             this.rtxt_Total = new System.Windows.Forms.RichTextBox();
             this.timer_Redraw = new System.Windows.Forms.Timer(this.components);
+            this.label22 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label25 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.Button_Redraw = new System.Windows.Forms.Button();
             this.panel_Navigation.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -254,7 +259,7 @@
             this.panel_Navigation.Controls.Add(this.btn_Undo);
             this.panel_Navigation.Controls.Add(this.panel3);
             this.panel_Navigation.Controls.Add(this.btn_Logout);
-            this.panel_Navigation.Controls.Add(this.btnAnalysis);
+            this.panel_Navigation.Controls.Add(this.btn_Analysis);
             this.panel_Navigation.Controls.Add(this.pictureBox1);
             this.panel_Navigation.Controls.Add(this.btn_Manage);
             this.panel_Navigation.Controls.Add(this.btnDashboard);
@@ -266,7 +271,7 @@
             // 
             // btn_Redo
             // 
-            this.btn_Redo.Location = new System.Drawing.Point(132, 697);
+            this.btn_Redo.Location = new System.Drawing.Point(151, 749);
             this.btn_Redo.Name = "btn_Redo";
             this.btn_Redo.Size = new System.Drawing.Size(64, 37);
             this.btn_Redo.TabIndex = 12;
@@ -276,7 +281,7 @@
             // 
             // btn_Undo
             // 
-            this.btn_Undo.Location = new System.Drawing.Point(24, 697);
+            this.btn_Undo.Location = new System.Drawing.Point(78, 749);
             this.btn_Undo.Name = "btn_Undo";
             this.btn_Undo.Size = new System.Drawing.Size(64, 37);
             this.btn_Undo.TabIndex = 11;
@@ -310,7 +315,7 @@
             this.lbl_UserName.AutoSize = true;
             this.lbl_UserName.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_UserName.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lbl_UserName.Location = new System.Drawing.Point(57, 3);
+            this.lbl_UserName.Location = new System.Drawing.Point(34, 0);
             this.lbl_UserName.Name = "lbl_UserName";
             this.lbl_UserName.Size = new System.Drawing.Size(73, 16);
             this.lbl_UserName.TabIndex = 1;
@@ -319,7 +324,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::HotelManagement.Properties.Resources.icons8_customer_30px;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 3);
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(39, 38);
             this.pictureBox2.TabIndex = 0;
@@ -340,20 +345,20 @@
             this.btn_Logout.UseVisualStyleBackColor = false;
             this.btn_Logout.Click += new System.EventHandler(this.btn_Logout_Click);
             // 
-            // btnAnalysis
+            // btn_Analysis
             // 
-            this.btnAnalysis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(166)))), ((int)(((byte)(90)))));
-            this.btnAnalysis.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAnalysis.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnalysis.ForeColor = System.Drawing.Color.White;
-            this.btnAnalysis.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAnalysis.Location = new System.Drawing.Point(2, 477);
-            this.btnAnalysis.Name = "btnAnalysis";
-            this.btnAnalysis.Size = new System.Drawing.Size(227, 70);
-            this.btnAnalysis.TabIndex = 4;
-            this.btnAnalysis.Text = "Analysis ";
-            this.btnAnalysis.UseVisualStyleBackColor = false;
-            this.btnAnalysis.Click += new System.EventHandler(this.btnAnalysis_Click);
+            this.btn_Analysis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(166)))), ((int)(((byte)(90)))));
+            this.btn_Analysis.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Analysis.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Analysis.ForeColor = System.Drawing.Color.White;
+            this.btn_Analysis.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Analysis.Location = new System.Drawing.Point(2, 477);
+            this.btn_Analysis.Name = "btn_Analysis";
+            this.btn_Analysis.Size = new System.Drawing.Size(227, 70);
+            this.btn_Analysis.TabIndex = 4;
+            this.btn_Analysis.Text = "Analysis";
+            this.btn_Analysis.UseVisualStyleBackColor = false;
+            this.btn_Analysis.Click += new System.EventHandler(this.btnAnalysis_Click);
             // 
             // pictureBox1
             // 
@@ -1330,6 +1335,11 @@
             // 
             // tabPage_DefaultScreen
             // 
+            this.tabPage_DefaultScreen.Controls.Add(this.Button_Redraw);
+            this.tabPage_DefaultScreen.Controls.Add(this.richTextBox1);
+            this.tabPage_DefaultScreen.Controls.Add(this.label25);
+            this.tabPage_DefaultScreen.Controls.Add(this.dateTimePicker1);
+            this.tabPage_DefaultScreen.Controls.Add(this.label22);
             this.tabPage_DefaultScreen.Controls.Add(this.Panel_ListRoom);
             this.tabPage_DefaultScreen.Location = new System.Drawing.Point(4, 4);
             this.tabPage_DefaultScreen.Name = "tabPage_DefaultScreen";
@@ -1340,9 +1350,10 @@
             // 
             // Panel_ListRoom
             // 
-            this.Panel_ListRoom.Location = new System.Drawing.Point(66, 180);
+            this.Panel_ListRoom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Panel_ListRoom.Location = new System.Drawing.Point(66, 226);
             this.Panel_ListRoom.Name = "Panel_ListRoom";
-            this.Panel_ListRoom.Size = new System.Drawing.Size(1174, 658);
+            this.Panel_ListRoom.Size = new System.Drawing.Size(1213, 612);
             this.Panel_ListRoom.TabIndex = 0;
             // 
             // TabPage_Service
@@ -2232,6 +2243,49 @@
             this.timer_Redraw.Interval = 30000;
             this.timer_Redraw.Tick += new System.EventHandler(this.timer_Redraw_Tick);
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(63, 210);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(57, 13);
+            this.label22.TabIndex = 21;
+            this.label22.Text = "List Room ";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(1123, 17);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 22;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(1071, 22);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(37, 13);
+            this.label25.TabIndex = 23;
+            this.label25.Text = "Today";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(66, 54);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(1213, 96);
+            this.richTextBox1.TabIndex = 24;
+            this.richTextBox1.Text = "";
+            // 
+            // Button_Redraw
+            // 
+            this.Button_Redraw.Location = new System.Drawing.Point(22, 14);
+            this.Button_Redraw.Name = "Button_Redraw";
+            this.Button_Redraw.Size = new System.Drawing.Size(75, 23);
+            this.Button_Redraw.TabIndex = 25;
+            this.Button_Redraw.Text = "Reset";
+            this.Button_Redraw.UseVisualStyleBackColor = true;
+            this.Button_Redraw.Click += new System.EventHandler(this.Button_Redraw_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2265,6 +2319,7 @@
             this.TabPage_Employee.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Employee)).EndInit();
             this.tabPage_DefaultScreen.ResumeLayout(false);
+            this.tabPage_DefaultScreen.PerformLayout();
             this.TabPage_Service.ResumeLayout(false);
             this.TabPage_Service.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Service)).EndInit();
@@ -2293,7 +2348,7 @@
         private System.Windows.Forms.Label lbl_UserName;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btn_Logout;
-        private System.Windows.Forms.Button btnAnalysis;
+        private System.Windows.Forms.Button btn_Analysis;
         private System.Windows.Forms.Button btn_Manage;
         private System.Windows.Forms.Button btnDashboard;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -2476,6 +2531,11 @@
         private System.Windows.Forms.Button btn_Undo;
         private System.Windows.Forms.CheckBox checkBox_VIP;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button Button_Redraw;
     }
 }
 

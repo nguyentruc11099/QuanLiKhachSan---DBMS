@@ -88,7 +88,7 @@ namespace HotelManagement.BS_Layer
         {
             HotelManagementDataContext db = new HotelManagementDataContext();
 
-            return Convert.ToDecimal(db.Revenue(month, year));
+            return Convert.ToDecimal(db.fn_Revenue(month, year));
         }
     }
 }

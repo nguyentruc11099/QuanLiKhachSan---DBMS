@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Checkin_ChooseCustomer = new System.Windows.Forms.Button();
             this.Checkin_Panel_SelectCustomer = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Checkin_Combobox_Search = new System.Windows.Forms.ComboBox();
+            this.Checkin_TextBox_SearchCutomer = new System.Windows.Forms.TextBox();
             this.Checkin_Datagridview_ListOfCustomer = new System.Windows.Forms.DataGridView();
             this.Checkin_Textbox_CustomerName = new System.Windows.Forms.TextBox();
             this.Checkin_Textbox_PhoneNumber = new System.Windows.Forms.TextBox();
@@ -43,7 +43,6 @@
             this.Checkin_AddCustomer = new System.Windows.Forms.Button();
             this.Checkin_Textbox_Address = new System.Windows.Forms.TextBox();
             this.Checkin_Textbox_IdentityCard = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.Checkin_Panel_CreateNewCustomer = new System.Windows.Forms.Panel();
@@ -75,10 +74,6 @@
             this.Checkin_Panel_DetailOFCheckin = new System.Windows.Forms.Panel();
             this.Button_ChooseBooking = new System.Windows.Forms.Button();
             this.Button_Booking = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.SearchKhachDat_TextBox = new System.Windows.Forms.TextBox();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.SearchKhachDat_ComboBox = new System.Windows.Forms.ComboBox();
             this.Checkin_Datagridview_Booking = new System.Windows.Forms.DataGridView();
             this.Checkin_Booking_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Checkin_Booking_CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -103,8 +98,8 @@
             this.Booking_Button_ChooseCustomer = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
-            this.SearchKH_ComboBox = new System.Windows.Forms.ComboBox();
-            this.SearchKH_TextBox = new System.Windows.Forms.TextBox();
+            this.Booking_Combobox_Search = new System.Windows.Forms.ComboBox();
+            this.Booking_TextBox_SearchCutomer = new System.Windows.Forms.TextBox();
             this.Booking_DGV_ListOfCustomer = new System.Windows.Forms.DataGridView();
             this.label11 = new System.Windows.Forms.Label();
             this.DateTimePicker_AppointmentDate = new System.Windows.Forms.DateTimePicker();
@@ -117,36 +112,36 @@
             this.Checkout_Button_Confirm = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Checkout_Datagridview_Invoice = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.Checkout_Datagridview_Services = new System.Windows.Forms.DataGridView();
-            this.Back_Button = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.tabPage_CheckOut = new System.Windows.Forms.TabPage();
-            this.tabControl_Main = new System.Windows.Forms.TabControl();
-            this.tabPage_Checkin = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.Checkout_Service_InvoiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkout_Service_ServiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkout_Service_ServiceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SoNgaySD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Checkout_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TextBox_RoomPrice = new System.Windows.Forms.TextBox();
-            this.TextBox_ServicePrice = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.Checkout_InvoiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Checkout_Invoices_CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Checkout_StartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Checkout_EndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Checkout_RoomType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Checkout_RoomPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
+            this.Checkout_Datagridview_Services = new System.Windows.Forms.DataGridView();
+            this.Checkout_Service_InvoiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkout_Service_ServiceID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkout_Service_ServiceName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SoNgaySD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Checkout_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Back_Button = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.tabPage_CheckOut = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.TextBox_ServicePrice = new System.Windows.Forms.TextBox();
+            this.TextBox_RoomPrice = new System.Windows.Forms.TextBox();
+            this.tabControl_Main = new System.Windows.Forms.TabControl();
+            this.tabPage_Checkin = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
             this.Checkin_Panel_SelectCustomer.SuspendLayout();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Checkin_Datagridview_ListOfCustomer)).BeginInit();
             this.Checkin_Panel_CreateNewCustomer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Checkin_DataGridView_Detail)).BeginInit();
             this.Checkin_Panel_DetailOFCheckin.SuspendLayout();
-            this.panel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Checkin_Datagridview_Booking)).BeginInit();
             this.Checkin_Panel_HaveBooking.SuspendLayout();
             this.tabPage_Booking.SuspendLayout();
@@ -183,7 +178,7 @@
             this.Checkin_Panel_SelectCustomer.Controls.Add(this.Checkin_ChooseCustomer);
             this.Checkin_Panel_SelectCustomer.Controls.Add(this.panel7);
             this.Checkin_Panel_SelectCustomer.Controls.Add(this.Checkin_Datagridview_ListOfCustomer);
-            this.Checkin_Panel_SelectCustomer.Location = new System.Drawing.Point(25, 458);
+            this.Checkin_Panel_SelectCustomer.Location = new System.Drawing.Point(78, 459);
             this.Checkin_Panel_SelectCustomer.Name = "Checkin_Panel_SelectCustomer";
             this.Checkin_Panel_SelectCustomer.Size = new System.Drawing.Size(695, 204);
             this.Checkin_Panel_SelectCustomer.TabIndex = 60;
@@ -191,8 +186,8 @@
             // panel7
             // 
             this.panel7.Controls.Add(this.label5);
-            this.panel7.Controls.Add(this.comboBox1);
-            this.panel7.Controls.Add(this.textBox1);
+            this.panel7.Controls.Add(this.Checkin_Combobox_Search);
+            this.panel7.Controls.Add(this.Checkin_TextBox_SearchCutomer);
             this.panel7.Location = new System.Drawing.Point(25, 142);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(334, 53);
@@ -204,32 +199,29 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(-3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 13);
+            this.label5.Size = new System.Drawing.Size(41, 13);
             this.label5.TabIndex = 13;
-            this.label5.Text = "Tìm kiếm";
+            this.label5.Text = "Search";
             // 
-            // comboBox1
+            // Checkin_Combobox_Search
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Mã KH",
-            "Tên KH",
-            "CMND",
-            "Giới Tính",
-            "SĐT",
-            "Xuất Xứ"});
-            this.comboBox1.Location = new System.Drawing.Point(9, 23);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 12;
-            this.comboBox1.Text = "Mã KH";
+            this.Checkin_Combobox_Search.FormattingEnabled = true;
+            this.Checkin_Combobox_Search.Items.AddRange(new object[] {
+            "Cutomer Name",
+            "Identity Card"});
+            this.Checkin_Combobox_Search.Location = new System.Drawing.Point(9, 23);
+            this.Checkin_Combobox_Search.Name = "Checkin_Combobox_Search";
+            this.Checkin_Combobox_Search.Size = new System.Drawing.Size(121, 21);
+            this.Checkin_Combobox_Search.TabIndex = 12;
+            this.Checkin_Combobox_Search.Text = "Mã KH";
             // 
-            // textBox1
+            // Checkin_TextBox_SearchCutomer
             // 
-            this.textBox1.Location = new System.Drawing.Point(142, 24);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(177, 20);
-            this.textBox1.TabIndex = 10;
+            this.Checkin_TextBox_SearchCutomer.Location = new System.Drawing.Point(142, 24);
+            this.Checkin_TextBox_SearchCutomer.Name = "Checkin_TextBox_SearchCutomer";
+            this.Checkin_TextBox_SearchCutomer.Size = new System.Drawing.Size(177, 20);
+            this.Checkin_TextBox_SearchCutomer.TabIndex = 10;
+            this.Checkin_TextBox_SearchCutomer.TextChanged += new System.EventHandler(this.Checkin_TextBox_SearchCutomer_TextChanged);
             // 
             // Checkin_Datagridview_ListOfCustomer
             // 
@@ -293,16 +285,6 @@
             this.Checkin_Textbox_IdentityCard.Size = new System.Drawing.Size(120, 20);
             this.Checkin_Textbox_IdentityCard.TabIndex = 12;
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(241, 58);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(45, 13);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "Xuất Xứ";
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -335,7 +317,7 @@
             this.Checkin_Panel_CreateNewCustomer.Controls.Add(this.label12);
             this.Checkin_Panel_CreateNewCustomer.Controls.Add(this.label13);
             this.Checkin_Panel_CreateNewCustomer.Controls.Add(this.label14);
-            this.Checkin_Panel_CreateNewCustomer.Location = new System.Drawing.Point(24, 317);
+            this.Checkin_Panel_CreateNewCustomer.Location = new System.Drawing.Point(77, 318);
             this.Checkin_Panel_CreateNewCustomer.Margin = new System.Windows.Forms.Padding(2);
             this.Checkin_Panel_CreateNewCustomer.Name = "Checkin_Panel_CreateNewCustomer";
             this.Checkin_Panel_CreateNewCustomer.Size = new System.Drawing.Size(696, 95);
@@ -351,7 +333,7 @@
             // 
             // Booking_TextBox_PhoneNumber
             // 
-            this.Booking_TextBox_PhoneNumber.Location = new System.Drawing.Point(290, 16);
+            this.Booking_TextBox_PhoneNumber.Location = new System.Drawing.Point(325, 13);
             this.Booking_TextBox_PhoneNumber.Name = "Booking_TextBox_PhoneNumber";
             this.Booking_TextBox_PhoneNumber.Size = new System.Drawing.Size(127, 20);
             this.Booking_TextBox_PhoneNumber.TabIndex = 18;
@@ -359,11 +341,11 @@
             // SDT_Label
             // 
             this.SDT_Label.AutoSize = true;
-            this.SDT_Label.Location = new System.Drawing.Point(257, 16);
+            this.SDT_Label.Location = new System.Drawing.Point(241, 16);
             this.SDT_Label.Name = "SDT_Label";
-            this.SDT_Label.Size = new System.Drawing.Size(29, 13);
+            this.SDT_Label.Size = new System.Drawing.Size(78, 13);
             this.SDT_Label.TabIndex = 17;
-            this.SDT_Label.Text = "SĐT";
+            this.SDT_Label.Text = "Phone Number";
             // 
             // Booking_Button_AddNewCustomer
             // 
@@ -378,7 +360,7 @@
             // 
             // Booking_TextBox_Address
             // 
-            this.Booking_TextBox_Address.Location = new System.Drawing.Point(290, 55);
+            this.Booking_TextBox_Address.Location = new System.Drawing.Point(325, 58);
             this.Booking_TextBox_Address.Margin = new System.Windows.Forms.Padding(2);
             this.Booking_TextBox_Address.Name = "Booking_TextBox_Address";
             this.Booking_TextBox_Address.Size = new System.Drawing.Size(127, 20);
@@ -395,27 +377,27 @@
             // XuatXu_Label
             // 
             this.XuatXu_Label.AutoSize = true;
-            this.XuatXu_Label.Location = new System.Drawing.Point(241, 58);
+            this.XuatXu_Label.Location = new System.Drawing.Point(241, 61);
             this.XuatXu_Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.XuatXu_Label.Name = "XuatXu_Label";
             this.XuatXu_Label.Size = new System.Drawing.Size(45, 13);
             this.XuatXu_Label.TabIndex = 6;
-            this.XuatXu_Label.Text = "Xuất Xứ";
+            this.XuatXu_Label.Text = "Address";
             // 
             // CMND_Label
             // 
             this.CMND_Label.AutoSize = true;
-            this.CMND_Label.Location = new System.Drawing.Point(29, 58);
+            this.CMND_Label.Location = new System.Drawing.Point(7, 58);
             this.CMND_Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.CMND_Label.Name = "CMND_Label";
-            this.CMND_Label.Size = new System.Drawing.Size(39, 13);
+            this.CMND_Label.Size = new System.Drawing.Size(66, 13);
             this.CMND_Label.TabIndex = 3;
-            this.CMND_Label.Text = "CMND";
+            this.CMND_Label.Text = "Identity Card";
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(460, 16);
+            this.label18.Location = new System.Drawing.Point(513, 17);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(37, 13);
             this.label18.TabIndex = 36;
@@ -423,7 +405,7 @@
             // 
             // Checkin_DateTimePicker_Today
             // 
-            this.Checkin_DateTimePicker_Today.Location = new System.Drawing.Point(520, 16);
+            this.Checkin_DateTimePicker_Today.Location = new System.Drawing.Point(573, 17);
             this.Checkin_DateTimePicker_Today.Name = "Checkin_DateTimePicker_Today";
             this.Checkin_DateTimePicker_Today.Size = new System.Drawing.Size(200, 20);
             this.Checkin_DateTimePicker_Today.TabIndex = 35;
@@ -435,7 +417,7 @@
             this.Button_Checkin.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button_Checkin.ForeColor = System.Drawing.Color.White;
             this.Button_Checkin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Button_Checkin.Location = new System.Drawing.Point(15, 187);
+            this.Button_Checkin.Location = new System.Drawing.Point(15, 316);
             this.Button_Checkin.Name = "Button_Checkin";
             this.Button_Checkin.Size = new System.Drawing.Size(227, 70);
             this.Button_Checkin.TabIndex = 6;
@@ -456,7 +438,7 @@
             // Checkin_RadioButton_NoBooking
             // 
             this.Checkin_RadioButton_NoBooking.AutoSize = true;
-            this.Checkin_RadioButton_NoBooking.Location = new System.Drawing.Point(144, 33);
+            this.Checkin_RadioButton_NoBooking.Location = new System.Drawing.Point(197, 34);
             this.Checkin_RadioButton_NoBooking.Name = "Checkin_RadioButton_NoBooking";
             this.Checkin_RadioButton_NoBooking.Size = new System.Drawing.Size(108, 17);
             this.Checkin_RadioButton_NoBooking.TabIndex = 66;
@@ -468,7 +450,7 @@
             // 
             this.Checkin_RadioButton_HaveBooking.AutoSize = true;
             this.Checkin_RadioButton_HaveBooking.Checked = true;
-            this.Checkin_RadioButton_HaveBooking.Location = new System.Drawing.Point(29, 33);
+            this.Checkin_RadioButton_HaveBooking.Location = new System.Drawing.Point(82, 34);
             this.Checkin_RadioButton_HaveBooking.Name = "Checkin_RadioButton_HaveBooking";
             this.Checkin_RadioButton_HaveBooking.Size = new System.Drawing.Size(91, 17);
             this.Checkin_RadioButton_HaveBooking.TabIndex = 65;
@@ -489,7 +471,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 442);
+            this.label2.Location = new System.Drawing.Point(76, 443);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(115, 13);
             this.label2.TabIndex = 62;
@@ -573,7 +555,7 @@
             this.Checkin_Panel_DetailOFCheckin.Controls.Add(this.Checkin_Button_Confirm);
             this.Checkin_Panel_DetailOFCheckin.Controls.Add(this.label4);
             this.Checkin_Panel_DetailOFCheckin.Controls.Add(this.Checkin_DataGridView_Detail);
-            this.Checkin_Panel_DetailOFCheckin.Location = new System.Drawing.Point(26, 683);
+            this.Checkin_Panel_DetailOFCheckin.Location = new System.Drawing.Point(79, 684);
             this.Checkin_Panel_DetailOFCheckin.Name = "Checkin_Panel_DetailOFCheckin";
             this.Checkin_Panel_DetailOFCheckin.Size = new System.Drawing.Size(694, 111);
             this.Checkin_Panel_DetailOFCheckin.TabIndex = 61;
@@ -596,56 +578,13 @@
             this.Button_Booking.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button_Booking.ForeColor = System.Drawing.Color.White;
             this.Button_Booking.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Button_Booking.Location = new System.Drawing.Point(15, 99);
+            this.Button_Booking.Location = new System.Drawing.Point(15, 222);
             this.Button_Booking.Name = "Button_Booking";
             this.Button_Booking.Size = new System.Drawing.Size(227, 70);
             this.Button_Booking.TabIndex = 5;
             this.Button_Booking.Text = "Booking ";
             this.Button_Booking.UseVisualStyleBackColor = false;
             this.Button_Booking.Click += new System.EventHandler(this.Button_Booking_Click);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(-3, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(49, 13);
-            this.label15.TabIndex = 13;
-            this.label15.Text = "Tìm kiếm";
-            // 
-            // SearchKhachDat_TextBox
-            // 
-            this.SearchKhachDat_TextBox.Location = new System.Drawing.Point(142, 24);
-            this.SearchKhachDat_TextBox.Name = "SearchKhachDat_TextBox";
-            this.SearchKhachDat_TextBox.Size = new System.Drawing.Size(177, 20);
-            this.SearchKhachDat_TextBox.TabIndex = 10;
-            // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.label15);
-            this.panel10.Controls.Add(this.SearchKhachDat_ComboBox);
-            this.panel10.Controls.Add(this.SearchKhachDat_TextBox);
-            this.panel10.Location = new System.Drawing.Point(15, 164);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(334, 53);
-            this.panel10.TabIndex = 25;
-            this.panel10.Tag = "";
-            // 
-            // SearchKhachDat_ComboBox
-            // 
-            this.SearchKhachDat_ComboBox.FormattingEnabled = true;
-            this.SearchKhachDat_ComboBox.Items.AddRange(new object[] {
-            "Mã Người Đặt",
-            "Tên Người Đặt",
-            "SĐT",
-            "Ngày Hết Hạn",
-            "Mã Phòng",
-            "Loại Phòng"});
-            this.SearchKhachDat_ComboBox.Location = new System.Drawing.Point(9, 23);
-            this.SearchKhachDat_ComboBox.Name = "SearchKhachDat_ComboBox";
-            this.SearchKhachDat_ComboBox.Size = new System.Drawing.Size(121, 21);
-            this.SearchKhachDat_ComboBox.TabIndex = 12;
-            this.SearchKhachDat_ComboBox.Text = "Mã Người Đặt";
             // 
             // Checkin_Datagridview_Booking
             // 
@@ -686,10 +625,9 @@
             // 
             this.Checkin_Panel_HaveBooking.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Checkin_Panel_HaveBooking.Controls.Add(this.Button_ChooseBooking);
-            this.Checkin_Panel_HaveBooking.Controls.Add(this.panel10);
             this.Checkin_Panel_HaveBooking.Controls.Add(this.label6);
             this.Checkin_Panel_HaveBooking.Controls.Add(this.Checkin_Datagridview_Booking);
-            this.Checkin_Panel_HaveBooking.Location = new System.Drawing.Point(28, 56);
+            this.Checkin_Panel_HaveBooking.Location = new System.Drawing.Point(81, 57);
             this.Checkin_Panel_HaveBooking.Name = "Checkin_Panel_HaveBooking";
             this.Checkin_Panel_HaveBooking.Size = new System.Drawing.Size(692, 231);
             this.Checkin_Panel_HaveBooking.TabIndex = 63;
@@ -700,9 +638,9 @@
             this.TenKH_Label.Location = new System.Drawing.Point(7, 19);
             this.TenKH_Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.TenKH_Label.Name = "TenKH_Label";
-            this.TenKH_Label.Size = new System.Drawing.Size(89, 13);
+            this.TenKH_Label.Size = new System.Drawing.Size(82, 13);
             this.TenKH_Label.TabIndex = 2;
-            this.TenKH_Label.Text = "Tên Khách Hàng";
+            this.TenKH_Label.Text = "Customer Name";
             // 
             // Button_Checkout
             // 
@@ -711,7 +649,7 @@
             this.Button_Checkout.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button_Checkout.ForeColor = System.Drawing.Color.White;
             this.Button_Checkout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Button_Checkout.Location = new System.Drawing.Point(15, 281);
+            this.Button_Checkout.Location = new System.Drawing.Point(15, 416);
             this.Button_Checkout.Name = "Button_Checkout";
             this.Button_Checkout.Size = new System.Drawing.Size(227, 70);
             this.Button_Checkout.TabIndex = 7;
@@ -722,7 +660,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(31, 193);
+            this.label7.Location = new System.Drawing.Point(83, 261);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(115, 13);
             this.label7.TabIndex = 54;
@@ -754,7 +692,7 @@
             this.Booking_Panel_ShowDetail.Controls.Add(this.Booking_Button_AddBooking);
             this.Booking_Panel_ShowDetail.Controls.Add(this.label8);
             this.Booking_Panel_ShowDetail.Controls.Add(this.Booking_DataGridView_DetailOfBooking);
-            this.Booking_Panel_ShowDetail.Location = new System.Drawing.Point(34, 480);
+            this.Booking_Panel_ShowDetail.Location = new System.Drawing.Point(86, 548);
             this.Booking_Panel_ShowDetail.Name = "Booking_Panel_ShowDetail";
             this.Booking_Panel_ShowDetail.Size = new System.Drawing.Size(682, 164);
             this.Booking_Panel_ShowDetail.TabIndex = 50;
@@ -836,7 +774,7 @@
             this.Booking_Panel_SelectingCustomer.Controls.Add(this.Booking_Button_ChooseCustomer);
             this.Booking_Panel_SelectingCustomer.Controls.Add(this.panel6);
             this.Booking_Panel_SelectingCustomer.Controls.Add(this.Booking_DGV_ListOfCustomer);
-            this.Booking_Panel_SelectingCustomer.Location = new System.Drawing.Point(34, 209);
+            this.Booking_Panel_SelectingCustomer.Location = new System.Drawing.Point(86, 277);
             this.Booking_Panel_SelectingCustomer.Name = "Booking_Panel_SelectingCustomer";
             this.Booking_Panel_SelectingCustomer.Size = new System.Drawing.Size(682, 204);
             this.Booking_Panel_SelectingCustomer.TabIndex = 48;
@@ -855,8 +793,8 @@
             // panel6
             // 
             this.panel6.Controls.Add(this.label10);
-            this.panel6.Controls.Add(this.SearchKH_ComboBox);
-            this.panel6.Controls.Add(this.SearchKH_TextBox);
+            this.panel6.Controls.Add(this.Booking_Combobox_Search);
+            this.panel6.Controls.Add(this.Booking_TextBox_SearchCutomer);
             this.panel6.Location = new System.Drawing.Point(25, 142);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(334, 53);
@@ -868,28 +806,29 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(-3, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(49, 13);
+            this.label10.Size = new System.Drawing.Size(41, 13);
             this.label10.TabIndex = 13;
-            this.label10.Text = "Tìm kiếm";
+            this.label10.Text = "Search";
             // 
-            // SearchKH_ComboBox
+            // Booking_Combobox_Search
             // 
-            this.SearchKH_ComboBox.FormattingEnabled = true;
-            this.SearchKH_ComboBox.Items.AddRange(new object[] {
+            this.Booking_Combobox_Search.FormattingEnabled = true;
+            this.Booking_Combobox_Search.Items.AddRange(new object[] {
             "Customer Name",
             "Identity Card"});
-            this.SearchKH_ComboBox.Location = new System.Drawing.Point(9, 23);
-            this.SearchKH_ComboBox.Name = "SearchKH_ComboBox";
-            this.SearchKH_ComboBox.Size = new System.Drawing.Size(121, 21);
-            this.SearchKH_ComboBox.TabIndex = 12;
-            this.SearchKH_ComboBox.Text = "Customer Name";
+            this.Booking_Combobox_Search.Location = new System.Drawing.Point(9, 23);
+            this.Booking_Combobox_Search.Name = "Booking_Combobox_Search";
+            this.Booking_Combobox_Search.Size = new System.Drawing.Size(121, 21);
+            this.Booking_Combobox_Search.TabIndex = 12;
+            this.Booking_Combobox_Search.Text = "Customer Name";
             // 
-            // SearchKH_TextBox
+            // Booking_TextBox_SearchCutomer
             // 
-            this.SearchKH_TextBox.Location = new System.Drawing.Point(142, 24);
-            this.SearchKH_TextBox.Name = "SearchKH_TextBox";
-            this.SearchKH_TextBox.Size = new System.Drawing.Size(177, 20);
-            this.SearchKH_TextBox.TabIndex = 10;
+            this.Booking_TextBox_SearchCutomer.Location = new System.Drawing.Point(142, 24);
+            this.Booking_TextBox_SearchCutomer.Name = "Booking_TextBox_SearchCutomer";
+            this.Booking_TextBox_SearchCutomer.Size = new System.Drawing.Size(177, 20);
+            this.Booking_TextBox_SearchCutomer.TabIndex = 10;
+            this.Booking_TextBox_SearchCutomer.TextChanged += new System.EventHandler(this.Booking_TextBox_SearchCutomer_TextChanged);
             // 
             // Booking_DGV_ListOfCustomer
             // 
@@ -908,7 +847,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(31, 439);
+            this.label11.Location = new System.Drawing.Point(83, 507);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(92, 13);
             this.label11.TabIndex = 47;
@@ -916,7 +855,7 @@
             // 
             // DateTimePicker_AppointmentDate
             // 
-            this.DateTimePicker_AppointmentDate.Location = new System.Drawing.Point(129, 439);
+            this.DateTimePicker_AppointmentDate.Location = new System.Drawing.Point(181, 507);
             this.DateTimePicker_AppointmentDate.Name = "DateTimePicker_AppointmentDate";
             this.DateTimePicker_AppointmentDate.Size = new System.Drawing.Size(200, 20);
             this.DateTimePicker_AppointmentDate.TabIndex = 46;
@@ -933,7 +872,7 @@
             this.Booking_Panel_NewCustomer.Controls.Add(this.XuatXu_Label);
             this.Booking_Panel_NewCustomer.Controls.Add(this.CMND_Label);
             this.Booking_Panel_NewCustomer.Controls.Add(this.TenKH_Label);
-            this.Booking_Panel_NewCustomer.Location = new System.Drawing.Point(36, 75);
+            this.Booking_Panel_NewCustomer.Location = new System.Drawing.Point(88, 143);
             this.Booking_Panel_NewCustomer.Margin = new System.Windows.Forms.Padding(2);
             this.Booking_Panel_NewCustomer.Name = "Booking_Panel_NewCustomer";
             this.Booking_Panel_NewCustomer.Size = new System.Drawing.Size(682, 95);
@@ -942,7 +881,7 @@
             // Booking_RadioButton_Never
             // 
             this.Booking_RadioButton_Never.AutoSize = true;
-            this.Booking_RadioButton_Never.Location = new System.Drawing.Point(190, 53);
+            this.Booking_RadioButton_Never.Location = new System.Drawing.Point(242, 121);
             this.Booking_RadioButton_Never.Name = "Booking_RadioButton_Never";
             this.Booking_RadioButton_Never.Size = new System.Drawing.Size(92, 17);
             this.Booking_RadioButton_Never.TabIndex = 44;
@@ -954,7 +893,7 @@
             // 
             this.Booking_RadioButton_Ever.AutoSize = true;
             this.Booking_RadioButton_Ever.Checked = true;
-            this.Booking_RadioButton_Ever.Location = new System.Drawing.Point(39, 53);
+            this.Booking_RadioButton_Ever.Location = new System.Drawing.Point(91, 121);
             this.Booking_RadioButton_Ever.Name = "Booking_RadioButton_Ever";
             this.Booking_RadioButton_Ever.Size = new System.Drawing.Size(109, 17);
             this.Booking_RadioButton_Ever.TabIndex = 43;
@@ -966,7 +905,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(49, 31);
+            this.label1.Location = new System.Drawing.Point(30, 115);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 13);
             this.label1.TabIndex = 69;
@@ -975,7 +914,7 @@
             // Today_Label
             // 
             this.Today_Label.AutoSize = true;
-            this.Today_Label.Location = new System.Drawing.Point(427, 12);
+            this.Today_Label.Location = new System.Drawing.Point(408, 96);
             this.Today_Label.Name = "Today_Label";
             this.Today_Label.Size = new System.Drawing.Size(43, 13);
             this.Today_Label.TabIndex = 68;
@@ -984,14 +923,14 @@
             // Checkout_DateTimePicker_CheckOut
             // 
             this.Checkout_DateTimePicker_CheckOut.Enabled = false;
-            this.Checkout_DateTimePicker_CheckOut.Location = new System.Drawing.Point(501, 12);
+            this.Checkout_DateTimePicker_CheckOut.Location = new System.Drawing.Point(482, 96);
             this.Checkout_DateTimePicker_CheckOut.Name = "Checkout_DateTimePicker_CheckOut";
             this.Checkout_DateTimePicker_CheckOut.Size = new System.Drawing.Size(200, 20);
             this.Checkout_DateTimePicker_CheckOut.TabIndex = 67;
             // 
             // Checkout_Button_Confirm
             // 
-            this.Checkout_Button_Confirm.Location = new System.Drawing.Point(139, 475);
+            this.Checkout_Button_Confirm.Location = new System.Drawing.Point(652, 589);
             this.Checkout_Button_Confirm.Name = "Checkout_Button_Confirm";
             this.Checkout_Button_Confirm.Size = new System.Drawing.Size(75, 23);
             this.Checkout_Button_Confirm.TabIndex = 66;
@@ -1003,7 +942,7 @@
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.Checkout_Datagridview_Invoice);
-            this.panel2.Location = new System.Drawing.Point(48, 47);
+            this.panel2.Location = new System.Drawing.Point(29, 131);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(794, 157);
             this.panel2.TabIndex = 70;
@@ -1024,6 +963,40 @@
             this.Checkout_Datagridview_Invoice.RowTemplate.Height = 24;
             this.Checkout_Datagridview_Invoice.Size = new System.Drawing.Size(760, 124);
             this.Checkout_Datagridview_Invoice.TabIndex = 49;
+            // 
+            // Checkout_InvoiceID
+            // 
+            this.Checkout_InvoiceID.HeaderText = "Invoice ID";
+            this.Checkout_InvoiceID.Name = "Checkout_InvoiceID";
+            // 
+            // Checkout_Invoices_CustomerName
+            // 
+            this.Checkout_Invoices_CustomerName.HeaderText = "Customer Name";
+            this.Checkout_Invoices_CustomerName.Name = "Checkout_Invoices_CustomerName";
+            // 
+            // Checkout_StartDate
+            // 
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.Format = "dd/MM/yyyy";
+            dataGridViewCellStyle1.NullValue = null;
+            this.Checkout_StartDate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Checkout_StartDate.HeaderText = "StartDate";
+            this.Checkout_StartDate.Name = "Checkout_StartDate";
+            // 
+            // Checkout_EndDate
+            // 
+            this.Checkout_EndDate.HeaderText = "EndDate";
+            this.Checkout_EndDate.Name = "Checkout_EndDate";
+            // 
+            // Checkout_RoomType
+            // 
+            this.Checkout_RoomType.HeaderText = "Room Type";
+            this.Checkout_RoomType.Name = "Checkout_RoomType";
+            // 
+            // Checkout_RoomPrice
+            // 
+            this.Checkout_RoomPrice.HeaderText = "Price";
+            this.Checkout_RoomPrice.Name = "Checkout_RoomPrice";
             // 
             // label3
             // 
@@ -1050,9 +1023,42 @@
             this.Checkout_Datagridview_Services.Size = new System.Drawing.Size(737, 138);
             this.Checkout_Datagridview_Services.TabIndex = 61;
             // 
+            // Checkout_Service_InvoiceID
+            // 
+            this.Checkout_Service_InvoiceID.DataPropertyName = "MaHD";
+            this.Checkout_Service_InvoiceID.HeaderText = "Invoice ID";
+            this.Checkout_Service_InvoiceID.Name = "Checkout_Service_InvoiceID";
+            // 
+            // Checkout_Service_ServiceID
+            // 
+            this.Checkout_Service_ServiceID.DataPropertyName = "MaDV";
+            this.Checkout_Service_ServiceID.HeaderText = "Service ID";
+            this.Checkout_Service_ServiceID.Name = "Checkout_Service_ServiceID";
+            // 
+            // Checkout_Service_ServiceName
+            // 
+            this.Checkout_Service_ServiceName.DataPropertyName = "TenDV";
+            this.Checkout_Service_ServiceName.HeaderText = "Service Name";
+            this.Checkout_Service_ServiceName.Name = "Checkout_Service_ServiceName";
+            // 
+            // SoNgaySD
+            // 
+            this.SoNgaySD.DataPropertyName = "Checkout_Service_Time";
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.NullValue = null;
+            this.SoNgaySD.DefaultCellStyle = dataGridViewCellStyle2;
+            this.SoNgaySD.HeaderText = "Time";
+            this.SoNgaySD.Name = "SoNgaySD";
+            // 
+            // Checkout_Price
+            // 
+            this.Checkout_Price.DataPropertyName = "GiaDV";
+            this.Checkout_Price.HeaderText = "Price per time";
+            this.Checkout_Price.Name = "Checkout_Price";
+            // 
             // Back_Button
             // 
-            this.Back_Button.Location = new System.Drawing.Point(48, 475);
+            this.Back_Button.Location = new System.Drawing.Point(563, 589);
             this.Back_Button.Name = "Back_Button";
             this.Back_Button.Size = new System.Drawing.Size(75, 23);
             this.Back_Button.TabIndex = 72;
@@ -1065,7 +1071,7 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.Checkout_Datagridview_Services);
-            this.panel3.Location = new System.Drawing.Point(48, 210);
+            this.panel3.Location = new System.Drawing.Point(29, 294);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(794, 188);
             this.panel3.TabIndex = 71;
@@ -1090,6 +1096,38 @@
             this.tabPage_CheckOut.TabIndex = 0;
             this.tabPage_CheckOut.Text = "Checkout";
             this.tabPage_CheckOut.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(549, 532);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(97, 13);
+            this.label17.TabIndex = 76;
+            this.label17.Text = "Total Service Price";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(549, 501);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(89, 13);
+            this.label16.TabIndex = 75;
+            this.label16.Text = "Total Room Price";
+            // 
+            // TextBox_ServicePrice
+            // 
+            this.TextBox_ServicePrice.Location = new System.Drawing.Point(652, 525);
+            this.TextBox_ServicePrice.Name = "TextBox_ServicePrice";
+            this.TextBox_ServicePrice.Size = new System.Drawing.Size(100, 20);
+            this.TextBox_ServicePrice.TabIndex = 74;
+            // 
+            // TextBox_RoomPrice
+            // 
+            this.TextBox_RoomPrice.Location = new System.Drawing.Point(652, 498);
+            this.TextBox_RoomPrice.Name = "TextBox_RoomPrice";
+            this.TextBox_RoomPrice.Size = new System.Drawing.Size(100, 20);
+            this.TextBox_RoomPrice.TabIndex = 73;
             // 
             // tabControl_Main
             // 
@@ -1132,112 +1170,25 @@
             this.panel1.Size = new System.Drawing.Size(256, 853);
             this.panel1.TabIndex = 3;
             // 
-            // Checkout_Service_InvoiceID
+            // label12
             // 
-            this.Checkout_Service_InvoiceID.DataPropertyName = "MaHD";
-            this.Checkout_Service_InvoiceID.HeaderText = "Invoice ID";
-            this.Checkout_Service_InvoiceID.Name = "Checkout_Service_InvoiceID";
-            // 
-            // Checkout_Service_ServiceID
-            // 
-            this.Checkout_Service_ServiceID.DataPropertyName = "MaDV";
-            this.Checkout_Service_ServiceID.HeaderText = "Service ID";
-            this.Checkout_Service_ServiceID.Name = "Checkout_Service_ServiceID";
-            // 
-            // Checkout_Service_ServiceName
-            // 
-            this.Checkout_Service_ServiceName.DataPropertyName = "TenDV";
-            this.Checkout_Service_ServiceName.HeaderText = "Service Name";
-            this.Checkout_Service_ServiceName.Name = "Checkout_Service_ServiceName";
-            // 
-            // SoNgaySD
-            // 
-            this.SoNgaySD.DataPropertyName = "Checkout_Service_Time";
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.NullValue = null;
-            this.SoNgaySD.DefaultCellStyle = dataGridViewCellStyle2;
-            this.SoNgaySD.HeaderText = "Time";
-            this.SoNgaySD.Name = "SoNgaySD";
-            // 
-            // Checkout_Price
-            // 
-            this.Checkout_Price.DataPropertyName = "GiaDV";
-            this.Checkout_Price.HeaderText = "Price per time";
-            this.Checkout_Price.Name = "Checkout_Price";
-            // 
-            // TextBox_RoomPrice
-            // 
-            this.TextBox_RoomPrice.Location = new System.Drawing.Point(139, 404);
-            this.TextBox_RoomPrice.Name = "TextBox_RoomPrice";
-            this.TextBox_RoomPrice.Size = new System.Drawing.Size(100, 20);
-            this.TextBox_RoomPrice.TabIndex = 73;
-            // 
-            // TextBox_ServicePrice
-            // 
-            this.TextBox_ServicePrice.Location = new System.Drawing.Point(139, 431);
-            this.TextBox_ServicePrice.Name = "TextBox_ServicePrice";
-            this.TextBox_ServicePrice.Size = new System.Drawing.Size(100, 20);
-            this.TextBox_ServicePrice.TabIndex = 74;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(44, 407);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(89, 13);
-            this.label16.TabIndex = 75;
-            this.label16.Text = "Total Room Price";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(36, 438);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(97, 13);
-            this.label17.TabIndex = 76;
-            this.label17.Text = "Total Service Price";
-            // 
-            // Checkout_InvoiceID
-            // 
-            this.Checkout_InvoiceID.HeaderText = "Invoice ID";
-            this.Checkout_InvoiceID.Name = "Checkout_InvoiceID";
-            // 
-            // Checkout_Invoices_CustomerName
-            // 
-            this.Checkout_Invoices_CustomerName.HeaderText = "Customer Name";
-            this.Checkout_Invoices_CustomerName.Name = "Checkout_Invoices_CustomerName";
-            // 
-            // Checkout_StartDate
-            // 
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.Format = "dd/MM/yyyy";
-            dataGridViewCellStyle1.NullValue = null;
-            this.Checkout_StartDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Checkout_StartDate.HeaderText = "StartDate";
-            this.Checkout_StartDate.Name = "Checkout_StartDate";
-            // 
-            // Checkout_EndDate
-            // 
-            this.Checkout_EndDate.HeaderText = "EndDate";
-            this.Checkout_EndDate.Name = "Checkout_EndDate";
-            // 
-            // Checkout_RoomType
-            // 
-            this.Checkout_RoomType.HeaderText = "Room Type";
-            this.Checkout_RoomType.Name = "Checkout_RoomType";
-            // 
-            // Checkout_RoomPrice
-            // 
-            this.Checkout_RoomPrice.HeaderText = "Price";
-            this.Checkout_RoomPrice.Name = "Checkout_RoomPrice";
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(241, 58);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(45, 13);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "Address";
             // 
             // Detail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 886);
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ClientSize = new System.Drawing.Size(1150, 868);
             this.Controls.Add(this.tabControl_Main);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Detail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DetailForm";
@@ -1251,8 +1202,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.Checkin_DataGridView_Detail)).EndInit();
             this.Checkin_Panel_DetailOFCheckin.ResumeLayout(false);
             this.Checkin_Panel_DetailOFCheckin.PerformLayout();
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Checkin_Datagridview_Booking)).EndInit();
             this.Checkin_Panel_HaveBooking.ResumeLayout(false);
             this.Checkin_Panel_HaveBooking.PerformLayout();
@@ -1287,8 +1236,8 @@
         private System.Windows.Forms.Panel Checkin_Panel_SelectCustomer;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox Checkin_Combobox_Search;
+        private System.Windows.Forms.TextBox Checkin_TextBox_SearchCutomer;
         private System.Windows.Forms.DataGridView Checkin_Datagridview_ListOfCustomer;
         private System.Windows.Forms.TextBox Checkin_Textbox_CustomerName;
         private System.Windows.Forms.TextBox Checkin_Textbox_PhoneNumber;
@@ -1296,7 +1245,6 @@
         private System.Windows.Forms.Button Checkin_AddCustomer;
         private System.Windows.Forms.TextBox Checkin_Textbox_Address;
         private System.Windows.Forms.TextBox Checkin_Textbox_IdentityCard;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Panel Checkin_Panel_CreateNewCustomer;
@@ -1323,10 +1271,6 @@
         private System.Windows.Forms.Panel Checkin_Panel_DetailOFCheckin;
         private System.Windows.Forms.Button Button_ChooseBooking;
         private System.Windows.Forms.Button Button_Booking;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox SearchKhachDat_TextBox;
-        private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.ComboBox SearchKhachDat_ComboBox;
         private System.Windows.Forms.DataGridView Checkin_Datagridview_Booking;
         private System.Windows.Forms.Panel Checkin_Panel_HaveBooking;
         private System.Windows.Forms.Label TenKH_Label;
@@ -1342,8 +1286,8 @@
         private System.Windows.Forms.Button Booking_Button_ChooseCustomer;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox SearchKH_ComboBox;
-        private System.Windows.Forms.TextBox SearchKH_TextBox;
+        private System.Windows.Forms.ComboBox Booking_Combobox_Search;
+        private System.Windows.Forms.TextBox Booking_TextBox_SearchCutomer;
         private System.Windows.Forms.DataGridView Booking_DGV_ListOfCustomer;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DateTimePicker DateTimePicker_AppointmentDate;
@@ -1393,5 +1337,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Checkout_EndDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Checkout_RoomType;
         private System.Windows.Forms.DataGridViewTextBoxColumn Checkout_RoomPrice;
+        private System.Windows.Forms.Label label12;
     }
 }

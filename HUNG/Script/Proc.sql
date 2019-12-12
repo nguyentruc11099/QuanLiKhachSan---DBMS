@@ -503,8 +503,8 @@ exec sp_Create_Trigger_Create @TableName = N'Booking'
 exec sp_Create_Trigger_Create @TableName = N'Invoices'
 exec sp_Create_Trigger_Create @TableName = N'HotelServices'
 exec sp_Create_Trigger_Create @TableName = N'Invoices_Services'
-
 GO
+
 if object_id('sp_Create_Trigger_Update') is not null
 	drop proc sp_Create_Trigger_Update
 go
@@ -531,7 +531,7 @@ BEGIN
 
 	 DECLARE @sql AS NVARCHAR(max) =	'create trigger ' + @TableName + '_UPDATE on ' + @TableName + char(13)+
 										'instead of update' + char(13)+
-										'as' + char(13)+
+										'as' + char(13)+'Begin'+char(13)+'Begin try'+char(13)+'begin tran'+char(13)+
 										'declare';
 	declare @cnt INT = 1;
 	while @cnt <= @count
@@ -592,6 +592,7 @@ BEGIN
 	end
 	SET @ColName = (select ColName from @InfoColTempTable where ID = 1);
 	SET @sql += ' where ' + @ColName+ ' = @' + @ColName; 
+	Set @sql += char(13)+'commit tran'+char(13)+'End Try'+char(13)+'End'+char(13);
 	print @sql
 	exec sys.sp_executesql @sql
 END
@@ -650,7 +651,7 @@ BEGIN
 	 	DECLARE @ColType AS NVARCHAR(20) =  (SELECT ColType FROM @InfoColTempTable WHERE ID = @cnt);  
 		DECLARE @CharLength AS NVARCHAR(20) =  (SELECT CharLength FROM @InfoColTempTable WHERE ID = @cnt);  
 		SET @sql += CHAR(13) +'	@'+ @ColName +' '+@ColType ;
-		if(@ColType = ' varchar' or @ColType = 'nvarchar')
+		if(@ColType = 'varchar' or @ColType = 'nvarchar')
 		begin
 			SET @sql += '('+@CharLength+')';
 		end
@@ -671,7 +672,7 @@ BEGIN
 	
 	SET @ColName = (select ColName from @InfoColTempTable where ID = 1)
 	SET @sql += 'IF((select top 1 iStatus from Undo_'+@TableName+' order by iID desc) = ''inserted'')'+char(13)+
-	'begin'+ char(13)+
+	'begin'+ char(13)+'begin tran'+char(13)+
 		'	delete '+ @TableName +char(13)+
 		'	where '+ @ColName +' = @' + @ColName+ char(13)+
 		'	insert Redo_'+ @TableName + char(13)+
@@ -685,10 +686,10 @@ BEGIN
 		END
 		SET @sql +=	'@iStatus);' +char(13)+
 					'	with t as (select top 1 * from Undo_'+@TableName+' order by iID desc)'+char(13)+
-					'	delete from t'+char(13)+
+					'	delete from t'+char(13)+'commit tran'+char(13)+
 	'end'+char(13)+
 	'else if((select top 1 iStatus from Undo_'+@TableName+' order by iID desc) = ''deleted'')'+char(13)+
-	'begin'+char(13)+
+	'begin'+char(13)+'begin tran'+char(13)+
 		'	insert '+ @TableName+'('
 		SET @cnt = 1
 		WHILE @cnt <= @count
@@ -726,10 +727,10 @@ BEGIN
 		END
 		SET @sql +=	'@iStatus);' +char(13)+
 					'	with t as (select top 1 * from Undo_'+@TableName+' order by iID desc )'+char(13)+
-					'	delete from t;'+char(13)+
+					'	delete from t;'+char(13)+'commit tran'+char(13)+
 	'end'+char(13)+
 	'else if((select top 1 iStatus from Undo_'+@TableName+' order by iID desc) = ''updated'')'+char(13)+	
-	'begin'+char(13)+
+	'begin'+char(13)+'begin tran'+char(13)+
 		'	insert Redo_'+ @TableName +char(13)+
 		'	select ' 
 		SET @cnt = 1
@@ -770,7 +771,7 @@ BEGIN
 		END
 		SET @sql +=	');' +char(13)+
 		'	with t as (select top 1 * from Undo_'+@TableName+' order by iID desc )'+char(13)+
-		'	delete from t;' + char(13)+
+		'	delete from t;' + char(13)+'commit tran'+char(13)+
 	'end'+char(13)+
 	'exec (''ENABLE TRIGGER '+@TableName+'_Create ON ' + @TableName+ ''')'+char(13)+
 	'exec (''ENABLE TRIGGER '+@TableName+'_Delete ON ' + @TableName+ ''')'+char(13)+
@@ -825,7 +826,7 @@ BEGIN
 	 	DECLARE @ColType AS NVARCHAR(20) =  (SELECT ColType FROM @InfoColTempTable WHERE ID = @cnt);  
 		DECLARE @CharLength AS NVARCHAR(20) =  (SELECT CharLength FROM @InfoColTempTable WHERE ID = @cnt);  
 		SET @sql += CHAR(13) +'	@'+ @ColName +' '+@ColType ;
-		if(@ColType = ' varchar' or @ColType = 'nvarchar')
+		if(@ColType = 'varchar' or @ColType = 'nvarchar')
 		begin
 			SET @sql += '('+@CharLength+')';
 		end
@@ -846,7 +847,7 @@ BEGIN
 	
 	SET @ColName = (select ColName from @InfoColTempTable where ID = 1)
 	SET @sql += 'IF((select top 1 iStatus from Redo_'+@TableName+' order by iID desc) = ''inserted'')'+char(13)+
-	'begin'+ char(13)+
+	'begin'+ char(13)+'Begin tran'+char(13)+ 
 	'	insert '+ @TableName+'('
 		SET @cnt = 1
 		WHILE @cnt <= @count
@@ -884,10 +885,10 @@ BEGIN
 		END
 		SET @sql +=	'@iStatus);' +char(13)+
 					'	with t as (select top 1 * from Redo_'+@TableName+' order by iID desc)'+char(13)+
-					'	delete from t'+char(13)+
+					'	delete from t'+char(13)+'commit tran'+char(13)+
 	'end'+char(13)+
 	'else if((select top 1 iStatus from Redo_'+@TableName+' order by iID desc) = ''deleted'')'+char(13)+
-	'begin'+char(13)
+	'begin'+char(13)+'Begin tran'+char(13);
 		SET @ColName = (select ColName from @InfoColTempTable where ID = 1)
 		SET @sql += '	delete '+ @TableName +char(13)+
 		'	where '+ @ColName +' = @' + @ColName+ char(13)+
@@ -902,10 +903,10 @@ BEGIN
 		END
 		SET @sql +=	'@iStatus);' +char(13)+
 					'	with t as (select top 1 * from Redo_'+@TableName+' order by iID desc )'+char(13)+
-					'	delete from t;'+char(13)+
+					'	delete from t;'+char(13)+'commit tran'+char(13)+
 	'end'+char(13)+
 	'else if((select top 1 iStatus from Redo_'+@TableName+' order by iID desc) = ''updated'')'+char(13)+	
-	'begin'+char(13)+
+	'begin'+char(13)+'Begin tran'+char(13)+
 		'	insert Undo_'+ @TableName +char(13)+
 		'	select ' 
 		SET @cnt = 1
@@ -946,7 +947,7 @@ BEGIN
 		END
 		SET @sql +=	');' +char(13)+
 		'	with t as (select top 1 * from Redo_'+@TableName+' order by iID desc )'+char(13)+
-		'	delete from t;' + char(13)+
+		'	delete from t;' + char(13)+'commit tran'+char(13)+
 	'end'+char(13)+
 	'exec (''ENABLE TRIGGER '+@TableName+'_Create ON ' + @TableName+ ''')'+char(13)+
 	'exec (''ENABLE TRIGGER '+@TableName+'_Delete ON ' + @TableName+ ''')'+char(13)+
@@ -963,8 +964,6 @@ exec dbo.sp_Create_Undo @TableName = N'Employees'
 exec dbo.sp_Create_Undo @TableName = N'Customers'
 exec dbo.sp_Create_Undo @TableName = N'RoomTypes'
 exec dbo.sp_Create_Undo @TableName = N'EmployeeTypes'
-exec dbo.sp_Create_Undo @TableName = N'Booking'
-exec dbo.sp_Create_Undo @TableName = N'Invoices'
 exec dbo.sp_Create_Undo @TableName = N'HotelServices'
 exec dbo.sp_Create_Undo @TableName = N'Invoices_Services'
 go
@@ -974,8 +973,6 @@ exec dbo.sp_Create_Redo @TableName = N'Employees'
 exec dbo.sp_Create_Redo @TableName = N'Customers'
 exec dbo.sp_Create_Redo @TableName = N'RoomTypes'
 exec dbo.sp_Create_Redo @TableName = N'EmployeeTypes'
-exec dbo.sp_Create_Redo @TableName = N'Booking'
-exec dbo.sp_Create_Redo @TableName = N'Invoices'
 exec dbo.sp_Create_Redo @TableName = N'HotelServices'
 exec dbo.sp_Create_Redo @TableName = N'Invoices_Services'
 GO
@@ -984,11 +981,9 @@ GO
 
 
 
---Other Function
+--Other Function 
 
---Room Table 
-
--- LoadRoom
+-- LoadRoom for booking and checkin form 
 use HotelDB;
 if object_id('sp_LoadRoom') is not null
 	drop PROCEDURE sp_LoadRoom;
@@ -1001,7 +996,7 @@ BEGIN
 	ORDER BY OnFloor ASC 
 END 
 go
-
+ 
 
 
 -- FindRoom
@@ -1021,57 +1016,30 @@ BEGIN
 END 
 go
 
--- Customer Table
-
---Searching FOR customer
-use HotelDB;
-if object_id('sp_SearchCustomer') is not null
-	drop proc sp_SearchCustomer;
-go
-CREATE PROC dbo.sp_SearchCustomer
-(
-	@CustomerName AS NVARCHAR(30) = NULL,
-	@IdentityCard AS VARCHAR(9) = NULL
-)
-AS
-BEGIN
-	DECLARE @sql AS NVARCHAR(1000);
-	SET @sql =
-		N'SELECT *'
-		+ N' FROM dbo.Customers'
-		+ N' WHERE '
-		+ CASE WHEN @CustomerName IS NOT NULL THEN
-		N' CustomerName like ''%'+@CustomerName +'%''' ELSE N'' END
-		+ CASE WHEN @IdentityCard IS NOT NULL THEN
-		N' AND IdentityCard like %''+ @IdentityCard + ''%' ELSE N'' END ;
-		PRINT @sql
-	EXEC sp_executesql
-		@stmt = @sql,
-		@params = N'@CusName AS NVARCHAR(30), @Identity AS  VARCHAR(9)',
-		@CusName = @CustomerName,
-		@Identity = @IdentityCard
-END
-go
-
 
 --Employee Table
 
 -- Authenication User
 use HotelDB;
-if object_id('fn_LoginEmployee') is not null
-	drop FUNCTION fn_LoginEmployee;
+if object_id('sp_LoginEmployee') is not null
+	drop proc sp_LoginEmployee;
 go
-create FUNCTION fn_LoginEmployee
+create proc sp_LoginEmployee
 	(
 		@Account int,
 		@Password NVARCHAR(20),
 		@EmployeeType TINYINT
 	)
-RETURNS INT
+as
 BEGIN
-	RETURN (SELECT TOP(1) EmployeeID FROM dbo.Employees WHERE IdentityCard = @Account AND PassWord = @Password AND EmployeeTypeID = @EmployeeType ORDER BY EmployeeID);
+	DECLARE @id AS INT;
+	DECLARE @sql AS NVARCHAR(200) = 'SELECT @EmpID=EmployeeID FROM dbo.Employees WHERE IdentityCard = @acc AND PassWord = @pass AND EmployeeTypeID = @type';
+	DECLARE @params AS NVARCHAR(100)= '@acc int,@pass nvarchar(20),@type tinyint, @EmpID int output';
+	EXEC sys.sp_executesql @sql, @params , @acc = @Account, @pass = @Password, @type = @EmployeeType, @EmpID = @id OUTPUT;
+	SELECT @id
 END
 go
+
 
 -- Find Employee
 use HotelDB;
@@ -1088,7 +1056,7 @@ Begin
 END
 go
 
-
+-- Booking method 
 use HotelDB;
 if object_id('sp_Booking') is not null
 	drop proc sp_Booking;
@@ -1116,7 +1084,7 @@ END
 GO
 
 
-
+--Find Booking for checkin form 
 use HotelDB;
 if object_id('fn_FindBooking') is not null
 	drop FUNCTION fn_FindBooking;
@@ -1127,27 +1095,10 @@ create FUNCTION fn_FindBooking
 	)
 RETURNS TABLE
 
-RETURN (SELECT BookingID,Booking.CustomerID,CustomerName,Booking.RoomID FROM ( Booking INNER JOIN dbo.Customers ON Booking.CustomerID = Customers.CustomerID ) INNER JOIN dbo.Rooms ON Booking.RoomID = Rooms.RoomID WHERE Booking.RoomID = @RoomID);
+RETURN (SELECT BookingID,Booking.CustomerID,CustomerName,Booking.RoomID FROM ( Booking INNER JOIN dbo.Customers ON Booking.CustomerID = Customers.CustomerID ) INNER JOIN dbo.Rooms ON Booking.RoomID = Rooms.RoomID WHERE Booking.RoomID = 5);
 go
 
-
-
-use HotelDB;
-if object_id('sp_FindBooking') is not null
-	drop proc sp_FindBooking;
-go
-create proc sp_FindBooking
-	(
-		@RoomID INT = NULL
-	)
-AS
-BEGIN
-	SELECT * FROM Booking WHERE Booking.RoomID = @RoomID 
-END
-go
-
-
-
+-- Checkin method
 use HotelDB;
 if object_id('sp_CheckIn') is not null
 	drop proc sp_CheckIn;
@@ -1180,78 +1131,7 @@ BEGIN
 END
 GO
 
-
-use HotelDB;
-if object_id('fn_RoomPrice') is not null
-	drop FUNCTION fn_RoomPrice;
-go
-create FUNCTION fn_RoomPrice
-	(
-		@RoomID INT = NULL
-	)
-RETURNS Money
-BEGIN
-	DECLARE @startdate AS SMALLDATETIME
-
-	SET @startdate = (SELECT CheckInDate FROM dbo.Invoices WHERE RoomID = @RoomID AND HasPaid = 0);
-
-	DECLARE @Price AS MONEY = ( SELECT c.Price FROM dbo.Invoices a INNER JOIN dbo.Rooms b ON a.RoomID = b.RoomID INNER JOIN dbo.RoomTypes c ON b.RoomTypeID = c.RoomTypeID WHERE a.RoomID = @RoomID AND a.HasPaid = 0); 
-
-	DECLARE @pay AS MONEY = DATEDIFF(day, @startdate,getdate()) * @Price
-
-	RETURN @pay;
-END
-go
-
-
-use HotelDB;
-if object_id('fn_ServicePrice') is not null
-	drop FUNCTION fn_ServicePrice;
-go
-create FUNCTION fn_ServicePrice
-	(
-		@RoomID INT = NULL
-	)
-RETURNS Money
-BEGIN
-	DECLARE @ID AS INT = (SELECT InvoiceID FROM dbo.Invoices WHERE RoomID= @RoomID AND HasPaid = 0);
-	DECLARE @pay AS MONEY =0;
-	SET @pay += (SELECT Sum(Times*Price) AS Price FROM dbo.Invoices_Services INNER JOIN dbo.HotelServices ON HotelServices.ServiceID = Invoices_Services.ServiceID WHERE InvoiceID = @ID);
-	RETURN @pay;
-END
-GO
-
-use HotelDB;
-if object_id('sp_FindInvoiceRoomPrice') is not null
-	drop Proc sp_FindInvoiceRoomPrice;
-go
-create proc sp_FindInvoiceRoomPrice
-(
-	@RoomID INT = NULL
-)
-as
-Begin
-	SELECT a.InvoiceID,a.CustomerID, d.CustomerName, a.CheckInDate,a.CheckOutDate,c.Name,c.Price FROM (SELECT * FROM dbo.Invoices WHERE RoomID = @RoomID AND HasPaid=0) a INNER JOIN dbo.Rooms b ON a.RoomID = b.RoomID INNER JOIN dbo.RoomTypes c ON c.RoomTypeID= b.RoomTypeID INNER JOIN dbo.Customers d ON a.CustomerID = d.CustomerID;
-END
-GO
-
-
-
-use HotelDB;
-if object_id('sp_FindInvoiceServicePrice') is not null
-	drop Proc sp_FindInvoiceServicePrice;
-go
-create proc sp_FindInvoiceServicePrice
-(
-	@RoomID INT = NULL
-)
-as
-Begin
-	SELECT A.InvoiceID,b.ServiceID,c.ServiceName,b.Times, c.Price FROM (SELECT * FROM dbo.Invoices WHERE RoomID= @RoomID AND HasPaid=0) a INNER JOIN dbo.Invoices_Services b ON a.InvoiceID = b.InvoiceID INNER JOIN dbo.HotelServices c ON b.ServiceID = c.ServiceID 
-END
-GO
-
-
+-- Checkout method 
 use HotelDB;
 if object_id('sp_CheckOut') is not null
 	drop proc sp_CheckOut;
@@ -1275,10 +1155,84 @@ BEGIN
 END
 GO
 
-if object_id('Revenue') is not null
-drop function Revenue
+
+-- Cal Room Price
+use HotelDB;
+if object_id('fn_RoomPrice') is not null
+	drop FUNCTION fn_RoomPrice;
 go
-create function Revenue(@month nvarchar(50), @year nvarchar(50))
+create FUNCTION fn_RoomPrice
+	(
+		@RoomID INT = NULL
+	)
+RETURNS Money
+BEGIN
+	DECLARE @startdate AS SMALLDATETIME
+
+	SET @startdate = (SELECT CheckInDate FROM dbo.Invoices WHERE RoomID = @RoomID AND HasPaid = 0);
+
+	DECLARE @Price AS MONEY = ( SELECT c.Price FROM dbo.Invoices a INNER JOIN dbo.Rooms b ON a.RoomID = b.RoomID INNER JOIN dbo.RoomTypes c ON b.RoomTypeID = c.RoomTypeID WHERE a.RoomID = @RoomID AND a.HasPaid = 0); 
+
+	DECLARE @pay AS MONEY = DATEDIFF(day, @startdate,getdate()) * @Price
+
+	RETURN @pay;
+END
+go
+
+-- Cal ServicePrice  
+use HotelDB;
+if object_id('fn_ServicePrice') is not null
+	drop FUNCTION fn_ServicePrice;
+go
+create FUNCTION fn_ServicePrice
+	(
+		@RoomID INT = NULL
+	)
+RETURNS Money
+BEGIN
+	DECLARE @ID AS INT = (SELECT InvoiceID FROM dbo.Invoices WHERE RoomID= @RoomID AND HasPaid = 0);
+	DECLARE @pay AS MONEY =0;
+	SET @pay += (SELECT Sum(Times*Price) AS Price FROM dbo.Invoices_Services INNER JOIN dbo.HotelServices ON HotelServices.ServiceID = Invoices_Services.ServiceID WHERE InvoiceID = @ID);
+	RETURN @pay;
+END
+GO
+
+-- Get data about room of an invoice  
+use HotelDB;
+if object_id('sp_FindInvoiceRoomPrice') is not null
+	drop Proc sp_FindInvoiceRoomPrice;
+go
+create proc sp_FindInvoiceRoomPrice
+(
+	@RoomID INT = NULL
+)
+as
+Begin
+	SELECT a.InvoiceID,a.CustomerID, d.CustomerName, a.CheckInDate,a.CheckOutDate,c.Name,c.Price FROM (SELECT * FROM dbo.Invoices WHERE RoomID = @RoomID AND HasPaid=0) a INNER JOIN dbo.Rooms b ON a.RoomID = b.RoomID INNER JOIN dbo.RoomTypes c ON c.RoomTypeID= b.RoomTypeID INNER JOIN dbo.Customers d ON a.CustomerID = d.CustomerID;
+END
+GO
+
+
+-- Get data about service of an invoice  
+use HotelDB;
+if object_id('sp_FindInvoiceServicePrice') is not null
+	drop Proc sp_FindInvoiceServicePrice;
+go
+create proc sp_FindInvoiceServicePrice
+(
+	@RoomID INT = NULL
+)
+as
+Begin
+	SELECT A.InvoiceID,b.ServiceID,c.ServiceName,b.Times, c.Price FROM (SELECT * FROM dbo.Invoices WHERE RoomID= @RoomID AND HasPaid=0) a INNER JOIN dbo.Invoices_Services b ON a.InvoiceID = b.InvoiceID INNER JOIN dbo.HotelServices c ON b.ServiceID = c.ServiceID 
+END
+GO
+
+-- Cal the total money in each month
+if object_id('fn_Revenue') is not null
+drop function fn_Revenue
+go
+create function fn_Revenue(@month nvarchar(50), @year nvarchar(50))
 returns smallmoney
 begin
 	if(@month != 'None')
@@ -1293,4 +1247,5 @@ begin
 		where year(cast(CheckOutDate as nvarchar(50))) = @year)
 end
 go
-select dbo.Revenue ('November','2019')
+
+

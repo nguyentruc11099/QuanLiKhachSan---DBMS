@@ -13,7 +13,7 @@ namespace HotelManagement.BS_Layer
         public int? Login(int Account, string Password, int Type)
         {
             HotelManagementDataContext db = new HotelManagementDataContext();
-            return db.fn_LoginEmployee(Account, Password, Convert.ToByte(Type));
+            return db.sp_LoginEmployee(Account, Password, Convert.ToByte(Type)).ElementAt(0).Column1;
         }
         public System.Collections.Generic.List<HotelManagement.sp_FindEmployeeResult> FindEmployee(int? ID)
         {

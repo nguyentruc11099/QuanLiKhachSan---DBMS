@@ -21,12 +21,20 @@ namespace HotelManagement.Presentation_Layer
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Employee = EmployeeID;
-            //BLEmployee temp = new BLEmployee();
-            //this.Employee = temp.FindEmployee(EmployeeID).ElementAt(0);
         }
 
         private void HotelManagement_Load(object sender, EventArgs e)
         {
+            BLEmployee bl = new BLEmployee();
+            var Temp = bl.FindEmployee(Employee).ElementAt(0);
+            lbl_UserName.Text = Temp.EmployeeName;
+            lbl_Permision.Text = "Admin";
+            if (Temp.EmployeeTypeID != 1)
+            {
+                btn_Manage.Enabled = false;
+                btn_Analysis.Enabled = false;
+                lbl_Permision.Text = "Receptionist";
+            }
             panel_Manage.Width = 0;
             LoadData();
         }
@@ -1134,5 +1142,9 @@ namespace HotelManagement.Presentation_Layer
         {
         }
 
+        private void Button_Redraw_Click(object sender, EventArgs e)
+        {
+            DrawRooms();
+        }
     }
 }

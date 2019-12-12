@@ -19,6 +19,14 @@ namespace HotelManagement.Presentation_Layer
             InitializeComponent();
             this.Room_ID = roomID;
             this.EmployeeID = employeeID;
+
+            //var bSource = new BindingSource();
+            //var table = new DataTable();
+            //var dataAdapter = new Dataadapter();
+            //dgv.DataSource = bSource
+            //dataAdapter = db.Egitek_Gorev_Listesi(LoggedUserID)
+            //dataAdapter.Fill(table)
+            //bSource.DataSource = table
         }
 
         private void Detail_Load(object sender, EventArgs e)
@@ -121,7 +129,7 @@ namespace HotelManagement.Presentation_Layer
         private void SearchKH_TextBox_TextChanged(object sender, EventArgs e)
         {
             string column;
-            switch (SearchKH_ComboBox.Text)
+            switch (Booking_Combobox_Search.Text)
             {
                 case "Customer Name":
                     {
@@ -383,6 +391,16 @@ namespace HotelManagement.Presentation_Layer
             Checkout_Datagridview_Services.Rows[0].Cells[4].Value = Temp.ElementAt(0).Price;
         }
         #endregion
+
+        private void Booking_TextBox_SearchCutomer_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Checkin_TextBox_SearchCutomer_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

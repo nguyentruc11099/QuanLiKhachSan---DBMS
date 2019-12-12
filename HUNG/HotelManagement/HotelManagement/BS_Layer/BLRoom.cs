@@ -22,24 +22,45 @@ namespace HotelManagement.BS_Layer
         }
         public bool CreateRoom (string RoomTypeID, string OnFloor, int Status)
         {
-            HotelManagementDataContext db = new HotelManagementDataContext();
-            db.sp_CreateRooms(Convert.ToByte(RoomTypeID), Convert.ToInt32(OnFloor), Status);
-            db.Rooms.Context.SubmitChanges();
-            return true;
+            try
+            {
+                HotelManagementDataContext db = new HotelManagementDataContext();
+                db.sp_CreateRooms(Convert.ToByte(RoomTypeID), Convert.ToInt32(OnFloor), Status);
+                db.Rooms.Context.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         public bool UpdateRoom(int RoomID, string RoomTypeID, string OnFloor, int Status)
         {
-            HotelManagementDataContext db = new HotelManagementDataContext();
-            db.sp_UpdateRooms(RoomID, Convert.ToByte(RoomTypeID), Convert.ToInt32(OnFloor), Status);
-            db.Rooms.Context.SubmitChanges();
-            return true;
+            try
+            {
+                HotelManagementDataContext db = new HotelManagementDataContext();
+                db.sp_UpdateRooms(RoomID, Convert.ToByte(RoomTypeID), Convert.ToInt32(OnFloor), Status);
+                db.Rooms.Context.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         public bool DeleteRoom(int RoomID)
         {
-            HotelManagementDataContext db = new HotelManagementDataContext();
-            db.sp_DeleteRooms(RoomID);
-            db.Rooms.Context.SubmitChanges();
-            return true;
+            try
+            {
+                HotelManagementDataContext db = new HotelManagementDataContext();
+                db.sp_DeleteRooms(RoomID);
+                db.Rooms.Context.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         public bool SearchRoom(int number, string textSearch)
         {
@@ -57,21 +78,6 @@ namespace HotelManagement.BS_Layer
             //    db.SearchRoom(default, default, Convert.ToInt32(textSearch));
             //}
             return true;
-
         }
-        //public bool UndoRoom ()
-        //{
-        //    //HotelManagementDataContext db = new HotelManagementDataContext();
-        //    //db.UndoRooms();
-        //    //db.Rooms.Context.SubmitChanges();
-        //    //return true;
-        //}
-        //public bool RedoRoom()
-        //{
-        //    //HotelManagementDataContext db = new HotelManagementDataContext();
-        //    //db.RedoRooms();
-        //    //db.Rooms.Context.SubmitChanges();
-        //    //return true;
-        //}
     }
 }

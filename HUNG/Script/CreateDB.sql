@@ -98,7 +98,7 @@ CREATE TABLE Invoices_Services
 )
 go
 
-
+-- Primary Key Constraint 
 ALTER TABLE dbo.Customers ADD CONSTRAINT PK_Customers PRIMARY KEY(CustomerID);
 ALTER TABLE dbo.RoomTypes ADD CONSTRAINT PK_RoomTypes PRIMARY KEY(RoomTypeID);
 ALTER TABLE dbo.Rooms ADD CONSTRAINT PK_Rooms PRIMARY KEY(RoomID);
@@ -110,6 +110,7 @@ ALTER TABLE dbo.Invoices_Services ADD CONSTRAINT PK_InvoicesServices PRIMARY KEY
 ALTER TABLE dbo.Invoices ADD CONSTRAINT PK_Invoices PRIMARY KEY(InvoiceID);
 GO
 
+-- Foreign Key Constraint 
 ALTER TABLE dbo.Customers
 WITH Check
 ADD CONSTRAINT UK_Customers UNIQUE(IdentityCard);
@@ -192,6 +193,7 @@ REFERENCES dbo.Employees(EmployeeID)
 ON DELETE CASCADE;
 go
 
+-- Check Constraint 
 
 ALTER TABLE dbo.Booking  
 add CONSTRAINT Check_BookingAppointmentDate CHECK ( AppoinmentDate >= CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME));
@@ -205,6 +207,46 @@ ALTER TABLE dbo.Invoices
 ADD CONSTRAINT Check_InvoicesInvoiceTotal CHECK (InvoiceTotal >= 0);
 GO
 
+
+-- Index
+
+drop index if exists idx_Room_RoomType
+on dbo.Rooms;
+go
+
+CREATE nonclustered INDEX idx_Room_RoomType
+ON dbo.Rooms(RoomTypeID)
+INCLUDE (Status,OnFloor,RoomID)
+go
+
+drop index if exists idx_Booking_Identify
+on dbo.booking;
+go
+
+CREATE nonclustered INDEX idx_Booking_Identify
+ON dbo.Booking(RoomID,CustomerID)
+include(BookingID)
+go
+
+drop index if exists idx_Invoice_CalRoomPrice
+on dbo.invoices;
+go
+
+CREATE nonclustered INDEX idx_Invoice_CalRoomPrice
+ON dbo.invoices(CustomerID,RoomID)
+include ( invoiceID, Checkindate, checkoutdate )
+go
+
+drop index if exists idx_InvoiceService_cal
+on dbo.Invoices_Services;
+go
+
+CREATE nonclustered INDEX idx_InvoiceService_cal
+ON dbo.Invoices_Services(InvoiceID, ServiceID)
+Include(Times)
+go
+
+--Seed Data
 INSERT INTO dbo.RoomTypes
 (
     Name,
@@ -226,8 +268,8 @@ VALUES
 (1,1,1),
 (1,1,0),
 (2,2,0),
-(2,1,0),
-(2,2,0),
+(2,1,2),
+(2,2,2),
 (2,2,0)
 
 INSERT INTO dbo.EmployeeTypes
@@ -249,7 +291,8 @@ INSERT INTO dbo.Employees
 )
 VALUES
 (N'Pham Ky Han',1,'0328953485','312383707',N'0000'),
-(N'Luong Nguyen Giao Khanh',2,'0328953425','313383707',N'1111')
+(N'Luong Nguyen Giao Khanh',2,'0328953425','313383707',N'1111'),
+(N'Le Tran Yen Nhi',2,'0328957725','313399707',N'2222')
 
 INSERT INTO dbo.Customers
 (
@@ -260,8 +303,9 @@ INSERT INTO dbo.Customers
 )
 VALUES
 (   N' Huynh Kim Lien','312383706',N'0328942384',N'HCM'  ),
-(   N' Huynh Nguyen Xuan Huy','312383206',N'0328342484',N'HCM'  ),
-(   N' Huynh Nguyen Mai Khanh','312383346',N'0323342485',N'HCM'  )
+(   N' Doan Nguyen Xuan Huy','312383206',N'0328342484',N'HCM'  ),
+(   N' Nguyen Mai Khanh','312383346',N'0323342485',N'HCM'  ),
+(   N' Nguyen Minh Nhut','312383377',N'0325662485',N'HCM'  )
 
  INSERT INTO dbo.HotelServices
  (
@@ -269,12 +313,9 @@ VALUES
      Price
  )
  VALUES
- (   N'Spa', -- ServiceName - nvarchar(20)
-      50000-- Price - smallmoney
-     ),
- (   N'Food', -- ServiceName - nvarchar(20)
-      20000-- Price - smallmoney
-     )
+ (   N'Spa',50000 ),
+ (   N'Food',20000)
+
 
 INSERT INTO dbo.Invoices
 (
@@ -283,26 +324,12 @@ INSERT INTO dbo.Invoices
     EmployeeID,
     InvoiceTotal,
     CheckInDate,
-    CheckOutDate,
     HasPaid
 )
 VALUES
-(   1,                     -- CustomerID - int
-    2,                     -- RoomID - int
-    1000,                     -- EmployeeID - int
-    0,                  -- InvoiceTotal - smallmoney
-    '2019-12-08 12:00:30', -- CheckInDate - smalldatetime
-    '2019-12-12 12:00:30', -- CheckOutDate - smalldatetime
-    0                   -- HasPaid - bit
-    ),
-(   1,                     -- CustomerID - int
-    1,                     -- RoomID - int
-    1000,                     -- EmployeeID - int
-    0,                  -- InvoiceTotal - smallmoney
-    '2019-12-08 12:00:30', -- CheckInDate - smalldatetime
-    '2019-12-15 12:00:30', -- CheckOutDate - smalldatetime
-    0                   -- HasPaid - bit
- )
+(   1,2,1000,0,'2019-12-08 12:00:30',0),
+(   2,1,1000,0,'2019-12-07 12:00:30',0)
+
 
 INSERT INTO dbo.Invoices_Services
 (
@@ -311,13 +338,15 @@ INSERT INTO dbo.Invoices_Services
     Times
 )
 VALUES
-(   2, -- InvoiceID - int
-    1, -- ServiceID - int
-    2  -- Times - int
-    ),
-(   
-	2, -- InvoiceID - int
-	2, -- ServiceID - int
-	1  -- Times - int
-)
+( 2,1, 2 ),
+( 2, 2,1 )
 
+INSERT INTO dbo.Booking
+(
+    CustomerID,
+    RoomID,
+    AppoinmentDate
+)
+VALUES
+(3,5,'2019-12-13 05:59:52' ),
+(4,6,'2019-12-13 05:59:52' )

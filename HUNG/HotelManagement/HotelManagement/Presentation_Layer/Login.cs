@@ -15,8 +15,7 @@ namespace HotelManagement.Presentation_Layer
         public int? EmployeeID { get; set; }
         public Login()
         {
-            InitializeComponent();
-            
+            InitializeComponent();            
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -49,7 +48,7 @@ namespace HotelManagement.Presentation_Layer
                 var Flag = Authenication.Login(Convert.ToInt32(txb_Account.Text), txb_Password.Text, 2);
                 if (Flag != null)
                 {
-                    this.EmployeeID = Flag;
+                    this.EmployeeID = Convert.ToInt32(Flag);
                     this.Close();
                 }
                 else
@@ -69,6 +68,5 @@ namespace HotelManagement.Presentation_Layer
         {
             this.Close();
         }
-
     }
 }
