@@ -40,7 +40,6 @@ C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagem
 C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe.config
 C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagement\bin\Debug\HotelManagement.exe
 C:\Users\hungd\Downloads\Compressed\HotelManagement\HotelManagement\HotelManagement\bin\Debug\HotelManagement.pdb
-C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csprojAssemblyReference.cache
 C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Presentation_Layer.Detail.resources
 C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Presentation_Layer.Main.resources
 C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Presentation_Layer.Login.resources
@@ -62,3 +61,4 @@ C:\Users\ADMIN\Desktop\temp\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelMana
 C:\Users\ADMIN\Desktop\temp\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csproj.GenerateResource.cache
 C:\Users\ADMIN\Desktop\temp\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.exe
 C:\Users\ADMIN\Desktop\temp\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.pdb
+C:\Users\hungd\Documents\GitHub\QuanLiKhachSan---DBMS\HUNG\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csprojAssemblyReference.cache

@@ -5,24 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-
+using HotelManagement.Data_Layer;
 
 namespace HotelManagement.BS_Layer
 {
-    class BLRoomType
+    class BLEmployeeType
     {
-        public System.Data.Linq.Table<RoomType> LoadRoomType()
+        public System.Data.Linq.Table<EmployeeType> LoadEmployeeType()
         {
-            HotelManagementDataContext db = new HotelManagementDataContext();
-            return db.RoomTypes;
+            DataSet ds = new DataSet();
+            HotelManagementDataContext hm = new HotelManagementDataContext();
+            return hm.EmployeeTypes;
         }
-        public bool CreateRoomType( string Name, string Price)
+        public bool CreateEmployeeType(string Name)
         {
             try
             {
                 HotelManagementDataContext db = new HotelManagementDataContext();
-                db.sp_CreateRoomTypes(Name, Convert.ToDecimal(Price));
-                db.RoomTypes.Context.SubmitChanges();
+                db.sp_CreateEmployeeTypes(Name);
+                db.EmployeeTypes.Context.SubmitChanges();
                 return true;
             }
             catch
@@ -30,13 +31,13 @@ namespace HotelManagement.BS_Layer
                 return false;
             }
         }
-        public bool UpdateRoomType(int RoomTypeID, string Name, string Price)
+        public bool UpdateEmployeeType(int EmployeeTypeID, string Name)
         {
             try
             {
                 HotelManagementDataContext db = new HotelManagementDataContext();
-                db.sp_UpdateRoomTypes(Convert.ToByte(RoomTypeID), Name, Convert.ToDecimal(Price));
-                db.RoomTypes.Context.SubmitChanges();
+                db.sp_UpdateEmployeeTypes(Convert.ToByte(EmployeeTypeID), Name);
+                db.EmployeeTypes.Context.SubmitChanges();
                 return true;
             }
             catch
@@ -44,13 +45,13 @@ namespace HotelManagement.BS_Layer
                 return false;
             }
         }
-        public bool DeleteRoomType(string RoomTypeID)
+        public bool DeleteEmployeeType(string EmployeeTypeID)
         {
             try
             {
                 HotelManagementDataContext db = new HotelManagementDataContext();
-                db.sp_DeleteRoomTypes(Convert.ToByte(RoomTypeID));
-                db.RoomTypes.Context.SubmitChanges();
+                db.sp_DeleteEmployeeTypes(Convert.ToByte(EmployeeTypeID));
+                db.EmployeeTypes.Context.SubmitChanges();
                 return true;
             }
             catch

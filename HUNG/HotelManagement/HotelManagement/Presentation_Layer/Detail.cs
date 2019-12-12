@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HotelManagement.BS_Layer;
 
 namespace HotelManagement.Presentation_Layer
 {
@@ -19,14 +21,6 @@ namespace HotelManagement.Presentation_Layer
             InitializeComponent();
             this.Room_ID = roomID;
             this.EmployeeID = employeeID;
-
-            //var bSource = new BindingSource();
-            //var table = new DataTable();
-            //var dataAdapter = new Dataadapter();
-            //dgv.DataSource = bSource
-            //dataAdapter = db.Egitek_Gorev_Listesi(LoggedUserID)
-            //dataAdapter.Fill(table)
-            //bSource.DataSource = table
         }
 
         private void Detail_Load(object sender, EventArgs e)
@@ -63,8 +57,6 @@ namespace HotelManagement.Presentation_Layer
                     }
             }
         }
-
-
 
         #region  Booking 
         private void Button_Booking_Click(object sender, EventArgs e)
@@ -384,17 +376,32 @@ namespace HotelManagement.Presentation_Layer
         {
             BS_Layer.BLHotelService bl = new BS_Layer.BLHotelService();
             var Temp = bl.LoadCheckOutInvoiceService(this.Room_ID);
-            Checkout_Datagridview_Services.Rows[0].Cells[0].Value = Temp.ElementAt(0).InvoiceID;
-            Checkout_Datagridview_Services.Rows[0].Cells[1].Value = Temp.ElementAt(0).ServiceID;
-            Checkout_Datagridview_Services.Rows[0].Cells[2].Value = Temp.ElementAt(0).ServiceName;
-            Checkout_Datagridview_Services.Rows[0].Cells[3].Value = Temp.ElementAt(0).Times;
-            Checkout_Datagridview_Services.Rows[0].Cells[4].Value = Temp.ElementAt(0).Price;
+            int count = 0;
+            foreach (var item in Temp)
+            {
+                Checkout_Datagridview_Services.Rows[0].Cells[0].Value = Temp.ElementAt(count).InvoiceID;
+                Checkout_Datagridview_Services.Rows[0].Cells[1].Value = Temp.ElementAt(count).ServiceID;
+                Checkout_Datagridview_Services.Rows[0].Cells[2].Value = Temp.ElementAt(count).ServiceName;
+                Checkout_Datagridview_Services.Rows[0].Cells[3].Value = Temp.ElementAt(count).Times;
+                Checkout_Datagridview_Services.Rows[0].Cells[4].Value = Temp.ElementAt(count).Price;
+                count++;
+            }
         }
         #endregion
 
         private void Booking_TextBox_SearchCutomer_TextChanged(object sender, EventArgs e)
         {
-            
+            //var bSource = new BindingSource();
+            //var table = new DataTable();
+            //SqlCommand comm = new SqlCommand();
+            //SqlDataAdapter dataAdapter = new SqlDataAdapter();
+
+            //dgv.DataSource = bSource;
+            //comm.CommandType = CommandType.Text;
+            //comm.CommandText = 'Exec sp_SearcgCustomers';
+            //dataAdapter = 
+            //dataAdapter.Fill(table);
+            //bSource.DataSource = table;
         }
 
         private void Checkin_TextBox_SearchCutomer_TextChanged(object sender, EventArgs e)

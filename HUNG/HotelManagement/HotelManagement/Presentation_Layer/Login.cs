@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HotelManagement.BS_Layer;
 
 namespace HotelManagement.Presentation_Layer
 {

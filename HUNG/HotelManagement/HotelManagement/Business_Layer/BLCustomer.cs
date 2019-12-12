@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-
+using HotelManagement.Data_Layer;
 
 namespace HotelManagement.BS_Layer
 {
@@ -15,6 +15,12 @@ namespace HotelManagement.BS_Layer
         {
             HotelManagementDataContext hm = new HotelManagementDataContext();
             return hm.Customers;
+        }
+        public void SearchCutomer(string CustomerName, string IdentityCard)
+        {
+            DBMain db = new DBMain();
+            string sql = "Exec sp_SearchCustomers";
+            db.ExecuteQueryDataSet(sql, CommandType.Text);
         }
         public bool CreateCustomer(string CustomerName, string IdentityCard, string PhoneNumber, string CustomerAddress)
         {

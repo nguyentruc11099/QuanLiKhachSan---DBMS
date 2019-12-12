@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace HotelManagement.Presentation_Layer
 {
     public partial class Main : Form
@@ -22,7 +23,6 @@ namespace HotelManagement.Presentation_Layer
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Employee = EmployeeID;
         }
-
         private void HotelManagement_Load(object sender, EventArgs e)
         {
             BLEmployee bl = new BLEmployee();
@@ -957,65 +957,18 @@ namespace HotelManagement.Presentation_Layer
         }
         #endregion
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            BLRoom db = new BLRoom();
-            if(cmb_Room.Text == "OnFloor")
-            {
-                if (textBox_Room.Text == "")
-                {
-                    dgv_Room.DataSource = db.LoadRoom();
-                }
-                else dgv_Room.DataSource = db.SearchRoom(2, textBox_Room.Text);
-            }
-            if (cmb_Room.Text == "RoomTypeID")
-            {
-                if (textBox_Room.Text == "")
-                {
-                    dgv_Room.DataSource = db.LoadRoom();
-                }
-                else dgv_Room.DataSource = db.SearchRoom(1, textBox_Room.Text);
-            }
-            if(cmb_Room.Text == "Status")
-            {
-                if (textBox_Room.Text == "")
-                {
-                    dgv_Room.DataSource = db.LoadRoom();
-                }
-                else dgv_Room.DataSource = db.SearchRoom(3, textBox_Room.Text);
-            }
-            if(textBox_Room.Text == "")
-            {
-                dgv_Room.DataSource = db.LoadRoom();
-            }  
-        }
-
-        private void btn_Manage_Click(object sender, EventArgs e)
-        {
-            panel_Manage.Width = 260;
-        }
-
-        private void Button_Hide_Click(object sender, EventArgs e)
-        {
-            panel_Manage.Width = 0;
-        }
-
-
-        private void btn_Logout_Click(object sender, EventArgs e)
-        {
-            Application.Restart();
-            Environment.Exit(0);
-        }
-
-        private void timer_Redraw_Tick(object sender, EventArgs e)
-        {
-            DrawRooms();
-        }
-
+        #region Analysis
         private void btnAnalysis_Click(object sender, EventArgs e)
         {
             TabControl_Main.TabPages.Clear();
             TabControl_Main.TabPages.Add(TabPage_Revenue);
+            panel_Manage.Width = 0;
+            AnalysisInitialize();
+        }
+
+        private void AnalysisInitialize()
+        {
+            
         }
 
         private void btn_Calculate_Click(object sender, EventArgs e)
@@ -1043,6 +996,8 @@ namespace HotelManagement.Presentation_Layer
                 cmb_Month.Text = "None";
             }
         }
+        #endregion
+
         #region Undo_Redo
         private void btn_Undo_Click(object sender, EventArgs e)
         {
@@ -1138,13 +1093,38 @@ namespace HotelManagement.Presentation_Layer
             }
         }
         #endregion
-        private void TabControl_Main_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
 
+        #region Navigation Button 
         private void Button_Redraw_Click(object sender, EventArgs e)
         {
             DrawRooms();
         }
+
+        private void btnDashboard_Click(object sender, EventArgs e)
+        {
+            TabControl_Main.TabPages.Clear();
+            TabControl_Main.TabPages.Add(tabPage_DefaultScreen);
+            panel_Manage.Width = 0;
+        }
+        private void btn_Manage_Click(object sender, EventArgs e)
+        {
+            panel_Manage.Width = 260;
+        }
+
+        private void Button_Hide_Click(object sender, EventArgs e)
+        {
+            panel_Manage.Width = 0;
+        }
+        private void btn_Logout_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+            Environment.Exit(0);
+        }
+
+        private void timer_Redraw_Tick(object sender, EventArgs e)
+        {
+            DrawRooms();
+        }
+        #endregion
     }
 }

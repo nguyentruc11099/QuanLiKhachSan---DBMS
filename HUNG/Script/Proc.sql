@@ -180,9 +180,9 @@ exec sp_Create @TableName = N'Rooms'
 exec sp_Create @TableName = N'Employees'
 exec sp_Create @TableName = N'Customers'
 exec sp_Create @TableName = N'RoomTypes'
+exec sp_Create @TableName = N'EmployeeTypes'
 exec sp_Create @TableName = N'Booking'
 exec sp_Create @TableName = N'Invoices'
-exec sp_Create @TableName = N'EmployeeTypes'
 exec sp_Create @TableName = N'HotelServices'
 exec sp_Create @TableName = N'Invoices_Services'
 go
@@ -314,6 +314,7 @@ exec sp_Create_Undo_Table @TableName = N'Booking'
 exec sp_Create_Undo_Table @TableName = N'Invoices'
 exec sp_Create_Undo_Table @TableName = N'HotelServices'
 exec sp_Create_Undo_Table @TableName = N'Invoices_Services'
+go
 
 exec sp_Create_Redo_Table @TableName = N'Rooms'
 exec sp_Create_Redo_Table @TableName = N'Employees'
@@ -324,9 +325,7 @@ exec sp_Create_Redo_Table @TableName = N'Booking'
 exec sp_Create_Redo_Table @TableName = N'Invoices'
 exec sp_Create_Redo_Table @TableName = N'HotelServices'
 exec sp_Create_Redo_Table @TableName = N'Invoices_Services'
-
 GO
-
 
 if object_id('sp_Create_Trigger_Delete') is not null
 	drop proc sp_Create_Trigger_Delete
@@ -354,7 +353,7 @@ BEGIN
 
 	 DECLARE @sql AS NVARCHAR(max) =	'create trigger ' + @TableName + '_DELETE on ' + @TableName + char(13)+
 										'after delete' + char(13)+
-										'as' + char(13)+
+										'as' + char(13)+'Begin'+char(13)+'Begin try'+char(13)+'Begin tran;'+char(13)+
 										'declare';
 	declare @cnt INT = 1;
 	while @cnt <= @count
@@ -399,11 +398,12 @@ BEGIN
 		end
 		SET @cnt = @cnt +1
 	end
-	SET @sql += '''deleted'');'
+	SET @sql += '''deleted'');'+char(13)+'commit tran;'+char(13)+'end try'+char(13)+'begin catch'+char(13)+'rollback tran;'+char(13)+'end catch'+char(13)+'end';
 	print @sql
 	exec sys.sp_executesql @sql
 END
 go
+
 exec sp_Create_Trigger_Delete @TableName = N'Rooms'
 exec sp_Create_Trigger_Delete @TableName = N'Employees'
 exec sp_Create_Trigger_Delete @TableName = N'Customers'
@@ -414,8 +414,6 @@ exec sp_Create_Trigger_Delete @TableName = N'Invoices'
 exec sp_Create_Trigger_Delete @TableName = N'HotelServices'
 exec sp_Create_Trigger_Delete @TableName = N'Invoices_Services'
 GO
-
-
 
 if object_id('sp_Create_Trigger_Create') is not null
 	drop proc sp_Create_Trigger_Create
@@ -443,7 +441,7 @@ BEGIN
 
 	 DECLARE @sql AS NVARCHAR(max) =	'create trigger ' + @TableName + '_CREATE on ' + @TableName + char(13)+
 										'after insert' + char(13)+
-										'as' + char(13)+
+										'as' + char(13)+'Begin'+char(13)+'Begin try'+char(13)+'Begin tran;'+char(13)+
 										'declare';
 	declare @cnt INT = 1;
 	while @cnt <= @count
@@ -489,7 +487,7 @@ BEGIN
 		end
 		SET @cnt = @cnt +1
 	end
-	SET @sql += '''inserted'');'
+	SET @sql += '''inserted'');'+char(13)+'commit tran;'+char(13)+'end try'+char(13)+'begin catch'+char(13)+'rollback tran;'+char(13)+'end catch'+char(13)+'end';
 	print @sql
 	exec sys.sp_executesql @sql
 END
@@ -531,7 +529,7 @@ BEGIN
 
 	 DECLARE @sql AS NVARCHAR(max) =	'create trigger ' + @TableName + '_UPDATE on ' + @TableName + char(13)+
 										'instead of update' + char(13)+
-										'as' + char(13)+'Begin'+char(13)+'Begin try'+char(13)+'begin tran'+char(13)+
+										'as' + char(13)+'Begin'+char(13)+'Begin try'+char(13)+'Begin tran;'+char(13)+
 										'declare';
 	declare @cnt INT = 1;
 	while @cnt <= @count
@@ -592,7 +590,7 @@ BEGIN
 	end
 	SET @ColName = (select ColName from @InfoColTempTable where ID = 1);
 	SET @sql += ' where ' + @ColName+ ' = @' + @ColName; 
-	Set @sql += char(13)+'commit tran'+char(13)+'End Try'+char(13)+'End'+char(13);
+	Set @sql += char(13)+'commit tran;'+char(13)+'end try'+char(13)+'begin catch'+char(13)+'rollback tran;'+char(13)+'end catch'+char(13)+'end';
 	print @sql
 	exec sys.sp_executesql @sql
 END
@@ -672,7 +670,7 @@ BEGIN
 	
 	SET @ColName = (select ColName from @InfoColTempTable where ID = 1)
 	SET @sql += 'IF((select top 1 iStatus from Undo_'+@TableName+' order by iID desc) = ''inserted'')'+char(13)+
-	'begin'+ char(13)+'begin tran'+char(13)+
+	'begin'+ char(13)+'begin try'+ char(13)+'begin tran;'+char(13)+
 		'	delete '+ @TableName +char(13)+
 		'	where '+ @ColName +' = @' + @ColName+ char(13)+
 		'	insert Redo_'+ @TableName + char(13)+
@@ -686,10 +684,10 @@ BEGIN
 		END
 		SET @sql +=	'@iStatus);' +char(13)+
 					'	with t as (select top 1 * from Undo_'+@TableName+' order by iID desc)'+char(13)+
-					'	delete from t'+char(13)+'commit tran'+char(13)+
+					'	delete from t'+char(13)+'commit tran;'+char(13)+'end try'+ char(13)+'begin catch'+char(13)+'rollback tran;'+char(13)+'end catch'+char(13)+
 	'end'+char(13)+
 	'else if((select top 1 iStatus from Undo_'+@TableName+' order by iID desc) = ''deleted'')'+char(13)+
-	'begin'+char(13)+'begin tran'+char(13)+
+	'begin'+char(13)+'begin try'+ char(13)+'begin tran;'+char(13)+
 		'	insert '+ @TableName+'('
 		SET @cnt = 1
 		WHILE @cnt <= @count
@@ -727,10 +725,10 @@ BEGIN
 		END
 		SET @sql +=	'@iStatus);' +char(13)+
 					'	with t as (select top 1 * from Undo_'+@TableName+' order by iID desc )'+char(13)+
-					'	delete from t;'+char(13)+'commit tran'+char(13)+
+					'	delete from t;'+char(13)+'commit tran;'+char(13)+'end try'+ char(13)+'begin catch'+char(13)+'rollback tran;'+char(13)+'end catch'+char(13)+
 	'end'+char(13)+
 	'else if((select top 1 iStatus from Undo_'+@TableName+' order by iID desc) = ''updated'')'+char(13)+	
-	'begin'+char(13)+'begin tran'+char(13)+
+	'begin'+char(13)+'begin try'+ char(13)+'begin tran;'+char(13)+
 		'	insert Redo_'+ @TableName +char(13)+
 		'	select ' 
 		SET @cnt = 1
@@ -771,7 +769,7 @@ BEGIN
 		END
 		SET @sql +=	');' +char(13)+
 		'	with t as (select top 1 * from Undo_'+@TableName+' order by iID desc )'+char(13)+
-		'	delete from t;' + char(13)+'commit tran'+char(13)+
+		'	delete from t;' + char(13)+'commit tran;'+char(13)+'end try'+ char(13)+'begin catch'+char(13)+'rollback tran;'+char(13)+'end catch'+char(13)+
 	'end'+char(13)+
 	'exec (''ENABLE TRIGGER '+@TableName+'_Create ON ' + @TableName+ ''')'+char(13)+
 	'exec (''ENABLE TRIGGER '+@TableName+'_Delete ON ' + @TableName+ ''')'+char(13)+
@@ -782,7 +780,6 @@ BEGIN
 	exec sys.sp_executesql @sql
 END
 go
-
 
 if object_id('sp_Create_Redo') is not null
 	drop proc sp_Create_Redo;
@@ -847,7 +844,7 @@ BEGIN
 	
 	SET @ColName = (select ColName from @InfoColTempTable where ID = 1)
 	SET @sql += 'IF((select top 1 iStatus from Redo_'+@TableName+' order by iID desc) = ''inserted'')'+char(13)+
-	'begin'+ char(13)+'Begin tran'+char(13)+ 
+	'begin'+char(13)+'begin try'+ char(13)+'begin tran;'+char(13)+
 	'	insert '+ @TableName+'('
 		SET @cnt = 1
 		WHILE @cnt <= @count
@@ -885,10 +882,10 @@ BEGIN
 		END
 		SET @sql +=	'@iStatus);' +char(13)+
 					'	with t as (select top 1 * from Redo_'+@TableName+' order by iID desc)'+char(13)+
-					'	delete from t'+char(13)+'commit tran'+char(13)+
+					'	delete from t'+ char(13)+'commit tran;'+char(13)+'end try'+ char(13)+'begin catch'+char(13)+'rollback tran;'+char(13)+'end catch'+char(13)+
 	'end'+char(13)+
 	'else if((select top 1 iStatus from Redo_'+@TableName+' order by iID desc) = ''deleted'')'+char(13)+
-	'begin'+char(13)+'Begin tran'+char(13);
+		'begin'+char(13)+'begin try'+ char(13)+'begin tran;'+char(13);
 		SET @ColName = (select ColName from @InfoColTempTable where ID = 1)
 		SET @sql += '	delete '+ @TableName +char(13)+
 		'	where '+ @ColName +' = @' + @ColName+ char(13)+
@@ -903,10 +900,10 @@ BEGIN
 		END
 		SET @sql +=	'@iStatus);' +char(13)+
 					'	with t as (select top 1 * from Redo_'+@TableName+' order by iID desc )'+char(13)+
-					'	delete from t;'+char(13)+'commit tran'+char(13)+
+					'	delete from t;'+char(13)+'commit tran;'+char(13)+'end try'+ char(13)+'begin catch'+char(13)+'rollback tran;'+char(13)+'end catch'+char(13)+
 	'end'+char(13)+
 	'else if((select top 1 iStatus from Redo_'+@TableName+' order by iID desc) = ''updated'')'+char(13)+	
-	'begin'+char(13)+'Begin tran'+char(13)+
+	'begin'+char(13)+'begin try'+ char(13)+'begin tran;'+char(13)+
 		'	insert Undo_'+ @TableName +char(13)+
 		'	select ' 
 		SET @cnt = 1
@@ -947,7 +944,7 @@ BEGIN
 		END
 		SET @sql +=	');' +char(13)+
 		'	with t as (select top 1 * from Redo_'+@TableName+' order by iID desc )'+char(13)+
-		'	delete from t;' + char(13)+'commit tran'+char(13)+
+		'	delete from t;'+char(13)+'commit tran;'+char(13)+'end try'+ char(13)+'begin catch'+char(13)+'rollback tran;'+char(13)+'end catch'+char(13)+
 	'end'+char(13)+
 	'exec (''ENABLE TRIGGER '+@TableName+'_Create ON ' + @TableName+ ''')'+char(13)+
 	'exec (''ENABLE TRIGGER '+@TableName+'_Delete ON ' + @TableName+ ''')'+char(13)+
@@ -964,6 +961,8 @@ exec dbo.sp_Create_Undo @TableName = N'Employees'
 exec dbo.sp_Create_Undo @TableName = N'Customers'
 exec dbo.sp_Create_Undo @TableName = N'RoomTypes'
 exec dbo.sp_Create_Undo @TableName = N'EmployeeTypes'
+exec dbo.sp_Create_Undo @TableName = N'Booking'
+exec dbo.sp_Create_Undo @TableName = N'Invoices'
 exec dbo.sp_Create_Undo @TableName = N'HotelServices'
 exec dbo.sp_Create_Undo @TableName = N'Invoices_Services'
 go
@@ -973,6 +972,8 @@ exec dbo.sp_Create_Redo @TableName = N'Employees'
 exec dbo.sp_Create_Redo @TableName = N'Customers'
 exec dbo.sp_Create_Redo @TableName = N'RoomTypes'
 exec dbo.sp_Create_Redo @TableName = N'EmployeeTypes'
+exec dbo.sp_Create_Redo @TableName = N'Booking'
+exec dbo.sp_Create_Redo @TableName = N'Invoices'
 exec dbo.sp_Create_Redo @TableName = N'HotelServices'
 exec dbo.sp_Create_Redo @TableName = N'Invoices_Services'
 GO
@@ -1228,7 +1229,7 @@ Begin
 END
 GO
 
--- Cal the total money in each month
+-- Calculate the total money in each month
 if object_id('fn_Revenue') is not null
 drop function fn_Revenue
 go
@@ -1248,4 +1249,42 @@ begin
 end
 go
 
+--
+use HotelDB;
+if object_id('sp_Revenue3Month') is not null
+drop Proc sp_Revenue3Month
+go
+create Proc sp_Revenue3Month
+AS
+begin
+	DECLARE @month as nvarchar(20) = month(cast(getdate() as nvarchar(50)));
+	DECLARE @year as int = year(cast(getdate() as nvarchar(50)));
+	DECLARE @TempTable TABLE (ID INT identity(1,1) PRIMARY KEY, [Month] int, Revenue decimal);
+	Declare @cnt INT = 0;
+		If(@month<=2)
+		begin 
+			while @cnt < @month
+			begin
+				INSERT INTO @TempTable
+				SELECT (@month-@cnt) as Month, SUM(InvoiceTotal) as Total 			 
+				FROM Invoices WHERE month(cast(CheckOutDate as nvarchar(50))) = @month-@cnt and 
+									year(cast(CheckOutDate as nvarchar(50))) = @year and HasPaid=1;
+				SET @cnt = @cnt +1;
+			end
+		end
+		else 
+		begin
+			while @cnt < 3
+			begin
+				INSERT INTO @TempTable
+				SELECT (@month-@cnt) as Month, SUM(InvoiceTotal) as Total 			 
+				FROM Invoices WHERE month(cast(CheckOutDate as nvarchar(50))) = @month-@cnt and 
+									year(cast(CheckOutDate as nvarchar(50))) = @year and HasPaid=1;
+				SET @cnt = @cnt +1;
+			end
+		end 
+	Select Month,Revenue from @TempTable;
+end
+go
 
+Exec sp_Revenue3Month

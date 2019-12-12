@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using HotelManagement.Data_Layer;
 
 namespace HotelManagement.BS_Layer
 {

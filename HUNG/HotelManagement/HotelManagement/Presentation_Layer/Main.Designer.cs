@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel_Navigation = new System.Windows.Forms.Panel();
             this.btn_Redo = new System.Windows.Forms.Button();
             this.btn_Undo = new System.Windows.Forms.Button();
@@ -57,8 +60,6 @@
             this.TabPage_Room = new System.Windows.Forms.TabPage();
             this.checkBox_VIP = new System.Windows.Forms.CheckBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.cmb_Room = new System.Windows.Forms.ComboBox();
-            this.textBox_Room = new System.Windows.Forms.TextBox();
             this.txt_Room_RoomTypeID = new System.Windows.Forms.TextBox();
             this.txt_Room_OnFloor = new System.Windows.Forms.TextBox();
             this.txt_Room_RoomID = new System.Windows.Forms.TextBox();
@@ -129,6 +130,11 @@
             this.label12 = new System.Windows.Forms.Label();
             this.dgv_Employee = new System.Windows.Forms.DataGridView();
             this.tabPage_DefaultScreen = new System.Windows.Forms.TabPage();
+            this.Button_Redraw = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label22 = new System.Windows.Forms.Label();
             this.Panel_ListRoom = new System.Windows.Forms.Panel();
             this.TabPage_Service = new System.Windows.Forms.TabPage();
             this.txt_Service_ServiceID = new System.Windows.Forms.TextBox();
@@ -218,11 +224,8 @@
             this.cmb_Month = new System.Windows.Forms.ComboBox();
             this.rtxt_Total = new System.Windows.Forms.RichTextBox();
             this.timer_Redraw = new System.Windows.Forms.Timer(this.components);
-            this.label22 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label25 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.Button_Redraw = new System.Windows.Forms.Button();
+            this.Analysis_DataGridView = new System.Windows.Forms.DataGridView();
+            this.Chart_TotalRevenue = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel_Navigation.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -250,13 +253,13 @@
             this.TabPage_Invoice_Service.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_InvoiceService)).BeginInit();
             this.TabPage_Revenue.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Analysis_DataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Chart_TotalRevenue)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_Navigation
             // 
             this.panel_Navigation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
-            this.panel_Navigation.Controls.Add(this.btn_Redo);
-            this.panel_Navigation.Controls.Add(this.btn_Undo);
             this.panel_Navigation.Controls.Add(this.panel3);
             this.panel_Navigation.Controls.Add(this.btn_Logout);
             this.panel_Navigation.Controls.Add(this.btn_Analysis);
@@ -271,7 +274,7 @@
             // 
             // btn_Redo
             // 
-            this.btn_Redo.Location = new System.Drawing.Point(151, 749);
+            this.btn_Redo.Location = new System.Drawing.Point(181, 40);
             this.btn_Redo.Name = "btn_Redo";
             this.btn_Redo.Size = new System.Drawing.Size(64, 37);
             this.btn_Redo.TabIndex = 12;
@@ -281,7 +284,7 @@
             // 
             // btn_Undo
             // 
-            this.btn_Undo.Location = new System.Drawing.Point(78, 749);
+            this.btn_Undo.Location = new System.Drawing.Point(18, 40);
             this.btn_Undo.Name = "btn_Undo";
             this.btn_Undo.Size = new System.Drawing.Size(64, 37);
             this.btn_Undo.TabIndex = 11;
@@ -315,7 +318,7 @@
             this.lbl_UserName.AutoSize = true;
             this.lbl_UserName.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_UserName.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lbl_UserName.Location = new System.Drawing.Point(34, 0);
+            this.lbl_UserName.Location = new System.Drawing.Point(45, 9);
             this.lbl_UserName.Name = "lbl_UserName";
             this.lbl_UserName.Size = new System.Drawing.Size(73, 16);
             this.lbl_UserName.TabIndex = 1;
@@ -397,11 +400,14 @@
             this.btnDashboard.TabIndex = 2;
             this.btnDashboard.Text = " Dashboard";
             this.btnDashboard.UseVisualStyleBackColor = false;
+            this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
             // 
             // panel_Manage
             // 
             this.panel_Manage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
+            this.panel_Manage.Controls.Add(this.btn_Redo);
             this.panel_Manage.Controls.Add(this.Button_Hide);
+            this.panel_Manage.Controls.Add(this.btn_Undo);
             this.panel_Manage.Controls.Add(this.btn_InvoiceService);
             this.panel_Manage.Controls.Add(this.btn_EmployeeType);
             this.panel_Manage.Controls.Add(this.btn_Booking);
@@ -421,7 +427,7 @@
             // 
             this.Button_Hide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(166)))), ((int)(((byte)(90)))));
             this.Button_Hide.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Button_Hide.Location = new System.Drawing.Point(170, 21);
+            this.Button_Hide.Location = new System.Drawing.Point(170, 4);
             this.Button_Hide.Name = "Button_Hide";
             this.Button_Hide.Size = new System.Drawing.Size(75, 23);
             this.Button_Hide.TabIndex = 15;
@@ -436,7 +442,7 @@
             this.btn_InvoiceService.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_InvoiceService.ForeColor = System.Drawing.Color.White;
             this.btn_InvoiceService.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_InvoiceService.Location = new System.Drawing.Point(18, 716);
+            this.btn_InvoiceService.Location = new System.Drawing.Point(18, 801);
             this.btn_InvoiceService.Name = "btn_InvoiceService";
             this.btn_InvoiceService.Size = new System.Drawing.Size(227, 70);
             this.btn_InvoiceService.TabIndex = 14;
@@ -451,7 +457,7 @@
             this.btn_EmployeeType.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_EmployeeType.ForeColor = System.Drawing.Color.White;
             this.btn_EmployeeType.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_EmployeeType.Location = new System.Drawing.Point(18, 640);
+            this.btn_EmployeeType.Location = new System.Drawing.Point(18, 716);
             this.btn_EmployeeType.Name = "btn_EmployeeType";
             this.btn_EmployeeType.Size = new System.Drawing.Size(227, 70);
             this.btn_EmployeeType.TabIndex = 13;
@@ -466,7 +472,7 @@
             this.btn_Booking.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Booking.ForeColor = System.Drawing.Color.White;
             this.btn_Booking.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Booking.Location = new System.Drawing.Point(18, 564);
+            this.btn_Booking.Location = new System.Drawing.Point(18, 628);
             this.btn_Booking.Name = "btn_Booking";
             this.btn_Booking.Size = new System.Drawing.Size(227, 70);
             this.btn_Booking.TabIndex = 12;
@@ -481,7 +487,7 @@
             this.btn_Invoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Invoice.ForeColor = System.Drawing.Color.White;
             this.btn_Invoice.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Invoice.Location = new System.Drawing.Point(18, 488);
+            this.btn_Invoice.Location = new System.Drawing.Point(18, 543);
             this.btn_Invoice.Name = "btn_Invoice";
             this.btn_Invoice.Size = new System.Drawing.Size(227, 70);
             this.btn_Invoice.TabIndex = 10;
@@ -496,7 +502,7 @@
             this.btn_Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Service.ForeColor = System.Drawing.Color.White;
             this.btn_Service.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Service.Location = new System.Drawing.Point(18, 412);
+            this.btn_Service.Location = new System.Drawing.Point(18, 457);
             this.btn_Service.Name = "btn_Service";
             this.btn_Service.Size = new System.Drawing.Size(227, 70);
             this.btn_Service.TabIndex = 8;
@@ -511,7 +517,7 @@
             this.btn_Employee.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Employee.ForeColor = System.Drawing.Color.White;
             this.btn_Employee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Employee.Location = new System.Drawing.Point(18, 336);
+            this.btn_Employee.Location = new System.Drawing.Point(18, 367);
             this.btn_Employee.Name = "btn_Employee";
             this.btn_Employee.Size = new System.Drawing.Size(227, 70);
             this.btn_Employee.TabIndex = 7;
@@ -526,7 +532,7 @@
             this.btn_RoomType.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_RoomType.ForeColor = System.Drawing.Color.White;
             this.btn_RoomType.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_RoomType.Location = new System.Drawing.Point(18, 260);
+            this.btn_RoomType.Location = new System.Drawing.Point(18, 281);
             this.btn_RoomType.Name = "btn_RoomType";
             this.btn_RoomType.Size = new System.Drawing.Size(227, 70);
             this.btn_RoomType.TabIndex = 6;
@@ -541,7 +547,7 @@
             this.btn_Customer.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Customer.ForeColor = System.Drawing.Color.White;
             this.btn_Customer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Customer.Location = new System.Drawing.Point(18, 184);
+            this.btn_Customer.Location = new System.Drawing.Point(18, 194);
             this.btn_Customer.Name = "btn_Customer";
             this.btn_Customer.Size = new System.Drawing.Size(227, 70);
             this.btn_Customer.TabIndex = 5;
@@ -556,7 +562,7 @@
             this.btn_Room.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Room.ForeColor = System.Drawing.Color.White;
             this.btn_Room.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Room.Location = new System.Drawing.Point(18, 108);
+            this.btn_Room.Location = new System.Drawing.Point(18, 104);
             this.btn_Room.Name = "btn_Room";
             this.btn_Room.Size = new System.Drawing.Size(227, 70);
             this.btn_Room.TabIndex = 4;
@@ -593,14 +599,11 @@
             this.TabControl_Main.SelectedIndex = 0;
             this.TabControl_Main.Size = new System.Drawing.Size(1374, 893);
             this.TabControl_Main.TabIndex = 5;
-            this.TabControl_Main.SelectedIndexChanged += new System.EventHandler(this.TabControl_Main_SelectedIndexChanged);
             // 
             // TabPage_Room
             // 
             this.TabPage_Room.Controls.Add(this.checkBox_VIP);
             this.TabPage_Room.Controls.Add(this.label21);
-            this.TabPage_Room.Controls.Add(this.cmb_Room);
-            this.TabPage_Room.Controls.Add(this.textBox_Room);
             this.TabPage_Room.Controls.Add(this.txt_Room_RoomTypeID);
             this.TabPage_Room.Controls.Add(this.txt_Room_OnFloor);
             this.TabPage_Room.Controls.Add(this.txt_Room_RoomID);
@@ -644,25 +647,6 @@
             this.label21.Size = new System.Drawing.Size(35, 13);
             this.label21.TabIndex = 25;
             this.label21.Text = "Name";
-            // 
-            // cmb_Room
-            // 
-            this.cmb_Room.FormattingEnabled = true;
-            this.cmb_Room.Items.AddRange(new object[] {
-            "OnFloor",
-            "RoomTypeID",
-            "Status"});
-            this.cmb_Room.Location = new System.Drawing.Point(749, 20);
-            this.cmb_Room.Name = "cmb_Room";
-            this.cmb_Room.Size = new System.Drawing.Size(121, 21);
-            this.cmb_Room.TabIndex = 24;
-            // 
-            // textBox_Room
-            // 
-            this.textBox_Room.Location = new System.Drawing.Point(888, 20);
-            this.textBox_Room.Name = "textBox_Room";
-            this.textBox_Room.Size = new System.Drawing.Size(363, 20);
-            this.textBox_Room.TabIndex = 23;
             // 
             // txt_Room_RoomTypeID
             // 
@@ -1347,6 +1331,49 @@
             this.tabPage_DefaultScreen.TabIndex = 4;
             this.tabPage_DefaultScreen.Text = "Default Screen";
             this.tabPage_DefaultScreen.UseVisualStyleBackColor = true;
+            // 
+            // Button_Redraw
+            // 
+            this.Button_Redraw.Location = new System.Drawing.Point(22, 14);
+            this.Button_Redraw.Name = "Button_Redraw";
+            this.Button_Redraw.Size = new System.Drawing.Size(75, 23);
+            this.Button_Redraw.TabIndex = 25;
+            this.Button_Redraw.Text = "Reset";
+            this.Button_Redraw.UseVisualStyleBackColor = true;
+            this.Button_Redraw.Click += new System.EventHandler(this.Button_Redraw_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(66, 54);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(1213, 96);
+            this.richTextBox1.TabIndex = 24;
+            this.richTextBox1.Text = "";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(1071, 22);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(37, 13);
+            this.label25.TabIndex = 23;
+            this.label25.Text = "Today";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(1123, 17);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 22;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(63, 210);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(57, 13);
+            this.label22.TabIndex = 21;
+            this.label22.Text = "List Room ";
             // 
             // Panel_ListRoom
             // 
@@ -2160,6 +2187,8 @@
             // 
             // TabPage_Revenue
             // 
+            this.TabPage_Revenue.Controls.Add(this.Chart_TotalRevenue);
+            this.TabPage_Revenue.Controls.Add(this.Analysis_DataGridView);
             this.TabPage_Revenue.Controls.Add(this.btn_Calculate);
             this.TabPage_Revenue.Controls.Add(this.cmb_Year);
             this.TabPage_Revenue.Controls.Add(this.cmb_Month);
@@ -2174,7 +2203,7 @@
             // 
             // btn_Calculate
             // 
-            this.btn_Calculate.Location = new System.Drawing.Point(521, 84);
+            this.btn_Calculate.Location = new System.Drawing.Point(558, 63);
             this.btn_Calculate.Name = "btn_Calculate";
             this.btn_Calculate.Size = new System.Drawing.Size(75, 23);
             this.btn_Calculate.TabIndex = 7;
@@ -2198,7 +2227,7 @@
             "2019",
             "2020",
             "2021"});
-            this.cmb_Year.Location = new System.Drawing.Point(611, 36);
+            this.cmb_Year.Location = new System.Drawing.Point(538, 36);
             this.cmb_Year.Name = "cmb_Year";
             this.cmb_Year.Size = new System.Drawing.Size(95, 21);
             this.cmb_Year.TabIndex = 6;
@@ -2221,7 +2250,7 @@
             "October",
             "November",
             "December"});
-            this.cmb_Month.Location = new System.Drawing.Point(520, 36);
+            this.cmb_Month.Location = new System.Drawing.Point(456, 36);
             this.cmb_Month.Name = "cmb_Month";
             this.cmb_Month.Size = new System.Drawing.Size(76, 21);
             this.cmb_Month.TabIndex = 5;
@@ -2233,58 +2262,42 @@
             this.rtxt_Total.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtxt_Total.Location = new System.Drawing.Point(39, 36);
             this.rtxt_Total.Name = "rtxt_Total";
-            this.rtxt_Total.Size = new System.Drawing.Size(411, 118);
+            this.rtxt_Total.Size = new System.Drawing.Size(411, 50);
             this.rtxt_Total.TabIndex = 4;
             this.rtxt_Total.Text = "";
             // 
             // timer_Redraw
             // 
             this.timer_Redraw.Enabled = true;
-            this.timer_Redraw.Interval = 30000;
+            this.timer_Redraw.Interval = 10000;
             this.timer_Redraw.Tick += new System.EventHandler(this.timer_Redraw_Tick);
             // 
-            // label22
+            // Analysis_DataGridView
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(63, 210);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(57, 13);
-            this.label22.TabIndex = 21;
-            this.label22.Text = "List Room ";
+            this.Analysis_DataGridView.AllowUserToAddRows = false;
+            this.Analysis_DataGridView.AllowUserToDeleteRows = false;
+            this.Analysis_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Analysis_DataGridView.Location = new System.Drawing.Point(48, 155);
+            this.Analysis_DataGridView.Name = "Analysis_DataGridView";
+            this.Analysis_DataGridView.ReadOnly = true;
+            this.Analysis_DataGridView.Size = new System.Drawing.Size(585, 552);
+            this.Analysis_DataGridView.TabIndex = 8;
             // 
-            // dateTimePicker1
+            // Chart_TotalRevenue
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(1123, 17);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 22;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(1071, 22);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(37, 13);
-            this.label25.TabIndex = 23;
-            this.label25.Text = "Today";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(66, 54);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1213, 96);
-            this.richTextBox1.TabIndex = 24;
-            this.richTextBox1.Text = "";
-            // 
-            // Button_Redraw
-            // 
-            this.Button_Redraw.Location = new System.Drawing.Point(22, 14);
-            this.Button_Redraw.Name = "Button_Redraw";
-            this.Button_Redraw.Size = new System.Drawing.Size(75, 23);
-            this.Button_Redraw.TabIndex = 25;
-            this.Button_Redraw.Text = "Reset";
-            this.Button_Redraw.UseVisualStyleBackColor = true;
-            this.Button_Redraw.Click += new System.EventHandler(this.Button_Redraw_Click);
+            chartArea1.Name = "ChartArea1";
+            this.Chart_TotalRevenue.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.Chart_TotalRevenue.Legends.Add(legend1);
+            this.Chart_TotalRevenue.Location = new System.Drawing.Point(737, 155);
+            this.Chart_TotalRevenue.Name = "Chart_TotalRevenue";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.Chart_TotalRevenue.Series.Add(series1);
+            this.Chart_TotalRevenue.Size = new System.Drawing.Size(560, 552);
+            this.Chart_TotalRevenue.TabIndex = 9;
+            this.Chart_TotalRevenue.Text = "chart1";
             // 
             // Main
             // 
@@ -2336,6 +2349,8 @@
             this.TabPage_Invoice_Service.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_InvoiceService)).EndInit();
             this.TabPage_Revenue.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Analysis_DataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Chart_TotalRevenue)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2366,8 +2381,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TabControl TabControl_Main;
         private System.Windows.Forms.TabPage TabPage_Room;
-        private System.Windows.Forms.ComboBox cmb_Room;
-        private System.Windows.Forms.TextBox textBox_Room;
         private System.Windows.Forms.TextBox txt_Room_RoomTypeID;
         private System.Windows.Forms.TextBox txt_Room_OnFloor;
         private System.Windows.Forms.TextBox txt_Room_RoomID;
@@ -2536,6 +2549,8 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button Button_Redraw;
+        private System.Windows.Forms.DataVisualization.Charting.Chart Chart_TotalRevenue;
+        private System.Windows.Forms.DataGridView Analysis_DataGridView;
     }
 }
 

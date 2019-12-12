@@ -324,11 +324,14 @@ INSERT INTO dbo.Invoices
     EmployeeID,
     InvoiceTotal,
     CheckInDate,
+	CheckOutDate,
     HasPaid
 )
 VALUES
-(   1,2,1000,0,'2019-12-08 12:00:30',0),
-(   2,1,1000,0,'2019-12-07 12:00:30',0)
+(   1,2,1000,0,'2019-12-08 12:00:30',null,0),
+(   2,1,1000,0,'2019-12-07 12:00:30',null,0),
+(   2,1,1000,1500,'2019-11-02 12:00:30','2019-11-04 12:00:30',1),
+(   2,1,1000,3000,'2019-10-02 12:00:30','2019-10-03 12:00:30',1)
 
 
 INSERT INTO dbo.Invoices_Services
@@ -338,8 +341,8 @@ INSERT INTO dbo.Invoices_Services
     Times
 )
 VALUES
-( 2,1, 2 ),
-( 2, 2,1 )
+( 2, 1, 2 ),
+( 2, 2, 1 )
 
 INSERT INTO dbo.Booking
 (

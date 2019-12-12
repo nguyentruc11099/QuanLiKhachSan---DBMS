@@ -5,24 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using HotelManagement.Data_Layer;
 
 namespace HotelManagement.BS_Layer
 {
-    class BLEmployeeType
+    class BLInvoice_Service
     {
-        public System.Data.Linq.Table<EmployeeType> LoadEmployeeType()
+        public System.Data.Linq.Table<Invoices_Service> LoadInvoice_Service()
         {
-            DataSet ds = new DataSet();
             HotelManagementDataContext hm = new HotelManagementDataContext();
-            return hm.EmployeeTypes;
+            return hm.Invoices_Services;
         }
-        public bool CreateEmployeeType(string Name)
+        public bool CreateInvoice_Service(string InvoiceID, string ServiceID, string Times)
         {
             try
             {
                 HotelManagementDataContext db = new HotelManagementDataContext();
-                db.sp_CreateEmployeeTypes(Name);
-                db.EmployeeTypes.Context.SubmitChanges();
+                db.sp_CreateInvoices_Services(Convert.ToInt32(InvoiceID), Convert.ToInt32(ServiceID), Convert.ToInt32(Times));
+                db.Invoices_Services.Context.SubmitChanges();
                 return true;
             }
             catch
@@ -30,13 +30,13 @@ namespace HotelManagement.BS_Layer
                 return false;
             }
         }
-        public bool UpdateEmployeeType(int EmployeeTypeID, string Name)
+        public bool UpdateInvoice_Service(int Invoices_Services_ID, string InvoiceID, string ServiceID, string Times)
         {
             try
             {
                 HotelManagementDataContext db = new HotelManagementDataContext();
-                db.sp_UpdateEmployeeTypes(Convert.ToByte(EmployeeTypeID), Name);
-                db.EmployeeTypes.Context.SubmitChanges();
+                db.sp_UpdateInvoices_Services(Invoices_Services_ID, Convert.ToInt32(InvoiceID), Convert.ToInt32(ServiceID), Convert.ToInt32(Times));
+                db.Invoices_Services.Context.SubmitChanges();
                 return true;
             }
             catch
@@ -44,13 +44,13 @@ namespace HotelManagement.BS_Layer
                 return false;
             }
         }
-        public bool DeleteEmployeeType(string EmployeeTypeID)
+        public bool DeleteInvoice_Service(int Invoices_Services_ID)
         {
             try
             {
                 HotelManagementDataContext db = new HotelManagementDataContext();
-                db.sp_DeleteEmployeeTypes(Convert.ToByte(EmployeeTypeID));
-                db.EmployeeTypes.Context.SubmitChanges();
+                db.sp_DeleteInvoices_Services(Invoices_Services_ID);
+                db.Invoices_Services.Context.SubmitChanges();
                 return true;
             }
             catch
