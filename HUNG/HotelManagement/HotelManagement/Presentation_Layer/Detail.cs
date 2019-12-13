@@ -51,7 +51,7 @@ namespace HotelManagement.Presentation_Layer
                         Button_Booking.Enabled = false;
                         Button_Checkout.Enabled = false;
                         tabControl_Main.TabPages.Clear();
-                        tabControl_Main.TabPages.Add(tabPage_Checkin);
+                        tabControl_Main.TabPages.Add(tabPage_Checkin);                       
                         InitializerCheckin();
                         break;
                     }
@@ -134,6 +134,7 @@ namespace HotelManagement.Presentation_Layer
         private void InitializerBooking()
         {
             Booking_RadioButton_Ever.Checked = true;
+            Booking_Panel_NewCustomer.Enabled = false;
             this.DateTimePicker_AppointmentDate.MinDate = DateTime.Today;
 
             this.Booking_TextBox_CustomerName.ResetText();
@@ -251,6 +252,10 @@ namespace HotelManagement.Presentation_Layer
         private void InitializerCheckin()
         {           
             this.DateTimePicker_AppointmentDate.MinDate = DateTime.Today;
+
+            Checkin_RadioButton_HaveBooking.Checked = true;
+            Checkin_Panel_CreateNewCustomer.Enabled = false;
+            Checkin_Panel_SelectCustomer.Enabled = false;
 
             this.Checkin_Textbox_CustomerName.ResetText();
             this.Checkin_Textbox_Address.ResetText();

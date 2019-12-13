@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.panel_Navigation = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lbl_Permision = new System.Windows.Forms.Label();
@@ -1340,7 +1340,7 @@
             this.Button_Redraw.Name = "Button_Redraw";
             this.Button_Redraw.Size = new System.Drawing.Size(75, 23);
             this.Button_Redraw.TabIndex = 25;
-            this.Button_Redraw.Text = "Reset";
+            this.Button_Redraw.Text = "Reload";
             this.Button_Redraw.UseVisualStyleBackColor = true;
             this.Button_Redraw.Click += new System.EventHandler(this.Button_Redraw_Click);
             // 
@@ -2215,22 +2215,22 @@
             // 
             // Chart_TotalRevenue
             // 
-            chartArea2.Name = "ChartArea1";
-            this.Chart_TotalRevenue.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.Chart_TotalRevenue.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.Chart_TotalRevenue.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.Chart_TotalRevenue.Legends.Add(legend1);
             this.Chart_TotalRevenue.Location = new System.Drawing.Point(737, 155);
             this.Chart_TotalRevenue.Name = "Chart_TotalRevenue";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Revenue";
-            this.Chart_TotalRevenue.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Revenue";
+            this.Chart_TotalRevenue.Series.Add(series1);
             this.Chart_TotalRevenue.Size = new System.Drawing.Size(560, 552);
             this.Chart_TotalRevenue.TabIndex = 9;
-            title2.Alignment = System.Drawing.ContentAlignment.TopCenter;
-            title2.Name = "Hotel avenue in the last 5 month ";
-            title2.Text = "Hotel\'s avenue in the last 5 month ";
-            this.Chart_TotalRevenue.Titles.Add(title2);
+            title1.Alignment = System.Drawing.ContentAlignment.TopCenter;
+            title1.Name = "Hotel avenue in the last 5 month ";
+            title1.Text = "Hotel\'s avenue in the last 5 month ";
+            this.Chart_TotalRevenue.Titles.Add(title1);
             // 
             // Analysis_DataGridView
             // 

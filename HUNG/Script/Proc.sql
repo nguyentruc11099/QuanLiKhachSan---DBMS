@@ -1133,8 +1133,6 @@ BEGIN
 END
 GO
 
-exec sp_CheckIn 3,7,1000
-
 -- Checkout method 
 use HotelDB;
 if object_id('sp_CheckOut') is not null
@@ -1148,7 +1146,9 @@ AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN	
-			UPDATE dbo.Invoices SET InvoiceTotal = dbo.fn_RoomPrice(@RoomID) + dbo.fn_ServicePrice(@RoomID), CheckOutDate = CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME), HasPaid = 1 WHERE RoomID = @RoomID AND HasPaid = 0;  
+			declare @roomprice as smallmoney =  dbo.fn_RoomPrice(@RoomID);
+			declare @serviceprice as smallmoney =  dbo.fn_ServicePrice(@RoomID);
+			UPDATE dbo.Invoices SET InvoiceTotal = @roomprice + @serviceprice, CheckOutDate = CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME), HasPaid = 1 WHERE RoomID = @RoomID AND HasPaid = 0;  
 			UPDATE dbo.Rooms SET Status = 0 WHERE RoomID = @RoomID; 
 		COMMIT TRAN
 	END TRY 
@@ -1195,8 +1195,11 @@ create FUNCTION fn_ServicePrice
 RETURNS Money
 BEGIN
 	DECLARE @ID AS INT = (SELECT InvoiceID FROM dbo.Invoices WHERE RoomID= @RoomID AND HasPaid = 0);
-	DECLARE @pay AS MONEY =0;
-	SET @pay += (SELECT Sum(Times*Price) AS Price FROM dbo.Invoices_Services INNER JOIN dbo.HotelServices ON HotelServices.ServiceID = Invoices_Services.ServiceID WHERE InvoiceID = @ID);
+	DECLARE @pay AS MONEY = 0;
+	IF( EXISTS(SELECT InvoiceID FROM dbo.Invoices_Services WHERE InvoiceID = @ID))
+	begin 
+		SET @pay += (SELECT Sum(Times*Price) AS Price FROM dbo.Invoices_Services INNER JOIN dbo.HotelServices ON HotelServices.ServiceID = Invoices_Services.ServiceID WHERE InvoiceID = @ID);
+	end
 	RETURN @pay;
 END
 GO
