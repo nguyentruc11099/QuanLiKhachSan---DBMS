@@ -21,6 +21,11 @@ namespace HotelManagement.BS_Layer
             HotelManagementDataContext db = new HotelManagementDataContext();
             return db.fn_FindBooking(roomid).ToList();
         }
+        public System.Collections.Generic.List<sp_OutDateBookingResult> OutdateBooking()
+        {
+            HotelManagementDataContext db = new HotelManagementDataContext();
+            return db.sp_OutDateBooking().ToList();
+        }
         public bool CreateBooking(string CustomerID, string RoomID, string AppointmentDate)
         {
             try

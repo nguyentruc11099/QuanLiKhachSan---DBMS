@@ -44,7 +44,18 @@ namespace HotelManagement.Presentation_Layer
             TabControl_Main.TabPages.Clear();
             TabControl_Main.TabPages.Add(tabPage_DefaultScreen);
             DrawRooms();
+            LoadOutdateBooking();
         }
+        public void LoadOutdateBooking()
+        {
+            BS_Layer.BLBooking bl = new BLBooking();
+            var temp = bl.OutdateBooking();
+            foreach( var c in temp)
+            {
+                RichTextBox_DefaultScreen.AppendText("Phong " + c.RoomID + " do Customer " + c.CustomerID + " dat co Appointment Date " + c.AppoinmentDate + " da qua han. Xin chu y! \n");
+            }
+        }
+
         private void DrawRooms()
         {
             Panel_ListRoom.Controls.Clear();
@@ -1139,6 +1150,7 @@ namespace HotelManagement.Presentation_Layer
         {
             TabControl_Main.TabPages.Clear();
             TabControl_Main.TabPages.Add(tabPage_DefaultScreen);
+            LoadOutdateBooking();
             panel_Manage.Width = 0;
         }
         private void btn_Manage_Click(object sender, EventArgs e)

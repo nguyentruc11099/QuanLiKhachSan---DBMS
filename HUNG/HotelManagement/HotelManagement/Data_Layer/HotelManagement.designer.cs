@@ -428,6 +428,13 @@ namespace HotelManagement.Data_Layer
 			return ((ISingleResult<sp_LoginEmployeeResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_OutDateBooking")]
+		public ISingleResult<sp_OutDateBookingResult> sp_OutDateBooking()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<sp_OutDateBookingResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Redo_Booking")]
 		public int sp_Redo_Booking()
 		{
@@ -489,6 +496,20 @@ namespace HotelManagement.Data_Layer
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Revenue5Month")]
+		public ISingleResult<sp_Revenue5MonthResult> sp_Revenue5Month()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<sp_Revenue5MonthResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SearchCustomer")]
+		public ISingleResult<sp_SearchCustomerResult> sp_SearchCustomer([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerName", DbType="NVarChar(30)")] string customerName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdentityCard", DbType="NVarChar(10)")] string identityCard)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerName, identityCard);
+			return ((ISingleResult<sp_SearchCustomerResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Undo_Booking")]
@@ -623,6 +644,12 @@ namespace HotelManagement.Data_Layer
 			return this.CreateMethodCallQuery<fn_FindBookingResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID);
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_ServicePrice", IsComposable=true)]
+		public System.Nullable<decimal> fn_ServicePrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
+		{
+			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_Revenue", IsComposable=true)]
 		public System.Nullable<decimal> fn_Revenue([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string month, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string year)
 		{
@@ -633,19 +660,6 @@ namespace HotelManagement.Data_Layer
 		public System.Nullable<decimal> fn_RoomPrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
 		{
 			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_ServicePrice", IsComposable=true)]
-		public System.Nullable<decimal> fn_ServicePrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
-		{
-			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Revenue5Month")]
-		public ISingleResult<sp_Revenue5MonthResult> sp_Revenue5Month()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<sp_Revenue5MonthResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -3199,6 +3213,210 @@ namespace HotelManagement.Data_Layer
 		}
 	}
 	
+	public partial class sp_OutDateBookingResult
+	{
+		
+		private int _BookingID;
+		
+		private int _CustomerID;
+		
+		private int _RoomID;
+		
+		private System.DateTime _AppoinmentDate;
+		
+		public sp_OutDateBookingResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingID", DbType="Int NOT NULL")]
+		public int BookingID
+		{
+			get
+			{
+				return this._BookingID;
+			}
+			set
+			{
+				if ((this._BookingID != value))
+				{
+					this._BookingID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomID", DbType="Int NOT NULL")]
+		public int RoomID
+		{
+			get
+			{
+				return this._RoomID;
+			}
+			set
+			{
+				if ((this._RoomID != value))
+				{
+					this._RoomID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppoinmentDate", DbType="SmallDateTime NOT NULL")]
+		public System.DateTime AppoinmentDate
+		{
+			get
+			{
+				return this._AppoinmentDate;
+			}
+			set
+			{
+				if ((this._AppoinmentDate != value))
+				{
+					this._AppoinmentDate = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_Revenue5MonthResult
+	{
+		
+		private System.Nullable<int> _Month;
+		
+		private System.Nullable<decimal> _Revenue;
+		
+		public sp_Revenue5MonthResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Month", DbType="Int")]
+		public System.Nullable<int> Month
+		{
+			get
+			{
+				return this._Month;
+			}
+			set
+			{
+				if ((this._Month != value))
+				{
+					this._Month = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Revenue", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> Revenue
+		{
+			get
+			{
+				return this._Revenue;
+			}
+			set
+			{
+				if ((this._Revenue != value))
+				{
+					this._Revenue = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_SearchCustomerResult
+	{
+		
+		private int _CustomerID;
+		
+		private string _CustomerName;
+		
+		private string _IdentityCard;
+		
+		private string _PhoneNumber;
+		
+		public sp_SearchCustomerResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string CustomerName
+		{
+			get
+			{
+				return this._CustomerName;
+			}
+			set
+			{
+				if ((this._CustomerName != value))
+				{
+					this._CustomerName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdentityCard", DbType="VarChar(9) NOT NULL", CanBeNull=false)]
+		public string IdentityCard
+		{
+			get
+			{
+				return this._IdentityCard;
+			}
+			set
+			{
+				if ((this._IdentityCard != value))
+				{
+					this._IdentityCard = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this._PhoneNumber = value;
+				}
+			}
+		}
+	}
+	
 	public partial class fn_FindBookingResult
 	{
 		
@@ -3274,50 +3492,6 @@ namespace HotelManagement.Data_Layer
 				if ((this._RoomID != value))
 				{
 					this._RoomID = value;
-				}
-			}
-		}
-	}
-	
-	public partial class sp_Revenue5MonthResult
-	{
-		
-		private System.Nullable<int> _Month;
-		
-		private System.Nullable<decimal> _Revenue;
-		
-		public sp_Revenue5MonthResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Month", DbType="Int")]
-		public System.Nullable<int> Month
-		{
-			get
-			{
-				return this._Month;
-			}
-			set
-			{
-				if ((this._Month != value))
-				{
-					this._Month = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Revenue", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> Revenue
-		{
-			get
-			{
-				return this._Revenue;
-			}
-			set
-			{
-				if ((this._Revenue != value))
-				{
-					this._Revenue = value;
 				}
 			}
 		}

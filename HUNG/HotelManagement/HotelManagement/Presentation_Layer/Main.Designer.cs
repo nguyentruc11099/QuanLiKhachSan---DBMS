@@ -132,7 +132,7 @@
             this.dgv_Employee = new System.Windows.Forms.DataGridView();
             this.tabPage_DefaultScreen = new System.Windows.Forms.TabPage();
             this.Button_Redraw = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.RichTextBox_DefaultScreen = new System.Windows.Forms.RichTextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label22 = new System.Windows.Forms.Label();
@@ -220,6 +220,7 @@
             this.label45 = new System.Windows.Forms.Label();
             this.dgv_InvoiceService = new System.Windows.Forms.DataGridView();
             this.TabPage_Revenue = new System.Windows.Forms.TabPage();
+            this.label34 = new System.Windows.Forms.Label();
             this.Chart_TotalRevenue = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.Analysis_DataGridView = new System.Windows.Forms.DataGridView();
             this.btn_Calculate = new System.Windows.Forms.Button();
@@ -1321,7 +1322,7 @@
             // tabPage_DefaultScreen
             // 
             this.tabPage_DefaultScreen.Controls.Add(this.Button_Redraw);
-            this.tabPage_DefaultScreen.Controls.Add(this.richTextBox1);
+            this.tabPage_DefaultScreen.Controls.Add(this.RichTextBox_DefaultScreen);
             this.tabPage_DefaultScreen.Controls.Add(this.label25);
             this.tabPage_DefaultScreen.Controls.Add(this.dateTimePicker1);
             this.tabPage_DefaultScreen.Controls.Add(this.label22);
@@ -1343,13 +1344,13 @@
             this.Button_Redraw.UseVisualStyleBackColor = true;
             this.Button_Redraw.Click += new System.EventHandler(this.Button_Redraw_Click);
             // 
-            // richTextBox1
+            // RichTextBox_DefaultScreen
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(66, 54);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1213, 96);
-            this.richTextBox1.TabIndex = 24;
-            this.richTextBox1.Text = "";
+            this.RichTextBox_DefaultScreen.Location = new System.Drawing.Point(66, 54);
+            this.RichTextBox_DefaultScreen.Name = "RichTextBox_DefaultScreen";
+            this.RichTextBox_DefaultScreen.Size = new System.Drawing.Size(1213, 96);
+            this.RichTextBox_DefaultScreen.TabIndex = 24;
+            this.RichTextBox_DefaultScreen.Text = "";
             // 
             // label25
             // 
@@ -2188,6 +2189,7 @@
             // 
             // TabPage_Revenue
             // 
+            this.TabPage_Revenue.Controls.Add(this.label34);
             this.TabPage_Revenue.Controls.Add(this.Chart_TotalRevenue);
             this.TabPage_Revenue.Controls.Add(this.Analysis_DataGridView);
             this.TabPage_Revenue.Controls.Add(this.btn_Calculate);
@@ -2201,6 +2203,15 @@
             this.TabPage_Revenue.TabIndex = 12;
             this.TabPage_Revenue.Text = "Revenue";
             this.TabPage_Revenue.UseVisualStyleBackColor = true;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(45, 133);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(170, 13);
+            this.label34.TabIndex = 10;
+            this.label34.Text = "Invoices have been paid recently :";
             // 
             // Chart_TotalRevenue
             // 
@@ -2353,6 +2364,7 @@
             this.TabPage_Invoice_Service.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_InvoiceService)).EndInit();
             this.TabPage_Revenue.ResumeLayout(false);
+            this.TabPage_Revenue.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Chart_TotalRevenue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Analysis_DataGridView)).EndInit();
             this.ResumeLayout(false);
@@ -2548,13 +2560,14 @@
         private System.Windows.Forms.Button btn_Undo;
         private System.Windows.Forms.CheckBox checkBox_VIP;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox RichTextBox_DefaultScreen;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button Button_Redraw;
         private System.Windows.Forms.DataVisualization.Charting.Chart Chart_TotalRevenue;
         private System.Windows.Forms.DataGridView Analysis_DataGridView;
+        private System.Windows.Forms.Label label34;
     }
 }
 

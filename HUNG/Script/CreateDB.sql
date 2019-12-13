@@ -195,9 +195,9 @@ go
 
 -- Check Constraint 
 
-ALTER TABLE dbo.Booking  
-add CONSTRAINT Check_BookingAppointmentDate CHECK ( AppoinmentDate >= CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME));
-GO
+--ALTER TABLE dbo.Booking  
+--add CONSTRAINT Check_BookingAppointmentDate CHECK ( AppoinmentDate >= CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME));
+--GO
 
 ALTER TABLE dbo.Invoices  
 ADD CONSTRAINT Check_InvoicesEndDate CHECK (CheckOutDate >= CheckInDate);
@@ -209,14 +209,21 @@ GO
 
 
 -- Index
+--drop index if exists idx_Room_RoomType
+--on dbo.Rooms;
+--go
 
-drop index if exists idx_Room_RoomType
-on dbo.Rooms;
+--CREATE nonclustered INDEX idx_Room_RoomType
+--ON dbo.Rooms(RoomTypeID)
+--INCLUDE (Status,OnFloor,RoomID)
+--go
+drop index if exists idx_Customer
+on dbo.Customers;
 go
 
-CREATE nonclustered INDEX idx_Room_RoomType
-ON dbo.Rooms(RoomTypeID)
-INCLUDE (Status,OnFloor,RoomID)
+CREATE nonclustered INDEX idx_Customer
+ON dbo.Customers(CustomerName,IdentityCard)
+INCLUDE (CustomerID,PhoneNumber)
 go
 
 drop index if exists idx_Booking_Identify
@@ -224,7 +231,7 @@ on dbo.booking;
 go
 
 CREATE nonclustered INDEX idx_Booking_Identify
-ON dbo.Booking(RoomID,CustomerID)
+ON dbo.Booking(CustomerID,RoomID)
 include(BookingID)
 go
 
@@ -331,8 +338,9 @@ VALUES
 (   1,2,1000,0,'2019-12-08 12:00:30',null,0),
 (   2,1,1000,0,'2019-12-07 12:00:30',null,0),
 (   2,1,1000,1500,'2019-11-02 12:00:30','2019-11-04 12:00:30',1),
-(   2,1,1000,3000,'2019-10-02 12:00:30','2019-10-03 12:00:30',1)
-
+(   2,1,1000,3000,'2019-10-02 12:00:30','2019-10-03 12:00:30',1),
+(   3,1,1000,4500,'2019-09-02 12:00:30','2019-09-04 12:00:30',1),
+(   4,1,1000,10000,'2019-08-02 12:00:30','2019-08-03 12:00:30',1)
 
 INSERT INTO dbo.Invoices_Services
 (
@@ -343,7 +351,7 @@ INSERT INTO dbo.Invoices_Services
 VALUES
 ( 2, 1, 2 ),
 ( 2, 2, 1 )
-
+ 
 INSERT INTO dbo.Booking
 (
     CustomerID,
@@ -352,4 +360,13 @@ INSERT INTO dbo.Booking
 )
 VALUES
 (3,5,'2019-12-13 05:59:52' ),
-(4,6,'2019-12-13 05:59:52' )
+(4,6,'2019-12-13 05:59:52' ),
+(2,7,'2019-12-10 05:59:52' )
+
+USE HotelDB;
+IF OBJECT_ID(N'dbo.vi_InvoicesHasPaid', N'P') IS NOT NULL DROP view dbo.vi_InvoicesHasPaid;
+GO
+CREATE view dbo.vi_InvoicesHasPaid
+AS
+	select InvoiceID,CheckInDate,CheckOutDate,InvoiceTotal  from Invoices where HasPaid = 1;
+GO

@@ -1036,7 +1036,7 @@ create proc sp_LoginEmployee
 as
 BEGIN
 	DECLARE @id AS INT;
-	DECLARE @sql AS NVARCHAR(200) = 'SELECT @EmpID=EmployeeID FROM dbo.Employees WHERE IdentityCard = @acc AND PassWord = @pass AND EmployeeTypeID = @type';
+	DECLARE @sql AS NVARCHAR(200) = 'SELECT @EmpID=EmployeeID FROM dbo.Employees WHERE EmployeeTypeID = @type and IdentityCard = @acc AND PassWord = @pass';
 	DECLARE @params AS NVARCHAR(100)= '@acc int,@pass nvarchar(20),@type tinyint, @EmpID int output';
 	EXEC sys.sp_executesql @sql, @params , @acc = @Account, @pass = @Password, @type = @EmployeeType, @EmpID = @id OUTPUT;
 	SELECT @id
@@ -1056,6 +1056,20 @@ as
 Begin
 	SELECT * FROM dbo.Employees WHERE EmployeeID = @EmployeeID;
 END
+go
+
+--Find Booking for checkin form 
+use HotelDB;
+if object_id('fn_FindBooking') is not null
+	drop FUNCTION fn_FindBooking;
+go
+create FUNCTION fn_FindBooking
+	(
+		@RoomID INT = NULL
+	)
+RETURNS TABLE
+
+RETURN (SELECT BookingID,Booking.CustomerID,CustomerName,Booking.RoomID FROM ( Booking INNER JOIN dbo.Customers ON Booking.CustomerID = Customers.CustomerID ) INNER JOIN dbo.Rooms ON Booking.RoomID = Rooms.RoomID WHERE Booking.RoomID = 5);
 go
 
 -- Booking method 
@@ -1085,20 +1099,6 @@ BEGIN
 END
 GO
 
-
---Find Booking for checkin form 
-use HotelDB;
-if object_id('fn_FindBooking') is not null
-	drop FUNCTION fn_FindBooking;
-go
-create FUNCTION fn_FindBooking
-	(
-		@RoomID INT = NULL
-	)
-RETURNS TABLE
-
-RETURN (SELECT BookingID,Booking.CustomerID,CustomerName,Booking.RoomID FROM ( Booking INNER JOIN dbo.Customers ON Booking.CustomerID = Customers.CustomerID ) INNER JOIN dbo.Rooms ON Booking.RoomID = Rooms.RoomID WHERE Booking.RoomID = 5);
-go
 
 -- Checkin method
 use HotelDB;
@@ -1307,7 +1307,7 @@ BEGIN
 
 	DECLARE @sql AS NVARCHAR(1000);
 	SET @sql =
-	N'SELECT *'
+	N'SELECT CustomerID, CustomerName,IdentityCard, PhoneNumber'
 	+ N' FROM dbo.Customers where 1=1 '
 	+ CASE WHEN @CustomerName IS NOT NULL THEN
 	N'AND CustomerName like @cna ' ELSE N'' END
@@ -1320,11 +1320,11 @@ BEGIN
 	@cna = @CustomerName,
 	@cid = @IdentityCard
 END
-GOUSE HotelDB;
-IF OBJECT_ID(N'dbo.vi_InvoicesHasPaid', N'P') IS NOT NULL DROP view dbo.vi_InvoicesHasPaid;
-GO
-CREATE view dbo.vi_InvoicesHasPaid
+GOIF OBJECT_ID(N'dbo.sp_OutDateBooking', N'P') IS NOT NULL DROP PROC dbo.sp_OutDateBooking;
+go
+CREATE PROC dbo.sp_OutDateBooking
 AS
-	select InvoiceID,CheckInDate,CheckOutDate,InvoiceTotal  from Invoices where HasPaid = 1;
+BEGIN
+	select * from Booking Where AppoinmentDate < CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME);
+END
 GO
-
