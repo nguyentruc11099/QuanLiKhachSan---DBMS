@@ -644,12 +644,6 @@ namespace HotelManagement.Data_Layer
 			return this.CreateMethodCallQuery<fn_FindBookingResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID);
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_ServicePrice", IsComposable=true)]
-		public System.Nullable<decimal> fn_ServicePrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
-		{
-			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_Revenue", IsComposable=true)]
 		public System.Nullable<decimal> fn_Revenue([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string month, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string year)
 		{
@@ -658,6 +652,12 @@ namespace HotelManagement.Data_Layer
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_RoomPrice", IsComposable=true)]
 		public System.Nullable<decimal> fn_RoomPrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
+		{
+			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_ServicePrice", IsComposable=true)]
+		public System.Nullable<decimal> fn_ServicePrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
 		{
 			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
 		}

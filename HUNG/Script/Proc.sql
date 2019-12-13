@@ -1320,11 +1320,21 @@ BEGIN
 	@cna = @CustomerName,
 	@cid = @IdentityCard
 END
-GOIF OBJECT_ID(N'dbo.sp_OutDateBooking', N'P') IS NOT NULL DROP PROC dbo.sp_OutDateBooking;
+GO
+
+IF OBJECT_ID(N'dbo.sp_OutDateBooking', N'P') IS NOT NULL DROP PROC dbo.sp_OutDateBooking;
 go
 CREATE PROC dbo.sp_OutDateBooking
 AS
 BEGIN
-	select * from Booking Where AppoinmentDate < CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME);
+	begin try 
+		begin tran;
+			select * from Booking Where AppoinmentDate < CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME);
+			delete dbo.Booking where AppoinmentDate < CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME);
+		commit tran;
+	end try
+	begin catch
+		 rollback tran;
+	end catch 
 END
 GO
