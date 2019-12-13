@@ -194,15 +194,10 @@ namespace HotelManagement.Presentation_Layer
         }
         private void Button_ChooseBooking_Click(object sender, EventArgs e)
         {
-            int r = Checkin_Datagridview_Booking.CurrentCell.RowIndex;
-            if (r > Checkin_Datagridview_Booking.Rows.Count - 2)
+            if(Checkin_Datagridview_Booking.Rows[0].Cells[0].Value != null)
             {
-                return;
-            }
-            else
-            {
-                Checkin_DataGridView_Detail.Rows[0].Cells[0].Value = Checkin_Datagridview_Booking.Rows[r].Cells[1].Value;
-                Checkin_DataGridView_Detail.Rows[0].Cells[1].Value = Checkin_Datagridview_Booking.Rows[r].Cells[2].Value;
+                Checkin_DataGridView_Detail.Rows[0].Cells[0].Value = Checkin_Datagridview_Booking.Rows[0].Cells[1].Value;
+                Checkin_DataGridView_Detail.Rows[0].Cells[1].Value = Checkin_Datagridview_Booking.Rows[0].Cells[2].Value;
             }
         }
         private void Checkin_ChooseCustomer_Click(object sender, EventArgs e)

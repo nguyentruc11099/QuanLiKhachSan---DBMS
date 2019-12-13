@@ -1069,7 +1069,7 @@ create FUNCTION fn_FindBooking
 	)
 RETURNS TABLE
 
-RETURN (SELECT BookingID,Booking.CustomerID,CustomerName,Booking.RoomID FROM ( Booking INNER JOIN dbo.Customers ON Booking.CustomerID = Customers.CustomerID ) INNER JOIN dbo.Rooms ON Booking.RoomID = Rooms.RoomID WHERE Booking.RoomID = 5);
+RETURN (SELECT BookingID,Booking.CustomerID,CustomerName,Booking.RoomID FROM ( Booking INNER JOIN dbo.Customers ON Booking.CustomerID = Customers.CustomerID ) INNER JOIN dbo.Rooms ON Booking.RoomID = Rooms.RoomID WHERE Booking.RoomID = @RoomID);
 go
 
 -- Booking method 
@@ -1116,7 +1116,7 @@ BEGIN
 	BEGIN TRY
 		BEGIN TRAN
 			insert into dbo.Invoices (CustomerID, RoomID, EmployeeID, InvoiceTotal, CheckInDate, CheckOutDate,HasPaid)
-				VALUES (@CustomerID, @RoomID, null, @EmployeeID, CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME),NULL,0)
+				VALUES (@CustomerID, @RoomID, @EmployeeID,0,CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME),NULL,0)
 			UPDATE dbo.Rooms SET Status = 1 WHERE RoomID = @RoomID; 
 			
 			IF( EXISTS(SELECT BookingID FROM dbo.Booking WHERE CustomerID=@CustomerID AND RoomID = RoomID))
@@ -1132,6 +1132,8 @@ BEGIN
 	END CATCH
 END
 GO
+
+exec sp_CheckIn 3,7,1000
 
 -- Checkout method 
 use HotelDB;
