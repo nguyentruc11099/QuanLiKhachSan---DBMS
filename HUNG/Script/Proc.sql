@@ -1329,7 +1329,20 @@ AS
 BEGIN
 	begin try 
 		begin tran;
-			select * from Booking Where AppoinmentDate < CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME);
+			declare @TempTable table(ID int identity(1,1) primary key,BookingID int unique, CustomerID int, RoomID int, AppointmentDate smalldatetime); 
+			insert into @TempTable select BookingID,CustomerID,RoomID,AppoinmentDate from Booking Where AppoinmentDate < CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME);		
+
+			declare @cnt as int = 1;
+			DECLARE @count INT = (SELECT COUNT(BookingID) FROM @TempTable);
+			Declare @ID as int 
+
+			WHILE @cnt <= @count
+			BEGIN				
+				set @ID = (SELECT RoomID FROM @TempTable WHERE ID = @cnt); 
+				Update Rooms set Status = 0 where RoomID = @ID; 
+				SET @cnt = @cnt + 1;
+			END
+			select BookingID,CustomerID,RoomID,AppointmentDate from @TempTable;
 			delete dbo.Booking where AppoinmentDate < CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME);
 		commit tran;
 	end try
@@ -1338,3 +1351,4 @@ BEGIN
 	end catch 
 END
 GO
+

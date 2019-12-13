@@ -314,10 +314,10 @@
   </Function>
   <Function Name="dbo.sp_OutDateBooking" Method="sp_OutDateBooking">
     <ElementType Name="sp_OutDateBookingResult">
-      <Column Name="BookingID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="RoomID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="AppoinmentDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="BookingID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RoomID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AppointmentDate" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.sp_Redo_Booking" Method="sp_Redo_Booking">

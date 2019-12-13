@@ -52,7 +52,7 @@ namespace HotelManagement.Presentation_Layer
             var temp = bl.OutdateBooking();
             foreach( var c in temp)
             {
-                RichTextBox_DefaultScreen.AppendText("Phong " + c.RoomID + " do Customer " + c.CustomerID + " dat co Appointment Date " + c.AppoinmentDate + " da qua han. Xin chu y! \n");
+                RichTextBox_DefaultScreen.AppendText("Phong " + c.RoomID + " do Customer " + c.CustomerID + " dat co Appointment Date " + c.AppointmentDate + " da qua han nen se duoc xoa. Xin chu y! \n");
             }
         }
 

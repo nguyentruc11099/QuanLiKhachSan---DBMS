@@ -3216,20 +3216,20 @@ namespace HotelManagement.Data_Layer
 	public partial class sp_OutDateBookingResult
 	{
 		
-		private int _BookingID;
+		private System.Nullable<int> _BookingID;
 		
-		private int _CustomerID;
+		private System.Nullable<int> _CustomerID;
 		
-		private int _RoomID;
+		private System.Nullable<int> _RoomID;
 		
-		private System.DateTime _AppoinmentDate;
+		private System.Nullable<System.DateTime> _AppointmentDate;
 		
 		public sp_OutDateBookingResult()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingID", DbType="Int NOT NULL")]
-		public int BookingID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingID", DbType="Int")]
+		public System.Nullable<int> BookingID
 		{
 			get
 			{
@@ -3244,8 +3244,8 @@ namespace HotelManagement.Data_Layer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
-		public int CustomerID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
+		public System.Nullable<int> CustomerID
 		{
 			get
 			{
@@ -3260,8 +3260,8 @@ namespace HotelManagement.Data_Layer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomID", DbType="Int NOT NULL")]
-		public int RoomID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomID", DbType="Int")]
+		public System.Nullable<int> RoomID
 		{
 			get
 			{
@@ -3276,18 +3276,18 @@ namespace HotelManagement.Data_Layer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppoinmentDate", DbType="SmallDateTime NOT NULL")]
-		public System.DateTime AppoinmentDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppointmentDate", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> AppointmentDate
 		{
 			get
 			{
-				return this._AppoinmentDate;
+				return this._AppointmentDate;
 			}
 			set
 			{
-				if ((this._AppoinmentDate != value))
+				if ((this._AppointmentDate != value))
 				{
-					this._AppoinmentDate = value;
+					this._AppointmentDate = value;
 				}
 			}
 		}
