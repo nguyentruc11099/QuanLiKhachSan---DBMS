@@ -970,6 +970,15 @@ namespace HotelManagement.Presentation_Layer
         private void AnalysisInitialize()
         {
             LoadChart();
+            LoadView();
+        }
+        private void LoadView()
+        {
+            var dt = new DataTable();
+            BS_Layer.BLInvoice bl = new BLInvoice();
+            DataSet ds = bl.ListOfInvoicesHasPaid();
+            dt = ds.Tables[0];
+            Analysis_DataGridView.DataSource = dt;
         }
         public void LoadChart()
         {

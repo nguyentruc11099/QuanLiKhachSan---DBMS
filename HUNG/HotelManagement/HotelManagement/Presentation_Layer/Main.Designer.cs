@@ -2216,7 +2216,9 @@
             this.Chart_TotalRevenue.Series.Add(series1);
             this.Chart_TotalRevenue.Size = new System.Drawing.Size(560, 552);
             this.Chart_TotalRevenue.TabIndex = 9;
+            title1.Alignment = System.Drawing.ContentAlignment.TopCenter;
             title1.Name = "Hotel avenue in the last 5 month ";
+            title1.Text = "Hotel\'s avenue in the last 5 month ";
             this.Chart_TotalRevenue.Titles.Add(title1);
             // 
             // Analysis_DataGridView

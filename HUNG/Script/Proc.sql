@@ -1320,4 +1320,11 @@ BEGIN
 	@cna = @CustomerName,
 	@cid = @IdentityCard
 END
-GO
+GOUSE HotelDB;
+IF OBJECT_ID(N'dbo.vi_InvoicesHasPaid', N'P') IS NOT NULL DROP view dbo.vi_InvoicesHasPaid;
+GO
+CREATE view dbo.vi_InvoicesHasPaid
+AS
+	select InvoiceID,CheckInDate,CheckOutDate,InvoiceTotal  from Invoices where HasPaid = 1;
+GO
+

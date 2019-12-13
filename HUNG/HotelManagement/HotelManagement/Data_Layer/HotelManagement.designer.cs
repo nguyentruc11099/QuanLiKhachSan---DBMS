@@ -161,6 +161,14 @@ namespace HotelManagement.Data_Layer
 			}
 		}
 		
+		public System.Data.Linq.Table<vi_InvoicesHasPaid> vi_InvoicesHasPaids
+		{
+			get
+			{
+				return this.GetTable<vi_InvoicesHasPaid>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Booking")]
 		public int sp_Booking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppoinmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appoinmentDate)
 		{
@@ -2537,6 +2545,87 @@ namespace HotelManagement.Data_Layer
 		{
 			this.SendPropertyChanging();
 			entity.RoomType = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vi_InvoicesHasPaid")]
+	public partial class vi_InvoicesHasPaid
+	{
+		
+		private int _InvoiceID;
+		
+		private System.DateTime _CheckInDate;
+		
+		private System.Nullable<System.DateTime> _CheckOutDate;
+		
+		private decimal _InvoiceTotal;
+		
+		public vi_InvoicesHasPaid()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int InvoiceID
+		{
+			get
+			{
+				return this._InvoiceID;
+			}
+			set
+			{
+				if ((this._InvoiceID != value))
+				{
+					this._InvoiceID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckInDate", DbType="SmallDateTime NOT NULL")]
+		public System.DateTime CheckInDate
+		{
+			get
+			{
+				return this._CheckInDate;
+			}
+			set
+			{
+				if ((this._CheckInDate != value))
+				{
+					this._CheckInDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckOutDate", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> CheckOutDate
+		{
+			get
+			{
+				return this._CheckOutDate;
+			}
+			set
+			{
+				if ((this._CheckOutDate != value))
+				{
+					this._CheckOutDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceTotal", DbType="SmallMoney NOT NULL")]
+		public decimal InvoiceTotal
+		{
+			get
+			{
+				return this._InvoiceTotal;
+			}
+			set
+			{
+				if ((this._InvoiceTotal != value))
+				{
+					this._InvoiceTotal = value;
+				}
+			}
 		}
 	}
 	

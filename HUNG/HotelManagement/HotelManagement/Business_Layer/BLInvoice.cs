@@ -22,6 +22,12 @@ namespace HotelManagement.BS_Layer
             string sql = "Exec sp_Revenue5Month ";
             return db.ExecuteQueryDataSet(sql, CommandType.Text);
         }
+        public DataSet ListOfInvoicesHasPaid()
+        {
+            DBMain db = new DBMain();
+            string sql = "Select * from vi_InvoicesHasPaid";
+            return db.ExecuteQueryDataSet(sql, CommandType.Text);
+        }
         public System.Collections.Generic.List<sp_FindInvoiceRoomPriceResult> LoadCheckoutInvoiceRoomPrice(int RoomID)
         {
             HotelManagementDataContext db = new HotelManagementDataContext();
