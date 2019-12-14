@@ -1081,14 +1081,14 @@ create proc sp_Booking
 	(
 		@CustomerID INT = NULL,
 		@RoomID INT = NULL,
-		@AppoinmentDate SMALLDATETIME = NULL
+		@AppointmentDate SMALLDATETIME = NULL
 	)
 AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN
-			insert into dbo.Booking(CustomerID, RoomID, AppoinmentDate)
-			values (@CustomerID, @RoomID, @AppoinmentDate);			
+			insert into dbo.Booking(CustomerID, RoomID, AppointmentDate)
+			values (@CustomerID, @RoomID, @AppointmentDate);			
 			UPDATE dbo.Rooms SET Status=2 WHERE RoomID=@RoomID; 
 		COMMIT TRAN
 	END TRY 
@@ -1335,7 +1335,7 @@ BEGIN
 	begin try 
 		begin tran;
 			declare @TempTable table(ID int identity(1,1) primary key,BookingID int unique, CustomerID int, RoomID int, AppointmentDate smalldatetime); 
-			insert into @TempTable select BookingID,CustomerID,RoomID,AppoinmentDate from Booking Where AppoinmentDate < CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME);		
+			insert into @TempTable select BookingID,CustomerID,RoomID,AppointmentDate from Booking Where AppointmentDate < CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME);		
 
 			declare @cnt as int = 1;
 			DECLARE @count INT = (SELECT COUNT(BookingID) FROM @TempTable);
@@ -1348,7 +1348,7 @@ BEGIN
 				SET @cnt = @cnt + 1;
 			END
 			select BookingID,CustomerID,RoomID,AppointmentDate from @TempTable;
-			delete dbo.Booking where AppoinmentDate < CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME);
+			delete dbo.Booking where AppointmentDate < CAST(CAST(GETDATE() AS DATE) AS SMALLDATETIME);
 		commit tran;
 	end try
 	begin catch

@@ -51,12 +51,12 @@ namespace HotelManagement.Data_Layer
     partial void InsertInvoices_Service(Invoices_Service instance);
     partial void UpdateInvoices_Service(Invoices_Service instance);
     partial void DeleteInvoices_Service(Invoices_Service instance);
-    partial void InsertRoom(Room instance);
-    partial void UpdateRoom(Room instance);
-    partial void DeleteRoom(Room instance);
     partial void InsertRoomType(RoomType instance);
     partial void UpdateRoomType(RoomType instance);
     partial void DeleteRoomType(RoomType instance);
+    partial void InsertRoom(Room instance);
+    partial void UpdateRoom(Room instance);
+    partial void DeleteRoom(Room instance);
     #endregion
 		
 		public HotelManagementDataContext() : 
@@ -145,19 +145,19 @@ namespace HotelManagement.Data_Layer
 			}
 		}
 		
-		public System.Data.Linq.Table<Room> Rooms
-		{
-			get
-			{
-				return this.GetTable<Room>();
-			}
-		}
-		
 		public System.Data.Linq.Table<RoomType> RoomTypes
 		{
 			get
 			{
 				return this.GetTable<RoomType>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Room> Rooms
+		{
+			get
+			{
+				return this.GetTable<Room>();
 			}
 		}
 		
@@ -169,34 +169,10 @@ namespace HotelManagement.Data_Layer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_FindBooking", IsComposable=true)]
-		public IQueryable<fn_FindBookingResult> fn_FindBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
-		{
-			return this.CreateMethodCallQuery<fn_FindBookingResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_Revenue", IsComposable=true)]
-		public System.Nullable<decimal> fn_Revenue([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string month, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string year)
-		{
-			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), month, year).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_RoomPrice", IsComposable=true)]
-		public System.Nullable<decimal> fn_RoomPrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
-		{
-			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_ServicePrice", IsComposable=true)]
-		public System.Nullable<decimal> fn_ServicePrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
-		{
-			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Booking")]
-		public int sp_Booking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppoinmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appoinmentDate)
+		public int sp_Booking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppointmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appointmentDate)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, appoinmentDate);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, appointmentDate);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -278,9 +254,9 @@ namespace HotelManagement.Data_Layer
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CreateBooking")]
-		public int sp_CreateBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppoinmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appoinmentDate)
+		public int sp_CreateBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppointmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appointmentDate)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, appoinmentDate);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, roomID, appointmentDate);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -607,9 +583,9 @@ namespace HotelManagement.Data_Layer
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_UpdateBooking")]
-		public int sp_UpdateBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="BookingID", DbType="Int")] System.Nullable<int> bookingID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppoinmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appoinmentDate)
+		public int sp_UpdateBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="BookingID", DbType="Int")] System.Nullable<int> bookingID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CustomerID", DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AppointmentDate", DbType="SmallDateTime")] System.Nullable<System.DateTime> appointmentDate)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), bookingID, customerID, roomID, appoinmentDate);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), bookingID, customerID, roomID, appointmentDate);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -661,6 +637,30 @@ namespace HotelManagement.Data_Layer
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID, roomTypeID, onFloor, status);
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_FindBooking", IsComposable=true)]
+		public IQueryable<fn_FindBookingResult> fn_FindBooking([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
+		{
+			return this.CreateMethodCallQuery<fn_FindBookingResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_Revenue", IsComposable=true)]
+		public System.Nullable<decimal> fn_Revenue([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string month, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string year)
+		{
+			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), month, year).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_RoomPrice", IsComposable=true)]
+		public System.Nullable<decimal> fn_RoomPrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
+		{
+			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.fn_ServicePrice", IsComposable=true)]
+		public System.Nullable<decimal> fn_ServicePrice([global::System.Data.Linq.Mapping.ParameterAttribute(Name="RoomID", DbType="Int")] System.Nullable<int> roomID)
+		{
+			return ((System.Nullable<decimal>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), roomID).ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Booking")]
@@ -675,7 +675,7 @@ namespace HotelManagement.Data_Layer
 		
 		private int _RoomID;
 		
-		private System.DateTime _AppoinmentDate;
+		private System.DateTime _AppointmentDate;
 		
 		private EntityRef<Customer> _Customer;
 		
@@ -691,8 +691,8 @@ namespace HotelManagement.Data_Layer
     partial void OnCustomerIDChanged();
     partial void OnRoomIDChanging(int value);
     partial void OnRoomIDChanged();
-    partial void OnAppoinmentDateChanging(System.DateTime value);
-    partial void OnAppoinmentDateChanged();
+    partial void OnAppointmentDateChanging(System.DateTime value);
+    partial void OnAppointmentDateChanged();
     #endregion
 		
 		public Booking()
@@ -770,22 +770,22 @@ namespace HotelManagement.Data_Layer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppoinmentDate", DbType="SmallDateTime NOT NULL")]
-		public System.DateTime AppoinmentDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppointmentDate", DbType="SmallDateTime NOT NULL")]
+		public System.DateTime AppointmentDate
 		{
 			get
 			{
-				return this._AppoinmentDate;
+				return this._AppointmentDate;
 			}
 			set
 			{
-				if ((this._AppoinmentDate != value))
+				if ((this._AppointmentDate != value))
 				{
-					this.OnAppoinmentDateChanging(value);
+					this.OnAppointmentDateChanging(value);
 					this.SendPropertyChanging();
-					this._AppoinmentDate = value;
-					this.SendPropertyChanged("AppoinmentDate");
-					this.OnAppoinmentDateChanged();
+					this._AppointmentDate = value;
+					this.SendPropertyChanged("AppointmentDate");
+					this.OnAppointmentDateChanged();
 				}
 			}
 		}
@@ -2193,6 +2193,144 @@ namespace HotelManagement.Data_Layer
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RoomTypes")]
+	public partial class RoomType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private byte _RoomTypeID;
+		
+		private string _Name;
+		
+		private decimal _Price;
+		
+		private EntitySet<Room> _Rooms;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRoomTypeIDChanging(byte value);
+    partial void OnRoomTypeIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnPriceChanging(decimal value);
+    partial void OnPriceChanged();
+    #endregion
+		
+		public RoomType()
+		{
+			this._Rooms = new EntitySet<Room>(new Action<Room>(this.attach_Rooms), new Action<Room>(this.detach_Rooms));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomTypeID", AutoSync=AutoSync.OnInsert, DbType="TinyInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public byte RoomTypeID
+		{
+			get
+			{
+				return this._RoomTypeID;
+			}
+			set
+			{
+				if ((this._RoomTypeID != value))
+				{
+					this.OnRoomTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._RoomTypeID = value;
+					this.SendPropertyChanged("RoomTypeID");
+					this.OnRoomTypeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="SmallMoney NOT NULL")]
+		public decimal Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this.OnPriceChanging(value);
+					this.SendPropertyChanging();
+					this._Price = value;
+					this.SendPropertyChanged("Price");
+					this.OnPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RoomType_Room", Storage="_Rooms", ThisKey="RoomTypeID", OtherKey="RoomTypeID")]
+		public EntitySet<Room> Rooms
+		{
+			get
+			{
+				return this._Rooms;
+			}
+			set
+			{
+				this._Rooms.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Rooms(Room entity)
+		{
+			this.SendPropertyChanging();
+			entity.RoomType = this;
+		}
+		
+		private void detach_Rooms(Room entity)
+		{
+			this.SendPropertyChanging();
+			entity.RoomType = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rooms")]
 	public partial class Room : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2424,144 +2562,6 @@ namespace HotelManagement.Data_Layer
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.RoomTypes")]
-	public partial class RoomType : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private byte _RoomTypeID;
-		
-		private string _Name;
-		
-		private decimal _Price;
-		
-		private EntitySet<Room> _Rooms;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnRoomTypeIDChanging(byte value);
-    partial void OnRoomTypeIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnPriceChanging(decimal value);
-    partial void OnPriceChanged();
-    #endregion
-		
-		public RoomType()
-		{
-			this._Rooms = new EntitySet<Room>(new Action<Room>(this.attach_Rooms), new Action<Room>(this.detach_Rooms));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomTypeID", AutoSync=AutoSync.OnInsert, DbType="TinyInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public byte RoomTypeID
-		{
-			get
-			{
-				return this._RoomTypeID;
-			}
-			set
-			{
-				if ((this._RoomTypeID != value))
-				{
-					this.OnRoomTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._RoomTypeID = value;
-					this.SendPropertyChanged("RoomTypeID");
-					this.OnRoomTypeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="SmallMoney NOT NULL")]
-		public decimal Price
-		{
-			get
-			{
-				return this._Price;
-			}
-			set
-			{
-				if ((this._Price != value))
-				{
-					this.OnPriceChanging(value);
-					this.SendPropertyChanging();
-					this._Price = value;
-					this.SendPropertyChanged("Price");
-					this.OnPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RoomType_Room", Storage="_Rooms", ThisKey="RoomTypeID", OtherKey="RoomTypeID")]
-		public EntitySet<Room> Rooms
-		{
-			get
-			{
-				return this._Rooms;
-			}
-			set
-			{
-				this._Rooms.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Rooms(Room entity)
-		{
-			this.SendPropertyChanging();
-			entity.RoomType = this;
-		}
-		
-		private void detach_Rooms(Room entity)
-		{
-			this.SendPropertyChanging();
-			entity.RoomType = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vi_InvoicesHasPaid")]
 	public partial class vi_InvoicesHasPaid
 	{
@@ -2638,86 +2638,6 @@ namespace HotelManagement.Data_Layer
 				if ((this._InvoiceTotal != value))
 				{
 					this._InvoiceTotal = value;
-				}
-			}
-		}
-	}
-	
-	public partial class fn_FindBookingResult
-	{
-		
-		private int _BookingID;
-		
-		private int _CustomerID;
-		
-		private string _CustomerName;
-		
-		private int _RoomID;
-		
-		public fn_FindBookingResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingID", DbType="Int NOT NULL")]
-		public int BookingID
-		{
-			get
-			{
-				return this._BookingID;
-			}
-			set
-			{
-				if ((this._BookingID != value))
-				{
-					this._BookingID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
-		public int CustomerID
-		{
-			get
-			{
-				return this._CustomerID;
-			}
-			set
-			{
-				if ((this._CustomerID != value))
-				{
-					this._CustomerID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
-		public string CustomerName
-		{
-			get
-			{
-				return this._CustomerName;
-			}
-			set
-			{
-				if ((this._CustomerName != value))
-				{
-					this._CustomerName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomID", DbType="Int NOT NULL")]
-		public int RoomID
-		{
-			get
-			{
-				return this._RoomID;
-			}
-			set
-			{
-				if ((this._RoomID != value))
-				{
-					this._RoomID = value;
 				}
 			}
 		}
@@ -3492,6 +3412,86 @@ namespace HotelManagement.Data_Layer
 				if ((this._PhoneNumber != value))
 				{
 					this._PhoneNumber = value;
+				}
+			}
+		}
+	}
+	
+	public partial class fn_FindBookingResult
+	{
+		
+		private int _BookingID;
+		
+		private int _CustomerID;
+		
+		private string _CustomerName;
+		
+		private int _RoomID;
+		
+		public fn_FindBookingResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingID", DbType="Int NOT NULL")]
+		public int BookingID
+		{
+			get
+			{
+				return this._BookingID;
+			}
+			set
+			{
+				if ((this._BookingID != value))
+				{
+					this._BookingID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string CustomerName
+		{
+			get
+			{
+				return this._CustomerName;
+			}
+			set
+			{
+				if ((this._CustomerName != value))
+				{
+					this._CustomerName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoomID", DbType="Int NOT NULL")]
+		public int RoomID
+		{
+			get
+			{
+				return this._RoomID;
+			}
+			set
+			{
+				if ((this._RoomID != value))
+				{
+					this._RoomID = value;
 				}
 			}
 		}

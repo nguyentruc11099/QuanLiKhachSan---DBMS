@@ -72,7 +72,7 @@ CREATE TABLE Booking
   BookingID int IDENTITY(1,1) NOT null,
   CustomerID INT UNIQUE NOT NULL,
   RoomID int unique NOT NULL,
-  AppoinmentDate smalldatetime not null,
+  AppointmentDate smalldatetime not null,
 )
 go
 
@@ -207,23 +207,26 @@ ALTER TABLE dbo.Invoices
 ADD CONSTRAINT Check_InvoicesInvoiceTotal CHECK (InvoiceTotal >= 0);
 GO
 
+--Index
 
--- Index
+-- Khong su dung index nay do RoomType la 1 thuoc tinh co do da dang du lieu khong cao ( co it gia tri )
 --drop index if exists idx_Room_RoomType
 --on dbo.Rooms;
 --go
 
 --CREATE nonclustered INDEX idx_Room_RoomType
 --ON dbo.Rooms(RoomTypeID)
---INCLUDE (Status,OnFloor,RoomID)
+--INCLUDE (Status,OnFloor)
 --go
+
+
 drop index if exists idx_Customer
 on dbo.Customers;
 go
 
 CREATE nonclustered INDEX idx_Customer
 ON dbo.Customers(CustomerName,IdentityCard)
-INCLUDE (CustomerID,PhoneNumber)
+INCLUDE (PhoneNumber)
 go
 
 drop index if exists idx_Booking_Identify
@@ -232,7 +235,14 @@ go
 
 CREATE nonclustered INDEX idx_Booking_Identify
 ON dbo.Booking(CustomerID,RoomID)
-include(BookingID)
+go
+
+drop index if exists idx_Booking_AppointmentDate
+on dbo.Invoices_Services;
+go
+
+CREATE nonclustered INDEX idx_Booking_AppointmentDate
+ON dbo.Booking(AppointmentDate)
 go
 
 drop index if exists idx_Invoice_CalRoomPrice
@@ -241,7 +251,7 @@ go
 
 CREATE nonclustered INDEX idx_Invoice_CalRoomPrice
 ON dbo.invoices(CustomerID,RoomID)
-include ( invoiceID, Checkindate, checkoutdate )
+include (Checkindate, Checkoutdate )
 go
 
 drop index if exists idx_InvoiceService_cal
@@ -252,6 +262,7 @@ CREATE nonclustered INDEX idx_InvoiceService_cal
 ON dbo.Invoices_Services(InvoiceID, ServiceID)
 Include(Times)
 go
+
 
 --Seed Data
 INSERT INTO dbo.RoomTypes
@@ -274,7 +285,7 @@ VALUES
 (1,1,1),
 (1,1,1),
 (1,1,0),
-(2,2,0),
+(2,2,2),
 (2,1,2),
 (2,2,2),
 (2,2,2)
@@ -356,12 +367,13 @@ INSERT INTO dbo.Booking
 (
     CustomerID,
     RoomID,
-    AppoinmentDate
+    AppointmentDate
 )
 VALUES
 (3,5,'2019-12-13 05:59:52' ),
 (4,6,'2019-12-13 05:59:52' ),
-(2,7,'2019-12-10 05:59:52' )
+(2,7,'2019-12-10 05:59:52' ),
+(1,4,'2019-12-29 05:59:52' )
 
 USE HotelDB;
 IF OBJECT_ID(N'dbo.vi_InvoicesHasPaid', N'P') IS NOT NULL DROP view dbo.vi_InvoicesHasPaid;

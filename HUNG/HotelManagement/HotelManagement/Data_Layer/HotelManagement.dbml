@@ -5,7 +5,7 @@
       <Column Name="BookingID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="RoomID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="AppoinmentDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="AppointmentDate" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
       <Association Name="Customer_Booking" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Room_Booking" Member="Room" ThisKey="RoomID" OtherKey="RoomID" Type="Room" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
@@ -74,6 +74,14 @@
       <Association Name="HotelService_Invoices_Service" Member="HotelService" ThisKey="ServiceID" OtherKey="ServiceID" Type="HotelService" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.RoomTypes" Member="RoomTypes">
+    <Type Name="RoomType">
+      <Column Name="RoomTypeID" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
+      <Association Name="RoomType_Room" Member="Rooms" ThisKey="RoomTypeID" OtherKey="RoomTypeID" Type="Room" />
+    </Type>
+  </Table>
   <Table Name="dbo.Rooms" Member="Rooms">
     <Type Name="Room">
       <Column Name="RoomID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -85,14 +93,6 @@
       <Association Name="RoomType_Room" Member="RoomType" ThisKey="RoomTypeID" OtherKey="RoomTypeID" Type="RoomType" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.RoomTypes" Member="RoomTypes">
-    <Type Name="RoomType">
-      <Column Name="RoomTypeID" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Price" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
-      <Association Name="RoomType_Room" Member="Rooms" ThisKey="RoomTypeID" OtherKey="RoomTypeID" Type="Room" />
-    </Type>
-  </Table>
   <Table Name="dbo.vi_InvoicesHasPaid" Member="vi_InvoicesHasPaids">
     <Type Name="vi_InvoicesHasPaid">
       <Column Name="InvoiceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
@@ -101,32 +101,10 @@
       <Column Name="InvoiceTotal" Type="System.Decimal" DbType="SmallMoney NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Function Name="dbo.fn_FindBooking" Method="fn_FindBooking" IsComposable="true">
-    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
-    <ElementType Name="fn_FindBookingResult">
-      <Column Name="BookingID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="RoomID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.fn_Revenue" Method="fn_Revenue" IsComposable="true">
-    <Parameter Name="month" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="year" Type="System.String" DbType="NVarChar(50)" />
-    <Return Type="System.Decimal" />
-  </Function>
-  <Function Name="dbo.fn_RoomPrice" Method="fn_RoomPrice" IsComposable="true">
-    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Decimal" />
-  </Function>
-  <Function Name="dbo.fn_ServicePrice" Method="fn_ServicePrice" IsComposable="true">
-    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Decimal" />
-  </Function>
   <Function Name="dbo.sp_Booking" Method="sp_Booking">
     <Parameter Name="CustomerID" Parameter="customerID" Type="System.Int32" DbType="Int" />
     <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="AppoinmentDate" Parameter="appoinmentDate" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="AppointmentDate" Parameter="appointmentDate" Type="System.DateTime" DbType="SmallDateTime" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.sp_UpdateRoomTypes" Method="sp_UpdateRoomTypes">
@@ -180,7 +158,7 @@
   <Function Name="dbo.sp_CreateBooking" Method="sp_CreateBooking">
     <Parameter Name="CustomerID" Parameter="customerID" Type="System.Int32" DbType="Int" />
     <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="AppoinmentDate" Parameter="appoinmentDate" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="AppointmentDate" Parameter="appointmentDate" Type="System.DateTime" DbType="SmallDateTime" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.sp_CreateCustomers" Method="sp_CreateCustomers">
@@ -420,7 +398,7 @@
     <Parameter Name="BookingID" Parameter="bookingID" Type="System.Int32" DbType="Int" />
     <Parameter Name="CustomerID" Parameter="customerID" Type="System.Int32" DbType="Int" />
     <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="AppoinmentDate" Parameter="appoinmentDate" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="AppointmentDate" Parameter="appointmentDate" Type="System.DateTime" DbType="SmallDateTime" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.sp_UpdateCustomers" Method="sp_UpdateCustomers">
@@ -475,5 +453,27 @@
     <Parameter Name="OnFloor" Parameter="onFloor" Type="System.Int32" DbType="Int" />
     <Parameter Name="Status" Parameter="status" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_FindBooking" Method="fn_FindBooking" IsComposable="true">
+    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="fn_FindBookingResult">
+      <Column Name="BookingID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="RoomID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.fn_Revenue" Method="fn_Revenue" IsComposable="true">
+    <Parameter Name="month" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="year" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Decimal" />
+  </Function>
+  <Function Name="dbo.fn_RoomPrice" Method="fn_RoomPrice" IsComposable="true">
+    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Decimal" />
+  </Function>
+  <Function Name="dbo.fn_ServicePrice" Method="fn_ServicePrice" IsComposable="true">
+    <Parameter Name="RoomID" Parameter="roomID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Decimal" />
   </Function>
 </Database>

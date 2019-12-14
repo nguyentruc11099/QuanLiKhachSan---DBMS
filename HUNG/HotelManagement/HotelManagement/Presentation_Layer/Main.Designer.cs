@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.panel_Navigation = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lbl_Permision = new System.Windows.Forms.Label();
@@ -228,6 +228,7 @@
             this.cmb_Month = new System.Windows.Forms.ComboBox();
             this.rtxt_Total = new System.Windows.Forms.RichTextBox();
             this.timer_Redraw = new System.Windows.Forms.Timer(this.components);
+            this.label35 = new System.Windows.Forms.Label();
             this.panel_Navigation.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -289,7 +290,7 @@
             this.lbl_Permision.AutoSize = true;
             this.lbl_Permision.Font = new System.Drawing.Font("Malgun Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Permision.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lbl_Permision.Location = new System.Drawing.Point(73, 28);
+            this.lbl_Permision.Location = new System.Drawing.Point(45, 18);
             this.lbl_Permision.Name = "lbl_Permision";
             this.lbl_Permision.Size = new System.Drawing.Size(57, 13);
             this.lbl_Permision.TabIndex = 2;
@@ -300,7 +301,7 @@
             this.lbl_UserName.AutoSize = true;
             this.lbl_UserName.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_UserName.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lbl_UserName.Location = new System.Drawing.Point(45, 9);
+            this.lbl_UserName.Location = new System.Drawing.Point(45, -1);
             this.lbl_UserName.Name = "lbl_UserName";
             this.lbl_UserName.Size = new System.Drawing.Size(73, 16);
             this.lbl_UserName.TabIndex = 1;
@@ -1321,6 +1322,7 @@
             // 
             // tabPage_DefaultScreen
             // 
+            this.tabPage_DefaultScreen.Controls.Add(this.label35);
             this.tabPage_DefaultScreen.Controls.Add(this.Button_Redraw);
             this.tabPage_DefaultScreen.Controls.Add(this.RichTextBox_DefaultScreen);
             this.tabPage_DefaultScreen.Controls.Add(this.label25);
@@ -1336,7 +1338,7 @@
             // 
             // Button_Redraw
             // 
-            this.Button_Redraw.Location = new System.Drawing.Point(22, 14);
+            this.Button_Redraw.Location = new System.Drawing.Point(13, 8);
             this.Button_Redraw.Name = "Button_Redraw";
             this.Button_Redraw.Size = new System.Drawing.Size(75, 23);
             this.Button_Redraw.TabIndex = 25;
@@ -1346,7 +1348,7 @@
             // 
             // RichTextBox_DefaultScreen
             // 
-            this.RichTextBox_DefaultScreen.Location = new System.Drawing.Point(66, 54);
+            this.RichTextBox_DefaultScreen.Location = new System.Drawing.Point(66, 64);
             this.RichTextBox_DefaultScreen.Name = "RichTextBox_DefaultScreen";
             this.RichTextBox_DefaultScreen.Size = new System.Drawing.Size(1213, 96);
             this.RichTextBox_DefaultScreen.TabIndex = 24;
@@ -1373,9 +1375,9 @@
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(63, 210);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(57, 13);
+            this.label22.Size = new System.Drawing.Size(59, 13);
             this.label22.TabIndex = 21;
-            this.label22.Text = "List Room ";
+            this.label22.Text = "List Rooms";
             // 
             // Panel_ListRoom
             // 
@@ -2215,22 +2217,22 @@
             // 
             // Chart_TotalRevenue
             // 
-            chartArea1.Name = "ChartArea1";
-            this.Chart_TotalRevenue.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.Chart_TotalRevenue.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.Chart_TotalRevenue.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.Chart_TotalRevenue.Legends.Add(legend2);
             this.Chart_TotalRevenue.Location = new System.Drawing.Point(737, 155);
             this.Chart_TotalRevenue.Name = "Chart_TotalRevenue";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Revenue";
-            this.Chart_TotalRevenue.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Revenue";
+            this.Chart_TotalRevenue.Series.Add(series2);
             this.Chart_TotalRevenue.Size = new System.Drawing.Size(560, 552);
             this.Chart_TotalRevenue.TabIndex = 9;
-            title1.Alignment = System.Drawing.ContentAlignment.TopCenter;
-            title1.Name = "Hotel avenue in the last 5 month ";
-            title1.Text = "Hotel\'s avenue in the last 5 month ";
-            this.Chart_TotalRevenue.Titles.Add(title1);
+            title2.Alignment = System.Drawing.ContentAlignment.TopCenter;
+            title2.Name = "Hotel avenue in the last 5 month ";
+            title2.Text = "Hotel\'s avenue in the last 5 month ";
+            this.Chart_TotalRevenue.Titles.Add(title2);
             // 
             // Analysis_DataGridView
             // 
@@ -2313,6 +2315,15 @@
             this.timer_Redraw.Enabled = true;
             this.timer_Redraw.Interval = 10000;
             this.timer_Redraw.Tick += new System.EventHandler(this.timer_Redraw_Tick);
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(66, 44);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(72, 13);
+            this.label35.TabIndex = 26;
+            this.label35.Text = "Update News";
             // 
             // Main
             // 
@@ -2568,6 +2579,7 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart Chart_TotalRevenue;
         private System.Windows.Forms.DataGridView Analysis_DataGridView;
         private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label35;
     }
 }
 
